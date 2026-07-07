@@ -341,7 +341,14 @@ class SimpleLearningHub {
                     content = this.generateOverviewContent();
                     break;
                 case 'learn':
-                    content = `<learning-section course="${this.currentCourse}"></learning-section>`;
+                    content = `
+                        <div class="learning-container">
+                            <learning-section course="${this.currentCourse}"></learning-section>
+                            <div class="mola-puzzle-section" style="margin-top: 3rem;">
+                                <mola-puzzle></mola-puzzle>
+                            </div>
+                        </div>
+                    `;
                     break;
                 case 'vocabulary':
                     content = `<guna-vocabulary-section></guna-vocabulary-section>`;
