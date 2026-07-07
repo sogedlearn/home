@@ -532,19 +532,11 @@ class LearningSection extends HTMLElement {
     generateLessonsForCourse() {
         const lessons = this.getLessonsData();
         const currentLevel = this.getCurrentLevel();
-        const isGuest = localStorage.getItem('isGuest') === 'true';
-        const guestAccessLevel = parseInt(localStorage.getItem('guestAccessLevel') || '2', 10);
         
         let html = '';
         let currentModule = 0;
 
         lessons.forEach((lesson, index) => {
-            // Check if guest mode and level is beyond access
-            if (isGuest && lesson.id > guestAccessLevel) {
-                lesson.status = 'locked';
-                lesson.isLockedForGuest = true;
-            }
-
             // Add module header when module changes
             if (lesson.module && lesson.module !== currentModule) {
                 currentModule = lesson.module;
@@ -553,9 +545,8 @@ class LearningSection extends HTMLElement {
 
             html += `
             <div class="path-step">
-                <div class="lesson-node ${lesson.status} ${lesson.type === 'boss' ? 'boss-node' : ''} ${lesson.status === 'locked' ? 'opacity-60 pointer-events-none' : ''}" data-lesson="${lesson.id}">
+                <div class="lesson-node ${lesson.status} ${lesson.type === 'boss' ? 'boss-node' : ''}" data-lesson="${lesson.id}">
                     ${lesson.type === 'boss' ? '<div class="boss-badge">BOSS</div>' : ''}
-                    ${lesson.isLockedForGuest ? '<div class="lock-overlay"><i class="fas fa-lock"></i><span>Register to unlock</span></div>' : ''}
                     <div class="lesson-level-num">${lesson.id}</div>
                     ${lesson.id === currentLevel ? this.generateSoggyAvatar() : ''}
                     <div class="lesson-icon">
@@ -788,19 +779,7 @@ function getActiveCourse() {
 
 function openGunaLessonViewer(lessonId, review = false) {
     const id = parseInt(lessonId, 10);
-    if (typeof GunaProgress !== 'undefined') {
-        if (!GunaProgress.canAccessLesson(id, review)) {
-            showNotification('🔒 Completa la lección anterior para desbloquear este nivel.', 'info');
-            return;
-        }
-        if (!review && typeof GunaLives !== 'undefined' && !GunaLives.canPlay()) {
-            const session = GunaProgress.getLessonSession(id);
-            if (!session) {
-                showNotification(typeof GunaI18n !== 'undefined' ? GunaI18n.t('noLives') : 'No lives left! Visit the store.', 'error');
-                return;
-            }
-        }
-    }
+    // Remove access check - allow all lessons
 
     const contentContainer = document.getElementById('contentContainer');
     if (!contentContainer) return;
@@ -830,21 +809,7 @@ window.startLesson = function(lessonId) {
         return;
     }
     const id = parseInt(lessonId, 10);
-    if (typeof GunaProgress !== 'undefined') {
-        if (!GunaProgress.canAccessLesson(id, false)) {
-            showNotification('🔒 Esta lección está bloqueada.', 'info');
-            return;
-        }
-        const completed = GunaProgress.getProgress().completed;
-        let currentId = 1;
-        for (let i = 1; i <= GunaProgress.TOTAL_LESSONS; i++) {
-            if (!completed.includes(i)) { currentId = i; break; }
-        }
-        if (id !== currentId) {
-            showNotification('Solo puedes iniciar la lección actual del camino.', 'info');
-            return;
-        }
-    }
+    // Remove access check - allow all lessons
     openGunaLessonViewer(id, false);
 };
 
@@ -855,10 +820,7 @@ window.reviewLesson = function(lessonId) {
         return;
     }
     const id = parseInt(lessonId, 10);
-    if (typeof GunaProgress !== 'undefined' && !GunaProgress.isCompleted(id)) {
-        showNotification('Solo puedes repasar lecciones completadas.', 'info');
-        return;
-    }
+    // Remove completion check - allow reviewing all lessons
     openGunaLessonViewer(id, true);
 };
 

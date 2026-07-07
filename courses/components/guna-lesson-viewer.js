@@ -22,17 +22,7 @@ class GunaLessonViewer extends HTMLElement {
         this.isReviewMode = this.getAttribute('review') === 'true' ||
             (typeof GunaProgress !== 'undefined' && GunaProgress.isCompleted(this.currentLessonId));
 
-        if (typeof GunaProgress !== 'undefined' && !GunaProgress.canAccessLesson(this.currentLessonId, this.isReviewMode)) {
-            this.innerHTML = `
-                <div class="lesson-viewer lesson-locked">
-                    <h2>🔒 Lección bloqueada</h2>
-                    <p>Completa la lección anterior para desbloquear este nivel.</p>
-                    <button type="button" class="nav-btn" id="backToPathBtn"><i class="fas fa-arrow-left"></i> Volver al camino</button>
-                </div>`;
-            this.querySelector('#backToPathBtn')?.addEventListener('click', () => this.backToPath());
-            return;
-        }
-
+        // Remove access check - allow all lessons
         this.gunaLessons = new GunaLessons();
         this.currentSectionIndex = 0;
         this.maxSectionReached = 0;

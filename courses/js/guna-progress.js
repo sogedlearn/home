@@ -29,26 +29,20 @@ const GunaProgress = {
     },
 
     canAccessLesson(lessonId, allowReview = false) {
-        const id = parseInt(lessonId, 10);
-        if (allowReview && this.isCompleted(id)) return true;
-        if (id === 1) return true;
-        return this.getProgress().completed.includes(id - 1);
+        // Allow access to all lessons without restrictions
+        return true;
     },
 
     getLessonsWithStatus(baseLessons) {
         const progress = this.getProgress();
         const completed = progress.completed;
-        let foundCurrent = false;
 
         return baseLessons.map(lesson => {
             if (completed.includes(lesson.id)) {
                 return { ...lesson, status: 'completed' };
             }
-            if (!foundCurrent && (lesson.id === 1 || completed.includes(lesson.id - 1))) {
-                foundCurrent = true;
-                return { ...lesson, status: 'current' };
-            }
-            return { ...lesson, status: 'locked' };
+            // Mark all incomplete lessons as current (accessible)
+            return { ...lesson, status: 'current' };
         });
     },
 
