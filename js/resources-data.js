@@ -67,6 +67,12 @@ const RESOURCES_DATA = [
         active: true,
         theme: 'soged-blue',
         search: 'guna pronunciation guide audio native speakers',
+        audioFiles: [
+            { name: 'Frase 1', file: 'courses/resources/guna/audio/frase1.mp3' },
+            { name: 'Frase 2', file: 'courses/resources/guna/audio/frase2.mp3' },
+            { name: 'Frase 3', file: 'courses/resources/guna/audio/frase3.mp3' },
+            { name: 'Frase 4', file: 'courses/resources/guna/audio/frase4.mp3' }
+        ],
         actions: [
             { label: 'Listen', icon: 'fa-headphones', primary: true, onClick: 'openListeningModal()' },
             { label: 'Download', icon: 'fa-download', primary: false }

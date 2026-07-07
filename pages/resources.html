@@ -404,11 +404,58 @@
         <button class="auth-modal-close" aria-label="Close" onclick="closeListeningModal();">&times;</button>
         <div style="width:100%; max-width:600px; min-height:350px; padding:2.5rem 2.5rem 2rem 2.5rem; display:flex; flex-direction:column; align-items:center; justify-content:center;">
           <h3 style="margin-bottom:1rem;">Guna Pronunciation Guide</h3>
-          <p style="text-align:center; color:var(--text-secondary);">Practice Guna sounds with native speaker audio examples.</p>
+          <p style="text-align:center; color:var(--text-secondary); margin-bottom:1.5rem;">Practice Guna sounds with native speaker audio examples.</p>
+          <div id="audio-player-container" style="width:100%; display:flex; flex-direction:column; gap:1rem;">
+            <div class="audio-track" style="display:flex; align-items:center; gap:0.75rem; padding:0.75rem; background:var(--bg-tertiary); border-radius:8px;">
+              <button onclick="playAudio('frase1')" style="background:var(--primary-color); color:white; border:none; border-radius:50%; width:40px; height:40px; cursor:pointer; display:flex; align-items:center; justify-content:center;">
+                <i class="fas fa-play"></i>
+              </button>
+              <span style="flex:1; font-weight:500;">Frase 1</span>
+              <audio id="audio-frase1" src="../courses/resources/guna/audio/frase1.mp3" style="display:none;"></audio>
+            </div>
+            <div class="audio-track" style="display:flex; align-items:center; gap:0.75rem; padding:0.75rem; background:var(--bg-tertiary); border-radius:8px;">
+              <button onclick="playAudio('frase2')" style="background:var(--primary-color); color:white; border:none; border-radius:50%; width:40px; height:40px; cursor:pointer; display:flex; align-items:center; justify-content:center;">
+                <i class="fas fa-play"></i>
+              </button>
+              <span style="flex:1; font-weight:500;">Frase 2</span>
+              <audio id="audio-frase2" src="../courses/resources/guna/audio/frase2.mp3" style="display:none;"></audio>
+            </div>
+            <div class="audio-track" style="display:flex; align-items:center; gap:0.75rem; padding:0.75rem; background:var(--bg-tertiary); border-radius:8px;">
+              <button onclick="playAudio('frase3')" style="background:var(--primary-color); color:white; border:none; border-radius:50%; width:40px; height:40px; cursor:pointer; display:flex; align-items:center; justify-content:center;">
+                <i class="fas fa-play"></i>
+              </button>
+              <span style="flex:1; font-weight:500;">Frase 3</span>
+              <audio id="audio-frase3" src="../courses/resources/guna/audio/frase3.mp3" style="display:none;"></audio>
+            </div>
+            <div class="audio-track" style="display:flex; align-items:center; gap:0.75rem; padding:0.75rem; background:var(--bg-tertiary); border-radius:8px;">
+              <button onclick="playAudio('frase4')" style="background:var(--primary-color); color:white; border:none; border-radius:50%; width:40px; height:40px; cursor:pointer; display:flex; align-items:center; justify-content:center;">
+                <i class="fas fa-play"></i>
+              </button>
+              <span style="flex:1; font-weight:500;">Frase 4</span>
+              <audio id="audio-frase4" src="../courses/resources/guna/audio/frase4.mp3" style="display:none;"></audio>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <script>
+    let currentAudio = null;
+    
+    function playAudio(id) {
+      // Stop any currently playing audio
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+      }
+      
+      // Play the selected audio
+      const audio = document.getElementById('audio-' + id);
+      if (audio) {
+        currentAudio = audio;
+        audio.play();
+      }
+    }
+    
     function openListeningModal() {
       var overlay = document.getElementById('listening-modal-overlay');
       if (overlay) {
@@ -419,6 +466,12 @@
       var overlay = document.getElementById('listening-modal-overlay');
       if (overlay) {
         overlay.style.display = 'none';
+        // Stop any playing audio when closing
+        if (currentAudio) {
+          currentAudio.pause();
+          currentAudio.currentTime = 0;
+          currentAudio = null;
+        }
       }
     }
     </script>
