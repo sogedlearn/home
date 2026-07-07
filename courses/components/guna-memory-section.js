@@ -246,7 +246,7 @@ class GunaMemorySection extends HTMLElement {
             const countdownNumber = this.querySelector('#countdownNumber');
             const countdownProgress = this.querySelector('#countdownProgress');
             
-            // Show all cards revealed
+            // Show all cards revealed immediately
             state.cards.forEach(c => c.revealed = true);
             renderGrid();
 
@@ -282,6 +282,9 @@ class GunaMemorySection extends HTMLElement {
                 playGameSound('start');
             }
         };
+
+        // Start memorization phase immediately - no welcome modal
+        startMemorizationPhase();
 
         const onWin = () => {
             const victoryScreen = this.querySelector('#victoryScreen');

@@ -10,7 +10,7 @@
         .soggy-chat-container {
             max-width: 700px;
             margin: 2rem auto;
-            background: linear-gradient(135deg, #8B4513 0%, #654321 25%, #228B22 50%, #2E8B57 75%, #8B4513 100%);
+            background: linear-gradient(135deg, #006400 0%, #228B22 25%, #32CD32 50%, #00FF7F 75%, #006400 100%);
             border-radius: 24px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
             overflow: hidden;
@@ -21,10 +21,22 @@
             border: 4px solid #FFD700;
         }
 
+        .soggy-chat-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="iguana-scales" x="0" y="0" width="15" height="15" patternUnits="userSpaceOnUse"><ellipse cx="7.5" cy="7.5" rx="6" ry="4" fill="rgba(0,255,127,0.08)" stroke="rgba(0,100,0,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23iguana-scales)"/></svg>');
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
         .soggy-header {
-            background: linear-gradient(135deg, #8B4513 0%, #A0522D 20%, #CD853F 40%, #D2691E 60%, #8B4513 80%, #654321 100%);
+            background: linear-gradient(135deg, #006400 0%, #228B22 20%, #32CD32 40%, #00FF7F 60%, #006400 80%, #2E8B57 100%);
             background-size: 300% 300%;
-            animation: mola-gradient 10s ease infinite;
+            animation: iguana-gradient 10s ease infinite;
             padding: 2rem;
             display: flex;
             align-items: center;
@@ -33,6 +45,12 @@
             overflow: hidden;
             border-bottom: 4px solid #FFD700;
             box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        @keyframes iguana-gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         @keyframes mola-gradient {
@@ -48,7 +66,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="mola-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><rect width="20" height="20" fill="none"/><path d="M0 10 L10 0 L20 10 L10 20 Z" fill="rgba(255,215,0,0.1)"/><circle cx="10" cy="10" r="3" fill="rgba(255,107,53,0.15)"/></pattern></defs><rect width="100" height="100" fill="url(%23mola-pattern)"/></svg>');
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="iguana-header" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M0 10 Q5 5 10 10 Q15 15 20 10" fill="none" stroke="rgba(255,215,0,0.15)" stroke-width="1"/><circle cx="10" cy="10" r="2" fill="rgba(0,255,127,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23iguana-header)"/></svg>');
             opacity: 0.5;
         }
 
@@ -59,7 +77,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(0,255,127,0.3) 0%, transparent 70%);
             animation: pulse-glow 3s ease-in-out infinite;
         }
 
@@ -141,9 +159,9 @@
             flex: 1;
             overflow-y: auto;
             padding: 1.5rem;
-            background: linear-gradient(180deg, #F5DEB3 0%, #DEB887 50%, #D2B48C 100%);
+            background: linear-gradient(180deg, #E8F5E9 0%, #C8E6C9 50%, #A5D6A7 100%);
             scroll-behavior: smooth;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="chat-bg" x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M0 12.5 L12.5 0 L25 12.5 L12.5 25 Z" fill="rgba(139,69,19,0.05)"/><circle cx="12.5" cy="12.5" r="2" fill="rgba(34,139,34,0.08)"/></pattern></defs><rect width="100" height="100" fill="url(%23chat-bg)"/></svg>');
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="iguana-chat-bg" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M0 15 Q7.5 7.5 15 15 Q22.5 22.5 30 15" fill="none" stroke="rgba(0,100,0,0.08)" stroke-width="1"/><ellipse cx="15" cy="15" rx="8" ry="5" fill="rgba(0,255,127,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23iguana-chat-bg)"/></svg>');
         }
 
         .message {
@@ -183,9 +201,10 @@
         }
 
         .message.ai .message-avatar {
-            background: linear-gradient(135deg, #228B22, #2E8B57);
+            background: linear-gradient(135deg, #006400, #228B22);
             color: white;
             border: 3px solid #FFD700;
+            box-shadow: 0 0 15px rgba(0,255,127,0.4);
         }
 
         .message.user .message-avatar {
@@ -206,16 +225,16 @@
 
         .message.ai .message-content {
             background: rgba(255, 255, 255, 0.95);
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="ai-bg" x="0" y="0" width="15" height="15" patternUnits="userSpaceOnUse"><path d="M0 7.5 L7.5 0 L15 7.5 L7.5 15 Z" fill="rgba(34,139,34,0.06)"/><circle cx="7.5" cy="7.5" r="2" fill="rgba(139,69,19,0.06)"/></pattern></defs><rect width="100" height="100" fill="url(%23ai-bg)"/></svg>');
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="iguana-ai-bg" x="0" y="0" width="18" height="18" patternUnits="userSpaceOnUse"><ellipse cx="9" cy="9" rx="7" ry="5" fill="rgba(0,255,127,0.06)" stroke="rgba(0,100,0,0.08)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23iguana-ai-bg)"/></svg>');
             border-top-left-radius: 0;
             color: #333;
             border: 3px solid #228B22;
         }
 
         .message.user .message-content {
-            background: linear-gradient(135deg, #FF6B35, #FF8C00);
+            background: linear-gradient(135deg, #FFD700, #FFA500);
             border-top-right-radius: 0;
-            color: white;
+            color: #333;
             border: 3px solid #FFD700;
         }
 
@@ -333,7 +352,7 @@
 
         .chat-input-area {
             padding: 1rem 1.5rem;
-            background: linear-gradient(135deg, #DEB887, #D2B48C);
+            background: linear-gradient(135deg, #C8E6C9, #A5D6A7);
             border-top: 3px solid #FFD700;
             display: flex;
             align-items: center;
