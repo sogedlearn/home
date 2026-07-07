@@ -418,6 +418,13 @@
             <!-- Question 1: What do you want to learn? -->
             <div class="question-section active" id="question1">
                 <h2 class="question-title">What language would you like to learn?</h2>
+                <div class="option-card language-option" data-value="guna">
+                    <img src="../Images/Languages/Guna.png" alt="Guna" class="language-icon">
+                    <div class="language-info">
+                        <div class="option-title">Guna (Kuna)</div>
+                        <div class="option-description">Rich maritime culture from San Blas Islands</div>
+                    </div>
+                </div>
                 <div class="option-card language-option" data-value="ngabe">
                     <img src="../Images/Languages/Ngabe.png" alt="Ngäbe" class="language-icon">
                     <div class="language-info">
@@ -430,13 +437,6 @@
                     <div class="language-info">
                         <div class="option-title">Naso</div>
                         <div class="option-description">Musical language with unique rhythms</div>
-                    </div>
-                </div>
-                <div class="option-card language-option" data-value="guna">
-                    <img src="../Images/Languages/Guna.png" alt="Guna" class="language-icon">
-                    <div class="language-info">
-                        <div class="option-title">Guna</div>
-                        <div class="option-description">Rich maritime culture from San Blas Islands</div>
                     </div>
                 </div>
                 <div class="option-card language-option" data-value="embera">
@@ -692,20 +692,20 @@
                 let courseUrl = '';
                 
                 switch(selectedLanguage) {
+                    case 'guna':
+                        courseUrl = '../courses/learning-hub.html?course=guna';
+                        break;
                     case 'ngabe':
                         courseUrl = '../courses/learning-hub.html?course=ngabe';
                         break;
                     case 'naso':
                         courseUrl = '../courses/learning-hub.html?course=naso';
                         break;
-                    case 'guna':
-                        courseUrl = '../courses/learning-hub.html?course=guna';
-                        break;
                     case 'embera':
                         courseUrl = '../courses/learning-hub.html?course=embera';
                         break;
                     default:
-                        courseUrl = '../courses/learning-hub.html?course=ngabe'; // Default to Ngäbe course
+                        courseUrl = '../courses/learning-hub.html?course=guna'; // Default to Guna course
                 }
                 
                 window.location.href = courseUrl;

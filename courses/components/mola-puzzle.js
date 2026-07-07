@@ -11,14 +11,14 @@ class MolaPuzzle extends HTMLElement {
         this.draggedPiece = null;
         this.gameStarted = false;
         this.culturalFacts = [
-            "¡Este patrón representa el laberinto de la vida!",
-            "Las molas cuentan historias de nuestros antepasados.",
-            "Cada color tiene un significado espiritual profundo.",
-            "Los símbolos geométricos representan la naturaleza.",
-            "Las molas son arte textil transmitido por generaciones.",
-            "Este diseño simboliza la conexión con el mar.",
-            "Los patrones triangulares representan montañas sagradas.",
-            "Las molas son patrimonio cultural de la humanidad."
+            "This pattern represents the labyrinth of life!",
+            "Molas tell stories of our ancestors.",
+            "Each color has a deep spiritual meaning.",
+            "Geometric symbols represent nature.",
+            "Molas are textile art passed down through generations.",
+            "This design symbolizes the connection with the sea.",
+            "Triangular patterns represent sacred mountains.",
+            "Molas are cultural heritage of humanity."
         ];
         this.currentFactIndex = 0;
         this.render();
@@ -29,20 +29,20 @@ class MolaPuzzle extends HTMLElement {
         this.innerHTML = `
             <div class="mola-puzzle-container">
                 <div class="puzzle-header">
-                    <h2 class="puzzle-title">🧩 El Rompecabezas de la Mola</h2>
-                    <p class="puzzle-subtitle">Reconstruye la mola tradicional y descubre su significado cultural</p>
+                    <h2 class="puzzle-title">🧩 Mola Puzzle</h2>
+                    <p class="puzzle-subtitle">Reconstruct the traditional mola and discover its cultural meaning</p>
                     
                     <div class="puzzle-controls">
                         <div class="difficulty-selector">
                             <button class="difficulty-btn ${this.gridSize === 3 ? 'active' : ''}" data-size="3">
-                                Fácil (3x3)
+                                Easy (3x3)
                             </button>
                             <button class="difficulty-btn ${this.gridSize === 4 ? 'active' : ''}" data-size="4">
-                                Difícil (4x4)
+                                Hard (4x4)
                             </button>
                         </div>
                         <button class="puzzle-reset-btn" id="resetPuzzle">
-                            <i class="fas fa-redo"></i> Reiniciar
+                            <i class="fas fa-redo"></i> Reset
                         </button>
                     </div>
                 </div>
@@ -52,7 +52,7 @@ class MolaPuzzle extends HTMLElement {
                     <div class="soggy-character">
                         <img src="../../Images/Soged/Newturttle.png" alt="Soggy" class="soggy-img animate-pulse">
                         <div class="soggy-bubble">
-                            <p id="soggyFact">¡Hola! Soy Soggy, tu guía cultural. Arrastra las piezas para reconstruir esta hermosa mola.</p>
+                            <p id="soggyFact">Hello! I'm Soggy, your cultural guide. Drag the pieces to reconstruct this beautiful mola.</p>
                         </div>
                     </div>
 
@@ -67,11 +67,11 @@ class MolaPuzzle extends HTMLElement {
                 <div class="victory-modal" id="victoryModal" hidden>
                     <div class="victory-content">
                         <img src="../../Images/Soged/Newturttle.png" alt="Soggy" class="victory-soggy">
-                        <h2 class="victory-title">¡Excelente trabajo!</h2>
-                        <p class="victory-message">Has completado el rompecabezas de la mola</p>
+                        <h2 class="victory-title">Excellent work!</h2>
+                        <p class="victory-message">You have completed the mola puzzle</p>
                         <div class="cultural-explanation">
-                            <h3>📚 Significado Cultural</h3>
-                            <p id="culturalText">Las molas son expresiones artísticas únicas del pueblo Guna, representando su cosmovisión, historia y conexión espiritual con la naturaleza.</p>
+                            <h3>📚 Cultural Meaning</h3>
+                            <p id="culturalText">Molas are unique artistic expressions of the Guna people, representing their worldview, history, and spiritual connection with nature.</p>
                         </div>
                         <div class="victory-reward">
                             <span class="reward-icon">🥥</span>
@@ -80,10 +80,10 @@ class MolaPuzzle extends HTMLElement {
                         </div>
                         <div class="victory-actions">
                             <button class="victory-btn primary" id="nextPuzzle">
-                                <i class="fas fa-arrow-right"></i> Siguiente
+                                <i class="fas fa-arrow-right"></i> Next
                             </button>
                             <button class="victory-btn secondary" id="closePuzzle">
-                                <i class="fas fa-times"></i> Cerrar
+                                <i class="fas fa-times"></i> Close
                             </button>
                         </div>
                     </div>
