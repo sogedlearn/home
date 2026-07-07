@@ -1829,8 +1829,8 @@ body {
 /* Header */
 .main-header {
     height: var(--header-height);
-    background: var(--bg-secondary);
-    border-bottom: 1px solid #E9ECEF;
+    background: linear-gradient(135deg, rgba(255, 111, 0, 0.05), rgba(255, 143, 0, 0.03));
+    border-bottom: 2px solid rgba(255, 111, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1838,7 +1838,8 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
 }
 
 .header-left {
@@ -1937,15 +1938,18 @@ body {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    background: var(--bg-tertiary);
+    padding: 0.75rem 1.25rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.9));
+    border: 1px solid rgba(255, 111, 0, 0.15);
     border-radius: var(--border-radius-lg);
     transition: all var(--transition-fast);
+    backdrop-filter: blur(5px);
 }
 
 .stat-item:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 111, 0, 0.15);
+    border-color: rgba(255, 111, 0, 0.3);
 }
 
 .stat-item.streak .stat-icon {
@@ -1995,9 +1999,9 @@ body {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.5rem;
-    background: var(--bg-tertiary);
-    border: none;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, rgba(255, 111, 0, 0.1), rgba(255, 143, 0, 0.05));
+    border: 1px solid rgba(255, 111, 0, 0.2);
     border-radius: var(--border-radius-lg);
     cursor: pointer;
     transition: all var(--transition-fast);
@@ -2005,10 +2009,10 @@ body {
 }
 
 .user-avatar-btn:hover {
-    background: var(--primary-color);
-    color: white;
+    background: linear-gradient(135deg, rgba(255, 111, 0, 0.2), rgba(255, 143, 0, 0.1));
+    border-color: rgba(255, 111, 0, 0.4);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 8px 20px rgba(255, 111, 0, 0.2);
 }
 
 .header-avatar {
@@ -2209,16 +2213,19 @@ body {
 }
 
 .dashboard-card {
-    background: var(--bg-secondary);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.95));
+    border: 1px solid rgba(255, 111, 0, 0.1);
     border-radius: var(--border-radius-lg);
     padding: 2rem;
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     transition: all var(--transition-fast);
+    backdrop-filter: blur(10px);
 }
 
 .dashboard-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(255, 111, 0, 0.15);
+    border-color: rgba(255, 111, 0, 0.25);
 }
 
 .card-header {
@@ -2263,9 +2270,17 @@ body {
 
 .progress-stat {
     text-align: center;
-    padding: 1rem;
-    background: var(--bg-tertiary);
+    padding: 1.25rem;
+    background: linear-gradient(135deg, rgba(255, 111, 0, 0.05), rgba(255, 143, 0, 0.03));
+    border: 1px solid rgba(255, 111, 0, 0.1);
     border-radius: var(--border-radius);
+    transition: all var(--transition-fast);
+}
+
+.progress-stat:hover {
+    background: linear-gradient(135deg, rgba(255, 111, 0, 0.1), rgba(255, 143, 0, 0.05));
+    border-color: rgba(255, 111, 0, 0.2);
+    transform: translateY(-2px);
 }
 
 .stat-number {
@@ -2994,16 +3009,16 @@ input:checked + .toggle-slider:before {
 }
 
 .ogob-icon-wrap {
-    width: 28px;
-    height: 28px;
+    width: 20px;
+    height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .ogob-icon {
-    width: 28px;
-    height: 28px;
+    width: 20px;
+    height: 20px;
     object-fit: contain;
 }
 
