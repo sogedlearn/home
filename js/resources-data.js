@@ -39,6 +39,60 @@ const RESOURCES_DATA = [
         ]
     },
     {
+        id: 'guna-cultura-pdf',
+        title: 'Guna Culture Complete',
+        category: 'docs',
+        description: 'Comprehensive guide to Guna culture, traditions, and heritage.',
+        level: 'All Levels',
+        time: 'PDF — 100 pages',
+        icon: 'fa-book',
+        featured: true,
+        active: true,
+        theme: 'soged-green',
+        search: 'guna culture traditions heritage pdf',
+        file: 'courses/resources/guna/cultura-guna-completa.pdf',
+        actions: [
+            { label: 'Download', icon: 'fa-download', primary: true },
+            { label: 'Read', icon: 'fa-book-reader', primary: false }
+        ]
+    },
+    {
+        id: 'guna-diccionario-espanol-ingles',
+        title: 'Guna-Spanish-English Dictionary',
+        category: 'docs',
+        description: 'Trilingual dictionary with Guna, Spanish, and English translations.',
+        level: 'All Levels',
+        time: 'PDF — 150 pages',
+        icon: 'fa-language',
+        featured: true,
+        active: true,
+        theme: 'soged-blue',
+        search: 'guna spanish english dictionary trilingual',
+        file: 'courses/resources/guna/diccionario-guna-espanol-ingles.pdf',
+        actions: [
+            { label: 'Download', icon: 'fa-download', primary: true },
+            { label: 'Read', icon: 'fa-book-reader', primary: false }
+        ]
+    },
+    {
+        id: 'guna-diccionario-gunagaya',
+        title: 'Gunagaya-Spanish Dictionary',
+        category: 'docs',
+        description: 'Complete Gunagaya to Spanish dictionary with extensive vocabulary.',
+        level: 'All Levels',
+        time: 'PDF — 500 pages',
+        icon: 'fa-book-open',
+        featured: true,
+        active: true,
+        theme: 'soged-purple',
+        search: 'gunagaya spanish dictionary vocabulary',
+        file: 'courses/resources/guna/diccionario-gunagaya-espanol.pdf',
+        actions: [
+            { label: 'Download', icon: 'fa-download', primary: true },
+            { label: 'Read', icon: 'fa-book-reader', primary: false }
+        ]
+    },
+    {
         id: 'guna-art',
         title: 'Guna art',
         category: 'culture',
@@ -56,25 +110,74 @@ const RESOURCES_DATA = [
         ]
     },
     {
-        id: 'guna-pronunciation',
-        title: 'Guna pronunciation guide',
+        id: 'guna-frase1',
+        title: 'Guna Phrase 1',
         category: 'audio',
-        description: 'Audio lessons with native speakers teaching proper Guna pronunciation and intonation.',
-        level: 'All Levels',
-        time: '60 min audio',
+        description: 'Practice Guna pronunciation with native speaker audio.',
+        level: 'Beginner',
+        time: '30 sec audio',
         icon: 'fa-volume-up',
         featured: true,
         active: true,
         theme: 'soged-blue',
-        search: 'guna pronunciation guide audio native speakers',
-        audioFiles: [
-            { name: 'Frase 1', file: 'courses/resources/guna/audio/frase1.mp3' },
-            { name: 'Frase 2', file: 'courses/resources/guna/audio/frase2.mp3' },
-            { name: 'Frase 3', file: 'courses/resources/guna/audio/frase3.mp3' },
-            { name: 'Frase 4', file: 'courses/resources/guna/audio/frase4.mp3' }
-        ],
+        search: 'guna pronunciation audio phrase 1',
+        audioFile: 'courses/resources/guna/audio/frase1.mp3',
         actions: [
-            { label: 'Listen', icon: 'fa-headphones', primary: true, onClick: 'openListeningModal()' },
+            { label: 'Play', icon: 'fa-play', primary: true, onClick: 'playAudioResource("frase1")' },
+            { label: 'Download', icon: 'fa-download', primary: false }
+        ]
+    },
+    {
+        id: 'guna-frase2',
+        title: 'Guna Phrase 2',
+        category: 'audio',
+        description: 'Practice Guna pronunciation with native speaker audio.',
+        level: 'Beginner',
+        time: '45 sec audio',
+        icon: 'fa-volume-up',
+        featured: true,
+        active: true,
+        theme: 'soged-blue',
+        search: 'guna pronunciation audio phrase 2',
+        audioFile: 'courses/resources/guna/audio/frase2.mp3',
+        actions: [
+            { label: 'Play', icon: 'fa-play', primary: true, onClick: 'playAudioResource("frase2")' },
+            { label: 'Download', icon: 'fa-download', primary: false }
+        ]
+    },
+    {
+        id: 'guna-frase3',
+        title: 'Guna Phrase 3',
+        category: 'audio',
+        description: 'Practice Guna pronunciation with native speaker audio.',
+        level: 'Beginner',
+        time: '50 sec audio',
+        icon: 'fa-volume-up',
+        featured: true,
+        active: true,
+        theme: 'soged-blue',
+        search: 'guna pronunciation audio phrase 3',
+        audioFile: 'courses/resources/guna/audio/frase3.mp3',
+        actions: [
+            { label: 'Play', icon: 'fa-play', primary: true, onClick: 'playAudioResource("frase3")' },
+            { label: 'Download', icon: 'fa-download', primary: false }
+        ]
+    },
+    {
+        id: 'guna-frase4',
+        title: 'Guna Phrase 4',
+        category: 'audio',
+        description: 'Practice Guna pronunciation with native speaker audio.',
+        level: 'Beginner',
+        time: '40 sec audio',
+        icon: 'fa-volume-up',
+        featured: true,
+        active: true,
+        theme: 'soged-blue',
+        search: 'guna pronunciation audio phrase 4',
+        audioFile: 'courses/resources/guna/audio/frase4.mp3',
+        actions: [
+            { label: 'Play', icon: 'fa-play', primary: true, onClick: 'playAudioResource("frase4")' },
             { label: 'Download', icon: 'fa-download', primary: false }
         ]
     },
