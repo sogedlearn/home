@@ -17,7 +17,7 @@ class GunaStore extends HTMLElement {
     connectedCallback() {
         this.render();
         this.bindEvents();
-        CocosEconomy.updateAllDisplays();
+        OgobEconomy.updateAllDisplays();
     }
 
     getWeeklyCountdown() {
@@ -134,8 +134,8 @@ class GunaStore extends HTMLElement {
 
     renderItemCard(item) {
         const isLives = !!item.lives;
-        const purchased = !isLives && CocosEconomy.isPurchased(item.id);
-        const balance = CocosEconomy.getBalance();
+        const purchased = !isLives && OgobEconomy.isPurchased(item.id);
+        const balance = OgobEconomy.getBalance();
         const canAfford = balance >= item.price;
         const currentLives = typeof GunaLives !== 'undefined' ? GunaLives.getLives() : 5;
         const livesFull = isLives && currentLives >= 5;
@@ -157,7 +157,7 @@ class GunaStore extends HTMLElement {
                     <div class="store-item-footer">
                         <span class="store-item-price">
                             <img src="${GUNA_STORE_ASSETS.coco}" alt="" class="store-coco-icon" aria-hidden="true">
-                            <span>${CocosEconomy.formatCocos(item.price)} cocos</span>
+                            <span>${OgobEconomy.formatOgob(item.price)} ogob</span>
                         </span>
                         ${isLives
                             ? (livesFull
@@ -182,7 +182,7 @@ class GunaStore extends HTMLElement {
         const categories = Object.entries(catalog);
         const active = catalog[this.activeCategory];
         const { days, hours } = this.weeklyCountdown;
-        const balance = CocosEconomy.getBalance();
+        const balance = OgobEconomy.getBalance();
 
         this.innerHTML = `
             <div class="guna-store-modern" role="region" aria-label="Tienda Guna">
@@ -198,8 +198,8 @@ class GunaStore extends HTMLElement {
                         </div>
                         <div class="wallet-info">
                             <span class="wallet-label">Mi Monedero</span>
-                            <span class="wallet-balance" data-cocos-balance>${CocosEconomy.formatCocos(balance)}</span>
-                            <span class="wallet-currency">🥥 Cocos</span>
+                            <span class="wallet-balance" data-ogob-balance>${OgobEconomy.formatOgob(balance)}</span>
+                            <span class="wallet-currency">🥥 Ogob</span>
                         </div>
                     </div>
                 </header>
@@ -273,28 +273,28 @@ class GunaStore extends HTMLElement {
                 this.bindEvents();
                 return;
             }
-            if (!CocosEconomy.spendCocos(price)) {
-                this.showToast(typeof GunaI18n !== 'undefined' ? GunaI18n.t('notEnoughCocos') : 'No tienes suficientes cocos.', 'error');
+            if (!OgobEconomy.spendOgob(price)) {
+                this.showToast(typeof GunaI18n !== 'undefined' ? GunaI18n.t('notEnoughCocos') : 'No tienes suficientes ogob.', 'error');
                 return;
             }
             GunaLives.addLives(item.lives);
             if (item.special) GunaLives.markSpecialOfferUsed();
-            CocosEconomy.recordPurchase(`purchase-${itemId}-${Date.now()}`);
-            CocosEconomy.triggerConfetti();
+            OgobEconomy.recordPurchase(`purchase-${itemId}-${Date.now()}`);
+            OgobEconomy.triggerConfetti();
             this.showToast(`¡+${item.lives} vida(s) añadida(s)! ❤️`, 'success');
             this.render();
             this.bindEvents();
             return;
         }
 
-        if (CocosEconomy.isPurchased(itemId)) return;
+        if (OgobEconomy.isPurchased(itemId)) return;
 
-        if (!CocosEconomy.spendCocos(price)) {
-            this.showToast('No tienes suficientes cocos. ¡Completa más lecciones!', 'error');
+        if (!OgobEconomy.spendOgob(price)) {
+            this.showToast('No tienes suficientes ogob. ¡Completa más lecciones!', 'error');
             return;
         }
 
-        CocosEconomy.recordPurchase(itemId);
+        OgobEconomy.recordPurchase(itemId);
         if (item.id === 'avatar-ancestral' || item.id === 'semanal-avatar') {
             const profile = GunaUserData?.getProfile();
             if (profile) GunaUserData.saveProfile({ ...profile, avatar: item.image });

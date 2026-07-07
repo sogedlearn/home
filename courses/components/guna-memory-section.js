@@ -122,7 +122,7 @@ class GunaMemorySection extends HTMLElement {
                             <div class="victory-reward">
                                 <span class="reward-icon">🥥</span>
                                 <span class="reward-count" id="rewardCount">+0</span>
-                                <span class="reward-text">COCOS</span>
+                                <span class="reward-text">OGOB</span>
                             </div>
                         </div>
                         <div class="victory-actions">
@@ -321,9 +321,9 @@ class GunaMemorySection extends HTMLElement {
             this.updateCocosInSupabase(config.reward);
 
             // Award cocos locally if economy system exists
-            if (typeof CocosEconomy !== 'undefined') {
-                CocosEconomy.addCocos(config.reward);
-                CocosEconomy.triggerConfetti();
+            if (typeof OgobEconomy !== 'undefined') {
+                OgobEconomy.addOgob(config.reward);
+                OgobEconomy.triggerConfetti();
             }
 
             if (typeof GunaGamification !== 'undefined') {

@@ -73,8 +73,8 @@ const GunaLeaderboard = {
             GunaGamification.awardBadge(`leader-${period}`);
             GunaGamification.addXP(period === 'week' ? 50 : period === 'month' ? 150 : 0);
         }
-        if (typeof CocosEconomy !== 'undefined' && period !== 'all') {
-            CocosEconomy.addCocos(period === 'week' ? 25 : 75);
+        if (typeof OgobEconomy !== 'undefined' && period !== 'all') {
+            OgobEconomy.addOgob(period === 'week' ? 25 : 75);
         }
     }
 };

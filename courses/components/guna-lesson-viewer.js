@@ -1545,7 +1545,7 @@ class GunaLessonViewer extends HTMLElement {
             GunaGamification.onLessonComplete(this.currentLessonId, this.lessonContent?.xp || 50);
             if (this.currentLessonId === 10) {
                 GunaGamification.awardBadge('guna-master');
-                if (typeof CocosEconomy !== 'undefined') CocosEconomy.addCocos(25);
+                if (typeof OgobEconomy !== 'undefined') OgobEconomy.addOgob(25);
             }
         }
         this.gunaLessons.saveProgress(this.currentLessonId, {

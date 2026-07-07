@@ -8,17 +8,17 @@ const GunaI18n = {
         en: {
             overview: 'Overview', learn: 'Learning Path', vocabulary: 'Vocabulary', store: 'Guna Store',
             stories: 'Stories', chat: 'AI Tutor', community: 'Culture Center', leaderboard: 'Leaderboard',
-            achievements: 'Achievements', streak: 'streak', lives: 'lives', cocos: 'Cocos',
+            achievements: 'Achievements', streak: 'streak', lives: 'burba', cocos: 'Ogob',
             saveChanges: 'Save Changes', saveSettings: 'Save Settings', cancel: 'Cancel',
             profileTitle: 'Your Profile', settingsTitle: 'Settings',
-            noLives: 'No lives left! Visit the store to buy more or wait for regeneration.',
-            livesLost: 'You lost a life!',
+            noLives: 'No burba left! Visit the store to buy more or wait for regeneration.',
+            livesLost: 'You lost a burba!',
             purchaseSuccess: 'Purchase successful!',
-            notEnoughCocos: 'Not enough cocos.',
+            notEnoughCocos: 'Not enough ogob.',
             profileSaved: 'Profile saved successfully!',
             settingsSaved: 'Settings saved successfully!',
             locked: 'Locked', startLesson: 'Start Lesson', review: 'Review',
-            complete: 'Complete Lesson', outOfLives: 'Out of Lives'
+            complete: 'Complete Lesson', outOfLives: 'Out of Burba'
         },
         es: {
             overview: 'Inicio', learn: 'Ruta de Aprendizaje', vocabulary: 'Vocabulario', store: 'Tienda Guna',

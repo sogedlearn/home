@@ -83,8 +83,8 @@ const GunaProgress = {
         this.clearLessonSession(id);
         this.saveProgress(progress);
 
-        if (typeof CocosEconomy !== 'undefined') {
-            CocosEconomy.addCocos(25);
+        if (typeof OgobEconomy !== 'undefined') {
+            OgobEconomy.addOgob(25);
         }
         return progress;
     },

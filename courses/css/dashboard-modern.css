@@ -337,7 +337,7 @@
     margin: 0;
 }
 
-.cocos-wallet-modern {
+.ogob-wallet-modern {
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
     border-radius: 20px;
@@ -618,7 +618,7 @@
         font-size: 2rem;
     }
 
-    .cocos-wallet-modern {
+    .ogob-wallet-modern {
         width: 100%;
         justify-content: center;
     }
@@ -1957,7 +1957,7 @@ body {
 }
 
 .stat-item.seeds .stat-icon,
-.stat-item.cocos .stat-icon {
+.stat-item.ogob .stat-icon {
     color: var(--success-color);
 }
 
@@ -2895,7 +2895,7 @@ input:checked + .toggle-slider:before {
         display: none;
     }
 
-    .stat-item.cocos .stat-info {
+    .stat-item.ogob .stat-info {
         display: flex;
     }
     
@@ -2931,7 +2931,7 @@ input:checked + .toggle-slider:before {
         display: none;
     }
 
-    .stat-item.cocos .stat-info {
+    .stat-item.ogob .stat-info {
         display: flex;
     }
     
@@ -2987,13 +2987,13 @@ input:checked + .toggle-slider:before {
    Gamified Dashboard & Cocos Economy
    ================================ */
 
-/* Cocos counter in header */
-.stat-item.cocos {
+/* Ogob counter in header */
+.stat-item.ogob {
     position: relative;
     cursor: default;
 }
 
-.cocos-icon-wrap {
+.ogob-icon-wrap {
     width: 28px;
     height: 28px;
     display: flex;
@@ -3001,13 +3001,13 @@ input:checked + .toggle-slider:before {
     justify-content: center;
 }
 
-.cocos-icon {
+.ogob-icon {
     width: 28px;
     height: 28px;
     object-fit: contain;
 }
 
-.cocos-tooltip {
+.ogob-tooltip {
     position: absolute;
     bottom: calc(100% + 8px);
     left: 50%;
@@ -3025,7 +3025,7 @@ input:checked + .toggle-slider:before {
     z-index: 10;
 }
 
-.cocos-tooltip::after {
+.ogob-tooltip::after {
     content: '';
     position: absolute;
     top: 100%;
@@ -3035,8 +3035,8 @@ input:checked + .toggle-slider:before {
     border-top-color: var(--text-primary);
 }
 
-.stat-item.cocos:hover .cocos-tooltip,
-.stat-item.cocos:focus .cocos-tooltip {
+.stat-item.ogob:hover .ogob-tooltip,
+.stat-item.ogob:focus .ogob-tooltip {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) scale(1);
@@ -3050,16 +3050,16 @@ input:checked + .toggle-slider:before {
     100% { transform: scale(1); }
 }
 
-.cocos-bounce {
+.ogob-bounce {
     animation: cocosBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.cocos-gain .stat-value,
-.cocos-gain .store-balance-value {
+.ogob-gain .stat-value,
+.ogob-gain .store-balance-value {
     color: var(--success-color);
 }
 
-.cocos-spend .stat-value {
+.ogob-spend .stat-value {
     color: var(--accent-color);
 }
 
@@ -3398,8 +3398,8 @@ input:checked + .toggle-slider:before {
 .mini-stat-card.lessons .mini-stat-number { color: var(--info-color); }
 .mini-stat-card.xp-total { border-color: rgba(255, 179, 0, 0.2); }
 .mini-stat-card.xp-total .mini-stat-number { color: var(--secondary-color); }
-.mini-stat-card.cocos-earned { border-color: rgba(40, 167, 69, 0.2); }
-.mini-stat-card.cocos-earned .mini-stat-number { color: var(--primary-color); }
+.mini-stat-card.ogob-earned { border-color: rgba(40, 167, 69, 0.2); }
+.mini-stat-card.ogob-earned .mini-stat-number { color: var(--primary-color); }
 .mini-stat-card.streak-current { border-color: rgba(255, 107, 53, 0.2); }
 .mini-stat-card.streak-current .mini-stat-number { color: var(--accent-color); }
 
@@ -4493,7 +4493,7 @@ body.dark-mode .sidebar { background: #1e2229; }
 .lesson-xp-reward { display: flex; gap: 1rem; justify-content: center; margin: 1.5rem 0; }
 .xp-badge, .cocos-badge { padding: 0.5rem 1rem; border-radius: 20px; font-weight: 700; }
 .xp-badge { background: rgba(139, 92, 246, 0.15); color: #8B5CF6; }
-.cocos-badge { background: rgba(255, 179, 0, 0.15); color: #FFB300; }
+.ogob-badge { background: rgba(255, 179, 0, 0.15); color: #FFB300; }
 .lesson-status-badge { display: block; font-size: 1.25rem; margin-bottom: 0.35rem; }
 
 .stat-item.lives.lives-empty .stat-value { color: #e74c3c; }

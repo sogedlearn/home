@@ -422,8 +422,8 @@ class SimpleLearningHub {
                 AOS.refresh();
             }
             
-            if (typeof CocosEconomy !== 'undefined') {
-                CocosEconomy.updateAllDisplays();
+            if (typeof OgobEconomy !== 'undefined') {
+                OgobEconomy.updateAllDisplays();
             }
             if (typeof GunaGamification !== 'undefined') {
                 GunaGamification.updateDisplays();
@@ -761,7 +761,7 @@ class SimpleLearningHub {
             xpNext: typeof GunaGamification !== 'undefined' ? GunaGamification.xpForLevel(gunaState.level || 1) : (progress.xpNext || 2000),
             streak: gunaState.streak || progress.streak || 7,
             lessons: gunaCompleted,
-            cocos: typeof CocosEconomy !== 'undefined' ? CocosEconomy.getBalance() : 1250,
+            ogob: typeof OgobEconomy !== 'undefined' ? OgobEconomy.getBalance() : 1250,
             pathProgress: pathProgress || progress.pathProgress || 30
         };
     }
@@ -842,10 +842,6 @@ class SimpleLearningHub {
         return `
             <div class="overview-dashboard overview-gamified overview-mola-bg">
                 <section class="hero-section" data-aos="fade-up">
-                    <div class="hero-greeting">
-                        <h1 class="hero-title">Welcome back, <span class="hero-username">${username}</span>!</h1>
-                        <p class="hero-subtitle">Keep strengthening your knowledge of Guna culture and language.</p>
-                    </div>
                     <div class="hero-stats-row">
                         <div class="hero-stat-pill level">
                             <i class="fas fa-star"></i>
@@ -894,10 +890,10 @@ class SimpleLearningHub {
                         <span class="mini-stat-number">${stats.xp.toLocaleString('en-US')}</span>
                         <span class="mini-stat-label">Total XP</span>
                     </div>
-                    <div class="mini-stat-card cocos-earned cocos-counter">
-                        <img src="../Images/Soged/coco.png" alt="" class="mini-stat-coco-img" aria-hidden="true">
-                        <span class="mini-stat-number" data-cocos-balance>${stats.cocos.toLocaleString('en-US')}</span>
-                        <span class="mini-stat-label">Cocos earned</span>
+                    <div class="mini-stat-card ogob-earned ogob-counter">
+                        <img src="../Images/Soged/coco.png" alt="" class="mini-stat-ogob-img" aria-hidden="true">
+                        <span class="mini-stat-number" data-ogob-balance>${stats.ogob.toLocaleString('en-US')}</span>
+                        <span class="mini-stat-label">Ogob earned</span>
                     </div>
                     <div class="mini-stat-card streak-current">
                         <span class="mini-stat-emoji" aria-hidden="true">🔥</span>
@@ -1158,8 +1154,8 @@ class SimpleLearningHub {
         if (pathBar) pathBar.style.width = `${stats.pathProgress}%`;
         if (pathPercent) pathPercent.textContent = `${stats.pathProgress}% complete`;
 
-        if (typeof CocosEconomy !== 'undefined') {
-            CocosEconomy.updateAllDisplays();
+        if (typeof OgobEconomy !== 'undefined') {
+            OgobEconomy.updateAllDisplays();
         }
         if (typeof GunaLives !== 'undefined') {
             GunaLives.updateDisplays();

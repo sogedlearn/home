@@ -22,7 +22,7 @@ const GunaGamification = {
         { id: 'history-explorer', category: 'community', icon: '📜', title: 'History Explorer', description: 'Visit the History section', check: () => localStorage.getItem('guna_history_visited') === '1' },
         { id: 'culture-enthusiast', category: 'community', icon: '🧵', title: 'Culture Enthusiast', description: 'Explore Guna culture', check: () => localStorage.getItem('guna_culture_visited') === '1' },
         { id: 'territory-expert', category: 'community', icon: '🗺️', title: 'Territory Expert', description: 'Explore the Guna territory map', check: () => localStorage.getItem('guna_territory_visited') === '1' },
-        { id: 'mola-collector', category: 'community', icon: '🎨', title: 'Mola Collector', description: 'Purchase a mola in the store', check: () => CocosEconomy?.isPurchased('mola-colibri') || CocosEconomy?.isPurchased('mola-coco') },
+        { id: 'mola-collector', category: 'community', icon: '🎨', title: 'Mola Collector', description: 'Purchase a mola in the store', check: () => OgobEconomy?.isPurchased('mola-colibri') || OgobEconomy?.isPurchased('mola-coco') },
         // Streaks
         { id: 'streak-3', category: 'streak', icon: '🔥', title: '3-Day Streak', description: 'Study 3 days in a row', check: () => GunaGamification.getState().streak >= 3 },
         { id: 'streak-7', category: 'streak', icon: '🔥', title: '7-Day Streak', description: 'Study 7 days in a row', check: () => GunaGamification.getState().streak >= 7 },
@@ -115,7 +115,7 @@ const GunaGamification = {
         this.saveState(state);
         if (perfect) localStorage.setItem('guna_memory_perfect', '1');
         this.addXP(perfect ? 40 : 20);
-        if (typeof CocosEconomy !== 'undefined') CocosEconomy.addCocos(perfect ? 15 : 8);
+        if (typeof OgobEconomy !== 'undefined') OgobEconomy.addOgob(perfect ? 15 : 8);
         this.checkAllBadges();
     },
 
