@@ -14,21 +14,40 @@
     }
 
     .closet-button {
-        width: 70px;
-        height: 70px;
+        width: 80px;
+        height: 80px;
         border-radius: 50%;
         border: 4px solid #FFD700;
-        background: linear-gradient(135deg, #C41E3A, #FF6B35);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #CD853F 100%);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.3), inset 0 2px 10px rgba(255, 255, 255, 0.2);
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         overflow: hidden;
         position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .closet-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), transparent);
+        pointer-events: none;
     }
 
     .closet-button:hover {
-        transform: scale(1.1);
-        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+        transform: scale(1.15) rotate(5deg);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.5), inset 0 2px 15px rgba(255, 255, 255, 0.3);
+    }
+
+    .closet-button:active {
+        transform: scale(1.05) rotate(-2deg);
     }
 
     .closet-button img {
@@ -98,16 +117,16 @@
     }
 
     .closet-modal {
-        background: linear-gradient(135deg, #FFF8E1, #FFE0B2);
+        background: linear-gradient(135deg, #F5DEB3 0%, #DEB887 50%, #D2B48C 100%);
         border-radius: 24px;
-        padding: 2rem;
+        padding: 2.5rem;
         max-width: 900px;
         width: 90%;
         max-height: 90vh;
         overflow-y: auto;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.2);
         border: 4px solid #FFD700;
-        animation: slideUp 0.4s ease;
+        animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         position: relative;
     }
 
@@ -118,23 +137,27 @@
 
     .closet-close {
         position: absolute;
-        top: 15px;
-        right: 15px;
-        background: #C41E3A;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #8B4513, #A0522D);
         color: white;
-        border: none;
-        width: 40px;
-        height: 40px;
+        border: 3px solid #FFD700;
+        width: 45px;
+        height: 45px;
         border-radius: 50%;
         cursor: pointer;
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .closet-close:hover {
-        background: #FF6B35;
-        transform: rotate(90deg);
+        background: linear-gradient(135deg, #A0522D, #CD853F);
+        transform: rotate(90deg) scale(1.1);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
     }
 
     .closet-header {
@@ -143,15 +166,17 @@
     }
 
     .closet-header h2 {
-        color: #C41E3A;
-        font-size: 2rem;
+        color: #8B4513;
+        font-size: 2.2rem;
         font-weight: 700;
         margin-bottom: 0.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .closet-header p {
-        color: #666;
-        font-size: 1rem;
+        color: #654321;
+        font-size: 1.1rem;
+        font-weight: 500;
     }
 
     .closet-content {
@@ -168,12 +193,18 @@
     }
 
     .closet-preview img {
-        width: 200px;
-        height: 200px;
-        border-radius: 20px;
-        border: 4px solid #FFD700;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        width: 220px;
+        height: 220px;
+        border-radius: 24px;
+        border: 5px solid #FFD700;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3), 0 0 25px rgba(255, 215, 0, 0.2);
         object-fit: cover;
+        transition: all 0.3s ease;
+    }
+
+    .closet-preview img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 35px rgba(255, 215, 0, 0.3);
     }
 
     .closet-accessories {
@@ -183,33 +214,41 @@
     }
 
     .accessory-item {
-        background: white;
-        border-radius: 12px;
-        padding: 1rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 16px;
+        padding: 1.2rem;
         text-align: center;
         cursor: pointer;
-        transition: all 0.3s ease;
-        border: 2px solid transparent;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 3px solid transparent;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     }
 
     .accessory-item:hover {
-        transform: translateY(-5px);
+        transform: translateY(-8px) rotate(2deg);
         border-color: #FFD700;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
     }
 
     .accessory-item.selected {
-        border-color: #28A745;
+        border-color: #228B22;
         background: linear-gradient(135deg, #D4F4DD, #C8E6C9);
+        box-shadow: 0 12px 30px rgba(34, 139, 34, 0.3);
+        transform: scale(1.05);
     }
 
     .accessory-item img {
-        width: 60px;
-        height: 60px;
-        border-radius: 8px;
-        margin-bottom: 0.5rem;
+        width: 70px;
+        height: 70px;
+        border-radius: 12px;
+        margin-bottom: 0.8rem;
         object-fit: cover;
+        border: 2px solid rgba(139, 69, 19, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .accessory-item:hover img {
+        border-color: #FFD700;
     }
 
     .accessory-item span {
@@ -237,23 +276,25 @@
     }
 
     .closet-btn.primary {
-        background: linear-gradient(135deg, #28A745, #20C997);
+        background: linear-gradient(135deg, #228B22, #2E8B57);
         color: white;
+        border: 2px solid #FFD700;
     }
 
     .closet-btn.primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(34, 139, 34, 0.5);
     }
 
     .closet-btn.secondary {
-        background: linear-gradient(135deg, #6c757d, #495057);
+        background: linear-gradient(135deg, #8B4513, #A0522D);
         color: white;
+        border: 2px solid #CD853F;
     }
 
     .closet-btn.secondary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(108, 117, 125, 0.4);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(139, 69, 19, 0.4);
     }
 
     @media (max-width: 768px) {
@@ -278,61 +319,66 @@
 </style>
 
 <div class="closet-quick-access">
-    <button class="closet-button" id="closetButton" aria-label="Abrir Clóset Virtual">
+    <button class="closet-button" id="closetButton" aria-label="Open Virtual Closet">
         <img src="../Images/Soged/Newturttle.png" alt="Avatar Soggy" id="closetAvatarPreview">
     </button>
-    <div class="closet-tooltip">Clóset Virtual</div>
+    <div class="closet-tooltip">Virtual Closet</div>
 </div>
 
 <!-- Closet Modal -->
 <div class="closet-modal-overlay" id="closetModal">
     <div class="closet-modal">
-        <button class="closet-close" id="closetClose" aria-label="Cerrar">
+        <button class="closet-close" id="closetClose" aria-label="Close">
             <i class="fas fa-times"></i>
         </button>
         
         <div class="closet-header">
-            <h2>👕 Clóset Virtual de Soggy</h2>
-            <p>Personaliza tu avatar con accesorios culturales</p>
+            <h2>👕 Soggy's Virtual Closet</h2>
+            <p>Customize your avatar with cultural accessories</p>
         </div>
 
         <div class="closet-content">
             <div class="closet-preview">
                 <img src="../Images/Soged/Newturttle.png" alt="Avatar Preview" id="closetPreview">
-                <h3>Vista Previa</h3>
+                <h3>Preview</h3>
             </div>
 
             <div class="closet-accessories">
                 <div class="accessory-item selected" data-accessory="none">
-                    <img src="../Images/Soged/Newturttle.png" alt="Ninguno">
-                    <span>Ninguno</span>
+                    <img src="../Images/Soged/Newturttle.png" alt="None">
+                    <span>None</span>
                 </div>
                 <div class="accessory-item" data-accessory="hat">
+<<<<<<< HEAD
                     <img src="../Images/Soged/oggob.png" alt="Sombrero">
                     <span>Sombrero</span>
+=======
+                    <img src="../Images/Soged/coco.png" alt="Hat">
+                    <span>Hat</span>
+>>>>>>> 1e22df232296411c72984fad8debddf4a52af023
                 </div>
                 <div class="accessory-item" data-accessory="glasses">
-                    <img src="../Images/Soged/mola-icon.png" alt="Lentes">
-                    <span>Lentes</span>
+                    <img src="../Images/Soged/mola-icon.png" alt="Glasses">
+                    <span>Glasses</span>
                 </div>
                 <div class="accessory-item" data-accessory="necklace">
-                    <img src="../Images/Soged/turttleeee.png" alt="Collar">
-                    <span>Collar</span>
+                    <img src="../Images/Soged/turttleeee.png" alt="Necklace">
+                    <span>Necklace</span>
                 </div>
                 <div class="accessory-item" data-accessory="scarf">
-                    <img src="../Images/Soged/Turttle.png" alt="Bufanda">
-                    <span>Bufanda</span>
+                    <img src="../Images/Soged/Turttle.png" alt="Scarf">
+                    <span>Scarf</span>
                 </div>
                 <div class="accessory-item" data-accessory="crown">
-                    <img src="../Images/Soged/Soged.jpg" alt="Corona">
-                    <span>Corona</span>
+                    <img src="../Images/Soged/Soged.jpg" alt="Crown">
+                    <span>Crown</span>
                 </div>
             </div>
         </div>
 
         <div class="closet-actions">
-            <button class="closet-btn secondary" id="closetCancel">Cancelar</button>
-            <button class="closet-btn primary" id="closetSave">Guardar Cambios</button>
+            <button class="closet-btn secondary" id="closetCancel">Cancel</button>
+            <button class="closet-btn primary" id="closetSave">Save Changes</button>
         </div>
     </div>
 </div>
@@ -407,8 +453,8 @@
             // Show success feedback
             const btn = closetSave;
             const originalText = btn.textContent;
-            btn.textContent = '✓ Guardado!';
-            btn.style.background = 'linear-gradient(135deg, #28A745, #20C997)';
+            btn.textContent = '✓ Saved!';
+            btn.style.background = 'linear-gradient(135deg, #228B22, #2E8B57)';
             
             setTimeout(() => {
                 btn.textContent = originalText;
