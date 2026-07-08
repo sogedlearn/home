@@ -42,16 +42,16 @@ class GunaAiTutor extends HTMLElement {
     }
 
     addWelcomeMessage() {
-        this.addMessage('ai', `Welcome! I'm your ${this.getCourseName()} AI tutor — here to help you learn Dulegaya (the Guna language) and explore Guna culture.\n\nI can help you with:\n• Vocabulary and pronunciation\n• Grammar and sentence patterns\n• Cultural context (molas, history, territory)\n• Practice conversations and mini quizzes\n\nTry asking "How do I say hello?" or tap the microphone to speak!\n\nWhat would you like to explore today?`);
+        this.addMessage('ai', `Welcome! I'm your ${this.getCourseName()} Soggy Tutor — here to help you learn Dulegaya (the Guna language) and explore Guna culture.\n\nI can help you with:\n• Vocabulary and pronunciation\n• Grammar and sentence patterns\n• Cultural context (molas, history, territory)\n• Practice conversations and mini quizzes\n\nTry asking "How do I say hello?" or tap the microphone to speak!\n\nWhat would you like to explore today?`);
     }
 
     render() {
         this.innerHTML = `
             <div class="ai-tutor-section">
                 <div class="ai-tutor-header">
-                    <div class="ai-tutor-avatar" aria-hidden="true">🤖</div>
+                    <div class="ai-tutor-avatar" aria-hidden="true"><img src="../../Images/Soged/Soggy IA.jpg" alt="Soggy Tutor" class="ai-tutor-avatar-img"></div>
                     <div>
-                        <h2 class="ai-tutor-title">AI Tutor</h2>
+                        <h2 class="ai-tutor-title">Soggy Tutor</h2>
                         <p class="ai-tutor-subtitle">Your personal ${this.getCourseName()} language assistant</p>
                     </div>
                     <div class="ai-tutor-controls">
@@ -72,10 +72,10 @@ class GunaAiTutor extends HTMLElement {
                         <button type="button" class="ai-suggestion" data-prompt="Practice a short conversation greeting someone">Practice conversation</button>
                     </div>
                     <div class="ai-tutor-input-row">
-                        <button type="button" id="aiMicBtn" class="ai-mic-btn" aria-label="Speak to AI tutor" title="Voice input">
+                        <button type="button" id="aiMicBtn" class="ai-mic-btn" aria-label="Speak to Soggy Tutor" title="Voice input">
                             <i class="fas fa-microphone"></i>
                         </button>
-                        <textarea id="aiChatInput" rows="2" placeholder="Ask about ${this.getCourseName()} language, culture, or pronunciation..." aria-label="Message to AI tutor"></textarea>
+                        <textarea id="aiChatInput" rows="2" placeholder="Ask about ${this.getCourseName()} language, culture, or pronunciation..." aria-label="Message to Soggy Tutor"></textarea>
                         <button type="button" id="aiChatSend" class="ai-send-btn" aria-label="Send message">
                             <i class="fas fa-paper-plane"></i>
                         </button>
@@ -195,7 +195,7 @@ class GunaAiTutor extends HTMLElement {
         const el = document.createElement('div');
         el.className = 'ai-msg ai-msg--typing';
         el.id = 'aiTypingIndicator';
-        el.innerHTML = `<div class="ai-msg-avatar" aria-hidden="true">🤖</div><div class="ai-msg-bubble ai-typing"><span></span><span></span><span></span></div>`;
+        el.innerHTML = `<div class="ai-msg-avatar" aria-hidden="true"><img src="../../Images/Soged/Soggy IA.jpg" alt="Soggy Tutor" class="ai-msg-avatar-img"></div><div class="ai-msg-bubble ai-typing"><span></span><span></span><span></span></div>`;
         container.appendChild(el);
         container.scrollTop = container.scrollHeight;
     }
@@ -215,7 +215,7 @@ class GunaAiTutor extends HTMLElement {
         if (!container) return;
         const el = document.createElement('div');
         el.className = `ai-msg ai-msg--${role}`;
-        const avatar = role === 'ai' ? '🤖' : '🧑‍🎓';
+        const avatar = role === 'ai' ? '<img src="../../Images/Soged/Soggy IA.jpg" alt="Soggy Tutor" class="ai-msg-avatar-img">' : '🧑‍🎓';
         const speakBtn = role === 'ai' ? `<button type="button" class="ai-msg-speak" aria-label="Listen to response"><i class="fas fa-volume-up"></i></button>` : '';
         el.innerHTML = `
             <div class="ai-msg-avatar" aria-hidden="true">${avatar}</div>

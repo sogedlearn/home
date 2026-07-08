@@ -1981,7 +1981,6 @@ body {
 .stat-label {
     font-size: 0.7rem;
     color: var(--text-secondary);
-    text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-top: 0.125rem;
 }
@@ -4117,14 +4116,22 @@ input:checked + .toggle-slider:before {
 }
 
 .ai-tutor-avatar {
-    width: 52px;
-    height: 52px;
+    width: 40px;
+    height: 40px;
     background: rgba(255,255,255,0.2);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.75rem;
+    overflow: hidden;
+}
+
+.ai-tutor-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .ai-tutor-title {
@@ -4179,8 +4186,8 @@ input:checked + .toggle-slider:before {
 }
 
 .ai-msg-avatar {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     background: var(--bg-tertiary);
     display: flex;
@@ -4188,6 +4195,14 @@ input:checked + .toggle-slider:before {
     justify-content: center;
     flex-shrink: 0;
     font-size: 1.1rem;
+    overflow: hidden;
+}
+
+.ai-msg-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .ai-msg-bubble {

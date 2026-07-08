@@ -8,32 +8,32 @@ const GunaI18n = {
         en: {
             overview: 'Overview', learn: 'Learning Path', vocabulary: 'Vocabulary', store: 'Guna Store',
             stories: 'Stories', chat: 'AI Tutor', community: 'Culture Center', leaderboard: 'Leaderboard',
-            achievements: 'Achievements', streak: 'streak', lives: 'lives', cocos: 'Cocos',
+            achievements: 'Achievements', streak: 'streak', lives: 'Burba', cocos: 'Oggob',
             saveChanges: 'Save Changes', saveSettings: 'Save Settings', cancel: 'Cancel',
             profileTitle: 'Your Profile', settingsTitle: 'Settings',
-            noLives: 'No lives left! Visit the store to buy more or wait for regeneration.',
-            livesLost: 'You lost a life!',
+            noLives: 'No Burba left! Visit the store to buy more or wait for regeneration.',
+            livesLost: 'You lost a Burba!',
             purchaseSuccess: 'Purchase successful!',
-            notEnoughCocos: 'Not enough cocos.',
+            notEnoughCocos: 'Not enough Oggob.',
             profileSaved: 'Profile saved successfully!',
             settingsSaved: 'Settings saved successfully!',
             locked: 'Locked', startLesson: 'Start Lesson', review: 'Review',
-            complete: 'Complete Lesson', outOfLives: 'Out of Lives'
+            complete: 'Complete Lesson', outOfLives: 'Out of Burba'
         },
         es: {
             overview: 'Inicio', learn: 'Ruta de Aprendizaje', vocabulary: 'Vocabulario', store: 'Tienda Guna',
             stories: 'Historias', chat: 'Tutor IA', community: 'Centro Cultural', leaderboard: 'Clasificación',
-            achievements: 'Logros', streak: 'racha', lives: 'vidas', cocos: 'Cocos',
+            achievements: 'Logros', streak: 'racha', lives: 'Burba', cocos: 'Oggob',
             saveChanges: 'Guardar Cambios', saveSettings: 'Guardar Configuración', cancel: 'Cancelar',
             profileTitle: 'Tu Perfil', settingsTitle: 'Configuración',
-            noLives: '¡Sin vidas! Visita la tienda o espera la regeneración.',
-            livesLost: '¡Perdiste una vida!',
+            noLives: '¡Sin Burba! Visita la tienda o espera la regeneración.',
+            livesLost: '¡Perdiste un Burba!',
             purchaseSuccess: '¡Compra exitosa!',
-            notEnoughCocos: 'No tienes suficientes cocos.',
+            notEnoughCocos: 'No tienes suficientes Oggob.',
             profileSaved: '¡Perfil guardado correctamente!',
             settingsSaved: '¡Configuración guardada correctamente!',
             locked: 'Bloqueado', startLesson: 'Iniciar Lección', review: 'Repasar',
-            complete: 'Completar Lección', outOfLives: 'Sin Vidas'
+            complete: 'Completar Lección', outOfLives: 'Sin Burba'
         }
     },
 
