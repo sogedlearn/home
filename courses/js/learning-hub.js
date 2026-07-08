@@ -1400,7 +1400,7 @@ class SimpleLearningHub {
 
     async logout() {
         // Show confirmation first
-        if (!confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+        if (!confirm('Are you sure you want to log out?')) {
             return;
         }
         

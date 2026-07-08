@@ -17,144 +17,144 @@ class InteractiveReading extends HTMLElement {
         return [
             {
                 id: 'mola-history',
-                title: 'La Historia de las Molas',
+                title: 'The History of Molas',
                 category: 'culture',
                 content: `
-                    <h2>El Arte de las Molas Guna</h2>
-                    <p>Las molas son una forma de arte textil tradicional del pueblo Guna, que habita en la comarca Guna Yala en Panamá y en algunas regiones de Colombia. Estas hermosas creaciones son mucho más que simples decoraciones: son expresiones de la cosmovisión, historia y espiritualidad del pueblo Guna.</p>
+                    <h2>The Art of Guna Molas</h2>
+                    <p>Molas are a traditional textile art form of the Guna people, who inhabit the Guna Yala region in Panama and some areas of Colombia. These beautiful creations are much more than simple decorations: they are expressions of the worldview, history, and spirituality of the Guna people.</p>
                     
-                    <h3>Orígenes y Significado</h3>
-                    <p>La palabra "mola" proviene del idioma Guna y significa "ropa" o "vestimenta". Tradicionalmente, las mujeres Guna llevan molas como parte de su vestimenta diaria, pero cada mola cuenta una historia única. Los patrones geométricos y figurativos representan elementos de la naturaleza, animales, mitos y eventos históricos importantes para la comunidad.</p>
+                    <h3>Origins and Meaning</h3>
+                    <p>The word "mola" comes from the Guna language and means "clothing" or "garment". Traditionally, Guna women wear molas as part of their daily attire, but each mola tells a unique story. Geometric and figurative patterns represent elements of nature, animals, myths, and historical events important to the community.</p>
                     
-                    <h3>Proceso de Creación</h3>
-                    <p>La técnica de las molas utiliza el método de "aplicación inversa" o "reverse appliqué". Las artesanas superponen varias capas de tela de diferentes colores y recortan patrones para revelar los colores inferiores, creando diseños intrincados y vibrantes. Este proceso puede tomar semanas o incluso meses para completar una sola mola compleja.</p>
+                    <h3>Creation Process</h3>
+                    <p>The mola technique uses the "reverse appliqué" method. Artisans layer several pieces of fabric of different colors and cut patterns to reveal the colors underneath, creating intricate and vibrant designs. This process can take weeks or even months to complete a single complex mola.</p>
                     
-                    <h3>Simbolismo Cultural</h3>
-                    <p>Cada elemento en una mola tiene significado. Los círculos representan el ciclo de la vida, los triángulos simbolizan las montañas sagradas, y las figuras de animales representan los espíritus guardianes. Los colores también tienen importancia: el rojo representa la sangre y la vida, el amarillo el sol y la prosperidad, y el negro la protección espiritual.</p>
+                    <h3>Cultural Symbolism</h3>
+                    <p>Each element in a mola has meaning. Circles represent the cycle of life, triangles symbolize sacred mountains, and animal figures represent guardian spirits. Colors also have importance: red represents blood and life, yellow the sun and prosperity, and black spiritual protection.</p>
                     
-                    <h3>Patrimonio Cultural</h3>
-                    <p>En 2017, el arte de las molas fue reconocido como Patrimonio Cultural Inmaterial de la Humanidad por la UNESCO. Este reconocimiento destaca no solo la belleza estética de las molas, sino también su importancia como vehículo de transmisión de conocimientos culturales y tradiciones ancestrales de generación en generación.</p>
+                    <h3>Cultural Heritage</h3>
+                    <p>In 2017, the art of molas was recognized as Intangible Cultural Heritage of Humanity by UNESCO. This recognition highlights not only the aesthetic beauty of molas, but also their importance as a vehicle for transmitting cultural knowledge and ancestral traditions from generation to generation.</p>
                 `,
                 quiz: [
                     {
-                        question: "¿Qué significa la palabra 'mola' en el idioma Guna?",
-                        options: ["Arte", "Ropa o vestimenta", "Colores", "Historia"],
+                        question: "What does the word 'mola' mean in the Guna language?",
+                        options: ["Art", "Clothing or garment", "Colors", "History"],
                         correct: 1
                     },
                     {
-                        question: "¿Qué técnica se utiliza para crear las molas?",
-                        options: ["Tejido tradicional", "Aplicación inversa (reverse appliqué)", "Pintura sobre tela", "Bordado convencional"],
+                        question: "What technique is used to create molas?",
+                        options: ["Traditional weaving", "Reverse appliqué", "Painting on fabric", "Conventional embroidery"],
                         correct: 1
                     },
                     {
-                        question: "¿Qué representa el color rojo en las molas?",
-                        options: ["El sol y la prosperidad", "La sangre y la vida", "La protección espiritual", "La naturaleza"],
+                        question: "What does the color red represent in molas?",
+                        options: ["The sun and prosperity", "Blood and life", "Spiritual protection", "Nature"],
                         correct: 1
                     },
                     {
-                        question: "¿En qué año las molas fueron reconocidas como Patrimonio Cultural Inmaterial por la UNESCO?",
+                        question: "In what year were molas recognized as Intangible Cultural Heritage by UNESCO?",
                         options: ["2010", "2015", "2017", "2020"],
                         correct: 2
                     },
                     {
-                        question: "¿Qué representan los círculos en las molas?",
-                        options: ["Las montañas sagradas", "El ciclo de la vida", "Los espíritus guardianes", "El mar"],
+                        question: "What do circles represent in molas?",
+                        options: ["Sacred mountains", "The cycle of life", "Guardian spirits", "The sea"],
                         correct: 1
                     }
                 ]
             },
             {
                 id: 'guna-language',
-                title: 'La Lengua Guna: Una Visión General',
+                title: 'The Guna Language: An Overview',
                 category: 'language',
                 content: `
-                    <h2>La Lengua Guna</h2>
-                    <p>El idioma Guna (también conocido como Kuna) es una lengua indígena hablada por aproximadamente 60,000 personas en Panamá y Colombia. Pertenece a la familia lingüística Chibchense y es una de las lenguas indígenas más vitales de la región.</p>
+                    <h2>The Guna Language</h2>
+                    <p>The Guna language (also known as Kuna) is an indigenous language spoken by approximately 60,000 people in Panama and Colombia. It belongs to the Chibchense language family and is one of the most vital indigenous languages in the region.</p>
                     
-                    <h3>Características Únicas</h3>
-                    <p>El Guna se distingue por su sistema fonológico complejo y su rica morfología. Una característica notable es el uso de sufijos para indicar diferentes aspectos gramaticales, incluyendo tiempo, modo y persona. La lengua también tiene un sistema de contadores específicos para diferentes tipos de objetos.</p>
+                    <h3>Unique Characteristics</h3>
+                    <p>Guna is distinguished by its complex phonological system and rich morphology. A notable feature is the use of suffixes to indicate different grammatical aspects, including tense, mood, and person. The language also has a specific counter system for different types of objects.</p>
                     
-                    <h3>Estructura Gramatical</h3>
-                    <p>A diferencia del español o inglés, el Guna sigue un orden de palabras flexible pero tiende a colocar el verbo al final de la oración. Los sustantivos pueden tener múltiples sufijos que modifican su significado, y los adjetivos generalmente preceden a los sustantivos que modifican.</p>
+                    <h3>Grammatical Structure</h3>
+                    <p>Unlike Spanish or English, Guna follows a flexible word order but tends to place the verb at the end of the sentence. Nouns can have multiple suffixes that modify their meaning, and adjectives generally precede the nouns they modify.</p>
                     
-                    <h3>Preservación Cultural</h3>
-                    <p>El idioma Guna es fundamental para la identidad cultural del pueblo Guna. A través de la lengua se transmiten historias, conocimientos tradicionales, prácticas espirituales y normas sociales. Los esfuerzos para preservar el idioma incluyen programas educativos bilingües y la documentación de historias orales de los ancianos.</p>
+                    <h3>Cultural Preservation</h3>
+                    <p>The Guna language is fundamental to the cultural identity of the Guna people. Through the language, stories, traditional knowledge, spiritual practices, and social norms are transmitted. Efforts to preserve the language include bilingual educational programs and documentation of oral histories from elders.</p>
                     
-                    <h3>Desafíos Modernos</h3>
-                    <p>A pesar de su vitalidad, el idioma Guna enfrenta desafíos como la influencia del español y la migración de jóvenes a áreas urbanas. Sin embargo, la fuerte identidad cultural Guna y el orgullo por su lengua han contribuido a su continuidad, con muchas comunidades manteniendo el Guna como lengua principal en la vida diaria.</p>
+                    <h3>Modern Challenges</h3>
+                    <p>Despite its vitality, the Guna language faces challenges such as the influence of Spanish and the migration of youth to urban areas. However, the strong Guna cultural identity and pride in their language have contributed to its continuity, with many communities maintaining Guna as the primary language in daily life.</p>
                 `,
                 quiz: [
                     {
-                        question: "¿A qué familia lingüística pertenece el idioma Guna?",
-                        options: ["Arawak", "Chibchense", "Caribe", "Quechua"],
+                        question: "Which language family does the Guna language belong to?",
+                        options: ["Arawak", "Chibchense", "Caribbean", "Quechua"],
                         correct: 1
                     },
                     {
-                        question: "¿Cuántas personas hablan aproximadamente el idioma Guna?",
+                        question: "Approximately how many people speak the Guna language?",
                         options: ["20,000", "40,000", "60,000", "80,000"],
                         correct: 2
                     },
                     {
-                        question: "¿Dónde tiende a colocarse el verbo en las oraciones Guna?",
-                        options: ["Al principio", "En el medio", "Al final", "No tiene posición fija"],
+                        question: "Where does the verb tend to be placed in Guna sentences?",
+                        options: ["At the beginning", "In the middle", "At the end", "No fixed position"],
                         correct: 2
                     },
                     {
-                        question: "¿Qué sistema específico tiene el Guna para diferentes tipos de objetos?",
-                        options: ["Sistema de género", "Sistema de contadores", "Sistema de casos", "Sistema de números"],
+                        question: "What specific system does Guna have for different types of objects?",
+                        options: ["Gender system", "Counter system", "Case system", "Number system"],
                         correct: 1
                     },
                     {
-                        question: "¿Qué es fundamental para la identidad cultural del pueblo Guna?",
-                        options: ["La geografía", "La economía", "El idioma", "La religión"],
+                        question: "What is fundamental to the cultural identity of the Guna people?",
+                        options: ["Geography", "Economy", "Language", "Religion"],
                         correct: 2
                     }
                 ]
             },
             {
                 id: 'guna-territory',
-                title: 'El Territorio Guna Yala',
+                title: 'The Guna Yala Territory',
                 category: 'geography',
                 content: `
-                    <h2>La Comarca Guna Yala</h2>
-                    <p>La Comarca Guna Yala es un territorio autónomo en Panamá que comprende un archipiélago de más de 365 islas a lo largo de la costa caribeña. Es el hogar del pueblo Guna y representa uno de los ejemplos más exitosos de autonomía indígena en América Latina.</p>
+                    <h2>The Guna Yala Region</h2>
+                    <p>The Guna Yala Region is an autonomous territory in Panama comprising an archipelago of more than 365 islands along the Caribbean coast. It is the home of the Guna people and represents one of the most successful examples of indigenous autonomy in Latin America.</p>
                     
-                    <h3>Geografía del Archipiélago</h3>
-                    <p>Las islas de Guna Yala se dividen en tres regiones principales: las islas habitadas, las islas desiertas utilizadas para agricultura y recolección, y las islas sagradas reservadas para ceremonias espirituales. Solo aproximadamente 49 de las islas están habitadas permanentemente.</p>
+                    <h3>Archipelago Geography</h3>
+                    <p>The islands of Guna Yala are divided into three main regions: inhabited islands, uninhabited islands used for agriculture and gathering, and sacred islands reserved for spiritual ceremonies. Only approximately 49 of the islands are permanently inhabited.</p>
                     
-                    <h3>Gobierno Autónomo</h3>
-                    <p>El pueblo Guna mantiene un sistema de gobierno autónomo basado en tradiciones ancestrales. El Congreso General Guna es la autoridad máxima, compuesto por líderes (sailas) de cada comunidad. Este sistema ha permitido a los Guna preservar su cultura, idioma y territorio frente a presiones externas.</p>
+                    <h3>Autonomous Government</h3>
+                    <p>The Guna people maintain an autonomous government system based on ancestral traditions. The Guna General Congress is the highest authority, composed of leaders (sailas) from each community. This system has allowed the Guna to preserve their culture, language, and territory against external pressures.</p>
                     
-                    <h3>Sostenibilidad y Medio Ambiente</h3>
-                    <p>Los Guna son conocidos por su profundo respeto por el medio ambiente. Prácticas tradicionales de pesca y agricultura sostenibles han mantenido la salud de los ecosistemas marinos y terrestres por generaciones. Sin embargo, el cambio climático y el turismo representan nuevos desafíos para la sostenibilidad del territorio.</p>
+                    <h3>Sustainability and Environment</h3>
+                    <p>The Guna are known for their deep respect for the environment. Traditional sustainable fishing and agricultural practices have maintained the health of marine and terrestrial ecosystems for generations. However, climate change and tourism represent new challenges for the territory's sustainability.</p>
                     
-                    <h3>Turismo Responsable</h3>
-                    <p>En décadas recientes, Guna Yala se ha convertido en un destino turístico popular. Los líderes Guna han implementado regulaciones para asegurar que el turismo sea responsable y respetuoso con la cultura local. Los visitantes deben seguir pautas estrictas y obtener permisos de las autoridades locales para visitar las islas.</p>
+                    <h3>Responsible Tourism</h3>
+                    <p>In recent decades, Guna Yala has become a popular tourist destination. Guna leaders have implemented regulations to ensure tourism is responsible and respectful of local culture. Visitors must follow strict guidelines and obtain permits from local authorities to visit the islands.</p>
                 `,
                 quiz: [
                     {
-                        question: "¿Cuántas islas comprende aproximadamente el archipiélago de Guna Yala?",
+                        question: "Approximately how many islands does the Guna Yala archipelago comprise?",
                         options: ["100", "200", "365", "500"],
                         correct: 2
                     },
                     {
-                        question: "¿Cuántas islas están habitadas permanentemente?",
-                        options: ["Aproximadamente 20", "Aproximadamente 49", "Aproximadamente 100", "Aproximadamente 200"],
+                        question: "How many islands are permanently inhabited?",
+                        options: ["Approximately 20", "Approximately 49", "Approximately 100", "Approximately 200"],
                         correct: 1
                     },
                     {
-                        question: "¿Cuál es la autoridad máxima del gobierno Guna?",
-                        options: ["El presidente de Panamá", "El Congreso General Guna", "El consejo de ancianos", "El gobernador local"],
+                        question: "What is the highest authority of the Guna government?",
+                        options: ["The President of Panama", "The Guna General Congress", "The council of elders", "The local governor"],
                         correct: 1
                     },
                     {
-                        question: "¿Qué desafío nuevo enfrentan los Guna respecto a la sostenibilidad?",
-                        options: ["La pesca excesiva", "El cambio climático y el turismo", "La deforestación", "La contaminación industrial"],
+                        question: "What new challenge do the Guna face regarding sustainability?",
+                        options: ["Overfishing", "Climate change and tourism", "Deforestation", "Industrial pollution"],
                         correct: 1
                     },
                     {
-                        question: "¿Qué deben hacer los visitantes para visitar las islas?",
-                        options: ["Solo pagar una tarifa", "Obtener permisos de autoridades locales", "No hay restricciones", "Solo visitar ciertas islas"],
+                        question: "What must visitors do to visit the islands?",
+                        options: ["Only pay a fee", "Obtain permits from local authorities", "No restrictions", "Only visit certain islands"],
                         correct: 1
                     }
                 ]

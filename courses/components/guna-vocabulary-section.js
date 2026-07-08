@@ -167,7 +167,7 @@ class GunaVocabularySection extends HTMLElement {
         const options = this.shuffle([w.es, ...this.shuffle(this.getAllWords().filter(x => x.guna !== w.guna)).slice(0, 3).map(x => x.es)]);
         return `
             <div class="vocab-practice">
-                <p class="vocab-practice-label">🔄 Repaso — ¿Qué significa?</p>
+                <p class="vocab-practice-label">🔄 Review — What does it mean?</p>
                 <h3 class="vocab-practice-prompt">${w.guna}</h3>
                 <div class="vocab-practice-options">
                     ${options.map(opt => `

@@ -610,7 +610,7 @@ class LearningSection extends HTMLElement {
     }
 
     getLessonsData() {
-        // Data específica por curso
+        // Course-specific data
         const courseLessons = {
             'ngabe': [
                 { id: 1, title: 'Basic Greetings', description: 'Learn essential greetings and polite expressions', status: 'completed', xp: 50, duration: 15, exercises: 8, type: 'normal' },
@@ -620,7 +620,7 @@ class LearningSection extends HTMLElement {
                 { id: 5, title: 'Level 1 Assessment', description: 'Test your knowledge with cultural scenarios', status: 'locked', xp: 200, duration: 45, exercises: 25, type: 'boss' }
             ],
             'guna': [
-                // MÓDULO 1: "Raíces y Entorno Comunitario" (Niveles 1-10)
+                // MODULE 1: "Roots and Community Environment" (Levels 1-10)
                 { id: 1, title: 'Greetings and Introductions', description: 'Greetings, pronouns and introductions', status: 'completed', xp: 50, duration: 15, exercises: 8, type: 'normal', module: 1 },
                 { id: 2, title: 'Family', description: 'Mother, father, siblings and grandparents', status: 'completed', xp: 75, duration: 20, exercises: 10, type: 'normal', module: 1 },
                 { id: 3, title: 'Household Objects', description: 'House, table, plate and daily objects', status: 'completed', xp: 75, duration: 20, exercises: 10, type: 'normal', module: 1 },
@@ -631,7 +631,7 @@ class LearningSection extends HTMLElement {
                 { id: 8, title: 'Weather and Seasons', description: 'Months, days, climate and lunar cycles', status: 'locked', xp: 150, duration: 35, exercises: 16, type: 'normal', module: 1 },
                 { id: 9, title: 'Clothing and Symbolism', description: 'Molas, beads, textiles and traditional crafts', status: 'locked', xp: 150, duration: 35, exercises: 16, type: 'normal', module: 1 },
                 { id: 10, title: 'Traditional Medicine', description: 'Medicinal plants, healing songs and botany', status: 'locked', xp: 175, duration: 40, exercises: 18, type: 'normal', module: 1 },
-                // MÓDULO 2: "Cosmovisión e Identidad Avanzada" (Niveles 11-20)
+                // MODULE 2: "Worldview and Advanced Identity" (Levels 11-20)
                 { id: 11, title: 'Stories and Legends', description: 'Creation myths and grandparents narrations', status: 'locked', xp: 175, duration: 40, exercises: 18, type: 'normal', module: 2 },
                 { id: 12, title: 'Community Organization', description: 'The Congress, comarcas and traditional authorities', status: 'locked', xp: 200, duration: 45, exercises: 20, type: 'normal', module: 2 },
                 { id: 13, title: 'Celebrations and Music', description: 'Traditional dances, ceremonies and music', status: 'locked', xp: 200, duration: 45, exercises: 20, type: 'normal', module: 2 },

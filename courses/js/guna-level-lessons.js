@@ -209,7 +209,7 @@ const GunaLevelLessons = {
                     content: `
                         <div class="lesson-intro">
                             <div class="intro-header">
-                                <h2>🏝️ Bienvenido al idioma Guna</h2>
+                                <h2>🏝️ Welcome to Guna Language</h2>
                                 <p>Discover the beautiful language of the Guna people, who live on the islands of Panama's Caribbean coast.</p>
                             </div>
                             <div class="cultural-context">
@@ -233,7 +233,7 @@ const GunaLevelLessons = {
                             <p>Let's learn the most important greeting words and phrases in Guna:</p>
                             <div class="vocabulary-table">
                                 <table>
-                                    <thead><tr><th>Guna</th><th>Español</th><th>English</th><th>Pronunciation</th></tr></thead>
+                                    <thead><tr><th>Guna</th><th>Spanish</th><th>English</th><th>Pronunciation</th></tr></thead>
                                     <tbody>
                                         <tr><td><strong>¡ anna !</strong></td><td>Hola</td><td>Hello</td><td>¡ anna !</td></tr>
                                         <tr><td><strong>¡ naa !</strong></td><td>Hola</td><td>Hi</td><td>¡ naa !</td></tr>
