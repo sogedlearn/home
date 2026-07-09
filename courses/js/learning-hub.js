@@ -887,10 +887,10 @@ class SimpleLearningHub {
                         <span class="mini-stat-number">${stats.xp.toLocaleString('en-US')}</span>
                         <span class="mini-stat-label">Total XP</span>
                     </div>
-                    <div class="mini-stat-card cocos-earned cocos-counter">
-                        <img src="../Images/Soged/oggob.png" alt="" class="mini-stat-coco-img" aria-hidden="true">
-                        <span class="mini-stat-number" data-cocos-balance>${stats.cocos.toLocaleString('en-US')}</span>
-                        <span class="mini-stat-label">Cocos earned</span>
+                    <div class="mini-stat-card oggob-earned oggob-counter">
+                        <img src="../Images/Soged/oggob.png" alt="" class="mini-stat-oggob-img" aria-hidden="true">
+                        <span class="mini-stat-number" data-oggob-balance>${stats.cocos.toLocaleString('en-US')}</span>
+                        <span class="mini-stat-label">Oggob earned</span>
                     </div>
                     <div class="mini-stat-card streak-current">
                         <span class="mini-stat-emoji" aria-hidden="true">🔥</span>
@@ -1095,21 +1095,48 @@ class SimpleLearningHub {
             try {
                 const { data: { session } } = await supabaseClient.auth.getSession();
                 if (!session) {
-                    alert('Por favor inicia sesión para acceder al dashboard.');
-                    window.location.href = '../auth/login.html';
-                    return false;
+                    // Allow guest mode - set guest user data
+                    const guestData = {
+                        name: 'Explorer',
+                        username: 'Explorer',
+                        email: 'guest@soged.org',
+                        role: 'guest',
+                        subscription: 'basic'
+                    };
+                    localStorage.setItem('soged_token', 'guest_token');
+                    localStorage.setItem('soged_user', JSON.stringify(guestData));
+                    this.currentUser = guestData;
+                    return true;
                 }
                 return true;
             } catch (error) {
                 console.error('Error checking authentication:', error);
-                alert('Por favor inicia sesión para acceder al dashboard.');
-                window.location.href = '../auth/login.html';
-                return false;
+                // Allow guest mode on error
+                const guestData = {
+                    name: 'Explorer',
+                    username: 'Explorer',
+                    email: 'guest@soged.org',
+                    role: 'guest',
+                    subscription: 'basic'
+                };
+                localStorage.setItem('soged_token', 'guest_token');
+                localStorage.setItem('soged_user', JSON.stringify(guestData));
+                this.currentUser = guestData;
+                return true;
             }
         } else {
-            alert('Por favor inicia sesión para acceder al dashboard.');
-            window.location.href = '../auth/login.html';
-            return false;
+            // Allow guest mode if Supabase not available
+            const guestData = {
+                name: 'Explorer',
+                username: 'Explorer',
+                email: 'guest@soged.org',
+                role: 'guest',
+                subscription: 'basic'
+            };
+            localStorage.setItem('soged_token', 'guest_token');
+            localStorage.setItem('soged_user', JSON.stringify(guestData));
+            this.currentUser = guestData;
+            return true;
         }
     }
 

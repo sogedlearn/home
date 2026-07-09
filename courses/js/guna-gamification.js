@@ -115,7 +115,7 @@ const GunaGamification = {
         this.saveState(state);
         if (perfect) localStorage.setItem('guna_memory_perfect', '1');
         this.addXP(perfect ? 40 : 20);
-        if (typeof CocosEconomy !== 'undefined') CocosEconomy.addCocos(perfect ? 15 : 8);
+        if (typeof CocosEconomy !== 'undefined') CocosEconomy.addOggob(perfect ? 15 : 8);
         this.checkAllBadges();
     },
 

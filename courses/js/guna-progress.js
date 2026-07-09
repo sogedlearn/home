@@ -90,7 +90,7 @@ const GunaProgress = {
         this.saveProgress(progress);
 
         if (typeof CocosEconomy !== 'undefined') {
-            CocosEconomy.addCocos(25);
+            CocosEconomy.addOggob(25);
         }
         return progress;
     },

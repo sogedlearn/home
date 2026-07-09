@@ -273,7 +273,7 @@ class GunaStore extends HTMLElement {
                 this.bindEvents();
                 return;
             }
-            if (!CocosEconomy.spendCocos(price)) {
+            if (!CocosEconomy.spendOggob(price)) {
                 this.showToast(typeof GunaI18n !== 'undefined' ? GunaI18n.t('notEnoughCocos') : 'No tienes suficientes cocos.', 'error');
                 return;
             }
@@ -289,7 +289,7 @@ class GunaStore extends HTMLElement {
 
         if (CocosEconomy.isPurchased(itemId)) return;
 
-        if (!CocosEconomy.spendCocos(price)) {
+        if (!CocosEconomy.spendOggob(price)) {
             this.showToast('No tienes suficientes cocos. ¡Completa más lecciones!', 'error');
             return;
         }

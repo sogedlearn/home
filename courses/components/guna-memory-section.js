@@ -317,9 +317,9 @@ class GunaMemorySection extends HTMLElement {
             // Award cocos via Supabase
             this.updateCocosInSupabase(config.reward);
 
-            // Award cocos locally if economy system exists
+            // Award oggob locally if economy system exists
             if (typeof CocosEconomy !== 'undefined') {
-                CocosEconomy.addCocos(config.reward);
+                CocosEconomy.addOggob(config.reward);
                 CocosEconomy.triggerConfetti();
             }
 

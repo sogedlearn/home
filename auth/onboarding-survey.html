@@ -223,6 +223,20 @@
             font-size: 14px;
         }
 
+        .option-card.disabled {
+            background: #f5f5f5;
+            border-color: #e0e0e0;
+            cursor: not-allowed;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .option-card.disabled:hover {
+            border-color: #e0e0e0;
+            transform: none;
+            box-shadow: none;
+        }
+
         .option-title {
             font-weight: 600;
             color: #333;
@@ -425,21 +439,21 @@
                         <div class="option-description">Rich maritime culture from San Blas Islands</div>
                     </div>
                 </div>
-                <div class="option-card language-option" data-value="ngabe">
+                <div class="option-card language-option disabled" data-value="ngabe">
                     <img src="../Images/Languages/Ngabe.png" alt="Ngäbe" class="language-icon">
                     <div class="language-info">
                         <div class="option-title">Ngäbe</div>
                         <div class="option-description">The largest indigenous group in Panama</div>
                     </div>
                 </div>
-                <div class="option-card language-option" data-value="naso">
+                <div class="option-card language-option disabled" data-value="naso">
                     <img src="../Images/Languages/Naso.gif" alt="Naso" class="language-icon">
                     <div class="language-info">
                         <div class="option-title">Naso</div>
                         <div class="option-description">Musical language with unique rhythms</div>
                     </div>
                 </div>
-                <div class="option-card language-option" data-value="embera">
+                <div class="option-card language-option disabled" data-value="embera">
                     <img src="../Images/Languages/Embera.png" alt="Emberá" class="language-icon">
                     <div class="language-info">
                         <div class="option-title">Emberá</div>
@@ -455,17 +469,6 @@
                     <option value="">Select your native language</option>
                     <option value="english">English</option>
                     <option value="spanish">Spanish</option>
-                    <option value="french">French</option>
-                    <option value="portuguese">Portuguese</option>
-                    <option value="german">German</option>
-                    <option value="italian">Italian</option>
-                    <option value="chinese">Chinese</option>
-                    <option value="japanese">Japanese</option>
-                    <option value="korean">Korean</option>
-                    <option value="arabic">Arabic</option>
-                    <option value="hindi">Hindi</option>
-                    <option value="russian">Russian</option>
-                    <option value="other">Other</option>
                 </select>
             </div>
 

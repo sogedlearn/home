@@ -476,9 +476,9 @@ class InteractiveReading extends HTMLElement {
             console.error('Error updating Cocos:', error);
         }
 
-        // Award cocos locally if economy system exists
+        // Award oggob locally if economy system exists
         if (typeof CocosEconomy !== 'undefined') {
-            CocosEconomy.addCocos(amount);
+            CocosEconomy.addOggob(amount);
             CocosEconomy.triggerConfetti();
         }
     }

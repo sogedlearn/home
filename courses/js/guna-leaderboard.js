@@ -74,7 +74,7 @@ const GunaLeaderboard = {
             GunaGamification.addXP(period === 'week' ? 50 : period === 'month' ? 150 : 0);
         }
         if (typeof CocosEconomy !== 'undefined' && period !== 'all') {
-            CocosEconomy.addCocos(period === 'week' ? 25 : 75);
+            CocosEconomy.addOggob(period === 'week' ? 25 : 75);
         }
     }
 };

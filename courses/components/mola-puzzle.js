@@ -333,9 +333,9 @@ class MolaPuzzle extends HTMLElement {
         // Update Cocos in Supabase
         this.updateCocosInSupabase(40);
 
-        // Award cocos locally if economy system exists
+        // Award oggob locally if economy system exists
         if (typeof CocosEconomy !== 'undefined') {
-            CocosEconomy.addCocos(40);
+            CocosEconomy.addOggob(40);
             CocosEconomy.triggerConfetti();
         }
     }
