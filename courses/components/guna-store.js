@@ -49,7 +49,7 @@ class GunaStore extends HTMLElement {
                 name: '🔥 Offer: ❤️ 1 Burba',
                 price: 50,
                 image: O,
-                story: 'Unique offer! One burba for only 50 oggob — only once per account.',
+                story: 'Unique offer! One burba for only 50 Oggob — only once per account.',
                 rarity: 'legendary',
                 burba: 1,
                 special: true
@@ -95,7 +95,7 @@ class GunaStore extends HTMLElement {
                     <div class="store-item-footer">
                         <span class="store-item-price">
                             <img src="${GUNA_STORE_ASSETS.oggob}" alt="" class="store-oggob-icon" aria-hidden="true">
-                            <span>${CocosEconomy.formatCocos(item.price)} oggob</span>
+                            <span>${CocosEconomy.formatCocos(item.price)} Oggob</span>
                         </span>
                         ${isBurba
                             ? (burbaFull
@@ -125,7 +125,7 @@ class GunaStore extends HTMLElement {
                 <header class="store-hero-modern" data-aos="fade-up">
                     <div class="store-hero-content-modern">
                         <h1 class="store-title-modern">🛒 Soged Market</h1>
-                        <p class="store-subtitle-modern">Exchange your oggob for exclusive rewards</p>
+                        <p class="store-subtitle-modern">Exchange your Oggob for exclusive rewards</p>
                     </div>
                     <div class="oggob-wallet-modern oggob-balance-display" title="Oggob earned during your learning">
                         <div class="wallet-icon-wrapper">
@@ -189,7 +189,7 @@ class GunaStore extends HTMLElement {
                 return;
             }
             if (!CocosEconomy.spendOggob(price)) {
-                this.showToast(typeof GunaI18n !== 'undefined' ? GunaI18n.t('notEnoughOggob') : 'You do not have enough oggob.', 'error');
+                this.showToast(typeof GunaI18n !== 'undefined' ? GunaI18n.t('notEnoughOggob') : 'You do not have enough Oggob.', 'error');
                 return;
             }
             GunaLives.addLives(item.burba);
@@ -205,7 +205,7 @@ class GunaStore extends HTMLElement {
         if (CocosEconomy.isPurchased(itemId)) return;
 
         if (!CocosEconomy.spendOggob(price)) {
-            this.showToast('You do not have enough oggob. Complete more lessons!', 'error');
+            this.showToast('You do not have enough Oggob. Complete more lessons!', 'error');
             return;
         }
 
