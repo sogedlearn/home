@@ -563,11 +563,11 @@
                     console.error('Login error:', error);
                     
                     // Show specific error message
-                    let errorMessage = 'Correo o contraseña incorrectos';
+                    let errorMessage = 'Incorrect email or password';
                     if (error.message.includes('Email not confirmed')) {
-                        errorMessage = 'Por favor confirma tu correo electrónico antes de iniciar sesión';
+                        errorMessage = 'Please confirm your email before logging in';
                     } else if (error.message.includes('Invalid login credentials')) {
-                        errorMessage = 'Correo o contraseña incorrectos';
+                        errorMessage = 'Incorrect email or password';
                     } else {
                         errorMessage = 'Error: ' + error.message;
                     }

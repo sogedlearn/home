@@ -659,7 +659,7 @@ class SimpleLearningHub {
     generateProgressContent() {
         return `
             <div class="progress-section" style="max-width: 1000px; margin: 0 auto;">
-                <div class="progress-header" style="text-align: center; margin-bottom: 3rem; padding: 2rem; background: linear-gradient(135deg, #8B5CF6, #A78BFA); color: white; border-radius: 16px;">
+                <div class="progress-header" style="text-align: center; margin-bottom: 3rem; padding: 2rem; background: url('../Images/Molas - Guna/Mola 1.jpg') center/cover, linear-gradient(135deg, rgba(255, 111, 0, 0.85), rgba(255, 143, 0, 0.85)); color: white; border-radius: 16px; position: relative; overflow: hidden;">
                     <h2 style="font-size: 2.5rem; margin-bottom: 0.5rem;">🏆 Your Achievements</h2>
                     <p style="font-size: 1.2rem; opacity: 0.9;">Track your ${this.getCourseName()} learning journey</p>
                 </div>
@@ -894,7 +894,7 @@ class SimpleLearningHub {
                     <div class="mini-stat-card oggob-earned oggob-counter">
                         <img src="../Images/Soged/oggob.png" alt="" class="mini-stat-oggob-img" aria-hidden="true">
                         <span class="mini-stat-number" data-oggob-balance>${stats.cocos.toLocaleString('en-US')}</span>
-                        <span class="mini-stat-label">Oggob earned</span>
+                        <span class="mini-stat-label">Ogob earned</span>
                     </div>
                     <div class="mini-stat-card streak-current">
                         <span class="mini-stat-emoji" aria-hidden="true">🔥</span>
@@ -956,7 +956,7 @@ class SimpleLearningHub {
                         <span class="store-promo-icon">🛒</span>
                         <div>
                             <h3>Visit the Guna Store</h3>
-                            <p>Spend your cocos to unlock molas, art and cultural rewards.</p>
+                            <p>Spend your ogobs to unlock molas, art and cultural rewards.</p>
                         </div>
                     </div>
                     <button type="button" class="store-promo-btn" onclick="window.learningHub.navigateToSection('store')">

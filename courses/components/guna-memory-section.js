@@ -124,7 +124,7 @@ class GunaMemorySection extends HTMLElement {
                             <div class="victory-reward">
                                 <span class="reward-icon">🥥</span>
                                 <span class="reward-count" id="rewardCount">+0</span>
-                                <span class="reward-text">COCOS</span>
+                                <span class="reward-text">OGOBS</span>
                             </div>
                         </div>
                         <div class="victory-actions">

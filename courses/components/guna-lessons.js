@@ -280,7 +280,7 @@ class GunaLessons {
                             </div>
                             <div class="lesson-xp-reward">
                                 <span class="xp-badge">+${config.xp} XP</span>
-                                <span class="cocos-badge">+25 🥥</span>
+                                <span class="ogobs-badge">+25 🥥</span>
                             </div>
                             <div class="lesson-completion">
                                 <button class="complete-lesson-btn">Complete Lesson</button>
@@ -445,7 +445,7 @@ class GunaLessons {
                     </div>
                     <div class="lesson-xp-reward">
                         <span class="xp-badge">+250 XP</span>
-                        <span class="cocos-badge">+50 🥥</span>
+                        <span class="ogobs-badge">+50 🥥</span>
                     </div>
                     <div class="lesson-completion">
                         <button class="complete-lesson-btn">Claim Certificate</button>

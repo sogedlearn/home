@@ -139,39 +139,39 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="feedbackModalLabel">
-                    <i class="fas fa-comment-dots me-2"></i>Enviar Comentario
+                    <i class="fas fa-comment-dots me-2"></i>Send Feedback
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="feedbackForm">
                     <div class="mb-3">
-                        <label for="feedbackName" class="form-label">Nombre</label>
+                        <label for="feedbackName" class="form-label">Name</label>
                         <input type="text" class="form-control" id="feedbackName" required>
                     </div>
                     <div class="mb-3">
-                        <label for="feedbackEmail" class="form-label">Correo</label>
+                        <label for="feedbackEmail" class="form-label">Email</label>
                         <input type="email" class="form-control" id="feedbackEmail" required>
                     </div>
                     <div class="mb-3">
-                        <label for="feedbackMessage" class="form-label">Mensaje de Feedback</label>
+                        <label for="feedbackMessage" class="form-label">Feedback Message</label>
                         <textarea class="form-control" id="feedbackMessage" rows="4" required></textarea>
                     </div>
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary" id="submitFeedbackBtn">
-                            <i class="fas fa-paper-plane me-2"></i>Enviar
+                            <i class="fas fa-paper-plane me-2"></i>Send
                         </button>
                     </div>
                 </form>
                 <div id="feedbackSuccess" class="alert alert-success mt-3" style="display: none;">
                     <i class="fas fa-check-circle me-2"></i>
-                    ¡Gracias por tu feedback! Hemos recibido tu mensaje.
+                    Thank you for your feedback! We have received your message.
                 </div>
                 <div id="feedbackLoading" class="text-center mt-3" style="display: none;">
                     <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Cargando...</span>
+                        <span class="visually-hidden">Loading...</span>
                     </div>
-                    <p class="mt-2">Enviando mensaje...</p>
+                    <p class="mt-2">Sending message...</p>
                 </div>
             </div>
         </div>
@@ -193,7 +193,7 @@
         document.getElementById('feedbackLoading').style.display = 'block';
         
         // Create mailto link with the feedback data
-        const mailtoLink = `mailto:soged.contact.2024@gmail.com?subject=Feedback de ${name}&body=Nombre: ${name}%0D%0ACorreo: ${email}%0D%0A%0D%0AMensaje:%0D%0A${message}`;
+        const mailtoLink = `mailto:soged.contact.2024@gmail.com?subject=Feedback from ${name}&body=Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
         
         // Simulate sending delay
         setTimeout(() => {

@@ -1158,7 +1158,7 @@ class GunaLessonViewer extends HTMLElement {
             if (fb) {
                 fb.hidden = false;
                 fb.className = 'memory-feedback success';
-                fb.innerHTML = `🎉 All pairs found in ${state.moves} moves! +20 XP, +8 cocos`;
+                fb.innerHTML = `🎉 All pairs found in ${state.moves} moves! +20 XP, +8 ogobs`;
             }
             if (typeof GunaGamification !== 'undefined') {
                 GunaGamification.onMemoryGameComplete(perfect);
