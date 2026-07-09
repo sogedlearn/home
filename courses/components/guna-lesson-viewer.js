@@ -805,7 +805,7 @@ class GunaLessonViewer extends HTMLElement {
                 <div class="audio-player-container">
                     <div class="audio-player-header">
                         <i class="fas fa-headphones"></i>
-                        <h4>Audio Nativo</h4>
+                        <h4>Native Audio</h4>
                     </div>
                     <div class="audio-controls">
                         <button class="play-btn" id="audioPlayBtn">
@@ -827,13 +827,13 @@ class GunaLessonViewer extends HTMLElement {
                 <div class="download-resources">
                     <h4>
                         <i class="fas fa-download"></i>
-                        Recursos Offline
+                        Offline Resources
                     </h4>
                     <div class="download-grid">
                         <a href="../resources/lesson-${this.currentLessonId}-audio.mp3" download class="download-item">
                             <i class="fas fa-file-audio"></i>
                             <div class="file-info">
-                                <span class="file-name">Audio de la Lección</span>
+                                <span class="file-name">Lesson Audio</span>
                                 <span class="file-size">2.5 MB</span>
                             </div>
                             <i class="fas fa-download download-icon"></i>
@@ -841,7 +841,7 @@ class GunaLessonViewer extends HTMLElement {
                         <a href="../resources/lesson-${this.currentLessonId}-vocabulary.pdf" download class="download-item">
                             <i class="fas fa-file-pdf"></i>
                             <div class="file-info">
-                                <span class="file-name">Vocabulario PDF</span>
+                                <span class="file-name">Vocabulary PDF</span>
                                 <span class="file-size">1.2 MB</span>
                             </div>
                             <i class="fas fa-download download-icon"></i>
@@ -849,7 +849,7 @@ class GunaLessonViewer extends HTMLElement {
                         <a href="../resources/lesson-${this.currentLessonId}-transcript.pdf" download class="download-item">
                             <i class="fas fa-file-alt"></i>
                             <div class="file-info">
-                                <span class="file-name">Transcripción</span>
+                                <span class="file-name">Transcript</span>
                                 <span class="file-size">0.8 MB</span>
                             </div>
                             <i class="fas fa-download download-icon"></i>

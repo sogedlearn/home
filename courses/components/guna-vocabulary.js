@@ -73,13 +73,13 @@ GUNA_VOCABULARY.pronouns = GUNA_VOCABULARY.greetings.filter(w => ['Na', 'Be'].in
 
 GUNA_VOCABULARY.CATEGORIES = [
     { id: 'greetings', label: 'Greetings', icon: '👋', words: GUNA_VOCABULARY.greetings },
-    { id: 'family', label: 'Familia', icon: '👨‍👩‍👧', words: GUNA_VOCABULARY.family },
-    { id: 'home', label: 'Objetos cotidianos', icon: '🏠', words: GUNA_VOCABULARY.home },
-    { id: 'nature', label: 'Naturaleza', icon: '🌊', words: GUNA_VOCABULARY.nature },
-    { id: 'animals', label: 'Animales', icon: '🐢', words: GUNA_VOCABULARY.animals },
-    { id: 'plants', label: 'Comida', icon: '🥥', words: GUNA_VOCABULARY.plants },
-    { id: 'culture', label: 'Cultura Guna', icon: '🧵', words: GUNA_VOCABULARY.culture },
-    { id: 'phrases', label: 'Frases', icon: '💬', words: GUNA_VOCABULARY.phrases }
+    { id: 'family', label: 'Family', icon: '👨‍👩‍👧', words: GUNA_VOCABULARY.family },
+    { id: 'home', label: 'Everyday Objects', icon: '🏠', words: GUNA_VOCABULARY.home },
+    { id: 'nature', label: 'Nature', icon: '🌊', words: GUNA_VOCABULARY.nature },
+    { id: 'animals', label: 'Animals', icon: '🐢', words: GUNA_VOCABULARY.animals },
+    { id: 'plants', label: 'Food', icon: '🥥', words: GUNA_VOCABULARY.plants },
+    { id: 'culture', label: 'Guna Culture', icon: '🧵', words: GUNA_VOCABULARY.culture },
+    { id: 'phrases', label: 'Phrases', icon: '💬', words: GUNA_VOCABULARY.phrases }
 ];
 
 window.GUNA_VOCABULARY = GUNA_VOCABULARY;

@@ -502,7 +502,7 @@
 
 .store-items-grid-modern {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1.5rem;
 }
 
@@ -523,7 +523,7 @@
 
 .store-item-image-wrap {
     position: relative;
-    height: 200px;
+    height: 160px;
     overflow: hidden;
 }
 
@@ -539,28 +539,40 @@
 }
 
 .store-item-body {
-    padding: 1.5rem;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 180px;
 }
 
 .store-item-name {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 700;
     color: #333;
     margin: 0 0 0.5rem 0;
+    line-height: 1.3;
 }
 
 .store-item-story {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #666;
-    line-height: 1.5;
+    line-height: 1.4;
     margin: 0 0 1rem 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
 }
 
 .store-item-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
+    margin-top: auto;
 }
 
 .store-item-price {
@@ -575,6 +587,12 @@
 .store-coco-icon {
     width: 24px;
     height: 24px;
+}
+
+.store-oggob-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
 }
 
 .store-buy-btn {

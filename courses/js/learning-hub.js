@@ -973,7 +973,7 @@ class SimpleLearningHub {
                         ${otherCourses.map(course => `
                             <div class="course-card course-card--soon" aria-disabled="true">
                                 <span class="coming-soon-badge">Coming Soon</span>
-                                <div class="course-flag">${course.flag}</div>
+                                <div class="course-flag"><img src="${course.flag}" alt="${course.name}" class="course-flag-img"></div>
                                 <h3 class="course-name">${course.name}</h3>
                                 <p class="course-description">${course.description}</p>
                                 <div class="course-progress">
@@ -1005,9 +1005,9 @@ class SimpleLearningHub {
 
     getOtherCourses() {
         const allCourses = [
-            { id: 'ngabe', name: 'Ngäbe', flag: '🏔️', description: 'Mountain People' },
-            { id: 'embera', name: 'Emberá', flag: '🌊', description: 'River Dwellers' },
-            { id: 'naso', name: 'Naso', flag: '🦋', description: 'Ancient Kingdom' }
+            { id: 'ngabe', name: 'Ngäbe', flag: '../Images/Languages/Ngabe.png', description: 'Mountain People' },
+            { id: 'embera', name: 'Emberá', flag: '../Images/Languages/Embera.png', description: 'River Dwellers' },
+            { id: 'naso', name: 'Naso', flag: '../Images/Languages/Naso.gif', description: 'Ancient Kingdom' }
         ];
         return allCourses;
     }

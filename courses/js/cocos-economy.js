@@ -61,6 +61,10 @@ const CocosEconomy = {
         return amount.toLocaleString('es-ES');
     },
 
+    formatCocos(amount) {
+        return amount.toLocaleString('es-ES');
+    },
+
     updateAllDisplays(balance) {
         const value = balance ?? this.getBalance();
         const formatted = this.formatOggob(value);
