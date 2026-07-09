@@ -30,7 +30,7 @@ class StoriesSection extends HTMLElement {
                 .stories-header {
                     text-align: center;
                     margin-bottom: 3rem;
-                    background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+                    background: url('../Images/Molas - Guna/Mola 1.jpg') center/cover, linear-gradient(135deg, rgba(255, 111, 0, 0.9), rgba(255, 143, 0, 0.9));
                     color: white;
                     padding: 3rem 2rem;
                     border-radius: var(--border-radius-xl);
@@ -51,19 +51,23 @@ class StoriesSection extends HTMLElement {
 
                 .section-title {
                     font-size: 2.8rem;
-                    font-weight: 700;
+                    font-weight: 800;
                     margin-bottom: 0.5rem;
                     position: relative;
                     z-index: 1;
+                    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+                    letter-spacing: 1px;
                 }
 
                 .section-subtitle {
                     font-size: 1.3rem;
-                    opacity: 0.9;
+                    opacity: 1;
                     position: relative;
                     z-index: 1;
                     max-width: 600px;
                     margin: 0 auto;
+                    font-weight: 600;
+                    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
                 }
 
                 .cultural-badge {
