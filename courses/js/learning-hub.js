@@ -350,9 +350,13 @@ class SimpleLearningHub {
                     content = `
                         <div class="games-container">
                             <guna-memory-section></guna-memory-section>
-                            <div class="mola-puzzle-section" style="margin-top: 3rem;">
-                                <mola-puzzle></mola-puzzle>
-                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'puzzle':
+                    content = `
+                        <div class="games-container">
+                            <mola-puzzle></mola-puzzle>
                         </div>
                     `;
                     break;

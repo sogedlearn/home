@@ -747,3 +747,33 @@
     padding: 0.35rem 0.75rem; border: 1px solid var(--guna-primary);
     background: transparent; color: var(--guna-primary); border-radius: 8px; cursor: pointer;
 }
+
+/* Vocabulary card images */
+.vocab-card-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    border: 2px solid var(--guna-primary);
+}
+
+/* Flashcard images */
+.vocab-flashcard-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    border: 2px solid var(--guna-primary);
+}
+
+/* Memory match card images */
+.card-image {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    border: 2px solid rgba(255,255,255,0.3);
+}

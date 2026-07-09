@@ -117,8 +117,15 @@ class MolaPuzzle extends HTMLElement {
         const board = this.querySelector('#puzzleBoard');
         const piecesContainer = this.querySelector('#piecesContainer');
         const soggyFact = this.querySelector('#soggyFact');
-        
+        const victoryModal = this.querySelector('#victoryModal');
+
         if (!board || !piecesContainer) return;
+
+        // Force hide victory modal on game start
+        if (victoryModal) {
+            victoryModal.hidden = true;
+            victoryModal.style.display = 'none';
+        }
 
         this.gameStarted = true;
         this.placedPieces = [];
@@ -289,15 +296,20 @@ class MolaPuzzle extends HTMLElement {
         const slots = this.querySelectorAll('.puzzle-slot');
         const totalPieces = this.gridSize * this.gridSize;
         let correctCount = 0;
+        let placedCount = 0;
 
         slots.forEach(slot => {
             const piece = slot.querySelector('.puzzle-piece');
-            if (piece && parseInt(piece.dataset.index) === parseInt(slot.dataset.index)) {
-                correctCount++;
+            if (piece) {
+                placedCount++;
+                if (parseInt(piece.dataset.index) === parseInt(slot.dataset.index)) {
+                    correctCount++;
+                }
             }
         });
 
-        if (correctCount === totalPieces) {
+        // Only show victory if all pieces are placed AND all are correct
+        if (placedCount === totalPieces && correctCount === totalPieces) {
             this.showVictory();
         }
     }

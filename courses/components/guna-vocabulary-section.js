@@ -83,7 +83,7 @@ class GunaVocabularySection extends HTMLElement {
             <div class="vocab-grid" id="vocabGrid">
                 ${words.length ? words.map(w => `
                     <article class="vocab-card" data-aos="fade-up">
-                        <div class="vocab-card-icon">${w.icon || '📝'}</div>
+                        ${w.image ? `<img src="${w.image}" alt="${w.guna}" class="vocab-card-image">` : `<div class="vocab-card-icon">${w.icon || '📝'}</div>`}
                         <h3 class="vocab-guna">${w.guna}</h3>
                         <p class="vocab-es">${w.es}</p>
                         <p class="vocab-en">${w.en}</p>
@@ -105,7 +105,7 @@ class GunaVocabularySection extends HTMLElement {
             <div class="vocab-flashcard-mode">
                 <div class="vocab-flashcard" id="vocabFlashcard">
                     <div class="vocab-flash-front">
-                        <span class="vocab-card-icon">${w.icon || '📝'}</span>
+                        ${w.image ? `<img src="${w.image}" alt="${w.guna}" class="vocab-flashcard-image">` : `<span class="vocab-card-icon">${w.icon || '📝'}</span>`}
                         <h3>${w.guna}</h3>
                         <p>Tap to reveal translation</p>
                     </div>

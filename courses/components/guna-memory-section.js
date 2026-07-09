@@ -21,24 +21,26 @@ class GunaMemorySection extends HTMLElement {
         return configs[this.difficulty] || configs.medium;
     }
     getWords() {
-        // Educational vocabulary pairs: Spanish - Indigenous Language
+        // Direct word pairs with images - English to Guna
         const educationalPairs = [
-            { es: 'Hello', guna: 'Na', icon: '👋' },
-            { es: 'Turtle', guna: 'Yarbi', icon: '🐢' },
-            { es: 'Family', guna: 'Dummad', icon: '👨‍👩‍👧‍👦' },
-            { es: 'Water', guna: 'Ubb', icon: '💧' },
-            { es: 'Sun', guna: 'Baba', icon: '☀️' },
-            { es: 'Moon', guna: 'Olo', icon: '🌙' },
-            { es: 'Coconut', guna: 'Ogob', icon: '🥥' },
-            { es: 'Sea', guna: 'Naggwa', icon: '🌊' },
-            { es: 'Mountain', guna: 'Nargga', icon: '⛰️' },
-            { es: 'Fish', guna: 'Mai', icon: '🐟' },
-            { es: 'House', guna: 'Dummag', icon: '🏠' },
-            { es: 'Food', guna: 'Naggwe', icon: '🍽️' },
-            { es: 'Friend', guna: 'Suggwa', icon: '🤝' },
-            { es: 'Thank you', guna: 'Diaba', icon: '🙏' },
-            { es: 'Good morning', guna: 'Bai naggwe', icon: '🌅' },
-            { es: 'Good night', guna: 'Bai olo', icon: '🌙' }
+            { en: 'I', guna: 'Na', icon: '👤', image: '../Images/Memory match/Na.png' },
+            { en: 'You', guna: 'Be', icon: '👋', image: '../Images/Memory match/Be.jpg' },
+            { en: 'Yes', guna: 'Eye', icon: '✅', image: '../Images/Memory match/Eye.jpg' },
+            { en: 'That is right', guna: 'Degii', icon: '👍', image: '../Images/Memory match/Degii.png' },
+            { en: 'Hello', guna: 'anna', icon: '🏝️', image: '../Images/Memory match/anna.png' },
+            { en: 'Goodbye', guna: 'degi malo', icon: '👋', image: '../Images/Memory match/degi malo.jpg' },
+            { en: 'See you tomorrow', guna: 'Banmalo', icon: '🌅', image: '../Images/Memory match/Banmalo.jpg' },
+            { en: 'Mother', guna: 'Nana', icon: '👩', image: '../Images/Memory match/Nana.jpg' },
+            { en: 'Father', guna: 'Tata', icon: '👨', image: '../Images/Memory match/Tata.jpg' },
+            { en: 'Brother', guna: 'Dummad', icon: '👦', image: '../Images/Memory match/Dummad.jpg' },
+            { en: 'Sister', guna: 'Nueded', icon: '👧', image: '../Images/Memory match/Nueded.jpg' },
+            { en: 'Grandfather', guna: 'Bab', icon: '👴', image: '../Images/Memory match/Bab.png' },
+            { en: 'Grandmother', guna: 'Dada', icon: '👵', image: '../Images/Memory match/Dada.jpg' },
+            { en: 'House', guna: 'Muu', icon: '🏠', image: '../Images/Memory match/Muu.jpg' },
+            { en: 'Table', guna: 'Nika', icon: '🪑', image: '../Images/Memory match/Nika.jpg' },
+            { en: 'Plate', guna: 'Misi', icon: '🍽️', image: '../Images/Memory match/Misi.jpg' },
+            { en: 'Spoon', guna: 'Tapa', icon: '🥄', image: '../Images/Memory match/Tapa.jpg' },
+            { en: 'Clothes', guna: 'Bii', icon: '👕', image: '../Images/Memory match/Bii.jpg' }
         ];
         return educationalPairs;
     }
@@ -178,15 +180,19 @@ class GunaMemorySection extends HTMLElement {
         const count = config.pairs;
         const words = this.shuffle(this.getWords()).slice(0, count);
         const pairs = words.map((w, i) => ({
-            id: `pair-${i}`, es: w.es, guna: w.guna, icon: w.icon
+            id: `pair-${i}`, en: w.en, guna: w.guna, icon: w.icon, image: w.image
         }));
 
         const grid = this.querySelector('#memoryGrid');
         const totalEl = this.querySelector('#memoryTotal');
         const victoryScreen = this.querySelector('#victoryScreen');
         const memorizationPhase = this.querySelector('#memorizationPhase');
-        
-        if (victoryScreen) victoryScreen.hidden = true;
+
+        // Force hide victory modal on game start
+        if (victoryScreen) {
+            victoryScreen.hidden = true;
+            victoryScreen.style.display = 'none';
+        }
         if (totalEl) totalEl.textContent = count;
         if (!grid) return;
 
@@ -198,8 +204,8 @@ class GunaMemorySection extends HTMLElement {
         // Create cards: English word and Indigenous translation
         const cards = [];
         pairs.forEach(p => {
-            cards.push({ pairId: p.id, type: 'english', label: p.es, icon: p.icon, language: 'English', revealed: true });
-            cards.push({ pairId: p.id, type: 'indigenous', label: p.guna, icon: p.icon, language: 'Indigenous Language', revealed: true });
+            cards.push({ pairId: p.id, type: 'english', label: p.en, icon: p.icon, image: p.image, language: 'English', revealed: true });
+            cards.push({ pairId: p.id, type: 'indigenous', label: p.guna, icon: p.icon, image: p.image, language: 'Guna', revealed: true });
         });
 
         let state = {
@@ -227,6 +233,7 @@ class GunaMemorySection extends HTMLElement {
                             <div class="mola-pattern"></div>
                         </div>
                         <div class="card-back ${c.type === 'english' ? 'english-card' : 'indigenous-card'}">
+                            ${c.image ? `<img src="${c.image}" alt="${c.label}" class="card-image">` : ''}
                             <span class="card-language">${c.language}</span>
                             <span class="card-word">${c.label}</span>
                             ${c.matched ? '<span class="checkmark">✓</span>' : ''}
@@ -275,6 +282,10 @@ class GunaMemorySection extends HTMLElement {
 
             // Flip all cards simultaneously
             state.cards.forEach(c => c.revealed = false);
+            
+            // Shuffle cards again after memorization phase
+            state.cards = this.shuffle(state.cards);
+            
             renderGrid();
 
             // Play sound if available
