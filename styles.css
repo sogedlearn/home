@@ -2743,18 +2743,112 @@ body::after {
 .modal-content {
     background: white !important;
     border: none;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
 }
 
 .modal-body {
     background: white !important;
     color: #1f2937;
+    padding: 2rem;
 }
 
 .modal-header {
-    border-radius: 16px 16px 0 0;
+    border-radius: 20px 20px 0 0;
+    padding: 1.5rem 2rem;
+    border-bottom: none;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: var(--font-primary);
 }
 
 .modal-footer {
-    border-radius: 0 0 16px 16px;
+    border-radius: 0 0 20px 20px;
+    border-top: none;
+    padding: 1.5rem 2rem;
+}
+
+/* Form Controls Styling */
+.form-label {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.form-control,
+.form-select {
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f9fafb;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #F59E0B;
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
+    background: white;
+}
+
+.form-control::placeholder {
+    color: #9ca3af;
+}
+
+/* Alert Styling */
+.alert {
+    border-radius: 12px;
+    border: none;
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    color: #92400e;
+    border-left: 4px solid #F59E0B;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    color: #065f46;
+    border-left: 4px solid #22c55e;
+}
+
+/* Button Styling in Modals */
+.modal .btn {
+    border-radius: 12px;
+    padding: 0.875rem 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.modal .btn-primary {
+    background: linear-gradient(135deg, #F59E0B, #FBBF24);
+    border: none;
+    color: white;
+}
+
+.modal .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+}
+
+/* Spinner Styling */
+.spinner-border {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+/* Modal Backdrop */
+.modal-backdrop {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
 }
