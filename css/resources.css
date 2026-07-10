@@ -338,6 +338,10 @@
     overflow: hidden;
 }
 
+.resource-image i {
+    color: white !important;
+}
+
 .resource-image::before {
     content: '';
     position: absolute;
