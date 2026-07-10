@@ -2461,7 +2461,7 @@ body::after {
 /* Pricing Section Styles */
 .pricing-section {
     padding: 80px 0;
-    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fef3c7 100%);
+    background: white;
     position: relative;
     overflow: hidden;
 }
