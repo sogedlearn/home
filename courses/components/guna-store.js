@@ -99,9 +99,9 @@ class GunaStore extends HTMLElement {
                         </span>
                         ${isBurba
                             ? (burbaFull
-                                ? '<button class="store-buy-btn owned" disabled><i class="fas fa-heart"></i> Burba Full</button>'
+                                ? '<button class="store-buy-btn owned" disabled><i class="fas fa-fire" style="color: #0973a1;"></i> Burba Full</button>'
                                 : `<button class="store-buy-btn ${canAfford ? '' : 'insufficient'}" data-buy="${item.id}" data-price="${item.price}" data-burba="${item.burba}" ${item.special ? 'data-special="1"' : ''} ${canAfford ? '' : 'disabled'}>
-                                    <i class="fas fa-heart"></i> Buy
+                                    <i class="fas fa-fire" style="color: #0973a1;"></i> Buy
                                    </button>`)
                             : (purchased
                                 ? '<button class="store-buy-btn owned" disabled><i class="fas fa-lock-open"></i> In Your Collection</button>'
