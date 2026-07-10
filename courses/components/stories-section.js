@@ -30,7 +30,7 @@ class StoriesSection extends HTMLElement {
                 .stories-header {
                     text-align: center;
                     margin-bottom: 3rem;
-                    background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+                    background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
                     color: white;
                     padding: 3rem 2rem;
                     border-radius: var(--border-radius-xl);
@@ -259,13 +259,13 @@ class StoriesSection extends HTMLElement {
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     gap: 2rem;
-                    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(167, 139, 250, 0.1));
-                    border: 2px solid rgba(139, 92, 246, 0.2);
+                    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.1));
+                    border: 2px solid rgba(245, 158, 11, 0.2);
                 }
 
                 .featured-story .story-image {
                     height: 300px;
-                    background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+                    background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
                 }
 
                 .reading-stats {
