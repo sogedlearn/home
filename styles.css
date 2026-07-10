@@ -2461,8 +2461,9 @@ body::after {
 /* Pricing Section Styles */
 .pricing-section {
     padding: 80px 0;
-    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-tertiary) 100%);
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fef3c7 100%);
     position: relative;
+    overflow: hidden;
 }
 
 .pricing-section::before {
@@ -2471,8 +2472,16 @@ body::after {
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: var(--gradient-primary);
+    height: 6px;
+    background: linear-gradient(90deg, #F59E0B, #FBBF24, #F59E0B);
+    animation: gradientMove 3s ease infinite;
+    background-size: 200% 100%;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .pricing-grid {
@@ -2489,63 +2498,75 @@ body::after {
 }
 
 .pricing-card {
-    background: var(--card-bg);
-    border-radius: 20px;
+    background: linear-gradient(145deg, #ffffff 0%, #f9fafb 100%);
+    border-radius: 24px;
     padding: 2.5rem;
     position: relative;
-    transition: all 0.3s ease;
-    border: 2px solid var(--border-color);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid rgba(245, 158, 11, 0.2);
+    box-shadow: 0 8px 32px rgba(245, 158, 11, 0.1);
+    overflow: hidden;
 }
 
 .pricing-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(245, 158, 11, 0.25);
+    border-color: #F59E0B;
 }
 
 .pricing-card.premium-plan {
-    border-color: var(--primary-color);
-    box-shadow: 0 8px 30px rgba(40, 167, 69, 0.2);
-    transform: scale(1.05);
+    border: 3px solid #F59E0B;
+    background: linear-gradient(145deg, #fffbeb 0%, #fef3c7 100%);
+    box-shadow: 0 12px 48px rgba(245, 158, 11, 0.3);
+    transform: scale(1.08);
     z-index: 10;
 }
 
 .pricing-card.premium-plan:hover {
-    transform: scale(1.05) translateY(-10px);
-    box-shadow: 0 20px 50px rgba(40, 167, 69, 0.3);
+    transform: scale(1.08) translateY(-15px);
+    box-shadow: 0 25px 70px rgba(245, 158, 11, 0.4);
 }
 
 .recommended-badge {
     position: absolute;
-    top: -15px;
+    top: -18px;
     left: 50%;
     transform: translateX(-50%);
-    background: linear-gradient(135deg, #FFD700, #FFA500);
+    background: linear-gradient(135deg, #F59E0B, #FBBF24);
     color: white;
-    padding: 0.5rem 1.5rem;
-    border-radius: 25px;
+    padding: 0.6rem 2rem;
+    border-radius: 30px;
     font-weight: 700;
-    font-size: 0.9rem;
-    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    font-size: 0.95rem;
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
     display: flex;
     align-items: center;
     gap: 0.5rem;
     white-space: nowrap;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5); }
+    50% { box-shadow: 0 6px 30px rgba(245, 158, 11, 0.8); }
 }
 
 .pricing-header {
     text-align: center;
     margin-bottom: 2rem;
     padding-bottom: 2rem;
-    border-bottom: 2px solid var(--border-color);
+    border-bottom: 2px solid rgba(245, 158, 11, 0.2);
+    position: relative;
 }
 
 .plan-name {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--text-primary);
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #1f2937;
     margin-bottom: 1rem;
     font-family: var(--font-primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .plan-price {
@@ -2557,9 +2578,12 @@ body::after {
 }
 
 .price-amount {
-    font-size: 3.5rem;
-    font-weight: 800;
-    color: var(--primary-color);
+    font-size: 4rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #F59E0B, #FBBF24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     font-family: var(--font-primary);
 }
 
@@ -2637,53 +2661,55 @@ body::after {
 
 .btn-pricing {
     width: 100%;
-    padding: 1rem 2rem;
-    border-radius: 15px;
+    padding: 1.2rem 2rem;
+    border-radius: 20px;
     font-weight: 700;
-    font-size: 1rem;
-    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: none;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .btn-free {
-    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
-    color: var(--text-primary);
-    border: 2px solid var(--border-color);
+    background: linear-gradient(135deg, #e5e7eb, #d1d5db);
+    color: #374151;
+    border: 2px solid #9ca3af;
 }
 
 .btn-free:hover {
-    background: var(--primary-color);
+    background: linear-gradient(135deg, #F59E0B, #FBBF24);
     color: white;
-    border-color: var(--primary-color);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(40, 167, 69, 0.3);
+    border-color: #F59E0B;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
 }
 
 .btn-premium {
-    background: linear-gradient(135deg, var(--primary-color), var(--success-color));
+    background: linear-gradient(135deg, #F59E0B, #FBBF24);
     color: white;
-    box-shadow: 0 5px 20px rgba(40, 167, 69, 0.3);
+    box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
 }
 
 .btn-premium:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(40, 167, 69, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(245, 158, 11, 0.5);
 }
 
 .btn-b2b {
-    background: linear-gradient(135deg, var(--accent-color), #0056b3);
+    background: linear-gradient(135deg, #22c55e, #16a34a);
     color: white;
-    box-shadow: 0 5px 20px rgba(0, 163, 224, 0.3);
+    box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
 }
 
 .btn-b2b:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(0, 163, 224, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(34, 197, 94, 0.5);
 }
 
 @media (max-width: 768px) {
