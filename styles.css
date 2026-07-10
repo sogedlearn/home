@@ -763,6 +763,10 @@ section {
     flex-shrink: 0;
 }
 
+.feature-icon i {
+    color: white !important;
+}
+
 .feature-info {
     display: flex;
     flex-direction: column;
