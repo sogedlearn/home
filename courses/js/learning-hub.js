@@ -7,6 +7,7 @@ class SimpleLearningHub {
     constructor() {
         this.currentSection = '';
         this.currentCourse = this.getCurrentCourse();
+        this.pendingGame = '';
         this.sidebarCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
         this.currentUser = this.getCurrentUser();
         
@@ -45,6 +46,7 @@ class SimpleLearningHub {
             GunaUserData.saveSettings(GunaUserData.getSettings());
         }
         if (typeof GunaI18n !== 'undefined') GunaI18n.apply();
+        if (typeof GameRewards !== 'undefined') GameRewards.syncFromServer();
         
         // Apply saved sidebar state
         if (this.sidebarCollapsed) {
@@ -131,7 +133,9 @@ class SimpleLearningHub {
             item.addEventListener('click', (e) => {
                 e.preventDefault();
                 const section = item.getAttribute('data-section');
+                const game = item.getAttribute('data-game') || '';
                 if (section) {
+                    this.pendingGame = game;
                     this.loadSection(section);
                 }
             });
@@ -284,14 +288,29 @@ class SimpleLearningHub {
         const hash = window.location.hash.replace('#', '');
         if (path.includes('/store') || hash === 'store') return 'store';
         if (path.includes('/learning-path') || hash === 'learning-path' || hash === 'learn') return 'learn';
-        const valid = ['overview', 'learn', 'vocabulary', 'memory', 'community', 'territory', 'store', 'stories', 'chat', 'leaderboard', 'achievements'];
-        if (hash && valid.includes(hash)) return hash;
+        if (hash.startsWith('games/')) {
+            const game = hash.split('/')[1];
+            this.pendingGame = game || '';
+            return 'games';
+        }
+        if (hash === 'memory' || hash === 'puzzle') {
+            this.pendingGame = hash === 'memory' ? 'memory' : 'puzzle';
+            return 'games';
+        }
+        if (hash === 'cultural' || hash === 'readings') return 'cultural';
+        const valid = ['overview', 'learn', 'vocabulary', 'memory', 'games', 'cultural', 'community', 'territory', 'store', 'stories', 'chat', 'leaderboard', 'achievements', 'puzzle'];
+        if (hash && valid.includes(hash)) {
+            if (hash === 'games') this.pendingGame = '';
+            return hash;
+        }
         return 'overview';
     }
 
-    navigateToSection(section) {
+    navigateToSection(section, game = '') {
         const hashMap = { learn: 'learning-path', store: 'store', overview: 'overview' };
-        const hash = hashMap[section] || section;
+        let hash = hashMap[section] || section;
+        if (section === 'games' && game) hash = `games/${game}`;
+        this.pendingGame = game;
         if (window.location.hash !== `#${hash}`) {
             window.location.hash = hash;
         }
@@ -347,18 +366,14 @@ class SimpleLearningHub {
                     content = `<guna-vocabulary-section></guna-vocabulary-section>`;
                     break;
                 case 'memory':
-                    content = `
-                        <div class="games-container">
-                            <guna-memory-section></guna-memory-section>
-                        </div>
-                    `;
+                case 'games':
+                    content = `<games-hub game="${this.pendingGame || ''}"></games-hub>`;
+                    break;
+                case 'cultural':
+                    content = `<cultural-readings></cultural-readings>`;
                     break;
                 case 'puzzle':
-                    content = `
-                        <div class="games-container">
-                            <mola-puzzle></mola-puzzle>
-                        </div>
-                    `;
+                    content = `<games-hub></games-hub>`;
                     break;
                 case 'community':
                     content = `<guna-community-section></guna-community-section>`;
@@ -1018,6 +1033,9 @@ class SimpleLearningHub {
             learn: 'Learning Path',
             vocabulary: 'Vocabulary',
             memory: 'Memory Match',
+            games: 'Games Hub',
+            cultural: 'Cultural Readings',
+            puzzle: 'Mola Puzzle',
             community: 'Culture Center',
             territory: 'Guna Territory',
             store: 'Guna Store',

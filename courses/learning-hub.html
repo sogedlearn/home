@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="css/dashboard-modern.css">
     <link rel="stylesheet" href="css/guna-lessons.css">
     <link rel="stylesheet" href="css/mola-puzzle.css">
+    <link rel="stylesheet" href="css/cultural-hub.css">
 </head>
 <body>
     <!-- Loading Screen -->
@@ -109,14 +110,14 @@
                     </div>
                 </a>
 
-                <a href="#memory" class="nav-item" data-section="memory">
+                <a href="#cultural" class="nav-item" data-section="cultural">
                     <div class="nav-icon">
-                        <i class="fas fa-brain"></i>
+                        <i class="fas fa-scroll"></i>
                     </div>
                     <div class="nav-content">
-                        <span class="nav-text">Memory Match</span>
+                        <span class="nav-text">Cultural Readings</span>
                         <div class="nav-meta">
-                            <span>Match Guna words</span>
+                            <span>Readings & territories</span>
                         </div>
                     </div>
                 </a>
@@ -156,6 +157,62 @@
                                 <i class="fas fa-circle"></i>
                                 <span class="status-text">Speaking practice</span>
                             </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Games Section -->
+            <div class="nav-section nav-section--games">
+                <h4 class="nav-section-title">
+                    <i class="fas fa-gamepad"></i>
+                    <span class="title-text">Games</span>
+                </h4>
+
+                <a href="#games" class="nav-item" data-section="games">
+                    <div class="nav-icon">
+                        <i class="fas fa-th-large"></i>
+                    </div>
+                    <div class="nav-content">
+                        <span class="nav-text">Games Hub</span>
+                        <div class="nav-meta">
+                            <span>All minigames</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#games/memory" class="nav-item" data-section="games" data-game="memory">
+                    <div class="nav-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="nav-content">
+                        <span class="nav-text">Memory Match</span>
+                        <div class="nav-meta">
+                            <span>Match Guna words</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#games/puzzle" class="nav-item" data-section="games" data-game="puzzle">
+                    <div class="nav-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <div class="nav-content">
+                        <span class="nav-text">Mola Puzzle</span>
+                        <div class="nav-meta">
+                            <span>Drag & drop molas</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#games/wordsearch" class="nav-item" data-section="games" data-game="wordsearch">
+                    <div class="nav-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="nav-content">
+                        <span class="nav-text">Word Search</span>
+                        <div class="nav-meta">
+                            <span>Guna vocabulary</span>
                         </div>
                     </div>
                 </a>
@@ -801,6 +858,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../js/supabase-config.js"></script>
     <script src="js/cocos-economy.js"></script>
+    <script src="js/hub-flow-utils.js"></script>
     <script src="js/mola-attribution.js"></script>
     <script src="js/guna-lives.js"></script>
     <script src="js/guna-user-data.js"></script>
@@ -813,6 +871,13 @@
     <script src="js/guna-level-lessons.js"></script>
     
     <!-- Web Components -->
+    <script src="components/soggy-avatar.js"></script>
+    <script src="components/games/game-rewards.js"></script>
+    <script src="components/games/memory-match-game.js"></script>
+    <script src="components/games/mola-puzzle-game.js"></script>
+    <script src="components/games/word-search-game.js"></script>
+    <script src="components/games/games-hub.js"></script>
+    <script src="components/cultural-readings.js"></script>
     <script src="components/guna-store.js"></script>
     <script src="components/learning-section.js"></script>
     <script src="components/practice-section.js"></script>

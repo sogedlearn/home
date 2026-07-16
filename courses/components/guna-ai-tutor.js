@@ -10,6 +10,7 @@ class GunaAiTutor extends HTMLElement {
         this.speechEnabled = true;
         this.recognition = null;
         this.isListening = false;
+        this.isStreaming = false;
     }
 
     connectedCallback() {
@@ -47,7 +48,8 @@ class GunaAiTutor extends HTMLElement {
 
     render() {
         this.innerHTML = `
-            <div class="ai-tutor-section">
+            <div class="ai-tutor-section soggy-chat-section">
+                <soggy-avatar></soggy-avatar>
                 <div class="ai-tutor-header">
                     <div class="ai-tutor-avatar" aria-hidden="true"><img src="../../Images/Soged/Soggy IA.jpg" alt="Soggy Tutor" class="ai-tutor-avatar-img"></div>
                     <div>
@@ -172,36 +174,136 @@ class GunaAiTutor extends HTMLElement {
         });
     }
 
-    handleSend() {
+    async handleSend() {
         const input = this.querySelector('#aiChatInput');
         const text = input?.value?.trim();
-        if (!text) return;
+        if (!text || this.isStreaming) return;
 
         this.addMessage('user', text);
         if (input) input.value = '';
 
-        this.showTyping();
-        const delay = 500 + Math.min(text.length * 8, 1200);
-        setTimeout(() => {
-            this.hideTyping();
-            const response = this.generateResponse(text);
-            this.addMessage('ai', response);
-            this.speak(response);
-        }, delay);
+        this.showThinking();
+        const userId = typeof HubFlow !== 'undefined' ? await HubFlow.getUserId() : 'guest';
+        const context = typeof HubFlow !== 'undefined'
+            ? { ...HubFlow.getUserContext(), currentSection: 'chat' }
+            : {};
+
+        try {
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_id: userId, message: text, stream: true, context })
+            });
+
+            this.hideThinking();
+
+            if (!response.ok) {
+                const fallback = this.generateResponse(text);
+                this.addMessage('ai', fallback);
+                this.speak(fallback);
+                return;
+            }
+
+            const contentType = response.headers.get('content-type') || '';
+            if (contentType.includes('text/event-stream')) {
+                await this.handleStreamResponse(response);
+            } else {
+                const data = await response.json();
+                this.addMessage('ai', data.response);
+                this.speak(data.response);
+            }
+        } catch (err) {
+            this.hideThinking();
+            const fallback = this.generateResponse(text);
+            this.addMessage('ai', fallback + '\n\n(Note: AI server unavailable — using offline tutor.)');
+            this.speak(fallback);
+        }
     }
 
-    showTyping() {
+    async handleStreamResponse(response) {
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let fullText = '';
+        this.isStreaming = true;
+
+        const bubbleEl = this.createStreamingBubble();
+        const bubbleContent = bubbleEl.querySelector('.ai-msg-bubble');
+
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            const chunk = decoder.decode(value, { stream: true });
+            const lines = chunk.split('\n');
+
+            for (const line of lines) {
+                if (!line.startsWith('data: ')) continue;
+                try {
+                    const data = JSON.parse(line.slice(6));
+                    if (data.chunk) {
+                        fullText += data.chunk;
+                        bubbleContent.innerHTML = this.escapeHtml(fullText);
+                        bubbleContent.classList.add('streaming');
+                        const container = this.querySelector('#aiChatMessages');
+                        if (container) container.scrollTop = container.scrollHeight;
+                    }
+                    if (data.done) {
+                        fullText = data.response || fullText;
+                    }
+                } catch { /* skip malformed SSE */ }
+            }
+        }
+
+        bubbleContent.classList.remove('streaming');
+        const speakBtn = document.createElement('button');
+        speakBtn.type = 'button';
+        speakBtn.className = 'ai-msg-speak';
+        speakBtn.setAttribute('aria-label', 'Listen to response');
+        speakBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+        speakBtn.addEventListener('click', () => this.speak(fullText));
+        bubbleContent.appendChild(speakBtn);
+
+        this.messages.push({ role: 'ai', text: fullText, time: Date.now() });
+        this.saveHistory();
+        this.isStreaming = false;
+        this.speak(fullText);
+    }
+
+    createStreamingBubble() {
+        const container = this.querySelector('#aiChatMessages');
+        const el = document.createElement('div');
+        el.className = 'ai-msg ai-msg--ai';
+        el.innerHTML = `
+            <div class="ai-msg-avatar" aria-hidden="true"><img src="../../Images/Soged/Soggy IA.jpg" alt="Soggy Tutor" class="ai-msg-avatar-img"></div>
+            <div class="ai-msg-bubble streaming"></div>
+        `;
+        container.appendChild(el);
+        container.scrollTop = container.scrollHeight;
+        return el;
+    }
+
+    showThinking() {
         const container = this.querySelector('#aiChatMessages');
         const el = document.createElement('div');
         el.className = 'ai-msg ai-msg--typing';
         el.id = 'aiTypingIndicator';
-        el.innerHTML = `<div class="ai-msg-avatar" aria-hidden="true"><img src="../../Images/Soged/Soggy IA.jpg" alt="Soggy Tutor" class="ai-msg-avatar-img"></div><div class="ai-msg-bubble ai-typing"><span></span><span></span><span></span></div>`;
+        el.innerHTML = `
+            <div class="ai-msg-avatar" aria-hidden="true"><img src="../../Images/Soged/Soggy IA.jpg" alt="Soggy Tutor" class="ai-msg-avatar-img"></div>
+            <div class="soggy-thinking">
+                Soggy is thinking...
+                <span class="thinking-dots"><span></span><span></span><span></span></span>
+            </div>
+        `;
         container.appendChild(el);
         container.scrollTop = container.scrollHeight;
     }
 
-    hideTyping() {
+    hideThinking() {
         this.querySelector('#aiTypingIndicator')?.remove();
+    }
+
+    showTyping() {
+        this.showThinking();
     }
 
     addMessage(role, text) {
