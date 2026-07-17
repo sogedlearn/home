@@ -37,25 +37,34 @@ class ResourcesManager {
         const featuredAttr = resource.featured ? 'data-featured="true"' : 'data-featured="false"';
         const categoryAttr = `data-category="${resource.category}"`;
         const searchAttr = `data-search="${resource.search}"`;
+        const resourceAttr = resource.resourceKey ? `data-resource="${resource.resourceKey}"` : '';
         const comingSoonBadge = !resource.active ? '<span class="coming-soon-badge">Coming Soon</span>' : '';
         const disabledAttr = !resource.active ? 'disabled' : '';
-        const onClickAttr = resource.actions[0]?.onClick ? `onclick="${resource.actions[0].onClick}"` : '';
 
         const actionsHtml = resource.actions.map(action => {
             const btnClass = action.primary ? 'btn-primary' : 'btn-outline-primary';
             const icon = action.icon;
             const label = action.label;
-            return `<button class="btn ${btnClass} btn-sm" ${disabledAttr} ${onClickAttr}>
-                <i class="fas fa-${icon}"></i>
+            const dataResourceAttr = action.resourceKey ? `data-resource="${action.resourceKey}"` : '';
+
+            if (action.href && resource.active) {
+                return `<a href="${action.href}" class="btn ${btnClass} btn-sm resource-practice-link">
+                    <i class="fas ${icon}"></i>
+                    ${label}
+                </a>`;
+            }
+
+            return `<button class="btn ${btnClass} btn-sm" ${disabledAttr} ${dataResourceAttr}>
+                <i class="fas ${icon}"></i>
                 ${label}
             </button>`;
         }).join('');
 
         return `
-            <div class="resource-card ${statusClass} ${resource.theme}" ${featuredAttr} ${categoryAttr} ${searchAttr}>
+            <div class="resource-card ${statusClass} ${resource.theme}" ${featuredAttr} ${resourceAttr} ${categoryAttr} ${searchAttr}>
                 ${comingSoonBadge}
                 <div class="resource-image">
-                    <i class="fas fa-${resource.icon}"></i>
+                    <i class="fas ${resource.icon.startsWith('fa-') ? resource.icon : 'fa-' + resource.icon}"></i>
                 </div>
                 <div class="resource-content">
                     <div class="resource-category">${this.capitalizeFirst(resource.category)}</div>
@@ -94,6 +103,18 @@ class ResourcesManager {
         if (this.loadMoreBtn) {
             this.loadMoreBtn.addEventListener('click', () => {
                 this.loadMoreResources();
+            });
+        }
+
+        if (this.resourcesGrid) {
+            this.resourcesGrid.addEventListener('click', (e) => {
+                const moreBtn = e.target.closest('button[data-resource]');
+                if (!moreBtn || moreBtn.disabled) return;
+                e.preventDefault();
+                const resourceKey = moreBtn.getAttribute('data-resource');
+                if (resourceKey && typeof openResourceModal === 'function') {
+                    openResourceModal(resourceKey);
+                }
             });
         }
     }
@@ -225,18 +246,13 @@ class ResourcesManager {
 
     setupCardInteractions() {
         this.resourceCards.forEach(card => {
-            if (card.classList.contains('resource-card--coming-soon')) {
+            if (!card.classList.contains('resource-card--coming-soon')) {
                 return;
             }
 
-            const downloadBtn = card.querySelector('.btn-primary:not([onclick])');
-            const actionBtn = card.querySelector('.btn-outline-primary');
-
-            if (downloadBtn) {
-                downloadBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.handleDownload(card);
-                });
+            const actionBtn = card.querySelector('.btn-outline-primary:not([href])');
+            if (actionBtn && actionBtn.disabled) {
+                return;
             }
 
             if (actionBtn) {

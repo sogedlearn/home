@@ -14,11 +14,12 @@ const RESOURCES_DATA = [
         icon: 'fa-comments',
         featured: true,
         active: true,
+        resourceKey: 'guna-phrases',
         theme: 'soged-earth',
         search: 'common guna phrases expressions vocabulary',
         actions: [
-            { label: 'Download', icon: 'fa-download', primary: true },
-            { label: 'Practice', icon: 'fa-play', primary: false }
+            { label: 'More', icon: 'fa-plus-circle', primary: true, resourceKey: 'guna-phrases' },
+            { label: 'Practice', icon: 'fa-play', primary: false, href: '../auth/login.html' }
         ]
     },
     {
@@ -31,11 +32,12 @@ const RESOURCES_DATA = [
         icon: 'fa-book-open',
         featured: true,
         active: true,
+        resourceKey: 'guna-dictionary',
         theme: 'soged-gold',
         search: 'guna english dictionary bilingual reference',
         actions: [
-            { label: 'Download', icon: 'fa-download', primary: true },
-            { label: 'Preview', icon: 'fa-eye', primary: false }
+            { label: 'More', icon: 'fa-plus-circle', primary: true, resourceKey: 'guna-dictionary' },
+            { label: 'Practice', icon: 'fa-play', primary: false, href: '../auth/login.html' }
         ]
     },
     {
@@ -48,11 +50,12 @@ const RESOURCES_DATA = [
         icon: 'fa-palette',
         featured: true,
         active: true,
+        resourceKey: 'guna-art',
         theme: 'soged-green',
         search: 'guna art molas traditional culture',
         actions: [
-            { label: 'Explore', icon: 'fa-play', primary: true },
-            { label: 'Save', icon: 'fa-heart', primary: false }
+            { label: 'More', icon: 'fa-plus-circle', primary: true, resourceKey: 'guna-art' },
+            { label: 'Practice', icon: 'fa-play', primary: false, href: '../auth/login.html' }
         ]
     },
     {
@@ -65,11 +68,12 @@ const RESOURCES_DATA = [
         icon: 'fa-volume-up',
         featured: true,
         active: true,
+        resourceKey: 'guna-pronunciation',
         theme: 'soged-blue',
         search: 'guna pronunciation guide audio native speakers',
         actions: [
-            { label: 'Listen', icon: 'fa-headphones', primary: true, onClick: 'openListeningModal()' },
-            { label: 'Download', icon: 'fa-download', primary: false }
+            { label: 'More', icon: 'fa-plus-circle', primary: true, resourceKey: 'guna-pronunciation' },
+            { label: 'Practice', icon: 'fa-play', primary: false, href: '../auth/login.html' }
         ]
     },
     {
