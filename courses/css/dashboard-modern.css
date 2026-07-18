@@ -360,9 +360,11 @@
     justify-content: center;
 }
 
-.wallet-coco-icon {
+.wallet-coco-icon,
+.wallet-oggob-icon {
     width: 50px;
     height: 50px;
+    object-fit: contain;
     animation: wallet-bounce 2s ease-in-out infinite;
 }
 
@@ -527,6 +529,34 @@
     overflow: hidden;
 }
 
+.store-item-image-wrap--burba {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--bg-secondary, #f8f9fa) 0%, var(--bg-tertiary, #eef1f4) 100%);
+}
+
+.store-burba-pack-image {
+    max-width: 72%;
+    max-height: 118px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.12));
+    transition: transform 0.3s ease;
+}
+
+.store-burba-pack-image--2 { max-width: 78%; max-height: 112px; }
+.store-burba-pack-image--3 { max-width: 82%; max-height: 110px; }
+.store-burba-pack-image--4 { max-width: 88%; max-height: 108px; }
+.store-burba-pack-image--5 { max-width: 92%; max-height: 106px; }
+
+.store-item-card:hover .store-burba-pack-image {
+    transform: scale(1.04);
+}
+
 .store-item-image {
     width: 100%;
     height: 100%;
@@ -593,6 +623,30 @@
     width: 24px;
     height: 24px;
     object-fit: contain;
+}
+
+.store-burba-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+.wallet-currency-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    vertical-align: -3px;
+    margin-right: 4px;
+}
+
+.inline-oggob-icon,
+.inline-burba-icon {
+    width: 1.1em;
+    height: 1.1em;
+    object-fit: contain;
+    vertical-align: -0.15em;
+    display: inline-block;
 }
 
 .store-buy-btn {
@@ -3026,6 +3080,92 @@ input:checked + .toggle-slider:before {
     object-fit: contain;
 }
 
+.burba-icon-wrap {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.burba-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.streak-icon-wrap {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.streak-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.hero-streak-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.mini-stat-streak-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 0.5rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.streak-card-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.card-icon.streak {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inline-streak-icon {
+    width: 1.1em;
+    height: 1.1em;
+    object-fit: contain;
+    vertical-align: -0.15em;
+    display: inline-block;
+}
+
+.lb-streak-icon {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    vertical-align: -2px;
+    margin-right: 2px;
+}
+
+.streak-highlight {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.nav-hint-oggob-icon {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    vertical-align: -2px;
+    margin-right: 2px;
+}
+
 .oggob-tooltip {
     position: absolute;
     bottom: calc(100% + 8px);
@@ -3121,6 +3261,9 @@ input:checked + .toggle-slider:before {
 
 .store-nav-hint {
     font-size: 0.72rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
 }
 
 .nav-item {
@@ -3436,6 +3579,18 @@ input:checked + .toggle-slider:before {
     margin: 0 auto 0.5rem;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
+
+.mini-stat-burba-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 0.5rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.mini-stat-card.burba-current { border-color: rgba(255, 107, 53, 0.25); }
+.mini-stat-card.burba-current .mini-stat-number { color: var(--accent-color); }
 
 .mini-stat-number {
     display: block;

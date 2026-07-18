@@ -8,7 +8,7 @@ const GunaI18n = {
         en: {
             overview: 'Overview', learn: 'Learning Path', vocabulary: 'Vocabulary', store: 'Guna Store',
             stories: 'Stories', chat: 'AI Tutor', community: 'Culture Center', leaderboard: 'Leaderboard',
-            achievements: 'Achievements', streak: 'streak', lives: 'Burba', cocos: 'Oggob',
+            achievements: 'Achievements', streak: 'Streak', lives: 'Burba', cocos: 'Oggob',
             saveChanges: 'Save Changes', saveSettings: 'Save Settings', cancel: 'Cancel',
             profileTitle: 'Your Profile', settingsTitle: 'Settings',
             noLives: 'No Burba left! Visit the store to buy more or wait for regeneration.',

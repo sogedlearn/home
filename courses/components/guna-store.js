@@ -4,6 +4,14 @@
 const GUNA_STORE_ASSETS = {
     mola: '../Images/Molas - Guna',
     oggob: '../Images/Soged/oggob.png',
+    burba: '../Images/Soged/Burba.png',
+    burbaPacks: {
+        1: '../Images/Soged/Burba.png',
+        2: '../Images/Soged/Burba2.png',
+        3: '../Images/Soged/Burba3.png',
+        4: '../Images/Soged/Burba4.png',
+        5: '../Images/Soged/Burba5.png'
+    },
     molaIcon: '../Images/Soged/mola-icon.png'
 };
 
@@ -33,22 +41,23 @@ class GunaStore extends HTMLElement {
     getCatalog() {
         const M = GUNA_STORE_ASSETS.mola;
         const O = GUNA_STORE_ASSETS.oggob;
+        const P = GUNA_STORE_ASSETS.burbaPacks;
         const I = GUNA_STORE_ASSETS.molaIcon;
 
         const burbaItems = [
-            { id: 'burba-1', name: '❤️ 1 Burba', price: 175, image: O, story: 'Recover a burba to keep practicing.', rarity: 'common', burba: 1 },
-            { id: 'burba-2', name: '❤️❤️ 2 Burba', price: 250, image: O, story: 'Pack of 2 burba for your learning path.', rarity: 'common', burba: 2 },
-            { id: 'burba-3', name: '❤️❤️❤️ 3 Burba', price: 350, image: O, story: 'Three burba to keep learning without stopping.', rarity: 'rare', burba: 3 },
-            { id: 'burba-4', name: '❤️❤️❤️❤️ 4 Burba', price: 450, image: O, story: 'Four burba — almost a full refill.', rarity: 'rare', burba: 4 },
-            { id: 'burba-5', name: '❤️❤️❤️❤️❤️ Full Refill', price: 500, image: O, story: 'Full refill of 5 burba.', rarity: 'epic', burba: 5 }
+            { id: 'burba-1', name: '1 Burba', price: 175, image: P[1], story: 'Recover a burba to keep practicing.', rarity: 'common', burba: 1 },
+            { id: 'burba-2', name: '2 Burba', price: 250, image: P[2], story: 'Pack of 2 burba for your learning path.', rarity: 'common', burba: 2 },
+            { id: 'burba-3', name: '3 Burba', price: 350, image: P[3], story: 'Three burba to keep learning without stopping.', rarity: 'rare', burba: 3 },
+            { id: 'burba-4', name: '4 Burba', price: 450, image: P[4], story: 'Four burba — almost a full refill.', rarity: 'rare', burba: 4 },
+            { id: 'burba-5', name: 'Full Refill (5 Burba)', price: 500, image: P[5], story: 'Full refill of 5 burba.', rarity: 'epic', burba: 5 }
         ];
 
         if (typeof GunaLives !== 'undefined' && !GunaLives.isSpecialOfferUsed()) {
             burbaItems.unshift({
                 id: 'burba-special',
-                name: '🔥 Offer: ❤️ 1 Burba',
+                name: '🔥 Offer: 1 Burba',
                 price: 50,
-                image: O,
+                image: P[1],
                 story: 'Unique offer! One burba for only 50 Oggob — only once per account.',
                 rarity: 'legendary',
                 burba: 1,
@@ -59,7 +68,7 @@ class GunaStore extends HTMLElement {
         return {
             burba: {
                 title: 'Burba',
-                icon: '❤️',
+                icon: GUNA_STORE_ASSETS.burba,
                 items: burbaItems
             }
         };
@@ -68,6 +77,17 @@ class GunaStore extends HTMLElement {
     rarityLabel(rarity) {
         const labels = { common: 'Common', rare: 'Rare', epic: 'Epic', legendary: 'Legendary' };
         return labels[rarity] || rarity;
+    }
+
+    getBurbaPackImage(count) {
+        const qty = Math.min(Math.max(count, 1), 5);
+        return GUNA_STORE_ASSETS.burbaPacks[qty] || GUNA_STORE_ASSETS.burba;
+    }
+
+    renderBurbaPackImage(item) {
+        const src = item.image || this.getBurbaPackImage(item.burba);
+        const qty = item.burba || 1;
+        return `<img src="${src}" alt="${item.name}" class="store-burba-pack-image store-burba-pack-image--${qty}" loading="lazy" onerror="this.src='${GUNA_STORE_ASSETS.burba}'">`;
     }
 
     renderItemCard(item) {
@@ -80,10 +100,12 @@ class GunaStore extends HTMLElement {
 
         return `
             <article class="store-item-card ${purchased ? 'purchased' : ''} ${item.special ? 'store-special-offer' : ''} rarity-${item.rarity}" data-item-id="${item.id}">
-                <div class="store-item-image-wrap">
-                    ${typeof MolaAttribution !== 'undefined' && MolaAttribution.isMolaImage(item.image)
-                        ? MolaAttribution.wrapHtml(item.image, item.name, 'store-item-image')
-                        : `<img src="${item.image}" alt="${item.name}" class="store-item-image" loading="lazy" onerror="this.src='${GUNA_STORE_ASSETS.oggob}'">`
+                <div class="store-item-image-wrap${isBurba ? ' store-item-image-wrap--burba' : ''}">
+                    ${isBurba
+                        ? this.renderBurbaPackImage(item)
+                        : (typeof MolaAttribution !== 'undefined' && MolaAttribution.isMolaImage(item.image)
+                            ? MolaAttribution.wrapHtml(item.image, item.name, 'store-item-image')
+                            : `<img src="${item.image}" alt="${item.name}" class="store-item-image" loading="lazy" onerror="this.src='${GUNA_STORE_ASSETS.oggob}'">`)
                     }
                     <span class="store-rarity-badge rarity-${item.rarity}">${this.rarityLabel(item.rarity)}</span>
                     ${item.special ? '<span class="store-special-badge">Unique Offer</span>' : ''}
@@ -99,9 +121,9 @@ class GunaStore extends HTMLElement {
                         </span>
                         ${isBurba
                             ? (burbaFull
-                                ? '<button class="store-buy-btn owned" disabled><i class="fas fa-fire" style="color: #0973a1;"></i> Burba Full</button>'
+                                ? `<button class="store-buy-btn owned" disabled><img src="${GUNA_STORE_ASSETS.burba}" alt="" class="store-burba-icon" aria-hidden="true"> Burba Full</button>`
                                 : `<button class="store-buy-btn ${canAfford ? '' : 'insufficient'}" data-buy="${item.id}" data-price="${item.price}" data-burba="${item.burba}" ${item.special ? 'data-special="1"' : ''} ${canAfford ? '' : 'disabled'}>
-                                    <i class="fas fa-fire" style="color: #0973a1;"></i> Buy
+                                    <img src="${GUNA_STORE_ASSETS.burba}" alt="" class="store-burba-icon" aria-hidden="true"> Buy
                                    </button>`)
                             : (purchased
                                 ? '<button class="store-buy-btn owned" disabled><i class="fas fa-lock-open"></i> In Your Collection</button>'
@@ -135,7 +157,7 @@ class GunaStore extends HTMLElement {
                         <div class="wallet-info">
                             <span class="wallet-label">My Wallet</span>
                             <span class="wallet-balance" data-oggob-balance>${CocosEconomy.formatCocos(balance)}</span>
-                            <span class="wallet-currency">🥥 Oggob</span>
+                            <span class="wallet-currency"><img src="${GUNA_STORE_ASSETS.oggob}" alt="" class="wallet-currency-icon" aria-hidden="true"> Oggob</span>
                         </div>
                     </div>
                 </header>
@@ -196,7 +218,7 @@ class GunaStore extends HTMLElement {
             if (item.special) GunaLives.markSpecialOfferUsed();
             CocosEconomy.recordPurchase(`purchase-${itemId}-${Date.now()}`);
             CocosEconomy.triggerConfetti();
-            this.showToast(`+${item.burba} burba added! ❤️`, 'success');
+            this.showToast(`+${item.burba} burba added!`, 'success');
             this.render();
             this.bindEvents();
             return;

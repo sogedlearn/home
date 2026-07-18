@@ -516,7 +516,7 @@ class SimpleLearningHub {
                     <div class="lb-stat-card"><span class="lb-stat-val">${userStats.xp || 0}</span><span class="lb-stat-lbl">Total XP</span></div>
                     <div class="lb-stat-card"><span class="lb-stat-val">${userStats.lessons || 0}</span><span class="lb-stat-lbl">Lessons</span></div>
                     <div class="lb-stat-card"><span class="lb-stat-val">${userStats.vocab || 0}</span><span class="lb-stat-lbl">Vocabulary</span></div>
-                    <div class="lb-stat-card"><span class="lb-stat-val">${userStats.streak || 0}</span><span class="lb-stat-lbl">Streak</span></div>
+                    <div class="lb-stat-card"><span class="lb-stat-val">${userStats.streak || 0}</span><span class="lb-stat-lbl"><img src="../Images/Soged/Streak.png" alt="" class="lb-streak-icon" aria-hidden="true"> Streak</span></div>
                     <div class="lb-stat-card"><span class="lb-stat-val">${userStats.badges || 0}</span><span class="lb-stat-lbl">Badges</span></div>
                     <div class="lb-stat-card"><span class="lb-stat-val">${userStats.community || 0}</span><span class="lb-stat-lbl">Community</span></div>
                 </div>
@@ -562,7 +562,7 @@ class SimpleLearningHub {
                     <div class="user-info">
                         <div class="user-name">${user.name} ${user.isCurrentUser ? '(You)' : ''}</div>
                         <div class="user-stats">
-                            <span><i class="fas fa-fire"></i> ${user.streak} day streak</span>
+                            <span><img src="../Images/Soged/Streak.png" alt="" class="inline-streak-icon" aria-hidden="true"> ${user.streak} day Streak</span>
                             <span><i class="fas fa-book"></i> ${user.lessons} lessons</span>
                         </div>
                     </div>
@@ -683,12 +683,12 @@ class SimpleLearningHub {
                     <div class="achievement-card unlocked" style="background: white; border-radius: 16px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: all 0.3s; cursor: pointer; border: 2px solid transparent; position: relative; overflow: hidden;" onMouseOver="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'; this.style.borderColor='var(--success-color)'" onMouseOut="this.style.transform='none'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.08)'; this.style.borderColor='transparent'">
                         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--success-color), #27AE60);"></div>
                         <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1rem;">
-                            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--success-color), #27AE60); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
-                                🔥
+                            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--success-color), #27AE60); border-radius: 50%; display: flex; align-items: center; justify-content: center; padding: 0.75rem;">
+                                <img src="../Images/Soged/Streak.png" alt="" style="width: 36px; height: 36px; object-fit: contain;" aria-hidden="true">
                             </div>
                             <div>
                                 <h3 style="font-size: 1.3rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Fire Streak</h3>
-                                <p style="color: var(--text-secondary); margin: 0;">7-day learning streak</p>
+                                <p style="color: var(--text-secondary); margin: 0;">7-day learning Streak</p>
                             </div>
                         </div>
                         <div style="background: var(--bg-tertiary); padding: 0.75rem 1rem; border-radius: 8px; text-align: center;">
@@ -774,6 +774,7 @@ class SimpleLearningHub {
             streak: gunaState.streak || progress.streak || 7,
             lessons: gunaCompleted,
             cocos: typeof CocosEconomy !== 'undefined' ? CocosEconomy.getBalance() : 1250,
+            lives: typeof GunaLives !== 'undefined' ? GunaLives.getLives() : 5,
             pathProgress: pathProgress || progress.pathProgress || 30
         };
     }
@@ -874,7 +875,7 @@ class SimpleLearningHub {
                             </div>
                         </div>
                         <div class="hero-stat-pill streak">
-                            <i class="fas fa-fire"></i>
+                            <img src="../Images/Soged/Streak.png" alt="" class="hero-streak-icon" aria-hidden="true">
                             <div>
                                 <span class="hero-stat-value">${stats.streak} days</span>
                                 <span class="hero-stat-label">Streak</span>
@@ -911,10 +912,15 @@ class SimpleLearningHub {
                         <span class="mini-stat-number" data-oggob-balance>${stats.cocos.toLocaleString('en-US')}</span>
                         <span class="mini-stat-label">Oggob earned</span>
                     </div>
+                    <div class="mini-stat-card burba-current">
+                        <img src="../Images/Soged/Burba.png" alt="" class="mini-stat-burba-img" aria-hidden="true">
+                        <span class="mini-stat-number" data-lives-count>${stats.lives}</span>
+                        <span class="mini-stat-label">Burba remaining</span>
+                    </div>
                     <div class="mini-stat-card streak-current">
-                        <span class="mini-stat-emoji" aria-hidden="true">🔥</span>
+                        <img src="../Images/Soged/Streak.png" alt="" class="mini-stat-streak-img" aria-hidden="true">
                         <span class="mini-stat-number">${stats.streak}</span>
-                        <span class="mini-stat-label">Current streak</span>
+                        <span class="mini-stat-label">Current Streak</span>
                     </div>
                 </section>
 
@@ -952,14 +958,14 @@ class SimpleLearningHub {
                     <div class="dashboard-card streak-card-modern">
                         <div class="card-header">
                             <div class="card-icon streak">
-                                <i class="fas fa-fire"></i>
+                                <img src="../Images/Soged/Streak.png" alt="" class="streak-card-icon" aria-hidden="true">
                             </div>
                             <div>
                                 <h3 class="card-title">Learning Streak</h3>
-                                <p class="card-subtitle streak-highlight">🔥 ${stats.streak} consecutive days</p>
+                                <p class="card-subtitle streak-highlight"><img src="../Images/Soged/Streak.png" alt="" class="inline-streak-icon" aria-hidden="true"> ${stats.streak} consecutive days</p>
                             </div>
                         </div>
-                        <div class="week-calendar" role="group" aria-label="Weekly streak calendar">
+                        <div class="week-calendar" role="group" aria-label="Weekly Streak calendar">
                             ${this.getWeekCalendar()}
                         </div>
                     </div>
@@ -971,7 +977,7 @@ class SimpleLearningHub {
                         <span class="store-promo-icon">🛒</span>
                         <div>
                             <h3>Visit the Guna Store</h3>
-                            <p>Spend your cocos to unlock molas, art and cultural rewards.</p>
+                            <p>Spend your <img src="../Images/Soged/oggob.png" alt="" class="inline-oggob-icon" aria-hidden="true"> Oggob to recover <img src="../Images/Soged/Burba.png" alt="" class="inline-burba-icon" aria-hidden="true"> Burba and unlock cultural rewards.</p>
                         </div>
                     </div>
                     <button type="button" class="store-promo-btn" onclick="window.learningHub.navigateToSection('store')">
