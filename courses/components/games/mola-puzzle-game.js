@@ -57,7 +57,7 @@ class MolaPuzzleGame extends HTMLElement {
         if (resultEl) resultEl.hidden = true;
 
         const total = this.gridSize * this.gridSize;
-        const molaImage = '../Images/Molas - Guna/Mola 1.jpg';
+        const molaImage = '../Multimedia/Images/Molas - Guna/Mola 1.jpg';
         const pieceSize = 100 / this.gridSize;
 
         board.style.gridTemplateColumns = `repeat(${this.gridSize}, 1fr)`;

@@ -27,7 +27,7 @@ class GunaCommunitySection extends HTMLElement {
                 population: '~34,000 habitantes',
                 traditions: 'Elaboración de molas, cantos ceremoniales, cayuco colectivo y gobierno por saglas.',
                 facts: 'Es una de las comarcas indígenas más conocidas de Panamá y un destino cultural único.',
-                image: '../Images/panama-guna-map.png'
+                image: '../Multimedia/Images/panama-guna-map.png'
             },
             'madugandi': {
                 name: 'Madugandí',
@@ -37,7 +37,7 @@ class GunaCommunitySection extends HTMLElement {
                 population: '~1,800 habitantes',
                 traditions: 'Chácaras, congresos locales y transmisión oral de historias de migración.',
                 facts: 'Madugandí significa "donde hay Madre Tierra" en la cosmovisión Guna.',
-                image: '../Images/Molas - Guna/Mola 4.jpg'
+                image: '../Multimedia/Images/Molas - Guna/Mola 4.jpg'
             },
             'wargandi': {
                 name: 'Wargandí',
@@ -47,7 +47,7 @@ class GunaCommunitySection extends HTMLElement {
                 population: '~1,700 habitantes',
                 traditions: 'Medicina tradicional, pesca fluvial y asambleas del congreso general.',
                 facts: 'Wargandí es la comarca Guna más joven y una de las más remotas de Panamá.',
-                image: '../Images/Molas - Guna/Mola 6.webp'
+                image: '../Multimedia/Images/Molas - Guna/Mola 6.webp'
             },
             'ailigandi': {
                 name: 'Isla Ailigandí',
@@ -57,7 +57,7 @@ class GunaCommunitySection extends HTMLElement {
                 population: 'Comunidad insular tradicional',
                 traditions: 'Celebraciones del 25 de febrero y reuniones del congreso.',
                 facts: 'Considerada cuna del movimiento que defendió la autonomía Guna.',
-                image: '../Images/Molas - Guna/Mola 1.jpg'
+                image: '../Multimedia/Images/Molas - Guna/Mola 1.jpg'
             },
             'nargana': {
                 name: 'Narganá',
@@ -67,7 +67,7 @@ class GunaCommunitySection extends HTMLElement {
                 population: '~3,000 habitantes',
                 traditions: 'Venta de molas, danzas y gastronomía de coco y pescado.',
                 facts: 'Es accesible por carretera desde el continente vía puente.',
-                image: '../Images/Molas - Guna/Mola 3.jpg'
+                image: '../Multimedia/Images/Molas - Guna/Mola 3.jpg'
             },
             'carti': {
                 name: 'Cartí Sugdup',
@@ -77,7 +77,7 @@ class GunaCommunitySection extends HTMLElement {
                 population: 'Varias comunidades insulares',
                 traditions: 'Embarque en cayucos, venta de artesanías y recepción de visitantes.',
                 facts: 'Desde aquí parten las embarcaciones hacia las islas del archipiélago.',
-                image: '../Images/Molas - Guna/Mola 5.jpg'
+                image: '../Multimedia/Images/Molas - Guna/Mola 5.jpg'
             }
         };
     }

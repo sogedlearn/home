@@ -38,7 +38,7 @@
     position: absolute;
     inset: 0;
     background-color: #0a0a0a;
-    background-image: url('../Images/guna-hero-mola-banner.png');
+    background-image: url('../Multimedia/Images/guna-hero-mola-banner.png');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -571,6 +571,10 @@
     margin-top: 40px;
 }
 
+.guna-culture-page .cosmo-cards--three {
+    grid-template-columns: repeat(3, 1fr);
+}
+
 .guna-culture-page .cosmo-card {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(212, 160, 23, 0.25);
@@ -590,6 +594,28 @@
     font-size: 2rem;
     display: block;
     margin-bottom: 12px;
+}
+
+.guna-culture-page .cosmo-card-img-wrap {
+    width: 100%;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 8px;
+    margin-bottom: 14px;
+    border: 1px solid rgba(212, 160, 23, 0.2);
+    overflow: hidden;
+    padding: 8px;
+}
+
+.guna-culture-page .cosmo-card-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
 }
 
 .guna-culture-page .cosmo-card h4 {
@@ -977,6 +1003,149 @@
     font-weight: 600;
 }
 
+.guna-culture-page .trad-grid--four {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.guna-culture-page .trad-video-wrap {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: -8px -6px 16px;
+    background: #000;
+    aspect-ratio: 16 / 9;
+}
+
+.guna-culture-page .trad-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    background: #000;
+}
+
+.guna-culture-page .trad-video-controls {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px 10px 10px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.88));
+}
+
+.guna-culture-page .trad-progress-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.guna-culture-page .trad-controls-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+}
+
+.guna-culture-page .trad-time-label {
+    flex-shrink: 0;
+    min-width: 72px;
+    font-size: 0.72rem;
+    font-variant-numeric: tabular-nums;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: right;
+}
+
+.guna-culture-page .trad-video-btn {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.guna-culture-page .trad-video-btn:hover {
+    background: rgba(212, 160, 23, 0.85);
+    transform: scale(1.05);
+}
+
+.guna-culture-page .trad-volume-slider {
+    flex: 1;
+    min-width: 48px;
+    max-width: 90px;
+    height: 4px;
+    accent-color: var(--guna-gold);
+    cursor: pointer;
+}
+
+.guna-culture-page .trad-progress-slider {
+    flex: 1;
+    width: 100%;
+    height: 6px;
+    margin: 0;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+}
+
+.guna-culture-page .trad-progress-slider::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(
+        to right,
+        var(--guna-gold) 0%,
+        var(--guna-gold) var(--progress, 0%),
+        rgba(255, 255, 255, 0.28) var(--progress, 0%),
+        rgba(255, 255, 255, 0.28) 100%
+    );
+}
+
+.guna-culture-page .trad-progress-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    margin-top: -4px;
+    border-radius: 50%;
+    background: var(--guna-gold);
+    border: 2px solid #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    cursor: pointer;
+}
+
+.guna-culture-page .trad-progress-slider::-moz-range-track {
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.28);
+}
+
+.guna-culture-page .trad-progress-slider::-moz-range-progress {
+    height: 6px;
+    border-radius: 999px;
+    background: var(--guna-gold);
+}
+
+.guna-culture-page .trad-progress-slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--guna-gold);
+    border: 2px solid #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    cursor: pointer;
+}
+
 /* ── CTA ── */
 .guna-culture-page .section-cta {
     position: relative;
@@ -990,7 +1159,7 @@
     position: absolute;
     inset: 0;
     background-color: #0a0a0a;
-    background-image: url('../Images/guna-hero-mola-banner.png');
+    background-image: url('../Multimedia/Images/guna-hero-mola-banner.png');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -1213,6 +1382,16 @@
 [data-theme="dark"] .guna-culture-page .mola-fact h5,
 [data-theme="dark"] .guna-culture-page .congreso-block h4 {
     color: var(--text-primary);
+}
+
+@media (max-width: 992px) {
+    .guna-culture-page .cosmo-cards--three {
+        grid-template-columns: 1fr;
+    }
+
+    .guna-culture-page .trad-grid--four {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 768px) {

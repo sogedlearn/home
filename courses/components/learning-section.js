@@ -604,7 +604,7 @@ class LearningSection extends HTMLElement {
     generateSoggyAvatar() {
         return `
             <div class="soggy-avatar-dynamic">
-                <img src="../Images/Soged/Newturttle.png" alt="Soggy" class="soggy-avatar-img">
+                <img src="../Multimedia/Images/Soged/Newturttle.png" alt="Soggy" class="soggy-avatar-img">
             </div>
         `;
     }

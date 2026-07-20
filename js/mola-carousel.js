@@ -9,31 +9,31 @@
 
     var MOLA_PIECES = [
         {
-            src: 'Images/Molas - Guna/Mola 1.jpg',
+            src: 'Multimedia/Images/Molas - Guna/Mola 1.jpg',
             title: 'Hummingbird Mola',
             meaning: 'The hummingbird represents agility and the connection between the earthly and spiritual worlds in Guna tradition. Its swift movement symbolizes vitality and the ability to cross boundaries between realms.',
             history: 'This design reflects centuries of observation of island wildlife. Guna women incorporate birds from daily life into molas as symbols of freedom and spiritual messengers.'
         },
         {
-            src: 'Images/Molas - Guna/Mola 2.jpg',
+            src: 'Multimedia/Images/Molas - Guna/Mola 2.jpg',
             title: 'Coconut Mola',
             meaning: 'The coconut embodies sustenance, prosperity, and the sacred relationship between the Guna people and their island environment. It represents nourishment for body and community.',
             history: 'Coconut palms sustain island life — food, crafts, and trade. Molas featuring coconuts honor the tree that has supported Guna families across generations on the archipelago.'
         },
         {
-            src: 'Images/Molas - Guna/Mola 3.jpg',
+            src: 'Multimedia/Images/Molas - Guna/Mola 3.jpg',
             title: 'Turtle Mola',
             meaning: 'The turtle symbolizes longevity, wisdom, and the ancestral knowledge carried through the sea. In Guna cosmology, marine animals connect communities to Muu — the living ocean.',
             history: 'Turtles appear frequently in Guna legends and mola art. Artisans pass down turtle motifs as reminders of patience, endurance, and respect for marine life.'
         },
         {
-            src: 'Images/Molas - Guna/Mola 4.jpg',
+            src: 'Multimedia/Images/Molas - Guna/Mola 4.jpg',
             title: 'Sun Mola',
             meaning: 'The sun guides fishermen, marks seasonal cycles, and represents clarity and life force. Solar motifs in molas express gratitude for light and the rhythm of island days.',
             history: 'Before modern navigation, the sun oriented travel between islands. Sun patterns in molas document this deep relationship between celestial cycles and daily Guna life.'
         },
         {
-            src: 'Images/Molas - Guna/Mola 5.jpg',
+            src: 'Multimedia/Images/Molas - Guna/Mola 5.jpg',
             title: 'Sea Mola',
             meaning: 'The sea is the spiritual home of the Guna people — source of food, identity, and ceremony. Marine patterns celebrate the archipelago as an extension of Muu\'s sacred body.',
             history: 'Island communities have lived in harmony with the Caribbean for centuries. Sea-themed molas are among the most treasured, worn as daily expressions of cultural pride.'

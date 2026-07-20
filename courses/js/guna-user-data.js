@@ -6,11 +6,11 @@ const GunaUserData = {
     SETTINGS_KEY: 'guna_user_settings',
 
     AVATARS: [
-        '../Images/Soged/Newturttle.png',
-        '../Images/Soged/mola-icon.png',
-        '../Images/Soged/LOGO SOGED.png',
-        '../Images/Molas - Guna/Mola 1.jpg',
-        '../Images/Molas - Guna/Mola 3.jpg'
+        '../Multimedia/Images/Soged/Newturttle.png',
+        '../Multimedia/Images/Soged/mola-icon.png',
+        '../Multimedia/Images/Soged/LOGO SOGED.png',
+        '../Multimedia/Images/Molas - Guna/Mola 1.jpg',
+        '../Multimedia/Images/Molas - Guna/Mola 3.jpg'
     ],
 
     defaultProfile() {
@@ -19,7 +19,7 @@ const GunaUserData = {
             username: user?.username || user?.name || 'Explorer',
             email: user?.email || '',
             bio: 'Passionate about preserving indigenous languages and cultures of Panama.',
-            avatar: '../Images/Soged/Newturttle.png',
+            avatar: '../Multimedia/Images/Soged/Newturttle.png',
             title: 'Cultural Ambassador',
             goals: { cultural: true, fluent: true, teaching: false, research: false }
         };

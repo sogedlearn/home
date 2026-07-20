@@ -23,24 +23,24 @@ class GunaMemorySection extends HTMLElement {
     getWords() {
         // Direct word pairs with images - English to Guna
         const educationalPairs = [
-            { en: 'I', guna: 'Na', icon: '👤', image: '../Images/Memory match/Na.png' },
-            { en: 'You', guna: 'Be', icon: '👋', image: '../Images/Memory match/Be.jpg' },
-            { en: 'Yes', guna: 'Eye', icon: '✅', image: '../Images/Memory match/Eye.jpg' },
-            { en: 'That is right', guna: 'Degii', icon: '👍', image: '../Images/Memory match/Degii.png' },
-            { en: 'Hello', guna: 'anna', icon: '🏝️', image: '../Images/Memory match/anna.png' },
-            { en: 'Goodbye', guna: 'degi malo', icon: '👋', image: '../Images/Memory match/degi malo.jpg' },
-            { en: 'See you tomorrow', guna: 'Banmalo', icon: '🌅', image: '../Images/Memory match/Banmalo.jpg' },
-            { en: 'Mother', guna: 'Nana', icon: '👩', image: '../Images/Memory match/Nana.jpg' },
-            { en: 'Father', guna: 'Tata', icon: '👨', image: '../Images/Memory match/Tata.jpg' },
-            { en: 'Brother', guna: 'Dummad', icon: '👦', image: '../Images/Memory match/Dummad.jpg' },
-            { en: 'Sister', guna: 'Nueded', icon: '👧', image: '../Images/Memory match/Nueded.jpg' },
-            { en: 'Grandfather', guna: 'Bab', icon: '👴', image: '../Images/Memory match/Bab.png' },
-            { en: 'Grandmother', guna: 'Dada', icon: '👵', image: '../Images/Memory match/Dada.jpg' },
-            { en: 'House', guna: 'Muu', icon: '🏠', image: '../Images/Memory match/Muu.jpg' },
-            { en: 'Table', guna: 'Nika', icon: '🪑', image: '../Images/Memory match/Nika.jpg' },
-            { en: 'Plate', guna: 'Misi', icon: '🍽️', image: '../Images/Memory match/Misi.jpg' },
-            { en: 'Spoon', guna: 'Tapa', icon: '🥄', image: '../Images/Memory match/Tapa.jpg' },
-            { en: 'Clothes', guna: 'Bii', icon: '👕', image: '../Images/Memory match/Bii.jpg' }
+            { en: 'I', guna: 'Na', icon: '👤', image: '../Multimedia/Images/Memory match/Na.png' },
+            { en: 'You', guna: 'Be', icon: '👋', image: '../Multimedia/Images/Memory match/Be.jpg' },
+            { en: 'Yes', guna: 'Eye', icon: '✅', image: '../Multimedia/Images/Memory match/Eye.jpg' },
+            { en: 'That is right', guna: 'Degii', icon: '👍', image: '../Multimedia/Images/Memory match/Degii.png' },
+            { en: 'Hello', guna: 'anna', icon: '🏝️', image: '../Multimedia/Images/Memory match/anna.png' },
+            { en: 'Goodbye', guna: 'degi malo', icon: '👋', image: '../Multimedia/Images/Memory match/degi malo.jpg' },
+            { en: 'See you tomorrow', guna: 'Banmalo', icon: '🌅', image: '../Multimedia/Images/Memory match/Banmalo.jpg' },
+            { en: 'Mother', guna: 'Nana', icon: '👩', image: '../Multimedia/Images/Memory match/Nana.jpg' },
+            { en: 'Father', guna: 'Tata', icon: '👨', image: '../Multimedia/Images/Memory match/Tata.jpg' },
+            { en: 'Brother', guna: 'Dummad', icon: '👦', image: '../Multimedia/Images/Memory match/Dummad.jpg' },
+            { en: 'Sister', guna: 'Nueded', icon: '👧', image: '../Multimedia/Images/Memory match/Nueded.jpg' },
+            { en: 'Grandfather', guna: 'Bab', icon: '👴', image: '../Multimedia/Images/Memory match/Bab.png' },
+            { en: 'Grandmother', guna: 'Dada', icon: '👵', image: '../Multimedia/Images/Memory match/Dada.jpg' },
+            { en: 'House', guna: 'Muu', icon: '🏠', image: '../Multimedia/Images/Memory match/Muu.jpg' },
+            { en: 'Table', guna: 'Nika', icon: '🪑', image: '../Multimedia/Images/Memory match/Nika.jpg' },
+            { en: 'Plate', guna: 'Misi', icon: '🍽️', image: '../Multimedia/Images/Memory match/Misi.jpg' },
+            { en: 'Spoon', guna: 'Tapa', icon: '🥄', image: '../Multimedia/Images/Memory match/Tapa.jpg' },
+            { en: 'Clothes', guna: 'Bii', icon: '👕', image: '../Multimedia/Images/Memory match/Bii.jpg' }
         ];
         return educationalPairs;
     }
@@ -113,7 +113,7 @@ class GunaMemorySection extends HTMLElement {
                 
                 <div class="victory-screen" id="victoryScreen" hidden>
                     <div class="victory-content">
-                        <img src="../Images/Soged/Newturttle.png" alt="Soggy" class="victory-soggy">
+                        <img src="../Multimedia/Images/Soged/Newturttle.png" alt="Soggy" class="victory-soggy">
                         <h2 class="victory-title">Excellent work!</h2>
                         <p class="victory-message">You have completed the memory game</p>
                         <div class="victory-stats">

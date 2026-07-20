@@ -61,8 +61,8 @@
     function mapStageHtml(expanded) {
         var cls = expanded ? 'learn-map-stage learn-map-stage--expanded' : 'learn-map-stage learn-map-stage--featured';
         return '<div class="' + cls + '" id="learnMapStage">' +
-            '<img src="Images/panama-guna-map.png" alt="Map of Panama highlighting Guna Yala" class="learn-map-img" ' +
-                'onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src=\'Images/panama-guna-map.svg\';}">' +
+            '<img src="Multimedia/Images/panama-guna-map.png" alt="Map of Panama highlighting Guna Yala" class="learn-map-img" ' +
+                'onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src=\'Multimedia/Images/panama-guna-map.svg\';}">' +
             hotspotHtml(MAP_POINTS) +
             (expanded ? '' :
                 '<button type="button" class="learn-map-expand-btn" id="learnMapExpandBtn" aria-label="Expand map">' +

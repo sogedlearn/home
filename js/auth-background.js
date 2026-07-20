@@ -4,11 +4,11 @@
  */
 (function () {
     const MOLA_IMAGES = [
-        '../Images/Molas Guna/Mola 1.jpg',
-        '../Images/Molas Guna/Mola 2.jpg',
-        '../Images/Molas Guna/Mola 3.jpg',
-        '../Images/Molas Guna/Mola 4.jpg',
-        '../Images/Molas Guna/Mola 5.jpg',
+        '../Multimedia/Images/Molas Guna/Mola 1.jpg',
+        '../Multimedia/Images/Molas Guna/Mola 2.jpg',
+        '../Multimedia/Images/Molas Guna/Mola 3.jpg',
+        '../Multimedia/Images/Molas Guna/Mola 4.jpg',
+        '../Multimedia/Images/Molas Guna/Mola 5.jpg',
     ];
 
     const INTERVAL_MS = 4500;

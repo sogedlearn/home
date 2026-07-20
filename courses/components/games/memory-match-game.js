@@ -20,22 +20,22 @@ class MemoryMatchGame extends HTMLElement {
 
     getWords() {
         return [
-            { en: 'I', guna: 'Na', image: '../Images/Memory match/Na.png' },
-            { en: 'You', guna: 'Be', image: '../Images/Memory match/Be.jpg' },
-            { en: 'Yes', guna: 'Eye', image: '../Images/Memory match/Eye.jpg' },
-            { en: 'Hello', guna: 'anna', image: '../Images/Memory match/anna.png' },
-            { en: 'Goodbye', guna: 'degi malo', image: '../Images/Memory match/degi malo.jpg' },
-            { en: 'Mother', guna: 'Nana', image: '../Images/Memory match/Nana.jpg' },
-            { en: 'Father', guna: 'Tata', image: '../Images/Memory match/Tata.jpg' },
-            { en: 'Brother', guna: 'Dummad', image: '../Images/Memory match/Dummad.jpg' },
-            { en: 'Sister', guna: 'Nueded', image: '../Images/Memory match/Nueded.jpg' },
-            { en: 'Grandfather', guna: 'Bab', image: '../Images/Memory match/Bab.png' },
-            { en: 'Grandmother', guna: 'Dada', image: '../Images/Memory match/Dada.jpg' },
-            { en: 'House', guna: 'Muu', image: '../Images/Memory match/Muu.jpg' },
-            { en: 'Table', guna: 'Nika', image: '../Images/Memory match/Nika.jpg' },
-            { en: 'Plate', guna: 'Misi', image: '../Images/Memory match/Misi.jpg' },
-            { en: 'Spoon', guna: 'Tapa', image: '../Images/Memory match/Tapa.jpg' },
-            { en: 'Clothes', guna: 'Bii', image: '../Images/Memory match/Bii.jpg' }
+            { en: 'I', guna: 'Na', image: '../Multimedia/Images/Memory match/Na.png' },
+            { en: 'You', guna: 'Be', image: '../Multimedia/Images/Memory match/Be.jpg' },
+            { en: 'Yes', guna: 'Eye', image: '../Multimedia/Images/Memory match/Eye.jpg' },
+            { en: 'Hello', guna: 'anna', image: '../Multimedia/Images/Memory match/anna.png' },
+            { en: 'Goodbye', guna: 'degi malo', image: '../Multimedia/Images/Memory match/degi malo.jpg' },
+            { en: 'Mother', guna: 'Nana', image: '../Multimedia/Images/Memory match/Nana.jpg' },
+            { en: 'Father', guna: 'Tata', image: '../Multimedia/Images/Memory match/Tata.jpg' },
+            { en: 'Brother', guna: 'Dummad', image: '../Multimedia/Images/Memory match/Dummad.jpg' },
+            { en: 'Sister', guna: 'Nueded', image: '../Multimedia/Images/Memory match/Nueded.jpg' },
+            { en: 'Grandfather', guna: 'Bab', image: '../Multimedia/Images/Memory match/Bab.png' },
+            { en: 'Grandmother', guna: 'Dada', image: '../Multimedia/Images/Memory match/Dada.jpg' },
+            { en: 'House', guna: 'Muu', image: '../Multimedia/Images/Memory match/Muu.jpg' },
+            { en: 'Table', guna: 'Nika', image: '../Multimedia/Images/Memory match/Nika.jpg' },
+            { en: 'Plate', guna: 'Misi', image: '../Multimedia/Images/Memory match/Misi.jpg' },
+            { en: 'Spoon', guna: 'Tapa', image: '../Multimedia/Images/Memory match/Tapa.jpg' },
+            { en: 'Clothes', guna: 'Bii', image: '../Multimedia/Images/Memory match/Bii.jpg' }
         ];
     }
 
@@ -113,7 +113,7 @@ class MemoryMatchGame extends HTMLElement {
                         <div class="card-front guna-card-back" aria-hidden="true">
                             <div class="guna-mola-layer guna-mola-layer--diamonds"></div>
                             <div class="guna-mola-layer guna-mola-layer--circles"></div>
-                            <img src="../Images/Soged/mola-icon.png" alt="" class="card-front-mola-emblem" data-no-mola-attribution="true">
+                            <img src="../Multimedia/Images/Soged/mola-icon.png" alt="" class="card-front-mola-emblem" data-no-mola-attribution="true">
                         </div>
                         <div class="card-back ${c.type === 'english' ? 'english-card' : 'indigenous-card'}">
                             ${c.image ? `<img src="${c.image}" alt="${c.label}" class="card-image">` : ''}

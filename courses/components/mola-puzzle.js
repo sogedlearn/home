@@ -50,7 +50,7 @@ class MolaPuzzle extends HTMLElement {
                 <div class="puzzle-content">
                     <!-- Soggy Character -->
                     <div class="soggy-character">
-                        <img src="../../Images/Soged/Newturttle.png" alt="Soggy" class="soggy-img animate-pulse">
+                        <img src="../../Multimedia/Images/Soged/Newturttle.png" alt="Soggy" class="soggy-img animate-pulse">
                         <div class="soggy-bubble">
                             <p id="soggyFact">Hello! I'm Soggy, your cultural guide. Drag the pieces to reconstruct this beautiful mola.</p>
                         </div>
@@ -66,7 +66,7 @@ class MolaPuzzle extends HTMLElement {
                 <!-- Victory Modal -->
                 <div class="victory-modal" id="victoryModal" hidden>
                     <div class="victory-content">
-                        <img src="../../Images/Soged/Newturttle.png" alt="Soggy" class="victory-soggy">
+                        <img src="../../Multimedia/Images/Soged/Newturttle.png" alt="Soggy" class="victory-soggy">
                         <h2 class="victory-title">Excellent work!</h2>
                         <p class="victory-message">You have completed the mola puzzle</p>
                         <div class="cultural-explanation">
@@ -138,7 +138,7 @@ class MolaPuzzle extends HTMLElement {
         piecesContainer.innerHTML = '';
 
         // Create puzzle pieces from mola image
-        const molaImage = '../../Images/Molas - Guna/Mola 1.jpg';
+        const molaImage = '../../Multimedia/Images/Molas - Guna/Mola 1.jpg';
         const pieceSize = 100 / this.gridSize;
 
         // Create board slots

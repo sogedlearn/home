@@ -923,7 +923,7 @@
 }
 
 .card-front {
-    background: url('../Images/Soged/Soggy IA.jpg') center/contain no-repeat;
+    background: url('../Multimedia/Images/Soged/Soggy IA.jpg') center/contain no-repeat;
     background-color: linear-gradient(135deg, #C41E3A, #FF6B35, #FFD700);
     overflow: hidden;
 }
@@ -3826,7 +3826,7 @@ input:checked + .toggle-slider:before {
     content: '';
     position: absolute;
     inset: 0;
-    background: url('../../Images/Molas - Guna/Mola 1.jpg') center/cover no-repeat;
+    background: url('../../Multimedia/Images/Molas - Guna/Mola 1.jpg') center/cover no-repeat;
     opacity: 0.12;
     pointer-events: none;
 }
@@ -4261,7 +4261,7 @@ input:checked + .toggle-slider:before {
     inset: 0;
     background:
         linear-gradient(135deg, rgba(250, 251, 252, 0.92) 0%, rgba(250, 251, 252, 0.88) 100%),
-        url('../../Images/Molas - Guna/Mola 5.jpg') center/cover no-repeat;
+        url('../../Multimedia/Images/Molas - Guna/Mola 5.jpg') center/cover no-repeat;
     pointer-events: none;
     z-index: 0;
 }

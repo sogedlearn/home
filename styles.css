@@ -392,14 +392,14 @@ section {
 .why-soged-bg::before {
     width: 300px; height: 300px;
     left: -100px; top: -80px;
-    background-image: url('Images/Languages/Amarillo.png');
+    background-image: url('Multimedia/Images/Languages/Amarillo.png');
     animation: float 6s ease-in-out infinite;
 }
 
 .why-soged-bg::after {
     width: 250px; height: 250px;
     right: -80px; bottom: -60px;
-    background-image: url('Images/Languages/Rojo.png');
+    background-image: url('Multimedia/Images/Languages/Rojo.png');
     animation: float 8s ease-in-out infinite reverse;
 }
 
@@ -410,7 +410,7 @@ section {
     width: 200px; height: 200px;
     left: 50px; top: 50%;
     transform: translateY(-50%);
-    background-image: url('Images/Languages/Azul.png');
+    background-image: url('Multimedia/Images/Languages/Azul.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -2091,7 +2091,7 @@ section {
 }
 
 .hero-section::before {
-    background: url('Images/Languages/Azul.png') center/cover;
+    background: url('Multimedia/Images/Languages/Azul.png') center/cover;
 }
 
 .features-section::before {
@@ -2134,22 +2134,22 @@ section {
 }
 
 .languages-section::before {
-    background: url('Images/Languages/Verde.png') center/cover;
+    background: url('Multimedia/Images/Languages/Verde.png') center/cover;
 }
 
 .how-it-works-section::before {
-    background: url('Images/Languages/Rojo.png') center/cover;
+    background: url('Multimedia/Images/Languages/Rojo.png') center/cover;
 }
 
 .testimonials-section::before {
-    background: url('Images/Languages/Azul.png') center/cover;
+    background: url('Multimedia/Images/Languages/Azul.png') center/cover;
     opacity: 0.6;
 }
 
 /* CTA section now handled by web component */
 
 .partners-section::before {
-    background: url('Images/Languages/Verde.png') center/cover;
+    background: url('Multimedia/Images/Languages/Verde.png') center/cover;
     opacity: 0.6;
 }
 
@@ -2184,66 +2184,66 @@ section {
 
 /* Feature card borders */
 .feature-card:nth-child(1)::before {
-    background-image: url('Images/Languages/Azul.png');
+    background-image: url('Multimedia/Images/Languages/Azul.png');
 }
 
 .feature-card:nth-child(2)::before {
-    background-image: url('Images/Languages/Amarillo.png');
+    background-image: url('Multimedia/Images/Languages/Amarillo.png');
 }
 
 .feature-card:nth-child(3)::before {
-    background-image: url('Images/Languages/Verde.png');
+    background-image: url('Multimedia/Images/Languages/Verde.png');
 }
 
 .feature-card:nth-child(4)::before {
-    background-image: url('Images/Languages/Rojo.png');
+    background-image: url('Multimedia/Images/Languages/Rojo.png');
 }
 
 /* Language step borders */
 .language-step.ngabe-blue::before {
-    background-image: url('Images/Languages/Azul.png');
+    background-image: url('Multimedia/Images/Languages/Azul.png');
 }
 
 .language-step.naso-orange::before {
-    background-image: url('Images/Languages/Amarillo.png');
+    background-image: url('Multimedia/Images/Languages/Amarillo.png');
 }
 
 .language-step.guna-green::before {
-    background-image: url('Images/Languages/Verde.png');
+    background-image: url('Multimedia/Images/Languages/Verde.png');
 }
 
 .language-step.embera-yellow::before {
-    background-image: url('Images/Languages/Rojo.png');
+    background-image: url('Multimedia/Images/Languages/Rojo.png');
 }
 
 /* Step card borders */
 .step-card.step-blue::before {
-    background-image: url('Images/Languages/Azul.png');
+    background-image: url('Multimedia/Images/Languages/Azul.png');
 }
 
 .step-card.step-orange::before {
-    background-image: url('Images/Languages/Amarillo.png');
+    background-image: url('Multimedia/Images/Languages/Amarillo.png');
 }
 
 .step-card.step-green::before {
-    background-image: url('Images/Languages/Verde.png');
+    background-image: url('Multimedia/Images/Languages/Verde.png');
 }
 
 .step-card.step-yellow::before {
-    background-image: url('Images/Languages/Rojo.png');
+    background-image: url('Multimedia/Images/Languages/Rojo.png');
 }
 
 /* Testimonial card borders */
 .testimonial-card::before {
-    background-image: url('Images/Languages/Azul.png');
+    background-image: url('Multimedia/Images/Languages/Azul.png');
 }
 
 .testimonial-card:nth-child(2)::before {
-    background-image: url('Images/Languages/Amarillo.png');
+    background-image: url('Multimedia/Images/Languages/Amarillo.png');
 }
 
 .testimonial-card:nth-child(3)::before {
-    background-image: url('Images/Languages/Verde.png');
+    background-image: url('Multimedia/Images/Languages/Verde.png');
 }
 
 /* Page border decorations */
@@ -2259,10 +2259,10 @@ body::before {
     right: 0;
     height: 6px;
     background: linear-gradient(90deg, 
-        url('Images/Languages/Azul.png') 0% 25%,
-        url('Images/Languages/Amarillo.png') 25% 50%,
-        url('Images/Languages/Verde.png') 50% 75%,
-        url('Images/Languages/Rojo.png') 75% 100%);
+        url('Multimedia/Images/Languages/Azul.png') 0% 25%,
+        url('Multimedia/Images/Languages/Amarillo.png') 25% 50%,
+        url('Multimedia/Images/Languages/Verde.png') 50% 75%,
+        url('Multimedia/Images/Languages/Rojo.png') 75% 100%);
     background-size: 25% 100%;
     background-repeat: no-repeat;
     z-index: 1000;
@@ -2277,10 +2277,10 @@ body::after {
     width: 6px;
     height: 100vh;
     background: linear-gradient(180deg, 
-        url('Images/Languages/Azul.png') 0% 25%,
-        url('Images/Languages/Amarillo.png') 25% 50%,
-        url('Images/Languages/Verde.png') 50% 75%,
-        url('Images/Languages/Rojo.png') 75% 100%);
+        url('Multimedia/Images/Languages/Azul.png') 0% 25%,
+        url('Multimedia/Images/Languages/Amarillo.png') 25% 50%,
+        url('Multimedia/Images/Languages/Verde.png') 50% 75%,
+        url('Multimedia/Images/Languages/Rojo.png') 75% 100%);
     background-size: 100% 25%;
     background-repeat: no-repeat;
     z-index: 1000;
@@ -2312,10 +2312,10 @@ body::after {
 .footer {
     border-top: 4px solid;
     border-image: linear-gradient(90deg, 
-        url('Images/Languages/Azul.png') 0% 25%,
-        url('Images/Languages/Amarillo.png') 25% 50%,
-        url('Images/Languages/Verde.png') 50% 75%,
-        url('Images/Languages/Rojo.png') 75% 100%) 1;
+        url('Multimedia/Images/Languages/Azul.png') 0% 25%,
+        url('Multimedia/Images/Languages/Amarillo.png') 25% 50%,
+        url('Multimedia/Images/Languages/Verde.png') 50% 75%,
+        url('Multimedia/Images/Languages/Rojo.png') 75% 100%) 1;
     opacity: 0.8;
 }
 

@@ -51,7 +51,7 @@ class GunaAiTutor extends HTMLElement {
             <div class="ai-tutor-section soggy-chat-section">
                 <soggy-avatar></soggy-avatar>
                 <div class="ai-tutor-header">
-                    <div class="ai-tutor-avatar" aria-hidden="true"><img src="../../Images/Soged/Soggy IA.jpg" alt="Soggy Tutor" class="ai-tutor-avatar-img"></div>
+                    <div class="ai-tutor-avatar" aria-hidden="true"><img src="../../Multimedia/Images/Soged/Soggy IA.jpg" alt="Soggy Tutor" class="ai-tutor-avatar-img"></div>
                     <div>
                         <h2 class="ai-tutor-title">Soggy Tutor</h2>
                         <p class="ai-tutor-subtitle">Your personal ${this.getCourseName()} language assistant</p>
@@ -274,7 +274,7 @@ class GunaAiTutor extends HTMLElement {
         const el = document.createElement('div');
         el.className = 'ai-msg ai-msg--ai';
         el.innerHTML = `
-            <div class="ai-msg-avatar" aria-hidden="true"><img src="../../Images/Soged/Soggy IA.jpg" alt="Soggy Tutor" class="ai-msg-avatar-img"></div>
+            <div class="ai-msg-avatar" aria-hidden="true"><img src="../../Multimedia/Images/Soged/Soggy IA.jpg" alt="Soggy Tutor" class="ai-msg-avatar-img"></div>
             <div class="ai-msg-bubble streaming"></div>
         `;
         container.appendChild(el);
@@ -288,7 +288,7 @@ class GunaAiTutor extends HTMLElement {
         el.className = 'ai-msg ai-msg--typing';
         el.id = 'aiTypingIndicator';
         el.innerHTML = `
-            <div class="ai-msg-avatar" aria-hidden="true"><img src="../../Images/Soged/Soggy IA.jpg" alt="Soggy Tutor" class="ai-msg-avatar-img"></div>
+            <div class="ai-msg-avatar" aria-hidden="true"><img src="../../Multimedia/Images/Soged/Soggy IA.jpg" alt="Soggy Tutor" class="ai-msg-avatar-img"></div>
             <div class="soggy-thinking">
                 Soggy is thinking...
                 <span class="thinking-dots"><span></span><span></span><span></span></span>
@@ -317,7 +317,7 @@ class GunaAiTutor extends HTMLElement {
         if (!container) return;
         const el = document.createElement('div');
         el.className = `ai-msg ai-msg--${role}`;
-        const avatar = role === 'ai' ? '<img src="../../Images/Soged/Soggy IA.jpg" alt="Soggy Tutor" class="ai-msg-avatar-img">' : '🧑‍🎓';
+        const avatar = role === 'ai' ? '<img src="../../Multimedia/Images/Soged/Soggy IA.jpg" alt="Soggy Tutor" class="ai-msg-avatar-img">' : '🧑‍🎓';
         const speakBtn = role === 'ai' ? `<button type="button" class="ai-msg-speak" aria-label="Listen to response"><i class="fas fa-volume-up"></i></button>` : '';
         el.innerHTML = `
             <div class="ai-msg-avatar" aria-hidden="true">${avatar}</div>

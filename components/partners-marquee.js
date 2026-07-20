@@ -4,22 +4,22 @@
 const PARTNERS = [
     {
         name: 'Museo de la Mola',
-        logo: 'Images/partner/Museo de la Mola.png',
+        logo: 'Multimedia/Images/partner/Museo de la Mola.png',
         url: 'https://museodelamola.org/',
     },
     {
         name: 'Congreso Guna',
-        logo: 'Images/partner/congresogeneral.png',
+        logo: 'Multimedia/Images/partner/congresogeneral.png',
         url: 'https://gunayala.org.pa/',
     },
     {
         name: 'Fundación Alberto Motta',
-        logo: 'Images/partner/Fundacion Alberto Motta.png',
+        logo: 'Multimedia/Images/partner/Fundacion Alberto Motta.png',
         url: 'https://fundacionalbertomotta.org/',
     },
     {
         name: 'CIEPI',
-        logo: 'Images/partner/CIEPI.png',
+        logo: 'Multimedia/Images/partner/CIEPI.png',
         url: 'https://www.udelas.ac.pa/servicio/ciepi/',
     },
 ];

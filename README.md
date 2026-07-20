@@ -91,7 +91,10 @@ SOGED Learn
 │
 ├── pages/
 │
-├── Images/
+├── Multimedia/
+│   ├── Audio/
+│   ├── Images/
+│   └── Videos/
 │
 ├── index.html
 ├── package.json

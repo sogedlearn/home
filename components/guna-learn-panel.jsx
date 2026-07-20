@@ -30,7 +30,7 @@ function GunaSidebar() {
     return (
         <div className="flex flex-col items-center sm:items-start gap-4 border-r border-gray-100 pr-4 sm:pr-6">
             <img
-                src="Images/Languages/Guna.png"
+                src="Multimedia/Images/Languages/Guna.png"
                 alt="Guna flag"
                 className="w-24 h-24 rounded-full object-cover ring-4 ring-[#11802b]/20"
             />
@@ -47,7 +47,7 @@ function GunaSidebar() {
                 </svg>
             </div>
             <img
-                src="Images/Molas Guna/Mola 2.jpg"
+                src="Multimedia/Images/Molas Guna/Mola 2.jpg"
                 alt="Guna Mola pattern"
                 className="w-full max-w-[140px] rounded-lg object-cover shadow-sm"
             />
@@ -60,7 +60,7 @@ function LearnTabContent() {
         <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
             <div className="text-center md:text-left shrink-0">
                 <img
-                    src="Images/Languages/Guna.png"
+                    src="Multimedia/Images/Languages/Guna.png"
                     alt="Guna Language"
                     className="w-28 h-28 rounded-full object-cover ring-4 ring-[#11802b]/25 mx-auto md:mx-0"
                 />
@@ -167,7 +167,7 @@ function MolaTabContent() {
                 </h3>
                 <div className="flex flex-col sm:flex-row gap-4 mb-4">
                     <img
-                        src="Images/Molas Guna/Mola 3.jpg"
+                        src="Multimedia/Images/Molas Guna/Mola 3.jpg"
                         alt="Traditional Guna Mola textile"
                         className="w-full sm:w-40 h-32 object-cover rounded-xl shadow-md shrink-0"
                     />

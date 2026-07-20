@@ -2,17 +2,17 @@
  * Tienda Guna — Economía de Cocos
  */
 const GUNA_STORE_ASSETS = {
-    mola: '../Images/Molas - Guna',
-    oggob: '../Images/Soged/oggob.png',
-    burba: '../Images/Soged/Burba.png',
+    mola: '../Multimedia/Images/Molas - Guna',
+    oggob: '../Multimedia/Images/Soged/oggob.png',
+    burba: '../Multimedia/Images/Soged/Burba.png',
     burbaPacks: {
-        1: '../Images/Soged/Burba.png',
-        2: '../Images/Soged/Burba2.png',
-        3: '../Images/Soged/Burba3.png',
-        4: '../Images/Soged/Burba4.png',
-        5: '../Images/Soged/Burba5.png'
+        1: '../Multimedia/Images/Soged/Burba.png',
+        2: '../Multimedia/Images/Soged/Burba2.png',
+        3: '../Multimedia/Images/Soged/Burba3.png',
+        4: '../Multimedia/Images/Soged/Burba4.png',
+        5: '../Multimedia/Images/Soged/Burba5.png'
     },
-    molaIcon: '../Images/Soged/mola-icon.png'
+    molaIcon: '../Multimedia/Images/Soged/mola-icon.png'
 };
 
 class GunaStore extends HTMLElement {

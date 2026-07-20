@@ -516,7 +516,7 @@ class SimpleLearningHub {
                     <div class="lb-stat-card"><span class="lb-stat-val">${userStats.xp || 0}</span><span class="lb-stat-lbl">Total XP</span></div>
                     <div class="lb-stat-card"><span class="lb-stat-val">${userStats.lessons || 0}</span><span class="lb-stat-lbl">Lessons</span></div>
                     <div class="lb-stat-card"><span class="lb-stat-val">${userStats.vocab || 0}</span><span class="lb-stat-lbl">Vocabulary</span></div>
-                    <div class="lb-stat-card"><span class="lb-stat-val">${userStats.streak || 0}</span><span class="lb-stat-lbl"><img src="../Images/Soged/Streak.png" alt="" class="lb-streak-icon" aria-hidden="true"> Streak</span></div>
+                    <div class="lb-stat-card"><span class="lb-stat-val">${userStats.streak || 0}</span><span class="lb-stat-lbl"><img src="../Multimedia/Images/Soged/Streak.png" alt="" class="lb-streak-icon" aria-hidden="true"> Streak</span></div>
                     <div class="lb-stat-card"><span class="lb-stat-val">${userStats.badges || 0}</span><span class="lb-stat-lbl">Badges</span></div>
                     <div class="lb-stat-card"><span class="lb-stat-val">${userStats.community || 0}</span><span class="lb-stat-lbl">Community</span></div>
                 </div>
@@ -562,7 +562,7 @@ class SimpleLearningHub {
                     <div class="user-info">
                         <div class="user-name">${user.name} ${user.isCurrentUser ? '(You)' : ''}</div>
                         <div class="user-stats">
-                            <span><img src="../Images/Soged/Streak.png" alt="" class="inline-streak-icon" aria-hidden="true"> ${user.streak} day Streak</span>
+                            <span><img src="../Multimedia/Images/Soged/Streak.png" alt="" class="inline-streak-icon" aria-hidden="true"> ${user.streak} day Streak</span>
                             <span><i class="fas fa-book"></i> ${user.lessons} lessons</span>
                         </div>
                     </div>
@@ -684,7 +684,7 @@ class SimpleLearningHub {
                         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--success-color), #27AE60);"></div>
                         <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1rem;">
                             <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--success-color), #27AE60); border-radius: 50%; display: flex; align-items: center; justify-content: center; padding: 0.75rem;">
-                                <img src="../Images/Soged/Streak.png" alt="" style="width: 36px; height: 36px; object-fit: contain;" aria-hidden="true">
+                                <img src="../Multimedia/Images/Soged/Streak.png" alt="" style="width: 36px; height: 36px; object-fit: contain;" aria-hidden="true">
                             </div>
                             <div>
                                 <h3 style="font-size: 1.3rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Fire Streak</h3>
@@ -840,7 +840,7 @@ class SimpleLearningHub {
 
     getCourseIcon(courseData) {
         if (this.currentCourse === 'guna') {
-            return `<img src="../Images/Soged/mola-icon.png" alt="Cultura ${courseData.name}" class="main-course-icon-img" data-no-mola-attribution="true">`;
+            return `<img src="../Multimedia/Images/Soged/mola-icon.png" alt="Cultura ${courseData.name}" class="main-course-icon-img" data-no-mola-attribution="true">`;
         }
         return `<span class="main-course-emoji">${courseData.flag}</span>`;
     }
@@ -875,7 +875,7 @@ class SimpleLearningHub {
                             </div>
                         </div>
                         <div class="hero-stat-pill streak">
-                            <img src="../Images/Soged/Streak.png" alt="" class="hero-streak-icon" aria-hidden="true">
+                            <img src="../Multimedia/Images/Soged/Streak.png" alt="" class="hero-streak-icon" aria-hidden="true">
                             <div>
                                 <span class="hero-stat-value">${stats.streak} days</span>
                                 <span class="hero-stat-label">Streak</span>
@@ -908,17 +908,17 @@ class SimpleLearningHub {
                         <span class="mini-stat-label">Total XP</span>
                     </div>
                     <div class="mini-stat-card oggob-earned oggob-counter">
-                        <img src="../Images/Soged/oggob.png" alt="" class="mini-stat-oggob-img" aria-hidden="true">
+                        <img src="../Multimedia/Images/Soged/oggob.png" alt="" class="mini-stat-oggob-img" aria-hidden="true">
                         <span class="mini-stat-number" data-oggob-balance>${stats.cocos.toLocaleString('en-US')}</span>
                         <span class="mini-stat-label">Oggob earned</span>
                     </div>
                     <div class="mini-stat-card burba-current">
-                        <img src="../Images/Soged/Burba.png" alt="" class="mini-stat-burba-img" aria-hidden="true">
+                        <img src="../Multimedia/Images/Soged/Burba.png" alt="" class="mini-stat-burba-img" aria-hidden="true">
                         <span class="mini-stat-number" data-lives-count>${stats.lives}</span>
                         <span class="mini-stat-label">Burba remaining</span>
                     </div>
                     <div class="mini-stat-card streak-current">
-                        <img src="../Images/Soged/Streak.png" alt="" class="mini-stat-streak-img" aria-hidden="true">
+                        <img src="../Multimedia/Images/Soged/Streak.png" alt="" class="mini-stat-streak-img" aria-hidden="true">
                         <span class="mini-stat-number">${stats.streak}</span>
                         <span class="mini-stat-label">Current Streak</span>
                     </div>
@@ -958,11 +958,11 @@ class SimpleLearningHub {
                     <div class="dashboard-card streak-card-modern">
                         <div class="card-header">
                             <div class="card-icon streak">
-                                <img src="../Images/Soged/Streak.png" alt="" class="streak-card-icon" aria-hidden="true">
+                                <img src="../Multimedia/Images/Soged/Streak.png" alt="" class="streak-card-icon" aria-hidden="true">
                             </div>
                             <div>
                                 <h3 class="card-title">Learning Streak</h3>
-                                <p class="card-subtitle streak-highlight"><img src="../Images/Soged/Streak.png" alt="" class="inline-streak-icon" aria-hidden="true"> ${stats.streak} consecutive days</p>
+                                <p class="card-subtitle streak-highlight"><img src="../Multimedia/Images/Soged/Streak.png" alt="" class="inline-streak-icon" aria-hidden="true"> ${stats.streak} consecutive days</p>
                             </div>
                         </div>
                         <div class="week-calendar" role="group" aria-label="Weekly Streak calendar">
@@ -972,12 +972,12 @@ class SimpleLearningHub {
                 </div>
 
                 <div class="store-promo-banner" data-aos="fade-up" data-aos-delay="200">
-                    <img src="../Images/Molas - Guna/Mola 2.jpg" alt="" class="store-promo-mola" data-no-mola-attribution="true" aria-hidden="true">
+                    <img src="../Multimedia/Images/Molas - Guna/Mola 2.jpg" alt="" class="store-promo-mola" data-no-mola-attribution="true" aria-hidden="true">
                     <div class="store-promo-content">
                         <span class="store-promo-icon">🛒</span>
                         <div>
                             <h3>Visit the Guna Store</h3>
-                            <p>Spend your <img src="../Images/Soged/oggob.png" alt="" class="inline-oggob-icon" aria-hidden="true"> Oggob to recover <img src="../Images/Soged/Burba.png" alt="" class="inline-burba-icon" aria-hidden="true"> Burba and unlock cultural rewards.</p>
+                            <p>Spend your <img src="../Multimedia/Images/Soged/oggob.png" alt="" class="inline-oggob-icon" aria-hidden="true"> Oggob to recover <img src="../Multimedia/Images/Soged/Burba.png" alt="" class="inline-burba-icon" aria-hidden="true"> Burba and unlock cultural rewards.</p>
                         </div>
                     </div>
                     <button type="button" class="store-promo-btn" onclick="window.learningHub.navigateToSection('store')">
@@ -1026,9 +1026,9 @@ class SimpleLearningHub {
 
     getOtherCourses() {
         const allCourses = [
-            { id: 'ngabe', name: 'Ngäbe', flag: '../Images/Languages/Ngabe.png', description: 'Mountain People' },
-            { id: 'embera', name: 'Emberá', flag: '../Images/Languages/Embera.png', description: 'River Dwellers' },
-            { id: 'naso', name: 'Naso', flag: '../Images/Languages/Naso.gif', description: 'Ancient Kingdom' }
+            { id: 'ngabe', name: 'Ngäbe', flag: '../Multimedia/Images/Languages/Ngabe.png', description: 'Mountain People' },
+            { id: 'embera', name: 'Emberá', flag: '../Multimedia/Images/Languages/Embera.png', description: 'River Dwellers' },
+            { id: 'naso', name: 'Naso', flag: '../Multimedia/Images/Languages/Naso.gif', description: 'Ancient Kingdom' }
         ];
         return allCourses;
     }
@@ -1260,7 +1260,7 @@ class SimpleLearningHub {
         const flagEl = document.querySelector('.course-flag');
         if (flagEl) {
             if (this.currentCourse === 'guna') {
-                flagEl.innerHTML = '<img src="../Images/Soged/mola-icon.png" alt="Guna" class="course-flag-img" data-no-mola-attribution="true">';
+                flagEl.innerHTML = '<img src="../Multimedia/Images/Soged/mola-icon.png" alt="Guna" class="course-flag-img" data-no-mola-attribution="true">';
                 flagEl.classList.add('course-flag-img-wrap');
             } else {
                 flagEl.classList.remove('course-flag-img-wrap');

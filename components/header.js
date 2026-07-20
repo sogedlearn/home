@@ -778,7 +778,7 @@ class SogedHeader extends HTMLElement {
                     <div class="header-left">
                         <a href="${basePath}index.html" class="navbar-brand">
                             <div class="logo-container">
-                                <img src="${basePath}Images/Soged/LOGO%20SOGED.png" alt="SOGED" class="logo-wordmark" width="280" height="56" decoding="async">
+                                <img src="${basePath}Multimedia/Images/Soged/LOGO%20SOGED.png" alt="SOGED" class="logo-wordmark" width="280" height="56" decoding="async">
                             </div>
                         </a>
                         <!-- Mobile Menu Toggle -->

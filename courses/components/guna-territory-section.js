@@ -19,7 +19,7 @@ class GunaTerritorySection extends HTMLElement {
                 top: '15%',
                 left: '56%',
                 name: 'Comarca Guna Yala',
-                molaImage: '../Images/Molas - Guna/Mola 1.jpg',
+                molaImage: '../Multimedia/Images/Molas - Guna/Mola 1.jpg',
                 molaTitle: 'Molas of Guna Yala',
                 molaText: 'Molas are reverse-appliqué textiles created by Guna women. Each design tells stories of nature, animals and spiritual beliefs passed through generations.',
                 culture: 'Guna Yala is an autonomous indigenous territory with over 360 Caribbean islands. Community congresses led by Saglas govern daily life, fishing, and cultural preservation.',
@@ -32,7 +32,7 @@ class GunaTerritorySection extends HTMLElement {
                 top: '12%',
                 left: '78%',
                 name: 'Ailigandí Island',
-                molaImage: '../Images/Molas - Guna/Mola 2.jpg',
+                molaImage: '../Multimedia/Images/Molas - Guna/Mola 2.jpg',
                 molaTitle: 'Revolution & Molas',
                 molaText: 'Ailigandí is a historic center of the Tule Revolution. Molas from this region often depict symbols of resistance and cultural pride.',
                 culture: 'Traditional congresses gather here. Women pass mola techniques from mothers to daughters as sacred cultural knowledge.',
@@ -45,7 +45,7 @@ class GunaTerritorySection extends HTMLElement {
                 top: '18%',
                 left: '54%',
                 name: 'Cartí Sugdup',
-                molaImage: '../Images/Molas - Guna/Mola 3.jpg',
+                molaImage: '../Multimedia/Images/Molas - Guna/Mola 3.jpg',
                 molaTitle: 'Gateway Molas',
                 molaText: 'Cartí is the gateway to the archipelago. Local artisans sell molas featuring turtles, fish, and geometric patterns inspired by the sea.',
                 culture: 'Visitors arrive by road and continue by cayuco (canoe) to the islands. Markets showcase living mola traditions.',
@@ -58,7 +58,7 @@ class GunaTerritorySection extends HTMLElement {
                 top: '14%',
                 left: '86%',
                 name: 'Narganá Island',
-                molaImage: '../Images/Molas - Guna/Mola 4.jpg',
+                molaImage: '../Multimedia/Images/Molas - Guna/Mola 4.jpg',
                 molaTitle: 'Island Mola Art',
                 molaText: 'Narganá molas blend sea life motifs — sharks, turtles, crabs — with bold geometric designs unique to each artisan.',
                 culture: 'A bridge-connected island where Guna families maintain fishing, coconut harvesting and ceremonial life.',
@@ -71,7 +71,7 @@ class GunaTerritorySection extends HTMLElement {
                 top: '20%',
                 left: '68%',
                 name: 'Mola — Sacred Textile',
-                molaImage: '../Images/Molas - Guna/Mola 5.jpg',
+                molaImage: '../Multimedia/Images/Molas - Guna/Mola 5.jpg',
                 molaTitle: 'The Art of the Mola',
                 molaText: 'A mola is created by layering colored cloth and cutting reverse-appliqué designs. Each layer reveals patterns of animals, plants and spiritual symbols.',
                 culture: 'Molas are worn daily by Guna women as identity and pride. Designs are never copied — each is an original artistic expression.',
@@ -93,11 +93,11 @@ class GunaTerritorySection extends HTMLElement {
                 <div class="panama-map-layout">
                     <div class="panama-map-stage" id="panamaMapStage">
                         <img
-                            src="../Images/panama-guna-map.png"
+                            src="../Multimedia/Images/panama-guna-map.png"
                             alt="Map of Panama highlighting Guna Yala"
                             class="panama-map-img"
                             data-no-mola-attribution="true"
-                            onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='../Images/panama-guna-map.svg';}"
+                            onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='../Multimedia/Images/panama-guna-map.svg';}"
                         >
                         ${points.map(p => `
                             <button type="button" class="map-hotspot" data-point="${p.id}"
@@ -124,7 +124,7 @@ class GunaTerritorySection extends HTMLElement {
         return `
             <a href="${MUSEUM_URL}" target="_blank" rel="noopener noreferrer" class="map-mola-link" title="Visit Museo de la Mola">
                 <img src="${imgSrc}" alt="${alt}" class="map-mola-thumb" data-no-mola-attribution="true" loading="lazy"
-                     onerror="this.src='../Images/Soged/mola-icon.png'">
+                     onerror="this.src='../Multimedia/Images/Soged/mola-icon.png'">
                 <span class="map-mola-link-label"><i class="fas fa-external-link-alt"></i> ${title}</span>
             </a>`;
     }

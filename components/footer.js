@@ -508,7 +508,7 @@ class SogedFooter extends HTMLElement {
                         <!-- Logo + Descripción -->
                         <div class="col-lg-3 col-md-6">
                             <div class="footer-brand">
-                                <img src="${basePath}Images/Soged/LOGO%20SOGED.png" alt="SOGED">
+                                <img src="${basePath}Multimedia/Images/Soged/LOGO%20SOGED.png" alt="SOGED">
                             </div>
                             <p class="footer-description">
                                 Preserving and promoting the indigenous languages of Panama.<br>Modern, interactive learning for all.
