@@ -52,6 +52,7 @@ const RESOURCES_DATA = [
         active: true,
         resourceKey: 'guna-art',
         theme: 'soged-green',
+        coverImage: '../Multimedia/Images/Molas - Guna/Mola 1.jpg',
         search: 'guna art molas traditional culture',
         actions: [
             { label: 'More', icon: 'fa-plus-circle', primary: true, resourceKey: 'guna-art' },

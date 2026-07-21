@@ -3,356 +3,494 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | Soged - Preserving Indigenous Languages</title>
+    <title>About Us | SOGED — Preserving Indigenous Languages</title>
     <link rel="icon" type="image/png" href="../Multimedia/Images/Soged/Newturttle.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&family=Fredoka+One&display=swap">
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="../css/about.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="../css/variables.css">
-    <link rel="stylesheet" href="../css/theme-components.css">
+    <link rel="stylesheet" href="../css/about-guna.css">
     <link rel="stylesheet" href="../css/dark-mode-fixes.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'guna-earth': '#3d1f0a',
+                        'guna-green': '#11802b',
+                        'guna-jungle': '#1a5c2e',
+                        'guna-sun': '#ffb300',
+                        'guna-gold': '#d4a017',
+                        'guna-cream': '#f8f3ea',
+                        'guna-red': '#c0392b',
+                        'soged-green': '#28A745',
+                        'soged-yellow': '#FFB300',
+                        'soged-orange': '#FF6B35',
+                        'soged-blue': '#00A3E0',
+                        'absolute-black': '#000000',
+                    },
+                    fontFamily: {
+                        display: ['Fredoka', 'sans-serif'],
+                        body: ['Quicksand', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'guna-card': '0 20px 60px rgba(61, 31, 10, 0.12)',
+                        'guna-deep': '0 25px 50px -12px rgba(61, 31, 10, 0.22)',
+                        'guna-float': '0 30px 60px -15px rgba(17, 128, 43, 0.18)',
+                    },
+                },
+            },
+        };
+    </script>
 </head>
-<body>
-    <!-- Header Component -->
+<body class="about-guna-page font-body antialiased">
     <div id="header-component"></div>
-    
 
-    
-    <!-- Hero Section -->
-    <section class="about-hero-section text-center">
-        <div class="container">
-            <div class="about-badge mx-auto gradient-primary">
-                <i class="fas fa-language"></i>
-                <span>Preserving Indigenous Languages</span>
-            </div>
-            <h1 class="about-title">Who We Are</h1>
-            <h2 class="about-subtitle">Empowering Cultural Heritage Through Technology</h2>
-            <p class="about-description mx-auto">
-                Soged is a revolutionary educational platform designed to preserve and teach Panama's Indigenous languages in a modern, accessible, and culturally respectful way. Our mission is to reconnect people with their roots and protect linguistic diversity for future generations.
-            </p>
-            <div class="about-hero-group responsive-hero mx-auto my-4">
-                <div class="about-photo-carousel" aria-label="SOGED en acción">
-                    <div class="about-carousel-track">
-                        <figure class="about-carousel-slide is-active">
-                            <img src="../Multimedia/Images/about/carousel-team-indoor.png" alt="Equipo SOGED en formación" class="about-group-img" loading="eager" decoding="async">
-                        </figure>
-                        <figure class="about-carousel-slide">
-                            <img src="../Multimedia/Images/about/carousel-guna-community.png" alt="Visita a la comunidad Guna" class="about-group-img" loading="lazy" decoding="async">
-                        </figure>
-                        <figure class="about-carousel-slide">
-                            <img src="../Multimedia/Images/about/carousel-monument.png" alt="Equipo SOGED en el monumento cultural" class="about-group-img" loading="lazy" decoding="async">
-                        </figure>
-                    </div>
-                    <button type="button" class="about-carousel-btn about-carousel-btn--prev" aria-label="Previous photo">
-                        <i class="fas fa-chevron-left" aria-hidden="true"></i>
-                    </button>
-                    <button type="button" class="about-carousel-btn about-carousel-btn--next" aria-label="Next photo">
-                        <i class="fas fa-chevron-right" aria-hidden="true"></i>
-                    </button>
-                    <div class="about-carousel-dots" role="tablist" aria-label="Photo navigation"></div>
-                </div>
-            </div>
-            <div class="about-stats d-flex justify-content-center align-items-center gap-4 flex-wrap mt-5">
-                <div class="about-stat-card is-active" data-carousel-index="0" role="button" tabindex="0">
-                    <span class="about-stat-icon"><i class="fas fa-language" aria-hidden="true"></i></span>
-                    <span class="about-stat-label">Idioma Guna</span>
-                </div>
-                <div class="about-stat-card" data-carousel-index="1" role="button" tabindex="0">
-                    <span class="about-stat-icon"><i class="fas fa-heart" aria-hidden="true"></i></span>
-                    <span class="about-stat-label">Comprometidos con la cultura</span>
-                </div>
-                <div class="about-stat-card" data-carousel-index="2" role="button" tabindex="0">
-                    <span class="about-stat-icon"><i class="fas fa-book-open" aria-hidden="true"></i></span>
-                    <span class="about-stat-label">Aprender cultura Guna</span>
-                </div>
-            </div>
-        </div>
-    </section>
-    
+    <!-- ═══════════════════════════════════════════════════════════
+         HERO — Logo header + Featured Image + Group Carousel
+         ═══════════════════════════════════════════════════════════ -->
+    <section class="relative pt-28 pb-8 md:pt-32 md:pb-12 overflow-hidden about-hero-gradient">
+        <div class="absolute inset-0 mola-pattern-bg opacity-40 pointer-events-none"></div>
+        <div class="absolute top-20 left-0 w-72 h-72 bg-soged-green/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-40 right-0 w-96 h-96 bg-soged-yellow/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-1/3 w-64 h-64 bg-soged-blue/10 rounded-full blur-3xl pointer-events-none"></div>
 
-    
-    <!-- Mission Section -->
-    <section class="mission-section">
-        <div class="mission-container">
-            <div class="mission-card">
-                <div class="mission-icon">
-                    <i class="fas fa-heart"></i>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Logo + intro -->
+            <div class="text-center max-w-3xl mx-auto mb-10 md:mb-14">
+                <div class="about-logo-emerge mx-auto" aria-hidden="false">
+                    <img
+                        src="../Multimedia/Images/Soged/LOGO SOGED.png"
+                        alt="SOGED — Preserving Indigenous Languages"
+                        class="about-hero-logo"
+                        loading="eager"
+                    >
                 </div>
-                <h2 class="mission-title">Our Mission</h2>
-                <p class="mission-text">
-                    To preserve and promote Panama's indigenous languages through cutting-edge technology and innovative education methods. We combine traditional knowledge with modern digital tools to make language learning accessible, engaging, and culturally respectful. Our platform serves as a bridge between generations, ensuring that these precious linguistic treasures are not lost to time.
+                <span class="inline-flex items-center gap-2 bg-gradient-to-r from-soged-green to-soged-blue text-white text-sm font-bold px-5 py-2 rounded-full shadow-lg mb-5 transition-transform hover:scale-105">
+                    <i class="fas fa-language" aria-hidden="true"></i>
+                    Preserving Indigenous Languages
+                </span>
+                <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-absolute-black tracking-tight mb-3">
+                    Who We Are
+                </h1>
+                <p class="text-lg sm:text-xl text-absolute-black/75 font-medium mb-3">
+                    Empowering Cultural Heritage Through Technology
+                </p>
+                <p class="text-base sm:text-lg text-absolute-black/60 leading-relaxed">
+                    SOGED is a revolutionary educational platform designed to preserve and teach Panama's Indigenous languages in a modern, accessible, and culturally respectful way. We reconnect people with their roots and protect linguistic diversity for future generations.
                 </p>
             </div>
-        </div>
-    </section>
-    
-    <!-- Values Section -->
-    <section class="values-section">
-        <div class="values-container">
-            <div class="section-header">
-                <h2 class="section-title">Our Core Values</h2>
-                <p class="section-subtitle">The principles that guide our mission to preserve indigenous languages</p>
-            </div>
-            
-            <div class="values-grid">
-                <div class="value-card">
-                    <div class="value-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3 class="value-title">Community First</h3>
-                    <p class="value-description">We work directly with native speakers and indigenous communities to ensure authentic content and real cultural impact. Every lesson is co-created with those who know the language best.</p>
-                    <div class="value-badge">
-                        <i class="fas fa-heart"></i>
-                        <span>Collaborative</span>
-                    </div>
+
+            <!-- Featured image + group carousel -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+                <!-- Main featured photo with SOGED branding -->
+                <div class="lg:col-span-7">
+                    <figure class="relative h-full min-h-[280px] sm:min-h-[360px] lg:min-h-[420px] rounded-3xl overflow-hidden shadow-guna-deep group ring-4 ring-soged-green/20">
+                        <img
+                            src="../Multimedia/Images/about/soged4/soged-presentation.jpg"
+                            alt="SOGED team presenting the platform"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            loading="eager"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-t from-guna-earth/85 via-guna-earth/20 to-soged-blue/10"></div>
+                        <!-- SOGED logo on image -->
+                        <div class="absolute top-5 left-5 sm:top-6 sm:left-6 bg-white/95 backdrop-blur-sm rounded-2xl px-4 py-3 shadow-guna-deep flex items-center gap-3">
+                            <img src="../Multimedia/Images/Soged/LOGO SOGED.png" alt="" class="h-10 sm:h-12 w-auto object-contain" aria-hidden="true">
+                            <div class="text-left hidden sm:block">
+                                <p class="font-display font-bold text-absolute-black text-sm leading-tight">SOGED</p>
+                                <p class="text-[10px] text-absolute-black/50 uppercase tracking-wider">Language Platform</p>
+                            </div>
+                        </div>
+                        <figcaption class="absolute bottom-0 inset-x-0 p-6 sm:p-8">
+                            <p class="text-white font-display text-xl sm:text-2xl font-bold drop-shadow-md">SOGED in Action</p>
+                            <p class="text-white/85 text-sm sm:text-base mt-1">Building bridges between tradition and technology</p>
+                        </figcaption>
+                    </figure>
                 </div>
 
-                <div class="value-card">
-                    <div class="value-icon">
-                        <i class="fas fa-hands-helping"></i>
-                    </div>
-                    <h3 class="value-title">Cultural Respect</h3>
-                    <p class="value-description">We approach language preservation with deep respect for traditions and practices, honoring the cultural significance behind every word and story.</p>
-                    <div class="value-badge">
-                        <i class="fas fa-star"></i>
-                        <span>Respectful</span>
-                    </div>
-                </div>
+                <!-- Group carousel -->
+                <div class="lg:col-span-5 flex flex-col">
+                    <div
+                        class="relative flex-1 min-h-[280px] sm:min-h-[360px] rounded-3xl overflow-hidden shadow-guna-deep bg-guna-earth"
+                        data-about-group-carousel
+                        aria-label="SOGED group photo gallery"
+                    >
+                        <div class="relative w-full h-full min-h-[280px] sm:min-h-[360px]">
+                            <figure class="about-group-carousel-slide is-active absolute inset-0">
+                                <img src="../Multimedia/Images/about/soged4/soged-presentation.jpg" alt="SOGED platform presentation" class="w-full h-full object-cover" loading="eager">
+                                <div class="absolute bottom-4 left-4 bg-white/90 rounded-xl px-3 py-2 shadow-lg">
+                                    <img src="../Multimedia/Images/Soged/LOGO SOGED.png" alt="SOGED" class="h-7 w-auto object-contain">
+                                </div>
+                            </figure>
+                            <figure class="about-group-carousel-slide absolute inset-0">
+                                <img src="../Multimedia/Images/about/soged4/group-collaboration.jpg" alt="Students collaborating around a laptop" class="w-full h-full object-cover" loading="lazy">
+                            </figure>
+                            <figure class="about-group-carousel-slide absolute inset-0">
+                                <img src="../Multimedia/Images/about/soged4/focus-learning.jpg" alt="Focused learning session with SOGED" class="w-full h-full object-cover" loading="lazy">
+                            </figure>
+                            <figure class="about-group-carousel-slide absolute inset-0">
+                                <img src="../Multimedia/Images/about/soged4/focus-group.jpg" alt="Team workshop at Museo de la Mola" class="w-full h-full object-cover" loading="lazy">
+                            </figure>
+                            <figure class="about-group-carousel-slide absolute inset-0">
+                                <img src="../Multimedia/Images/about/soged4/udelas-group.jpg" alt="UDELAS research group with SOGED" class="w-full h-full object-cover" loading="lazy">
+                            </figure>
+                            <figure class="about-group-carousel-slide absolute inset-0">
+                                <img src="../Multimedia/Images/about/soged4/mumo-group.jpg" alt="Students at Museo de la Mola exhibition" class="w-full h-full object-cover" loading="lazy">
+                            </figure>
+                        </div>
 
-                <div class="value-card">
-                    <div class="value-icon">
-                        <i class="fas fa-graduation-cap"></i>
+                        <!-- Controls -->
+                        <button type="button" data-group-prev class="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 text-guna-green shadow-lg flex items-center justify-center transition-all hover:bg-white hover:scale-110" aria-label="Previous photo">
+                            <i class="fas fa-chevron-left text-sm" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" data-group-next class="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 text-guna-green shadow-lg flex items-center justify-center transition-all hover:bg-white hover:scale-110" aria-label="Next photo">
+                            <i class="fas fa-chevron-right text-sm" aria-hidden="true"></i>
+                        </button>
+                        <div class="absolute bottom-4 inset-x-0 z-10 flex justify-center gap-2" data-group-dots role="tablist" aria-label="Gallery navigation"></div>
                     </div>
-                    <h3 class="value-title">Accessible Education</h3>
-                    <p class="value-description">Learning should be accessible to everyone. Our platform is friendly, inclusive, and designed for all ages and backgrounds.</p>
-                    <div class="value-badge">
-                        <i class="fas fa-universal-access"></i>
-                        <span>Inclusive</span>
-                    </div>
-                </div>
-
-                <div class="value-card">
-                    <div class="value-icon">
-                        <i class="fas fa-certificate"></i>
-                    </div>
-                    <h3 class="value-title">Official Recognition</h3>
-                    <p class="value-description">We help learners prepare for official certification, supporting the preservation and recognition of indigenous languages nationally and internationally.</p>
-                    <div class="value-badge">
-                        <i class="fas fa-award"></i>
-                        <span>Certified</span>
-                    </div>
-                </div>
-
-                <div class="value-card">
-                    <div class="value-icon">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <h3 class="value-title">Modern Technology</h3>
-                    <p class="value-description">We leverage cutting‑edge technology to create engaging and interactive experiences that make language acquisition effective and fun.</p>
-                    <div class="value-badge">
-                        <i class="fas fa-microchip"></i>
-                        <span>Innovative</span>
-                    </div>
-                </div>
-
-                <div class="value-card">
-                    <div class="value-icon">
-                        <i class="fas fa-globe-americas"></i>
-                    </div>
-                    <h3 class="value-title">Global Impact</h3>
-                    <p class="value-description">Our work contributes to worldwide efforts to preserve linguistic diversity and cultural heritage.</p>
-                    <div class="value-badge">
-                        <i class="fas fa-earth-americas"></i>
-                        <span>Worldwide</span>
-                    </div>
-                </div>
-            </div>
-
-            
-        </div>
-    </section>
-    
-    <!-- Team Section -->
-    <section class="team-section" id="team">
-        <div class="team-container">
-            <div class="section-header">
-                <h2 class="section-title">Meet Our Team</h2>
-                <p class="section-subtitle">The passionate individuals behind Soged's mission to preserve indigenous languages</p>
-            </div>
-            
-            <div class="team-carousel">
-                <div class="team-slide">
-                    <div class="team-photo">
-                        <img src="../Multimedia/Images/team/javier.png" alt="Javier">
-                    </div>
-                    <h3 class="team-name">Javier Matos</h3>
-                </div>
-                
-                <div class="team-slide">
-                    <div class="team-photo">
-                        <img src="../Multimedia/Images/team/mathias.png" alt="Mathias">
-                    </div>
-                    <h3 class="team-name">Mathias Aguilar</h3>
-                </div>
-                
-                <div class="team-slide">
-                    <div class="team-photo">
-                        <img src="../Multimedia/Images/team/nayeli.png" alt="Nayeli">
-                    </div>
-                    <h3 class="team-name">Nayeli Torres</h3>
-                </div>
-                
-                <div class="team-slide">
-                    <div class="team-photo">
-                        <img src="../Multimedia/Images/team/Edward.jpg" alt="Edward">
-                    </div>
-                    <h3 class="team-name">Edward De Orta</h3>
-                </div>
-                
-                <div class="team-slide">
-                    <div class="team-photo">
-                        <img src="../Multimedia/Images/team/issac.png" alt="Isaac">
-                    </div>
-                    <h3 class="team-name">Isaac Morales</h3>
-                </div>
-                
-                <div class="team-slide">
-                    <div class="team-photo">
-                        <img src="../Multimedia/Images/team/sara.png" alt="Sara">
-                    </div>
-                    <h3 class="team-name">Sara Rivas</h3>
-                </div>
-                
-                <div class="team-slide">
-                    <div class="team-photo">
-                        <img src="../Multimedia/Images/team/deyna.png" alt="Deyna">
-                    </div>
-                    <h3 class="team-name">Deyna Beckford</h3>
-                </div>
-                
-                <div class="team-slide">
-                    <div class="team-photo">
-                        <img src="../Multimedia/Images/team/isabelle.png" alt="Isabelle">
-                    </div>
-                    <h3 class="team-name">Isabelle Davey</h3>
-                </div>
-                
-                <div class="team-slide">
-                    <div class="team-photo">
-                        <img src="../Multimedia/Images/team/angel.png" alt="Angel">
-                    </div>
-                    <h3 class="team-name">Ángel Pérez</h3>
-                </div>
-                
-                <div class="team-slide">
-                    <div class="team-photo">
-                        <img src="../Multimedia/Images/team/alexis.png" alt="Alexis">
-                    </div>
-                    <h3 class="team-name">Alexis Rodriguez</h3>
-                </div>
-
-                <div class="team-slide">
-                    <div class="team-photo team-photo--initials" aria-hidden="true">
-                        <span>DB</span>
-                    </div>
-                    <h3 class="team-name">David Bustamante</h3>
-                </div>
-
-                <!-- Duplicate set for seamless carousel loop -->
-                <div class="team-slide" aria-hidden="true">
-                    <div class="team-photo">
-                        <img src="../Multimedia/Images/team/javier.png" alt="">
-                    </div>
-                    <h3 class="team-name">Javier Matos</h3>
-                </div>
-                
-                <div class="team-slide" aria-hidden="true">
-                    <div class="team-photo">
-                        <img src="../Multimedia/Images/team/mathias.png" alt="">
-                    </div>
-                    <h3 class="team-name">Mathias Aguilar</h3>
-                </div>
-                
-                <div class="team-slide" aria-hidden="true">
-                    <div class="team-photo">
-                        <img src="../Multimedia/Images/team/nayeli.png" alt="">
-                    </div>
-                    <h3 class="team-name">Nayeli Torres</h3>
-                </div>
-                
-                <div class="team-slide" aria-hidden="true">
-                    <div class="team-photo">
-                        <img src="../Multimedia/Images/team/Edward.jpg" alt="">
-                    </div>
-                    <h3 class="team-name">Edward De Orta</h3>
-                </div>
-                
-                <div class="team-slide" aria-hidden="true">
-                    <div class="team-photo">
-                        <img src="../Multimedia/Images/team/issac.png" alt="">
-                    </div>
-                    <h3 class="team-name">Isaac Morales</h3>
-                </div>
-                
-                <div class="team-slide" aria-hidden="true">
-                    <div class="team-photo">
-                        <img src="../Multimedia/Images/team/sara.png" alt="">
-                    </div>
-                    <h3 class="team-name">Sara Rivas</h3>
-                </div>
-                
-                <div class="team-slide" aria-hidden="true">
-                    <div class="team-photo">
-                        <img src="../Multimedia/Images/team/deyna.png" alt="">
-                    </div>
-                    <h3 class="team-name">Deyna Beckford</h3>
-                </div>
-                
-                <div class="team-slide" aria-hidden="true">
-                    <div class="team-photo">
-                        <img src="../Multimedia/Images/team/isabelle.png" alt="">
-                    </div>
-                    <h3 class="team-name">Isabelle Davey</h3>
-                </div>
-                
-                <div class="team-slide" aria-hidden="true">
-                    <div class="team-photo">
-                        <img src="../Multimedia/Images/team/angel.png" alt="">
-                    </div>
-                    <h3 class="team-name">Ángel Pérez</h3>
-                </div>
-                
-                <div class="team-slide" aria-hidden="true">
-                    <div class="team-photo">
-                        <img src="../Multimedia/Images/team/alexis.png" alt="">
-                    </div>
-                    <h3 class="team-name">Alexis Rodriguez</h3>
-                </div>
-
-                <div class="team-slide" aria-hidden="true">
-                    <div class="team-photo team-photo--initials">
-                        <span>DB</span>
-                    </div>
-                    <h3 class="team-name">David Bustamante</h3>
+                    <p class="text-center text-sm text-absolute-black/50 mt-3 font-medium">Team &amp; Collaborators Gallery</p>
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- CTA Section -->
+
+    <!-- ALLIANCE CARDS -->
+    <section class="relative z-10 -mt-2 pb-16 md:pb-24 about-section-warm" aria-label="Institutional Alliances">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
+                <!-- Congreso Guna -->
+                <button
+                    type="button"
+                    data-alliance-open="congreso"
+                    class="group text-left bg-white rounded-3xl p-6 sm:p-8 shadow-guna-float border border-guna-earth/5 transition-all duration-300 hover:-translate-y-2 hover:shadow-guna-deep focus:outline-none focus-visible:ring-2 focus-visible:ring-guna-green focus-visible:ring-offset-2"
+                >
+                    <div class="w-16 h-16 rounded-2xl bg-guna-cream flex items-center justify-center mb-5 p-2 transition-transform group-hover:scale-110">
+                        <img src="../Multimedia/Images/partner/congresogeneral.png" alt="" class="max-w-full max-h-full object-contain" aria-hidden="true">
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-absolute-black mb-2">Guna General Congress</h3>
+                    <p class="text-sm text-absolute-black/60 leading-relaxed mb-4">Community governance and cultural authority guiding every step of our mission.</p>
+                    <span class="inline-flex items-center gap-2 text-guna-green font-bold text-sm transition-all group-hover:gap-3">
+                        Explore Alliance <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                    </span>
+                </button>
+
+                <!-- UDELAS -->
+                <button
+                    type="button"
+                    data-alliance-open="udelas"
+                    class="group text-left bg-guna-jungle rounded-3xl p-6 sm:p-8 shadow-guna-float transition-all duration-300 hover:-translate-y-2 hover:shadow-guna-deep focus:outline-none focus-visible:ring-2 focus-visible:ring-guna-sun focus-visible:ring-offset-2"
+                >
+                    <div class="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center mb-5 p-2 transition-transform group-hover:scale-110">
+                        <img src="../Multimedia/Images/partner/CIEPI.png" alt="" class="max-w-full max-h-full object-contain brightness-0 invert" aria-hidden="true">
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white mb-2">UDELAS — CIEPI</h3>
+                    <p class="text-sm text-white/75 leading-relaxed mb-4">Academic research and teacher training powering evidence-based indigenous education.</p>
+                    <span class="inline-flex items-center gap-2 text-guna-sun font-bold text-sm transition-all group-hover:gap-3">
+                        Explore Alliance <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                    </span>
+                </button>
+
+                <!-- Museo de la Mola -->
+                <button
+                    type="button"
+                    data-alliance-open="museo"
+                    class="group text-left bg-guna-sun rounded-3xl p-6 sm:p-8 shadow-guna-float transition-all duration-300 hover:-translate-y-2 hover:shadow-guna-deep focus:outline-none focus-visible:ring-2 focus-visible:ring-guna-earth focus-visible:ring-offset-2"
+                >
+                    <div class="w-16 h-16 rounded-2xl bg-white/30 flex items-center justify-center mb-5 p-2 transition-transform group-hover:scale-110">
+                        <img src="../Multimedia/Images/partner/Museo de la Mola.png" alt="" class="max-w-full max-h-full object-contain" aria-hidden="true">
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-absolute-black mb-2">Museo de la Mola</h3>
+                    <p class="text-sm text-absolute-black/70 leading-relaxed mb-4">Safeguarding Guna textile heritage woven into our visual and cultural identity.</p>
+                    <span class="inline-flex items-center gap-2 text-guna-earth font-bold text-sm transition-all group-hover:gap-3">
+                        Explore Alliance <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         MISSION — Alternating layout (text left, image right)
+         ═══════════════════════════════════════════════════════════ -->
+    <section class="py-16 md:py-24 about-section-mission" aria-labelledby="mission-heading">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mola-divider max-w-xs mx-auto mb-12"></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center">
+                <div class="order-2 md:order-1">
+                    <span class="inline-block text-guna-green font-bold text-sm uppercase tracking-widest mb-3">Our Purpose</span>
+                    <h2 id="mission-heading" class="font-display text-3xl sm:text-4xl font-bold text-absolute-black mb-6">Our Mission</h2>
+                    <p class="text-absolute-black/70 text-base sm:text-lg leading-relaxed mb-6">
+                        To preserve and promote Panama's indigenous languages through cutting-edge technology and innovative education methods. We combine traditional knowledge with modern digital tools to make language learning accessible, engaging, and culturally respectful.
+                    </p>
+                    <p class="text-absolute-black/70 text-base sm:text-lg leading-relaxed mb-8">
+                        Our platform serves as a bridge between generations, ensuring that these precious linguistic treasures are not lost to time.
+                    </p>
+                    <a href="../index.html" class="inline-flex items-center gap-2 bg-gradient-to-r from-soged-green to-soged-green/90 text-white font-bold px-6 py-3 rounded-full transition-all hover:shadow-lg hover:-translate-y-0.5">
+                        Start Learning <i class="fas fa-arrow-right text-sm" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="order-1 md:order-2">
+                    <figure class="rounded-3xl overflow-hidden shadow-guna-deep aspect-square max-w-md mx-auto md:max-w-none">
+                        <img src="../Multimedia/Images/Soged/Nabgwana (Mother Earth).jpg" alt="Nabgwana — Mother Earth, symbol of Guna cosmovision" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         VISION — Alternating layout (image left, text right)
+         ═══════════════════════════════════════════════════════════ -->
+    <section class="py-16 md:py-24 about-section-vision mola-pattern-bg" aria-labelledby="vision-heading">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center">
+                <div>
+                    <figure class="rounded-3xl overflow-hidden shadow-guna-deep aspect-square max-w-md mx-auto md:max-w-none border-4 border-guna-gold/20">
+                        <img src="../Multimedia/Images/Molas - Guna/Mola 2.jpg" alt="Traditional Guna mola textile art" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                    </figure>
+                </div>
+                <div>
+                    <span class="inline-block text-guna-gold font-bold text-sm uppercase tracking-widest mb-3">Looking Forward</span>
+                    <h2 id="vision-heading" class="font-display text-3xl sm:text-4xl font-bold text-absolute-black mb-6">Our Vision</h2>
+                    <p class="text-absolute-black/70 text-base sm:text-lg leading-relaxed mb-6">
+                        A future where every Guna child grows up fluent in their ancestral language, where elders see their wisdom honored in digital form, and where the world recognizes indigenous languages as living treasures—not relics of the past.
+                    </p>
+                    <p class="text-absolute-black/70 text-base sm:text-lg leading-relaxed mb-8">
+                        We envision SOGED as the global reference for culturally grounded language technology, co-created with the communities it serves and inspired by the geometric beauty of mola art.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="inline-flex items-center gap-2 bg-white text-absolute-black text-sm font-semibold px-4 py-2 rounded-full shadow-sm border border-guna-earth/10">
+                            <i class="fas fa-heart text-guna-red" aria-hidden="true"></i> Cultural Respect
+                        </span>
+                        <span class="inline-flex items-center gap-2 bg-white text-absolute-black text-sm font-semibold px-4 py-2 rounded-full shadow-sm border border-guna-earth/10">
+                            <i class="fas fa-users text-guna-green" aria-hidden="true"></i> Community First
+                        </span>
+                        <span class="inline-flex items-center gap-2 bg-white text-absolute-black text-sm font-semibold px-4 py-2 rounded-full shadow-sm border border-guna-earth/10">
+                            <i class="fas fa-globe-americas text-guna-gold" aria-hidden="true"></i> Global Impact
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         TEAM / PARTICIPANTS CAROUSEL
+         ═══════════════════════════════════════════════════════════ -->
+    <section class="py-16 md:py-24 about-section-team overflow-hidden" id="team" aria-labelledby="team-heading">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 md:mb-14">
+            <div class="text-center max-w-2xl mx-auto">
+                <div class="mola-divider max-w-xs mx-auto mb-8"></div>
+                <h2 id="team-heading" class="font-display text-3xl sm:text-4xl font-bold text-absolute-black mb-4">Meet Our Team</h2>
+                <p class="text-absolute-black/60 text-base sm:text-lg">The passionate individuals and collaborators behind SOGED's mission to preserve indigenous languages.</p>
+            </div>
+        </div>
+
+        <!-- Styled marquee frame -->
+        <div class="relative max-w-[1400px] mx-auto">
+            <div class="absolute inset-y-0 left-0 w-16 sm:w-24 bg-gradient-to-r from-[#f0faf4] to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute inset-y-0 right-0 w-16 sm:w-24 bg-gradient-to-l from-[#f0faf4] to-transparent z-10 pointer-events-none"></div>
+
+            <div class="overflow-hidden py-4">
+                <div class="about-team-track flex gap-5 sm:gap-6 w-max px-4">
+                    <!-- Team slides (set 1) -->
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5 transition-all duration-300 hover:-translate-y-2 hover:shadow-guna-deep hover:border-guna-green/20">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <img src="../Multimedia/Images/team/javier.png" alt="Javier Matos" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">Javier Matos</h3>
+                    </article>
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5 transition-all duration-300 hover:-translate-y-2 hover:shadow-guna-deep hover:border-guna-green/20">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <img src="../Multimedia/Images/team/mathias.png" alt="Mathias Aguilar" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">Mathias Aguilar</h3>
+                    </article>
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5 transition-all duration-300 hover:-translate-y-2 hover:shadow-guna-deep hover:border-guna-green/20">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <img src="../Multimedia/Images/team/nayeli.png" alt="Nayeli Torres" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">Nayeli Torres</h3>
+                    </article>
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5 transition-all duration-300 hover:-translate-y-2 hover:shadow-guna-deep hover:border-guna-green/20">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <img src="../Multimedia/Images/team/Edward.jpg" alt="Edward De Orta" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">Edward De Orta</h3>
+                    </article>
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5 transition-all duration-300 hover:-translate-y-2 hover:shadow-guna-deep hover:border-guna-green/20">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <img src="../Multimedia/Images/team/issac.png" alt="Isaac Morales" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">Isaac Morales</h3>
+                    </article>
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5 transition-all duration-300 hover:-translate-y-2 hover:shadow-guna-deep hover:border-guna-green/20">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <img src="../Multimedia/Images/team/sara.png" alt="Sara Rivas" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">Sara Rivas</h3>
+                    </article>
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5 transition-all duration-300 hover:-translate-y-2 hover:shadow-guna-deep hover:border-guna-green/20">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <img src="../Multimedia/Images/team/deyna.png" alt="Deyna Beckford" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">Deyna Beckford</h3>
+                    </article>
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5 transition-all duration-300 hover:-translate-y-2 hover:shadow-guna-deep hover:border-guna-green/20">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <img src="../Multimedia/Images/team/isabelle.png" alt="Isabelle Davey" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">Isabelle Davey</h3>
+                    </article>
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5 transition-all duration-300 hover:-translate-y-2 hover:shadow-guna-deep hover:border-guna-green/20">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <img src="../Multimedia/Images/team/angel.png" alt="Ángel Pérez" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">Ángel Pérez</h3>
+                    </article>
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5 transition-all duration-300 hover:-translate-y-2 hover:shadow-guna-deep hover:border-guna-green/20">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <img src="../Multimedia/Images/team/alexis.png" alt="Alexis Rodriguez" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">Alexis Rodriguez</h3>
+                    </article>
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5 transition-all duration-300 hover:-translate-y-2 hover:shadow-guna-deep hover:border-guna-green/20">
+                        <div class="w-24 h-24 mx-auto rounded-full bg-guna-green flex items-center justify-center ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <span class="text-white font-display font-bold text-2xl">DB</span>
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">David Bustamante</h3>
+                    </article>
+
+                    <!-- Duplicate set for seamless loop -->
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5" aria-hidden="true">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <img src="../Multimedia/Images/team/javier.png" alt="" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">Javier Matos</h3>
+                    </article>
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5" aria-hidden="true">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <img src="../Multimedia/Images/team/mathias.png" alt="" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">Mathias Aguilar</h3>
+                    </article>
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5" aria-hidden="true">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <img src="../Multimedia/Images/team/nayeli.png" alt="" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">Nayeli Torres</h3>
+                    </article>
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5" aria-hidden="true">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <img src="../Multimedia/Images/team/Edward.jpg" alt="" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">Edward De Orta</h3>
+                    </article>
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5" aria-hidden="true">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <img src="../Multimedia/Images/team/issac.png" alt="" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">Isaac Morales</h3>
+                    </article>
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5" aria-hidden="true">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <img src="../Multimedia/Images/team/sara.png" alt="" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">Sara Rivas</h3>
+                    </article>
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5" aria-hidden="true">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <img src="../Multimedia/Images/team/deyna.png" alt="" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">Deyna Beckford</h3>
+                    </article>
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5" aria-hidden="true">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <img src="../Multimedia/Images/team/isabelle.png" alt="" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">Isabelle Davey</h3>
+                    </article>
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5" aria-hidden="true">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <img src="../Multimedia/Images/team/angel.png" alt="" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">Ángel Pérez</h3>
+                    </article>
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5" aria-hidden="true">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <img src="../Multimedia/Images/team/alexis.png" alt="" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">Alexis Rodriguez</h3>
+                    </article>
+                    <article class="flex-shrink-0 w-[220px] sm:w-[250px] bg-guna-cream rounded-3xl p-6 text-center shadow-guna-card border border-guna-earth/5" aria-hidden="true">
+                        <div class="w-24 h-24 mx-auto rounded-full bg-guna-green flex items-center justify-center ring-4 ring-guna-sun/40 shadow-lg mb-4">
+                            <span class="text-white font-display font-bold text-2xl">DB</span>
+                        </div>
+                        <h3 class="font-display font-bold text-absolute-black text-lg">David Bustamante</h3>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
     <cta-section id="about-cta"></cta-section>
-    
-    <!-- Footer Component -->
+
+    <!-- Footer -->
     <div id="footer-component"></div>
 
+    <!-- Alliance Detail Modal -->
+    <div
+        id="alliance-modal"
+        class="alliance-modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-guna-earth/70 backdrop-blur-sm"
+        aria-hidden="true"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="alliance-modal-title"
+    >
+        <div
+            data-alliance-panel
+            class="alliance-modal-panel relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white rounded-3xl shadow-guna-deep"
+        >
+            <button type="button" data-alliance-close data-alliance-close-main class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/10 text-absolute-black flex items-center justify-center transition-all hover:bg-black/20 hover:scale-110" aria-label="Close alliance details">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+
+            <!-- Modal photo carousel -->
+            <div class="relative aspect-video bg-guna-earth rounded-t-3xl overflow-hidden">
+                <div class="relative w-full h-full" data-alliance-carousel-track></div>
+                <button type="button" data-alliance-prev class="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white/90 text-guna-green flex items-center justify-center shadow transition-all hover:scale-110" aria-label="Previous photo">
+                    <i class="fas fa-chevron-left text-xs" aria-hidden="true"></i>
+                </button>
+                <button type="button" data-alliance-next class="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white/90 text-guna-green flex items-center justify-center shadow transition-all hover:scale-110" aria-label="Next photo">
+                    <i class="fas fa-chevron-right text-xs" aria-hidden="true"></i>
+                </button>
+                <div class="absolute bottom-3 inset-x-0 z-10 flex justify-center gap-1.5" data-alliance-dots></div>
+            </div>
+
+            <!-- Modal content -->
+            <div class="p-6 sm:p-8">
+                <div class="flex items-start gap-4 mb-4">
+                    <img data-alliance-logo src="" alt="" class="w-14 h-14 object-contain flex-shrink-0">
+                    <div>
+                        <h3 id="alliance-modal-title" data-alliance-title class="font-display text-2xl font-bold text-absolute-black"></h3>
+                    </div>
+                </div>
+                <p data-alliance-desc class="text-absolute-black/70 leading-relaxed mb-6"></p>
+                <a data-alliance-link href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-guna-green font-bold transition-all hover:gap-3">
+                    Visit Official Website <i class="fas fa-external-link-alt text-sm" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/components.js"></script>
     <script src="../components/cta-section.js"></script>
     <script src="../js/theme.js"></script>
-    <script src="../js/about-carousel.js"></script>
+    <script src="../js/about-hero-carousel.js"></script>
+    <script src="../js/about-alliances.js"></script>
     <script src="../main.js"></script>
 </body>
-</html> 
+</html>

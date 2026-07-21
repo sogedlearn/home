@@ -3,68 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resources | Soged - Indigenous Language Learning</title>
+    <title>Resources | SOGED — Indigenous Language Learning</title>
     <link rel="icon" type="image/png" href="../Multimedia/Images/Soged/Newturttle.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Nunito:wght@400;600;700&display=swap">
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="../css/resources.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="../css/variables.css">
-    <link rel="stylesheet" href="../css/theme-components.css">
+    <link rel="stylesheet" href="../css/resources-boutique.css">
     <link rel="stylesheet" href="../css/dark-mode-fixes.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'boutique-coral': '#e8756a',
+                        'boutique-coral-hover': '#d4655a',
+                        'boutique-bg': '#f7f7f7',
+                        'boutique-border': '#ececec',
+                        'absolute-black': '#000000',
+                    },
+                    fontFamily: {
+                        display: ['Fredoka', 'Georgia', 'serif'],
+                        body: ['Nunito', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'boutique': '0 8px 30px rgba(0, 0, 0, 0.08)',
+                        'boutique-hover': '0 16px 40px rgba(0, 0, 0, 0.14)',
+                    },
+                },
+            },
+        };
+    </script>
 </head>
-<body>
-    <!-- Header Component -->
+<body class="resources-boutique-page font-body antialiased">
+
     <div id="header-component"></div>
 
-    <!-- Hero Section -->
-    <section class="resources-hero">
-        <div class="container">
-            <div class="resources-hero-content text-center">
-                <h1 class="hero-title text-white">Learning Resources</h1>
-                <p class="hero-subtitle">Discover comprehensive materials to master the Guna language</p>
-                
-                <!-- Search Bar -->
-                <div class="search-container">
-                    <div class="search-box">
-                        <i class="fas fa-search search-icon"></i>
-                        <input type="text" id="searchInput" class="search-input" placeholder="Search Guna resources, vocabulary, grammar...">
-                        <button class="search-btn">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
+    <!-- Hero -->
+    <section class="pt-32 pb-10 md:pt-36 md:pb-14 bg-white border-b border-boutique-border">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 text-center">
+            <h1 class="font-display text-4xl sm:text-5xl font-bold text-absolute-black tracking-tight mb-4">
+                Learning Resources
+            </h1>
+            <p class="text-base sm:text-lg text-absolute-black/55 max-w-xl mx-auto leading-relaxed">
+                Discover comprehensive materials to master the Guna language
+            </p>
+        </div>
+    </section>
 
-                <!-- Category Filters -->
-                <div class="category-filters">
-                    <button class="category-btn active" data-category="all">
-                        <i class="fas fa-th-large"></i>
-                        All
-                    </button>
-                    <button class="category-btn" data-category="vocabulary">
-                        <i class="fas fa-book"></i>
-                        Vocabulary
-                    </button>
-                    <button class="category-btn" data-category="grammar">
-                        <i class="fas fa-language"></i>
-                        Grammar
-                    </button>
-                    <button class="category-btn" data-category="audio">
-                        <i class="fas fa-volume-up"></i>
-                        Audio
-                    </button>
-                    <button class="category-btn" data-category="video">
-                        <i class="fas fa-play-circle"></i>
-                        Video
-                    </button>
-                    <button class="category-btn" data-category="docs">
-                        <i class="fas fa-file-alt"></i>
-                        Documents
-                    </button>
-                    <button class="category-btn" data-category="culture">
-                        <i class="fas fa-heart"></i>
-                        Culture
+    <!-- Filter Bar -->
+    <section class="bg-boutique-bg py-8 md:py-10 border-b border-boutique-border">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="resources-filter-bar flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+                <div class="flex-1 min-w-0">
+                    <label for="categoryFilter" class="sr-only">Category</label>
+                    <select id="categoryFilter" class="w-full h-12 px-4 bg-white border border-boutique-border rounded-lg text-absolute-black/80 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-boutique-coral/30 focus:border-boutique-coral transition-all cursor-pointer">
+                        <option value="all">All Category</option>
+                        <option value="vocabulary">Vocabulary</option>
+                        <option value="grammar">Grammar</option>
+                        <option value="audio">Audio</option>
+                        <option value="video">Video</option>
+                        <option value="docs">Documents</option>
+                        <option value="culture">Culture</option>
+                    </select>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <label for="levelFilter" class="sr-only">Level</label>
+                    <select id="levelFilter" class="w-full h-12 px-4 bg-white border border-boutique-border rounded-lg text-absolute-black/80 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-boutique-coral/30 focus:border-boutique-coral transition-all cursor-pointer">
+                        <option value="all">All Levels</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                        <option value="all levels">All Levels</option>
+                    </select>
+                </div>
+                <div class="flex-[1.4] min-w-0 flex gap-2">
+                    <label for="searchInput" class="sr-only">Search resources</label>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        class="flex-1 h-12 px-4 bg-white border border-boutique-border rounded-lg text-absolute-black text-sm placeholder:text-absolute-black/40 focus:outline-none focus:ring-2 focus:ring-boutique-coral/30 focus:border-boutique-coral transition-all"
+                        placeholder="Search Guna resources, vocabulary, grammar..."
+                    >
+                    <button type="button" id="searchBtn" class="h-12 px-5 sm:px-7 bg-boutique-coral hover:bg-boutique-coral-hover text-white text-sm font-bold rounded-lg transition-all duration-300 flex items-center gap-2 whitespace-nowrap shadow-sm hover:shadow-md">
+                        <i class="fas fa-search text-xs" aria-hidden="true"></i>
+                        <span class="hidden sm:inline">Find Resource</span>
+                        <span class="sm:hidden">Find</span>
                     </button>
                 </div>
             </div>
@@ -72,326 +96,19 @@
     </section>
 
     <!-- Resources Grid -->
-    <section class="resources-section">
-        <div class="container">
-            <div class="resources-grid" id="resourcesGrid">
+    <section class="py-10 md:py-12 bg-boutique-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-absolute-black text-center mb-8">
+                Popular Resources
+            </h2>
 
-                <!-- Featured Guna Resources (visible on load) -->
-                <div class="resource-card resource-card--active soged-earth" data-featured="true" data-resource="guna-phrases" data-category="vocabulary" data-search="common guna phrases expressions vocabulary">
-                    <div class="resource-image">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <div class="resource-content">
-                        <div class="resource-category">Vocabulary</div>
-                        <h3 class="resource-title">Common Guna phrases</h3>
-                        <p class="resource-description">Learn the most frequently used phrases and expressions in Guna language.</p>
-                        <div class="resource-meta">
-                            <span class="resource-level">Beginner</span>
-                            <span class="resource-time">20 min read</span>
-                        </div>
-                        <div class="resource-actions">
-                            <button class="btn btn-primary btn-sm" data-resource="guna-phrases">
-                                <i class="fas fa-plus-circle"></i>
-                                More
-                            </button>
-                            <a href="../auth/login.html" class="btn btn-outline-primary btn-sm resource-practice-link">
-                                <i class="fas fa-play"></i>
-                                Practice
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="resource-card resource-card--active soged-gold" data-featured="true" data-resource="guna-dictionary" data-category="docs" data-search="guna english dictionary bilingual reference">
-                    <div class="resource-image">
-                        <i class="fas fa-book-open"></i>
-                    </div>
-                    <div class="resource-content">
-                        <div class="resource-category">Documents</div>
-                        <h3 class="resource-title">Guna English dictionary</h3>
-                        <p class="resource-description">Complete bilingual dictionary with pronunciation guides and everyday vocabulary.</p>
-                        <div class="resource-meta">
-                            <span class="resource-level">All Levels</span>
-                            <span class="resource-time">PDF — 250 pages</span>
-                        </div>
-                        <div class="resource-actions">
-                            <button class="btn btn-primary btn-sm" data-resource="guna-dictionary">
-                                <i class="fas fa-plus-circle"></i>
-                                More
-                            </button>
-                            <a href="../auth/login.html" class="btn btn-outline-primary btn-sm resource-practice-link">
-                                <i class="fas fa-play"></i>
-                                Practice
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="resource-card resource-card--active soged-green" data-featured="true" data-resource="guna-art" data-category="culture" data-search="guna art molas traditional culture">
-                    <div class="resource-image">
-                        <i class="fas fa-palette"></i>
-                    </div>
-                    <div class="resource-content">
-                        <div class="resource-category">Culture</div>
-                        <h3 class="resource-title">Guna art</h3>
-                        <p class="resource-description">Explore Guna culture through traditional mola art, symbolism, and language.</p>
-                        <div class="resource-meta">
-                            <span class="resource-level">All Levels</span>
-                            <span class="resource-time">40 min read</span>
-                        </div>
-                        <div class="resource-actions">
-                            <button class="btn btn-primary btn-sm" data-resource="guna-art">
-                                <i class="fas fa-plus-circle"></i>
-                                More
-                            </button>
-                            <a href="../auth/login.html" class="btn btn-outline-primary btn-sm resource-practice-link">
-                                <i class="fas fa-play"></i>
-                                Practice
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="resource-card resource-card--active soged-blue" data-featured="true" data-resource="guna-pronunciation" data-category="audio" data-search="guna pronunciation guide audio native speakers">
-                    <div class="resource-image">
-                        <i class="fas fa-volume-up"></i>
-                    </div>
-                    <div class="resource-content">
-                        <div class="resource-category">Audio</div>
-                        <h3 class="resource-title">Guna pronunciation guide</h3>
-                        <p class="resource-description">Audio lessons with native speakers teaching proper Guna pronunciation and intonation.</p>
-                        <div class="resource-meta">
-                            <span class="resource-level">All Levels</span>
-                            <span class="resource-time">60 min audio</span>
-                        </div>
-                        <div class="resource-actions">
-                            <button class="btn btn-primary btn-sm" data-resource="guna-pronunciation">
-                                <i class="fas fa-plus-circle"></i>
-                                More
-                            </button>
-                            <a href="../auth/login.html" class="btn btn-outline-primary btn-sm resource-practice-link">
-                                <i class="fas fa-play"></i>
-                                Practice
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Other languages (hidden until Load More) -->
-                <div class="resource-card resource-card--coming-soon" data-featured="false" data-category="vocabulary" data-search="ngäbe words basic vocabulary">
-                    <span class="coming-soon-badge">Coming Soon</span>
-                    <div class="resource-image">
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <div class="resource-content">
-                        <div class="resource-category">Vocabulary</div>
-                        <h3 class="resource-title">Basic Ngäbe Vocabulary</h3>
-                        <p class="resource-description">Essential words and phrases for everyday conversations in Ngäbe language.</p>
-                        <div class="resource-meta">
-                            <span class="resource-level">Beginner</span>
-                            <span class="resource-time">15 min read</span>
-                        </div>
-                        <div class="resource-actions">
-                            <button class="btn btn-primary btn-sm" disabled>
-                                <i class="fas fa-download"></i>
-                                Download
-                            </button>
-                            <button class="btn btn-outline-primary btn-sm" disabled>
-                                <i class="fas fa-play"></i>
-                                Practice
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="resource-card resource-card--coming-soon" data-featured="false" data-category="vocabulary" data-search="naso phrases common expressions">
-                    <span class="coming-soon-badge">Coming Soon</span>
-                    <div class="resource-image">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <div class="resource-content">
-                        <div class="resource-category">Vocabulary</div>
-                        <h3 class="resource-title">Common Naso Phrases</h3>
-                        <p class="resource-description">Learn the most frequently used phrases and expressions in Naso language.</p>
-                        <div class="resource-meta">
-                            <span class="resource-level">Intermediate</span>
-                            <span class="resource-time">20 min read</span>
-                        </div>
-                        <div class="resource-actions">
-                            <button class="btn btn-primary btn-sm" disabled>
-                                <i class="fas fa-download"></i>
-                                Download
-                            </button>
-                            <button class="btn btn-outline-primary btn-sm" disabled>
-                                <i class="fas fa-play"></i>
-                                Practice
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="resource-card resource-card--coming-soon" data-featured="false" data-category="grammar" data-search="embera sentence structure">
-                    <span class="coming-soon-badge">Coming Soon</span>
-                    <div class="resource-image">
-                        <i class="fas fa-sitemap"></i>
-                    </div>
-                    <div class="resource-content">
-                        <div class="resource-category">Grammar</div>
-                        <h3 class="resource-title">Emberá Sentence Structure</h3>
-                        <p class="resource-description">Understanding the unique sentence patterns and word order in Emberá.</p>
-                        <div class="resource-meta">
-                            <span class="resource-level">Intermediate</span>
-                            <span class="resource-time">30 min read</span>
-                        </div>
-                        <div class="resource-actions">
-                            <button class="btn btn-primary btn-sm" disabled>
-                                <i class="fas fa-download"></i>
-                                Download
-                            </button>
-                            <button class="btn btn-outline-primary btn-sm" disabled>
-                                <i class="fas fa-play"></i>
-                                Practice
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="resource-card resource-card--coming-soon" data-featured="false" data-category="audio" data-search="ngäbe pronunciation audio lessons">
-                    <span class="coming-soon-badge">Coming Soon</span>
-                    <div class="resource-image">
-                        <i class="fas fa-volume-up"></i>
-                    </div>
-                    <div class="resource-content">
-                        <div class="resource-category">Audio</div>
-                        <h3 class="resource-title">Ngäbe Pronunciation Guide</h3>
-                        <p class="resource-description">Audio lessons with native speakers teaching proper Ngäbe pronunciation.</p>
-                        <div class="resource-meta">
-                            <span class="resource-level">All Levels</span>
-                            <span class="resource-time">60 min audio</span>
-                        </div>
-                        <div class="resource-actions">
-                            <button class="btn btn-primary btn-sm" disabled>
-                                <i class="fas fa-play"></i>
-                                Listen
-                            </button>
-                            <button class="btn btn-outline-primary btn-sm" disabled>
-                                <i class="fas fa-download"></i>
-                                Download
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="resource-card resource-card--coming-soon" data-featured="false" data-category="audio" data-search="naso songs traditional music">
-                    <span class="coming-soon-badge">Coming Soon</span>
-                    <div class="resource-image">
-                        <i class="fas fa-music"></i>
-                    </div>
-                    <div class="resource-content">
-                        <div class="resource-category">Audio</div>
-                        <h3 class="resource-title">Traditional Naso Songs</h3>
-                        <p class="resource-description">Learn Naso through traditional songs and cultural music.</p>
-                        <div class="resource-meta">
-                            <span class="resource-level">Beginner</span>
-                            <span class="resource-time">45 min audio</span>
-                        </div>
-                        <div class="resource-actions">
-                            <button class="btn btn-primary btn-sm" disabled>
-                                <i class="fas fa-play"></i>
-                                Listen
-                            </button>
-                            <button class="btn btn-outline-primary btn-sm" disabled>
-                                <i class="fas fa-download"></i>
-                                Download
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="resource-card resource-card--coming-soon" data-featured="false" data-category="docs" data-search="ngäbe grammar pdf document">
-                    <span class="coming-soon-badge">Coming Soon</span>
-                    <div class="resource-image">
-                        <i class="fas fa-file-pdf"></i>
-                    </div>
-                    <div class="resource-content">
-                        <div class="resource-category">Documents</div>
-                        <h3 class="resource-title">Complete Ngäbe Grammar PDF</h3>
-                        <p class="resource-description">Comprehensive grammar reference with examples and exercises.</p>
-                        <div class="resource-meta">
-                            <span class="resource-level">Advanced</span>
-                            <span class="resource-time">PDF — 150 pages</span>
-                        </div>
-                        <div class="resource-actions">
-                            <button class="btn btn-primary btn-sm" disabled>
-                                <i class="fas fa-download"></i>
-                                Download
-                            </button>
-                            <button class="btn btn-outline-primary btn-sm" disabled>
-                                <i class="fas fa-eye"></i>
-                                Preview
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="resource-card resource-card--coming-soon" data-featured="false" data-category="docs" data-search="naso dictionary reference">
-                    <span class="coming-soon-badge">Coming Soon</span>
-                    <div class="resource-image">
-                        <i class="fas fa-book-open"></i>
-                    </div>
-                    <div class="resource-content">
-                        <div class="resource-category">Documents</div>
-                        <h3 class="resource-title">Naso-English Dictionary</h3>
-                        <p class="resource-description">Complete bilingual dictionary with pronunciation guides.</p>
-                        <div class="resource-meta">
-                            <span class="resource-level">All Levels</span>
-                            <span class="resource-time">PDF — 300 pages</span>
-                        </div>
-                        <div class="resource-actions">
-                            <button class="btn btn-primary btn-sm" disabled>
-                                <i class="fas fa-download"></i>
-                                Download
-                            </button>
-                            <button class="btn btn-outline-primary btn-sm" disabled>
-                                <i class="fas fa-eye"></i>
-                                Preview
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="resource-card resource-card--coming-soon" data-featured="false" data-category="culture" data-search="embera ceremonies traditions">
-                    <span class="coming-soon-badge">Coming Soon</span>
-                    <div class="resource-image">
-                        <i class="fas fa-drum"></i>
-                    </div>
-                    <div class="resource-content">
-                        <div class="resource-category">Culture</div>
-                        <h3 class="resource-title">Emberá Ceremonial Language</h3>
-                        <p class="resource-description">Learn about Emberá traditions and ceremonial vocabulary.</p>
-                        <div class="resource-meta">
-                            <span class="resource-level">Advanced</span>
-                            <span class="resource-time">50 min read</span>
-                        </div>
-                        <div class="resource-actions">
-                            <button class="btn btn-primary btn-sm" disabled>
-                                <i class="fas fa-play"></i>
-                                Explore
-                            </button>
-                            <button class="btn btn-outline-primary btn-sm" disabled>
-                                <i class="fas fa-heart"></i>
-                                Save
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
+            <div id="resourcesGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
+                <!-- Cards rendered by resources.js -->
             </div>
 
-            <!-- Load More Button -->
-            <div class="text-center mt-5">
-                <button class="btn btn-outline-primary btn-lg" id="loadMoreBtn">
-                    <i class="fas fa-plus"></i>
+            <div class="text-center mt-8 md:mt-10">
+                <button type="button" id="loadMoreBtn" class="inline-flex items-center gap-2 px-6 py-2.5 border-2 border-absolute-black/15 text-absolute-black font-bold text-xs rounded-lg bg-white hover:border-boutique-coral hover:text-boutique-coral transition-all duration-300">
+                    <i class="fas fa-plus text-xs" aria-hidden="true"></i>
                     Load More Resources
                 </button>
             </div>
@@ -399,16 +116,17 @@
     </section>
 
     <!-- Resource Modal -->
-    <div id="resource-modal-overlay" class="auth-modal-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.75); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); z-index:9999; align-items:center; justify-content:center;">
-      <div class="auth-modal" id="resource-modal" tabindex="-1" style="max-width:600px; width:90%; position:relative;">
-        <button class="auth-modal-close" aria-label="Close" onclick="closeResourceModal();" style="position:absolute; top:1.2rem; right:1.2rem; border:none; font-size:1.8rem; cursor:pointer; padding:0.5rem; border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center;">&times;</button>
-        <div id="resource-modal-body" style="width:100%; max-width:600px; min-height:350px; padding:2.5rem 2.5rem 2rem 2.5rem; display:flex; flex-direction:column; align-items:center; justify-content:center;">
-          <img id="resource-modal-image" src="" alt="" style="max-width:100%; max-height:200px; border-radius:12px; margin-bottom:1.25rem; object-fit:cover; display:none; box-shadow:0 4px 16px rgba(0,0,0,0.15);">
-          <h3 id="resource-modal-title" style="margin-bottom:1rem;"></h3>
-          <div id="resource-modal-text" style="text-align:center; margin:0; width:100%;"></div>
+    <div id="resource-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="resource-modal-title">
+        <div id="resource-modal" tabindex="-1">
+            <button type="button" class="modal-close-btn" aria-label="Close" onclick="closeResourceModal();">&times;</button>
+            <div id="resource-modal-body" class="p-8 sm:p-10 flex flex-col items-center">
+                <img id="resource-modal-image" src="" alt="" class="max-w-full max-h-48 rounded-xl mb-5 object-cover shadow-md hidden">
+                <h3 id="resource-modal-title"></h3>
+                <div id="resource-modal-text" class="text-left sm:text-center"></div>
+            </div>
         </div>
-      </div>
     </div>
+
     <script>
     var RESOURCE_MODAL_CONTENT = {
       'guna-phrases': {
@@ -457,23 +175,23 @@
       if (imageEl) {
         if (content.image) {
           imageEl.alt = content.imageAlt || content.title;
-          imageEl.style.display = 'block';
-          imageEl.onerror = function() { this.style.display = 'none'; };
+          imageEl.classList.remove('hidden');
+          imageEl.onerror = function() { this.classList.add('hidden'); };
           imageEl.src = content.image;
         } else {
-          imageEl.style.display = 'none';
+          imageEl.classList.add('hidden');
           imageEl.removeAttribute('src');
         }
       }
 
-      if (overlay) overlay.style.display = 'flex';
+      if (overlay) overlay.classList.add('is-open');
     }
 
     function closeResourceModal() {
       var overlay = document.getElementById('resource-modal-overlay');
       var audios = document.querySelectorAll('#resource-modal-text audio');
       audios.forEach(function(audio) { audio.pause(); });
-      if (overlay) overlay.style.display = 'none';
+      if (overlay) overlay.classList.remove('is-open');
     }
 
     window.openResourceModal = openResourceModal;
@@ -492,14 +210,9 @@
     });
     </script>
 
-    <!-- CTA Section -->
     <cta-section id="resources-cta"></cta-section>
-
-    <!-- Footer Component -->
     <div id="footer-component"></div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/components.js"></script>
     <script src="../components/cta-section.js"></script>
     <script src="../js/theme.js"></script>

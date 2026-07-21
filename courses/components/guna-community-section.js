@@ -11,6 +11,7 @@ class GunaCommunitySection extends HTMLElement {
     getTabs() {
         return [
             { id: 'history', label: 'History', icon: '📜' },
+            { id: 'bookshelf', label: 'My Bookshelf', icon: '📚' },
             { id: 'culture', label: 'Culture', icon: '🧵' },
             { id: 'spirituality', label: 'Spirituality', icon: '🌟' },
             { id: 'nature', label: 'Nature', icon: '🌊' }
@@ -142,6 +143,10 @@ class GunaCommunitySection extends HTMLElement {
     }
 
     getTabContent() {
+        if (this.activeTab === 'bookshelf') {
+            return '<my-bookshelf context="history"></my-bookshelf>';
+        }
+
         const content = {
             history: `
                 <div class="community-article">

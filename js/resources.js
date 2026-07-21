@@ -1,13 +1,16 @@
-// Resources Page JavaScript - Dynamic Rendering
+// Resources Page — Boutique grid rendering & filters
 
 class ResourcesManager {
     constructor() {
         this.searchInput = document.getElementById('searchInput');
-        this.categoryButtons = document.querySelectorAll('.category-btn');
+        this.searchBtn = document.getElementById('searchBtn');
+        this.categoryFilter = document.getElementById('categoryFilter');
+        this.levelFilter = document.getElementById('levelFilter');
         this.resourcesGrid = document.getElementById('resourcesGrid');
         this.loadMoreBtn = document.getElementById('loadMoreBtn');
 
         this.currentCategory = 'all';
+        this.currentLevel = 'all';
         this.currentSearch = '';
         this.showAllResources = false;
         this.resources = RESOURCES_DATA || [];
@@ -18,68 +21,139 @@ class ResourcesManager {
     init() {
         this.renderResources();
         this.setupEventListeners();
-        this.setupSearch();
         this.filterResources();
     }
 
     renderResources() {
         if (!this.resourcesGrid) return;
 
-        this.resourcesGrid.innerHTML = this.resources.map(resource => 
-            this.renderResourceCard(resource)
+        this.resourcesGrid.innerHTML = this.resources.map((resource, index) =>
+            this.renderResourceCard(resource, index)
         ).join('');
 
         this.resourceCards = document.querySelectorAll('.resource-card');
     }
 
-    renderResourceCard(resource) {
+    getCoverClass(theme) {
+        const map = {
+            'soged-earth': 'resource-cover--earth',
+            'soged-gold': 'resource-cover--gold',
+            'soged-green': 'resource-cover--green',
+            'soged-blue': 'resource-cover--blue',
+            'soged-red': 'resource-cover--red',
+            'soged-purple': 'resource-cover--purple',
+            'soged-orange': 'resource-cover--orange',
+            'soged-teal': 'resource-cover--teal',
+            'soged-indigo': 'resource-cover--indigo',
+            'soged-pink': 'resource-cover--pink',
+            'soged-cyan': 'resource-cover--cyan',
+            'soged-lime': 'resource-cover--lime',
+            'soged-rose': 'resource-cover--rose',
+        };
+        return map[theme] || 'resource-cover--earth';
+    }
+
+    getStarRating(resource) {
+        const levelMap = {
+            'beginner': 3,
+            'intermediate': 4,
+            'advanced': 5,
+            'all levels': 5,
+        };
+        const count = resource.active ? (levelMap[resource.level.toLowerCase()] || 4) : 0;
+        let stars = '';
+        for (let i = 1; i <= 5; i++) {
+            stars += i <= count
+                ? '<i class="fas fa-star text-boutique-coral text-xs" aria-hidden="true"></i>'
+                : '<i class="far fa-star text-absolute-black/20 text-xs" aria-hidden="true"></i>';
+        }
+        return stars;
+    }
+
+    getPrimaryAction(resource) {
+        return resource.actions.find(a => a.primary) || resource.actions[0];
+    }
+
+    getSecondaryAction(resource) {
+        return resource.actions.find(a => !a.primary);
+    }
+
+    renderResourceCard(resource, index) {
         const statusClass = resource.active ? 'resource-card--active' : 'resource-card--coming-soon';
         const featuredAttr = resource.featured ? 'data-featured="true"' : 'data-featured="false"';
         const categoryAttr = `data-category="${resource.category}"`;
+        const levelAttr = `data-level="${resource.level.toLowerCase()}"`;
         const searchAttr = `data-search="${resource.search}"`;
         const resourceAttr = resource.resourceKey ? `data-resource="${resource.resourceKey}"` : '';
-        const comingSoonBadge = !resource.active ? '<span class="coming-soon-badge">Coming Soon</span>' : '';
-        const disabledAttr = !resource.active ? 'disabled' : '';
+        const comingSoonBadge = !resource.active
+            ? `<span class="absolute top-2 right-2 z-10 bg-absolute-black/75 text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">Soon</span>`
+            : '';
+        const coverClass = this.getCoverClass(resource.theme);
+        const icon = resource.icon.startsWith('fa-') ? resource.icon : 'fa-' + resource.icon;
+        const categoryLabel = this.capitalizeFirst(resource.category === 'docs' ? 'Documents' : resource.category);
+        const primary = this.getPrimaryAction(resource);
+        const secondary = this.getSecondaryAction(resource);
+        const animationDelay = `style="animation-delay: ${(index % 6) * 0.08}s"`;
 
-        const actionsHtml = resource.actions.map(action => {
-            const btnClass = action.primary ? 'btn-primary' : 'btn-outline-primary';
-            const icon = action.icon;
-            const label = action.label;
-            const dataResourceAttr = action.resourceKey ? `data-resource="${action.resourceKey}"` : '';
+        const coverContent = resource.coverImage
+            ? `<img src="${resource.coverImage}" alt="${resource.title}" class="w-full h-full object-cover">`
+            : `<div class="flex items-center justify-center h-full"><i class="fas ${icon} text-white text-3xl opacity-90"></i></div>`;
 
-            if (action.href && resource.active) {
-                return `<a href="${action.href}" class="btn ${btnClass} btn-sm resource-practice-link">
-                    <i class="fas ${icon}"></i>
-                    ${label}
-                </a>`;
-            }
-
-            return `<button class="btn ${btnClass} btn-sm" ${disabledAttr} ${dataResourceAttr}>
-                <i class="fas ${icon}"></i>
-                ${label}
-            </button>`;
-        }).join('');
+        const primaryHtml = this.renderActionButton(primary, resource, true);
+        const secondaryHtml = secondary ? this.renderActionButton(secondary, resource, false) : '';
 
         return `
-            <div class="resource-card ${statusClass} ${resource.theme}" ${featuredAttr} ${resourceAttr} ${categoryAttr} ${searchAttr}>
-                ${comingSoonBadge}
-                <div class="resource-image">
-                    <i class="fas ${resource.icon.startsWith('fa-') ? resource.icon : 'fa-' + resource.icon}"></i>
-                </div>
-                <div class="resource-content">
-                    <div class="resource-category">${this.capitalizeFirst(resource.category)}</div>
-                    <h3 class="resource-title">${resource.title}</h3>
-                    <p class="resource-description">${resource.description}</p>
-                    <div class="resource-meta">
-                        <span class="resource-level">${resource.level}</span>
-                        <span class="resource-time">${resource.time}</span>
+            <article class="resource-card group flex flex-col ${statusClass}" ${featuredAttr} ${resourceAttr} ${categoryAttr} ${levelAttr} ${searchAttr} ${animationDelay}>
+                <div class="resource-card-inner">
+                    <div class="resource-cover-wrap ${coverClass}">
+                        ${comingSoonBadge}
+                        ${coverContent}
                     </div>
-                    <div class="resource-actions">
-                        ${actionsHtml}
+                    <div class="flex flex-col flex-1 px-3 pt-3 pb-4 text-center">
+                        <h3 class="font-display text-sm font-bold text-absolute-black leading-snug mb-1 capitalize line-clamp-2 min-h-[2.5rem]">${resource.title}</h3>
+                        <p class="text-[10px] text-absolute-black/50 font-semibold uppercase tracking-wide mb-1">${categoryLabel}</p>
+                        <p class="text-[10px] text-absolute-black/40 mb-1.5">${resource.level}</p>
+                        <div class="resource-stars flex justify-center gap-0.5 mb-2" aria-label="Level indicator">${this.getStarRating(resource)}</div>
+                        <p class="text-[10px] text-absolute-black/35 font-medium mb-3">${resource.time}</p>
+                        <div class="mt-auto space-y-1.5">
+                            ${primaryHtml}
+                            ${secondaryHtml}
+                        </div>
                     </div>
                 </div>
-            </div>
+            </article>
         `;
+    }
+
+    renderActionButton(action, resource, isPrimary) {
+        const disabled = !resource.active;
+        const icon = action.icon;
+        const label = action.label;
+
+        if (isPrimary) {
+            if (action.resourceKey && resource.active) {
+                return `<button type="button" class="resource-card-btn-primary w-full mt-2 py-2 bg-boutique-coral hover:bg-boutique-coral-hover text-white text-xs font-bold rounded-md transition-all duration-300 flex items-center justify-center gap-1.5" data-resource="${action.resourceKey}">
+                    <i class="fas ${icon} text-[10px]" aria-hidden="true"></i>${label}
+                </button>`;
+            }
+            if (action.href && resource.active) {
+                return `<a href="${action.href}" class="resource-card-btn-primary w-full mt-2 py-2 bg-boutique-coral hover:bg-boutique-coral-hover text-white text-xs font-bold rounded-md transition-all duration-300 flex items-center justify-center gap-1.5">
+                    <i class="fas ${icon} text-[10px]" aria-hidden="true"></i>${label}
+                </a>`;
+            }
+            return `<button type="button" class="resource-card-btn-primary w-full mt-2 py-2 bg-boutique-coral text-white text-xs font-bold rounded-md flex items-center justify-center gap-1.5 opacity-60 cursor-not-allowed" disabled>
+                <i class="fas ${icon} text-[10px]" aria-hidden="true"></i>${label}
+            </button>`;
+        }
+
+        if (action.href && resource.active) {
+            return `<a href="${action.href}" class="resource-card-btn-secondary w-full mt-1 inline-flex items-center justify-center gap-1 py-1.5 text-[11px] font-semibold text-absolute-black/50 hover:text-boutique-coral transition-colors duration-300">
+                <i class="fas ${icon} text-[10px]" aria-hidden="true"></i>${label}
+            </a>`;
+        }
+        return `<button type="button" class="resource-card-btn-secondary w-full mt-1 inline-flex items-center justify-center gap-1 py-1.5 text-[11px] font-semibold text-absolute-black/40" disabled>
+            <i class="fas ${icon} text-[10px]" aria-hidden="true"></i>${label}
+        </button>`;
     }
 
     capitalizeFirst(str) {
@@ -92,18 +166,31 @@ class ResourcesManager {
                 this.currentSearch = e.target.value.toLowerCase();
                 this.filterResources();
             });
+            this.searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') this.performSearch();
+            });
         }
 
-        this.categoryButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                this.setActiveCategory(e.target.closest('.category-btn'));
+        if (this.searchBtn) {
+            this.searchBtn.addEventListener('click', () => this.performSearch());
+        }
+
+        if (this.categoryFilter) {
+            this.categoryFilter.addEventListener('change', (e) => {
+                this.currentCategory = e.target.value;
+                this.filterResources();
             });
-        });
+        }
+
+        if (this.levelFilter) {
+            this.levelFilter.addEventListener('change', (e) => {
+                this.currentLevel = e.target.value;
+                this.filterResources();
+            });
+        }
 
         if (this.loadMoreBtn) {
-            this.loadMoreBtn.addEventListener('click', () => {
-                this.loadMoreResources();
-            });
+            this.loadMoreBtn.addEventListener('click', () => this.loadMoreResources());
         }
 
         if (this.resourcesGrid) {
@@ -119,43 +206,23 @@ class ResourcesManager {
         }
     }
 
-    setupSearch() {
-        const searchBtn = document.querySelector('.search-btn');
-        if (searchBtn) {
-            searchBtn.addEventListener('click', () => {
-                this.performSearch();
-            });
-        }
+    cardMatchesFilter(card) {
+        const category = card.getAttribute('data-category');
+        const level = card.getAttribute('data-level') || '';
+        const searchText = card.getAttribute('data-search') || '';
+        const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
 
-        if (this.searchInput) {
-            this.searchInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    this.performSearch();
-                }
-            });
-        }
-    }
+        const matchesCategory = this.currentCategory === 'all' || category === this.currentCategory;
+        const matchesLevel = this.currentLevel === 'all' || level === this.currentLevel;
+        const matchesSearch = !this.currentSearch ||
+            searchText.includes(this.currentSearch) ||
+            title.includes(this.currentSearch);
 
-    setActiveCategory(button) {
-        this.categoryButtons.forEach(btn => {
-            btn.classList.remove('active');
-        });
-
-        button.classList.add('active');
-        this.currentCategory = button.getAttribute('data-category');
-        this.filterResources();
+        return matchesCategory && matchesLevel && matchesSearch;
     }
 
     isFeatured(card) {
         return card.getAttribute('data-featured') === 'true';
-    }
-
-    cardMatchesFilter(card) {
-        const category = card.getAttribute('data-category');
-        const searchText = card.getAttribute('data-search') || '';
-        const matchesCategory = this.currentCategory === 'all' || category === this.currentCategory;
-        const matchesSearch = !this.currentSearch || searchText.includes(this.currentSearch);
-        return matchesCategory && matchesSearch;
     }
 
     filterResources() {
@@ -169,17 +236,14 @@ class ResourcesManager {
 
             if (!matches) {
                 card.classList.add('hidden');
-                card.style.display = 'none';
                 return;
             }
 
             if (featured || this.showAllResources) {
                 card.classList.add('filtered');
-                card.style.display = 'block';
                 visibleCount++;
             } else {
                 card.classList.add('hidden');
-                card.style.display = 'none';
             }
         });
 
@@ -190,9 +254,9 @@ class ResourcesManager {
     updateLoadMoreButton() {
         if (!this.loadMoreBtn) return;
 
-        const hiddenComingSoon = Array.from(this.resourceCards).some(card => {
-            return !this.isFeatured(card) && this.cardMatchesFilter(card);
-        });
+        const hiddenComingSoon = Array.from(this.resourceCards).some(card =>
+            !this.isFeatured(card) && this.cardMatchesFilter(card)
+        );
 
         if (this.showAllResources || !hiddenComingSoon) {
             this.loadMoreBtn.style.display = 'none';
@@ -203,22 +267,17 @@ class ResourcesManager {
 
     showNoResultsMessage(visibleCount) {
         const existingMessage = document.querySelector('.no-results-message');
-        if (existingMessage) {
-            existingMessage.remove();
-        }
+        if (existingMessage) existingMessage.remove();
 
-        if (visibleCount === 0) {
+        if (visibleCount === 0 && this.resourcesGrid) {
             const message = document.createElement('div');
-            message.className = 'no-results-message text-center py-5';
+            message.className = 'no-results-message col-span-full text-center py-16';
             message.innerHTML = `
-                <i class="fas fa-search" style="font-size: 3rem; color: var(--text-secondary); margin-bottom: 1rem;"></i>
-                <h3 style="color: var(--text-secondary); margin-bottom: 0.5rem;">No resources found</h3>
-                <p style="color: var(--text-secondary);">Try adjusting your search or filter criteria</p>
+                <i class="fas fa-search text-4xl text-absolute-black/20 mb-4"></i>
+                <h3 class="font-display text-xl font-bold text-absolute-black/60 mb-2">No resources found</h3>
+                <p class="text-absolute-black/40 text-sm">Try adjusting your search or filter criteria</p>
             `;
-
-            if (this.resourcesGrid) {
-                this.resourcesGrid.appendChild(message);
-            }
+            this.resourcesGrid.appendChild(message);
         }
     }
 
@@ -232,115 +291,35 @@ class ResourcesManager {
     loadMoreResources() {
         this.showAllResources = true;
         this.filterResources();
-
-        if (this.loadMoreBtn) {
-            this.loadMoreBtn.style.display = 'none';
-        }
+        if (this.loadMoreBtn) this.loadMoreBtn.style.display = 'none';
     }
 
     addCardAnimations() {
         this.resourceCards.forEach((card, index) => {
-            card.style.animationDelay = `${index * 0.1}s`;
+            card.style.animationDelay = `${(index % 6) * 0.08}s`;
         });
     }
 
     setupCardInteractions() {
-        this.resourceCards.forEach(card => {
-            if (!card.classList.contains('resource-card--coming-soon')) {
-                return;
-            }
-
-            const actionBtn = card.querySelector('.btn-outline-primary:not([href])');
-            if (actionBtn && actionBtn.disabled) {
-                return;
-            }
-
-            if (actionBtn) {
-                actionBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.handleAction(card);
-                });
-            }
-        });
-    }
-
-    handleDownload(card) {
-        const title = card.querySelector('.resource-title').textContent;
-        this.showNotification(`Downloading ${title}...`, 'success');
-
-        setTimeout(() => {
-            this.showNotification(`${title} downloaded successfully!`, 'success');
-        }, 2000);
-    }
-
-    handleAction(card) {
-        const title = card.querySelector('.resource-title').textContent;
-        const actionBtn = card.querySelector('.btn-outline-primary');
-        const actionText = actionBtn ? actionBtn.textContent.trim() : '';
-
-        if (actionText.includes('Practice')) {
-            this.showNotification(`Starting practice for ${title}...`, 'info');
-        } else if (actionText.includes('Listen')) {
-            this.showNotification(`Playing audio for ${title}...`, 'info');
-        } else if (actionText.includes('Watch')) {
-            this.showNotification(`Opening video for ${title}...`, 'info');
-        } else if (actionText.includes('Preview')) {
-            this.showNotification(`Opening preview for ${title}...`, 'info');
-        } else if (actionText.includes('Explore')) {
-            this.showNotification(`Exploring ${title}...`, 'info');
-        } else if (actionText.includes('Save')) {
-            this.showNotification(`${title} saved to favorites!`, 'success');
-        }
+        /* Coming soon cards are non-interactive via CSS */
     }
 
     showNotification(message, type = 'info') {
+        const icons = { success: 'check-circle', error: 'exclamation-circle', warning: 'exclamation-triangle', info: 'info-circle' };
         const notification = document.createElement('div');
-        notification.className = `notification notification-${type}`;
+        notification.className = 'resources-notification';
         notification.innerHTML = `
-            <div class="notification-content">
-                <i class="fas fa-${this.getNotificationIcon(type)}"></i>
+            <div class="flex items-center gap-3 text-sm text-absolute-black">
+                <i class="fas fa-${icons[type] || 'info-circle'} text-boutique-coral"></i>
                 <span>${message}</span>
             </div>
         `;
-
-        notification.style.cssText = `
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: var(--card-bg);
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1rem 1.5rem;
-            box-shadow: 0 8px 32px var(--shadow-color);
-            z-index: 1050;
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-            max-width: 300px;
-        `;
-
         document.body.appendChild(notification);
-
+        requestAnimationFrame(() => notification.classList.add('is-visible'));
         setTimeout(() => {
-            notification.style.transform = 'translateX(0)';
-        }, 100);
-
-        setTimeout(() => {
-            notification.style.transform = 'translateX(100%)';
-            setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.parentNode.removeChild(notification);
-                }
-            }, 300);
+            notification.classList.remove('is-visible');
+            setTimeout(() => notification.remove(), 300);
         }, 3000);
-    }
-
-    getNotificationIcon(type) {
-        switch (type) {
-            case 'success': return 'check-circle';
-            case 'error': return 'exclamation-circle';
-            case 'warning': return 'exclamation-triangle';
-            default: return 'info-circle';
-        }
     }
 }
 

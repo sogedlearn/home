@@ -122,6 +122,7 @@ class CulturalReadings extends HTMLElement {
                 </header>
                 <div class="hub-tabs" role="tablist">
                     <button type="button" class="hub-tab ${this.activeTab === 'readings' ? 'active' : ''}" data-tab="readings">Cultural Readings</button>
+                    <button type="button" class="hub-tab ${this.activeTab === 'bookshelf' ? 'active' : ''}" data-tab="bookshelf">My Bookshelf</button>
                     <button type="button" class="hub-tab ${this.activeTab === 'territories' ? 'active' : ''}" data-tab="territories">Guna Yala & Territories</button>
                 </div>
                 <div id="culturalHubContent"></div>
@@ -149,6 +150,8 @@ class CulturalReadings extends HTMLElement {
 
         if (this.activeTab === 'readings') {
             this.renderReadingsView(container);
+        } else if (this.activeTab === 'bookshelf') {
+            container.innerHTML = '<my-bookshelf context="readings"></my-bookshelf>';
         } else {
             this.renderTerritoriesView(container);
         }
