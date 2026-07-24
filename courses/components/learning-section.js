@@ -99,6 +99,49 @@ class LearningSection extends HTMLElement {
                     opacity: 0.3;
                 }
 
+                .learning-section--guna .learning-header {
+                    background: linear-gradient(165deg, #fffef9 0%, #f8f3ea 35%, rgba(255, 179, 0, 0.2) 65%, rgba(17, 128, 43, 0.16) 100%);
+                    color: #3d1f0a;
+                    border-bottom: 4px solid transparent;
+                    border-image: repeating-linear-gradient(90deg, #c0392b 0, #c0392b 12px, #ffb300 12px, #ffb300 24px, #11802b 24px, #11802b 36px, #d4a017 36px, #d4a017 48px) 1;
+                }
+
+                .learning-section--guna .learning-header::before {
+                    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40' viewBox='0 0 80 40'%3E%3Cpath d='M0 20 L10 10 L20 20 L30 10 L40 20 L50 10 L60 20 L70 10 L80 20' fill='none' stroke='%23c0392b' stroke-opacity='0.07' stroke-width='1.5'/%3E%3C/svg%3E");
+                    background-size: 80px 40px;
+                    opacity: 0.5;
+                }
+
+                .learning-section--guna .learning-path {
+                    background: linear-gradient(180deg, #fffef9 0%, rgba(248, 243, 234, 0.9) 100%);
+                    border: 1px solid rgba(255, 179, 0, 0.2);
+                }
+
+                .learning-section--guna .path-container::before {
+                    background: repeating-linear-gradient(180deg, #c0392b, #ffb300, #11802b, #d4a017);
+                }
+
+                .learning-section--guna .lesson-node.current::before {
+                    background: linear-gradient(180deg, #11802b, #ffb300);
+                }
+
+                .learning-section--guna .lesson-node.current .lesson-icon {
+                    background: linear-gradient(135deg, #11802b 0%, #d4a017 100%);
+                }
+
+                .learning-section--guna .lesson-node--island {
+                    background: linear-gradient(135deg, rgba(255, 179, 0, 0.1), rgba(17, 128, 43, 0.08));
+                    border: 2px solid rgba(255, 179, 0, 0.35);
+                }
+
+                .learning-section--guna .lesson-node--island::before {
+                    background: repeating-linear-gradient(180deg, #c0392b, #ffb300, #11802b, #d4a017);
+                }
+
+                .learning-section--guna .btn-primary {
+                    background: linear-gradient(135deg, #11802b 0%, #1a5c2e 100%);
+                }
+
                 .section-title {
                     font-size: 2.5rem;
                     font-weight: 700;
@@ -498,9 +541,9 @@ class LearningSection extends HTMLElement {
                 }
             </style>
 
-            <div class="learning-section">
+            <div class="learning-section ${this.currentCourse === 'guna' ? 'learning-section--guna' : ''}">
                 <div class="learning-header" data-aos="fade-up">
-                    <h2 class="section-title">🎯 Interactive Learning Path</h2>
+                    <h2 class="section-title">${this.currentCourse === 'guna' ? 'Interactive Learning Path' : '🎯 Interactive Learning Path'}</h2>
                     <p class="section-subtitle">Master ${this.getCourseName()} through gamified lessons and cultural immersion</p>
                     
 
@@ -553,7 +596,7 @@ class LearningSection extends HTMLElement {
 
             html += `
             <div class="path-step">
-                <div class="lesson-node ${lesson.status} ${lesson.type === 'boss' ? 'boss-node' : ''} ${lesson.status === 'locked' ? 'opacity-60 pointer-events-none' : ''}" data-lesson="${lesson.id}">
+                <div class="lesson-node ${lesson.status} ${lesson.type === 'boss' ? 'boss-node' : ''} ${lesson.status === 'locked' ? 'opacity-60 pointer-events-none' : ''} ${this.currentCourse === 'guna' && lesson.id === 1 ? 'lesson-node--island' : ''}" data-lesson="${lesson.id}">
                     ${lesson.type === 'boss' ? '<div class="boss-badge">BOSS</div>' : ''}
                     ${lesson.isLockedForGuest ? '<div class="lock-overlay"><i class="fas fa-lock"></i><span>Register to unlock</span></div>' : ''}
                     <div class="lesson-level-num">${lesson.id}</div>
@@ -621,7 +664,7 @@ class LearningSection extends HTMLElement {
             ],
             'guna': [
                 // MODULE 1: "Roots and Community Environment" (Levels 1-10)
-                { id: 1, title: 'Greetings and Introductions', description: 'Greetings, pronouns and introductions', status: 'completed', xp: 50, duration: 15, exercises: 8, type: 'normal', module: 1 },
+                { id: 1, title: 'Island Greetings', description: 'Traditional welcome expressions from Guna Yala', status: 'completed', xp: 50, duration: 15, exercises: 8, type: 'normal', module: 1 },
                 { id: 2, title: 'Family', description: 'Mother, father, siblings and grandparents', status: 'completed', xp: 75, duration: 20, exercises: 10, type: 'normal', module: 1 },
                 { id: 3, title: 'Household Objects', description: 'House, table, plate and daily objects', status: 'completed', xp: 75, duration: 20, exercises: 10, type: 'normal', module: 1 },
                 { id: 4, title: 'Nature', description: 'Rivers, seas, mountains and local flora', status: 'current', xp: 100, duration: 25, exercises: 12, type: 'normal', module: 1 },

@@ -2,8 +2,37 @@
 async function loadComponent(elementId, componentPath) {
     try {
         const response = await fetch(componentPath);
-        const html = await response.text();
-        document.getElementById(elementId).innerHTML = html;
+        let html = await response.text();
+
+        const path = window.location.pathname;
+        const isPagesFolder = path.includes('/pages/') || window.location.href.includes('/pages/');
+        const isAuthPage = path.includes('/auth/') || window.location.href.includes('/auth/');
+        const isCoursesFolder = path.includes('/courses/') || window.location.href.includes('/courses/');
+        const isDashboardPage = path.includes('/dashboard/') || window.location.href.includes('/dashboard/');
+        const isSubfolder = isPagesFolder || isAuthPage || isCoursesFolder || isDashboardPage;
+
+        if (elementId === 'footer-component') {
+            if (isSubfolder) {
+                html = html.replace(/href="(?!https?:|#|mailto:|tel:|\.\.\/)([^"]+\.html[^"]*)"/g, 'href="../$1"');
+            } else {
+                html = html.replace(/href="\.\.\/css\/footer\.css"/g, 'href="css/footer.css"');
+                html = html.replace(/src="\.\.\/Multimedia/g, 'src="Multimedia');
+            }
+        }
+
+        const container = document.getElementById(elementId);
+        container.innerHTML = html;
+
+        container.querySelectorAll('script').forEach(function (oldScript) {
+            const newScript = document.createElement('script');
+            if (oldScript.src) {
+                newScript.src = oldScript.src;
+            } else {
+                newScript.textContent = oldScript.textContent;
+            }
+            document.body.appendChild(newScript);
+            oldScript.remove();
+        });
     } catch (error) {
         console.error('Error loading component:', error);
     }

@@ -8,11 +8,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="../css/variables.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/mola-guna.css">
     <link rel="stylesheet" href="../css/about-guna.css">
     <link rel="stylesheet" href="../css/dark-mode-fixes.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            corePlugins: {
+                preflight: false,
+            },
             theme: {
                 extend: {
                     colors: {
@@ -50,10 +57,12 @@
          HERO — Logo header + Featured Image + Group Carousel
          ═══════════════════════════════════════════════════════════ -->
     <section class="relative pt-28 pb-8 md:pt-32 md:pb-12 overflow-hidden about-hero-gradient">
-        <div class="absolute inset-0 mola-pattern-bg opacity-40 pointer-events-none"></div>
-        <div class="absolute top-20 left-0 w-72 h-72 bg-soged-green/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute top-40 right-0 w-96 h-96 bg-soged-yellow/15 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute bottom-0 left-1/3 w-64 h-64 bg-soged-blue/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute inset-0 about-hero-mola-bg pointer-events-none"></div>
+        <div class="absolute inset-x-0 top-0 h-1 mola-stripe-accent pointer-events-none"></div>
+        <div class="absolute inset-x-0 bottom-0 h-1 mola-stripe-accent pointer-events-none"></div>
+        <div class="absolute top-16 -left-20 w-80 h-80 rounded-full bg-guna-red/8 blur-3xl pointer-events-none"></div>
+        <div class="absolute top-32 -right-16 w-96 h-96 rounded-full bg-guna-sun/12 blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-8 left-1/4 w-72 h-72 rounded-full bg-guna-green/10 blur-3xl pointer-events-none"></div>
 
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Logo + intro -->
@@ -66,8 +75,7 @@
                         loading="eager"
                     >
                 </div>
-                <span class="inline-flex items-center gap-2 bg-gradient-to-r from-soged-green to-soged-blue text-white text-sm font-bold px-5 py-2 rounded-full shadow-lg mb-5 transition-transform hover:scale-105">
-                    <i class="fas fa-language" aria-hidden="true"></i>
+                <span class="inline-flex items-center bg-gradient-to-r from-soged-green to-soged-blue text-white text-sm font-bold px-5 py-2 rounded-full shadow-lg mb-5 transition-transform hover:scale-105 tracking-wide">
                     Preserving Indigenous Languages
                 </span>
                 <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-absolute-black tracking-tight mb-3">
@@ -80,89 +88,108 @@
                     SOGED is a revolutionary educational platform designed to preserve and teach Panama's Indigenous languages in a modern, accessible, and culturally respectful way. We reconnect people with their roots and protect linguistic diversity for future generations.
                 </p>
             </div>
+        </div>
 
-            <!-- Featured image + group carousel -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-                <!-- Main featured photo with SOGED branding -->
-                <div class="lg:col-span-7">
-                    <figure class="relative h-full min-h-[280px] sm:min-h-[360px] lg:min-h-[420px] rounded-3xl overflow-hidden shadow-guna-deep group ring-4 ring-soged-green/20">
-                        <img
-                            src="../Multimedia/Images/about/soged4/soged-presentation.jpg"
-                            alt="SOGED team presenting the platform"
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                            loading="eager"
-                        >
-                        <div class="absolute inset-0 bg-gradient-to-t from-guna-earth/85 via-guna-earth/20 to-soged-blue/10"></div>
-                        <!-- SOGED logo on image -->
-                        <div class="absolute top-5 left-5 sm:top-6 sm:left-6 bg-white/95 backdrop-blur-sm rounded-2xl px-4 py-3 shadow-guna-deep flex items-center gap-3">
-                            <img src="../Multimedia/Images/Soged/LOGO SOGED.png" alt="" class="h-10 sm:h-12 w-auto object-contain" aria-hidden="true">
-                            <div class="text-left hidden sm:block">
-                                <p class="font-display font-bold text-absolute-black text-sm leading-tight">SOGED</p>
-                                <p class="text-[10px] text-absolute-black/50 uppercase tracking-wider">Language Platform</p>
+        <!-- Gallery stage — center spotlight + wide carousel -->
+        <div class="about-gallery-stage">
+            <div class="about-mola-wing about-mola-wing--left" aria-hidden="true"></div>
+            <div class="about-mola-wing about-mola-wing--right" aria-hidden="true"></div>
+
+            <!-- Center — SOGED in Action -->
+            <div class="about-gallery-center">
+                <figure class="about-soged-action-card">
+                    <div class="about-mola-frame">
+                        <span class="about-mola-corner about-mola-corner--tl" aria-hidden="true"></span>
+                        <span class="about-mola-corner about-mola-corner--tr" aria-hidden="true"></span>
+                        <span class="about-mola-corner about-mola-corner--bl" aria-hidden="true"></span>
+                        <span class="about-mola-corner about-mola-corner--br" aria-hidden="true"></span>
+                        <div class="about-mola-zigzag about-mola-zigzag--top" aria-hidden="true"></div>
+                        <div class="about-mola-zigzag about-mola-zigzag--bottom" aria-hidden="true"></div>
+                        <div class="about-mola-frame-inner group">
+                            <img
+                                src="../Multimedia/Images/about/soged4/soged-presentation.jpg"
+                                alt="SOGED team presenting the platform"
+                                class="about-soged-action-img"
+                                loading="eager"
+                            >
+                            <div class="about-soged-action-overlay">
+                                <div class="about-soged-badge">
+                                    <img src="../Multimedia/Images/Soged/LOGO SOGED.png" alt="" class="h-9 sm:h-11 w-auto object-contain" aria-hidden="true">
+                                </div>
+                                <figcaption class="about-soged-action-caption">
+                                    <p class="font-display text-2xl sm:text-3xl font-bold text-white drop-shadow-lg">SOGED in Action</p>
+                                    <p class="text-white/90 text-sm sm:text-base mt-1 font-medium">Building bridges between tradition and technology</p>
+                                </figcaption>
                             </div>
                         </div>
-                        <figcaption class="absolute bottom-0 inset-x-0 p-6 sm:p-8">
-                            <p class="text-white font-display text-xl sm:text-2xl font-bold drop-shadow-md">SOGED in Action</p>
-                            <p class="text-white/85 text-sm sm:text-base mt-1">Building bridges between tradition and technology</p>
-                        </figcaption>
-                    </figure>
+                    </div>
+                </figure>
+            </div>
+
+            <!-- Wide group carousel — extends to screen edges -->
+            <div class="about-gallery-carousel-bleed">
+                <div class="about-gallery-carousel-header">
+                    <span class="about-mola-line" aria-hidden="true"></span>
+                    <p class="about-gallery-carousel-label">Team &amp; Collaborators Gallery</p>
+                    <span class="about-mola-line" aria-hidden="true"></span>
                 </div>
 
-                <!-- Group carousel -->
-                <div class="lg:col-span-5 flex flex-col">
-                    <div
-                        class="relative flex-1 min-h-[280px] sm:min-h-[360px] rounded-3xl overflow-hidden shadow-guna-deep bg-guna-earth"
-                        data-about-group-carousel
-                        aria-label="SOGED group photo gallery"
-                    >
-                        <div class="relative w-full h-full min-h-[280px] sm:min-h-[360px]">
-                            <figure class="about-group-carousel-slide is-active absolute inset-0">
-                                <img src="../Multimedia/Images/about/soged4/soged-presentation.jpg" alt="SOGED platform presentation" class="w-full h-full object-cover" loading="eager">
-                                <div class="absolute bottom-4 left-4 bg-white/90 rounded-xl px-3 py-2 shadow-lg">
-                                    <img src="../Multimedia/Images/Soged/LOGO SOGED.png" alt="SOGED" class="h-7 w-auto object-contain">
-                                </div>
-                            </figure>
-                            <figure class="about-group-carousel-slide absolute inset-0">
-                                <img src="../Multimedia/Images/about/soged4/group-collaboration.jpg" alt="Students collaborating around a laptop" class="w-full h-full object-cover" loading="lazy">
-                            </figure>
-                            <figure class="about-group-carousel-slide absolute inset-0">
-                                <img src="../Multimedia/Images/about/soged4/focus-learning.jpg" alt="Focused learning session with SOGED" class="w-full h-full object-cover" loading="lazy">
-                            </figure>
-                            <figure class="about-group-carousel-slide absolute inset-0">
-                                <img src="../Multimedia/Images/about/soged4/focus-group.jpg" alt="Team workshop at Museo de la Mola" class="w-full h-full object-cover" loading="lazy">
-                            </figure>
-                            <figure class="about-group-carousel-slide absolute inset-0">
-                                <img src="../Multimedia/Images/about/soged4/udelas-group.jpg" alt="UDELAS research group with SOGED" class="w-full h-full object-cover" loading="lazy">
-                            </figure>
-                            <figure class="about-group-carousel-slide absolute inset-0">
-                                <img src="../Multimedia/Images/about/soged4/mumo-group.jpg" alt="Students at Museo de la Mola exhibition" class="w-full h-full object-cover" loading="lazy">
-                            </figure>
-                        </div>
-
-                        <!-- Controls -->
-                        <button type="button" data-group-prev class="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 text-guna-green shadow-lg flex items-center justify-center transition-all hover:bg-white hover:scale-110" aria-label="Previous photo">
-                            <i class="fas fa-chevron-left text-sm" aria-hidden="true"></i>
-                        </button>
-                        <button type="button" data-group-next class="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 text-guna-green shadow-lg flex items-center justify-center transition-all hover:bg-white hover:scale-110" aria-label="Next photo">
-                            <i class="fas fa-chevron-right text-sm" aria-hidden="true"></i>
-                        </button>
-                        <div class="absolute bottom-4 inset-x-0 z-10 flex justify-center gap-2" data-group-dots role="tablist" aria-label="Gallery navigation"></div>
+                <div
+                    class="about-gallery-carousel"
+                    data-about-group-carousel
+                    aria-label="SOGED group photo gallery"
+                >
+                    <div class="about-gallery-carousel-track">
+                        <figure class="about-group-carousel-slide is-active">
+                            <img src="../Multimedia/Images/about/soged4/group-collaboration.jpg" alt="Students collaborating around a laptop" class="about-gallery-slide-img" loading="eager">
+                        </figure>
+                        <figure class="about-group-carousel-slide">
+                            <img src="../Multimedia/Images/about/soged4/focus-learning.jpg" alt="Focused learning session with SOGED" class="about-gallery-slide-img" loading="lazy">
+                        </figure>
+                        <figure class="about-group-carousel-slide">
+                            <img src="../Multimedia/Images/about/soged4/focus-group.jpg" alt="Team workshop at Museo de la Mola" class="about-gallery-slide-img" loading="lazy">
+                        </figure>
+                        <figure class="about-group-carousel-slide">
+                            <img src="../Multimedia/Images/about/soged4/udelas-group.jpg" alt="UDELAS research group with SOGED" class="about-gallery-slide-img" loading="lazy">
+                        </figure>
+                        <figure class="about-group-carousel-slide">
+                            <img src="../Multimedia/Images/about/soged4/mumo-group.jpg" alt="Students at Museo de la Mola exhibition" class="about-gallery-slide-img" loading="lazy">
+                        </figure>
+                        <figure class="about-group-carousel-slide">
+                            <img src="../Multimedia/Images/about/soged4/mumo-collage.jpg" alt="Museum visit photo collage" class="about-gallery-slide-img" loading="lazy">
+                        </figure>
                     </div>
-                    <p class="text-center text-sm text-absolute-black/50 mt-3 font-medium">Team &amp; Collaborators Gallery</p>
+
+                    <div class="about-gallery-fade about-gallery-fade--left" aria-hidden="true"></div>
+                    <div class="about-gallery-fade about-gallery-fade--right" aria-hidden="true"></div>
+
+                    <button type="button" data-group-prev class="about-gallery-nav about-gallery-nav--prev" aria-label="Previous photo">
+                        <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" data-group-next class="about-gallery-nav about-gallery-nav--next" aria-label="Next photo">
+                        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                    </button>
+                    <div class="about-gallery-dots" data-group-dots role="tablist" aria-label="Gallery navigation"></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ALLIANCE CARDS -->
-    <section class="relative z-10 -mt-2 pb-16 md:pb-24 about-section-warm" aria-label="Institutional Alliances">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="relative z-10 -mt-2 pb-16 md:pb-24 about-section-warm mola-soft-bg" aria-label="Institutional Alliances">
+        <div class="absolute inset-x-0 top-0 h-1 mola-stripe-accent pointer-events-none"></div>
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+            <div class="mola-section-header">
+                <span class="mola-line" aria-hidden="true"></span>
+                <span class="mola-badge">Our Alliances</span>
+                <span class="mola-line" aria-hidden="true"></span>
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
                 <!-- Congreso Guna -->
                 <button
                     type="button"
                     data-alliance-open="congreso"
-                    class="group text-left bg-white rounded-3xl p-6 sm:p-8 shadow-guna-float border border-guna-earth/5 transition-all duration-300 hover:-translate-y-2 hover:shadow-guna-deep focus:outline-none focus-visible:ring-2 focus-visible:ring-guna-green focus-visible:ring-offset-2"
+                    class="about-alliance-card group text-left bg-white rounded-3xl p-6 sm:p-8 shadow-guna-float transition-all duration-300 hover:-translate-y-2 hover:shadow-guna-deep focus:outline-none focus-visible:ring-2 focus-visible:ring-guna-green focus-visible:ring-offset-2"
                 >
                     <div class="w-16 h-16 rounded-2xl bg-guna-cream flex items-center justify-center mb-5 p-2 transition-transform group-hover:scale-110">
                         <img src="../Multimedia/Images/partner/congresogeneral.png" alt="" class="max-w-full max-h-full object-contain" aria-hidden="true">
@@ -178,7 +205,7 @@
                 <button
                     type="button"
                     data-alliance-open="udelas"
-                    class="group text-left bg-guna-jungle rounded-3xl p-6 sm:p-8 shadow-guna-float transition-all duration-300 hover:-translate-y-2 hover:shadow-guna-deep focus:outline-none focus-visible:ring-2 focus-visible:ring-guna-sun focus-visible:ring-offset-2"
+                    class="about-alliance-card about-alliance-card--jungle group text-left bg-guna-jungle rounded-3xl p-6 sm:p-8 shadow-guna-float transition-all duration-300 hover:-translate-y-2 hover:shadow-guna-deep focus:outline-none focus-visible:ring-2 focus-visible:ring-guna-sun focus-visible:ring-offset-2"
                 >
                     <div class="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center mb-5 p-2 transition-transform group-hover:scale-110">
                         <img src="../Multimedia/Images/partner/CIEPI.png" alt="" class="max-w-full max-h-full object-contain brightness-0 invert" aria-hidden="true">
@@ -194,7 +221,7 @@
                 <button
                     type="button"
                     data-alliance-open="museo"
-                    class="group text-left bg-guna-sun rounded-3xl p-6 sm:p-8 shadow-guna-float transition-all duration-300 hover:-translate-y-2 hover:shadow-guna-deep focus:outline-none focus-visible:ring-2 focus-visible:ring-guna-earth focus-visible:ring-offset-2"
+                    class="about-alliance-card about-alliance-card--sun group text-left bg-guna-sun rounded-3xl p-6 sm:p-8 shadow-guna-float transition-all duration-300 hover:-translate-y-2 hover:shadow-guna-deep focus:outline-none focus-visible:ring-2 focus-visible:ring-guna-earth focus-visible:ring-offset-2"
                 >
                     <div class="w-16 h-16 rounded-2xl bg-white/30 flex items-center justify-center mb-5 p-2 transition-transform group-hover:scale-110">
                         <img src="../Multimedia/Images/partner/Museo de la Mola.png" alt="" class="max-w-full max-h-full object-contain" aria-hidden="true">
@@ -212,7 +239,7 @@
     <!-- ═══════════════════════════════════════════════════════════
          MISSION — Alternating layout (text left, image right)
          ═══════════════════════════════════════════════════════════ -->
-    <section class="py-16 md:py-24 about-section-mission" aria-labelledby="mission-heading">
+    <section class="py-16 md:py-24 about-section-mission mola-soft-bg" aria-labelledby="mission-heading">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mola-divider max-w-xs mx-auto mb-12"></div>
 
@@ -231,9 +258,11 @@
                     </a>
                 </div>
                 <div class="order-1 md:order-2">
-                    <figure class="rounded-3xl overflow-hidden shadow-guna-deep aspect-square max-w-md mx-auto md:max-w-none">
-                        <img src="../Multimedia/Images/Soged/Nabgwana (Mother Earth).jpg" alt="Nabgwana — Mother Earth, symbol of Guna cosmovision" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
-                    </figure>
+                    <div class="mola-frame-border max-w-md mx-auto md:max-w-none">
+                        <figure class="mola-frame-inner shadow-guna-deep aspect-square">
+                            <img src="../Multimedia/Images/Soged/Nabgwana (Mother Earth).jpg" alt="Nabgwana — Mother Earth, symbol of Guna cosmovision" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                        </figure>
+                    </div>
                 </div>
             </div>
         </div>
@@ -242,13 +271,15 @@
     <!-- ═══════════════════════════════════════════════════════════
          VISION — Alternating layout (image left, text right)
          ═══════════════════════════════════════════════════════════ -->
-    <section class="py-16 md:py-24 about-section-vision mola-pattern-bg" aria-labelledby="vision-heading">
+    <section class="py-16 md:py-24 about-section-vision about-mola-soft-bg" aria-labelledby="vision-heading">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center">
                 <div>
-                    <figure class="rounded-3xl overflow-hidden shadow-guna-deep aspect-square max-w-md mx-auto md:max-w-none border-4 border-guna-gold/20">
-                        <img src="../Multimedia/Images/Molas - Guna/Mola 2.jpg" alt="Traditional Guna mola textile art" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
-                    </figure>
+                    <div class="mola-frame-border max-w-md mx-auto md:max-w-none">
+                        <figure class="mola-frame-inner shadow-guna-deep aspect-square">
+                            <img src="../Multimedia/Images/Molas - Guna/Mola 2.jpg" alt="Traditional Guna mola textile art" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                        </figure>
+                    </div>
                 </div>
                 <div>
                     <span class="inline-block text-guna-gold font-bold text-sm uppercase tracking-widest mb-3">Looking Forward</span>
@@ -278,7 +309,7 @@
     <!-- ═══════════════════════════════════════════════════════════
          TEAM / PARTICIPANTS CAROUSEL
          ═══════════════════════════════════════════════════════════ -->
-    <section class="py-16 md:py-24 about-section-team overflow-hidden" id="team" aria-labelledby="team-heading">
+    <section class="py-16 md:py-24 about-section-team mola-pattern-bg overflow-hidden" id="team" aria-labelledby="team-heading">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 md:mb-14">
             <div class="text-center max-w-2xl mx-auto">
                 <div class="mola-divider max-w-xs mx-auto mb-8"></div>
@@ -486,6 +517,7 @@
     </div>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/components.js"></script>
     <script src="../components/cta-section.js"></script>
     <script src="../js/theme.js"></script>

@@ -3,19 +3,82 @@
  * Specific styles for Guna language lessons
  */
 
-/* Guna-specific color scheme */
+/* Guna-specific color scheme — mola palette (no blue) */
 :root {
-    --guna-primary: #00A3E0;
-    --guna-secondary: #29B6F6;
-    --guna-accent: #FF6B35;
+    --guna-primary: #11802b;
+    --guna-secondary: #d4a017;
+    --guna-accent: #c0392b;
+    --guna-sun: #ffb300;
+    --guna-earth: #3d1f0a;
+    --guna-cream: #f8f3ea;
     --guna-success: #2ECC71;
     --guna-warning: #F39C12;
     --guna-danger: #E74C3C;
-    --guna-info: #3498DB;
-    
-    --guna-gradient-primary: linear-gradient(135deg, #00A3E0, #29B6F6);
-    --guna-gradient-accent: linear-gradient(135deg, #FF6B35, #FF8A65);
-    --guna-gradient-success: linear-gradient(135deg, #2ECC71, #27AE60);
+    --guna-info: #1a5c2e;
+
+    --guna-gradient-primary: linear-gradient(135deg, #11802b 0%, #1a5c2e 55%, #d4a017 100%);
+    --guna-gradient-mola: linear-gradient(165deg, #fffef9 0%, #f8f3ea 35%, rgba(255, 179, 0, 0.18) 65%, rgba(17, 128, 43, 0.14) 100%);
+    --guna-gradient-accent: linear-gradient(135deg, #c0392b, #ffb300);
+    --guna-gradient-success: linear-gradient(135deg, #2ECC71, #11802b);
+    --guna-mola-stripe: repeating-linear-gradient(
+        90deg,
+        #c0392b 0, #c0392b 10px,
+        #ffb300 10px, #ffb300 20px,
+        #11802b 20px, #11802b 30px,
+        #d4a017 30px, #d4a017 40px
+    );
+}
+
+/* Mola intro hero inside lesson viewer */
+.lesson-intro--mola {
+    text-align: center;
+}
+
+.intro-header--mola {
+    background: var(--guna-gradient-mola);
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+    border: 3px solid transparent;
+    border-image: var(--guna-mola-stripe) 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.intro-header--mola::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40' viewBox='0 0 80 40'%3E%3Cpath d='M0 20 L10 10 L20 20 L30 10 L40 20 L50 10 L60 20 L70 10 L80 20' fill='none' stroke='%23c0392b' stroke-opacity='0.06' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-size: 80px 40px;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.intro-header--mola h2 {
+    position: relative;
+    z-index: 1;
+    color: var(--guna-earth);
+    margin-bottom: 0.75rem;
+}
+
+.intro-header--mola p {
+    position: relative;
+    z-index: 1;
+    color: rgba(61, 31, 10, 0.75);
+}
+
+.cultural-context--mola {
+    background: linear-gradient(135deg, rgba(255, 179, 0, 0.08), rgba(17, 128, 43, 0.06));
+    padding: 2rem;
+    border-radius: 16px;
+    border-left: 4px solid var(--guna-sun);
+    margin: 2rem 0;
+}
+
+.cultural-context--mola h3 {
+    color: var(--guna-earth);
+    margin-bottom: 0.75rem;
 }
 
 /* Lesson viewer enhancements */
@@ -25,10 +88,10 @@
 
 /* Cultural context styling */
 .cultural-context {
-    background: linear-gradient(135deg, rgba(0, 163, 224, 0.05), rgba(41, 182, 246, 0.05));
+    background: linear-gradient(135deg, rgba(255, 179, 0, 0.08), rgba(17, 128, 43, 0.06));
     padding: 2rem;
     border-radius: 16px;
-    border-left: 4px solid var(--guna-primary);
+    border-left: 4px solid var(--guna-sun);
     margin: 2rem 0;
 }
 
@@ -50,7 +113,7 @@
 
 .highlight-item:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0, 163, 224, 0.2);
+    box-shadow: 0 4px 16px rgba(17, 128, 43, 0.18);
     border-color: var(--guna-primary);
 }
 
@@ -83,7 +146,7 @@
 }
 
 .vocabulary-table tr:hover td {
-    background: rgba(0, 163, 224, 0.05);
+    background: rgba(17, 128, 43, 0.06);
 }
 
 .vocabulary-table td:first-child {
@@ -120,8 +183,12 @@
 }
 
 .pronunciation-tips li::before {
-    content: '🎯';
-    font-size: 1.2rem;
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--guna-sun);
+    flex-shrink: 0;
 }
 
 /* Quiz enhancements */
@@ -150,8 +217,12 @@
 }
 
 .quiz-question h4::before {
-    content: '❓';
-    font-size: 1.5rem;
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--guna-sun);
+    flex-shrink: 0;
 }
 
 .quiz-options {
@@ -194,7 +265,7 @@
     background: var(--guna-primary);
     color: white;
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 163, 224, 0.3);
+    box-shadow: 0 6px 20px rgba(17, 128, 43, 0.28);
     border-color: var(--guna-primary);
 }
 
@@ -203,7 +274,7 @@
     color: white;
     border-color: var(--guna-primary);
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0, 163, 224, 0.3);
+    box-shadow: 0 4px 16px rgba(17, 128, 43, 0.25);
 }
 
 .quiz-option.correct {
@@ -259,8 +330,8 @@
 }
 
 .matching-item:hover {
-    background: rgba(0, 163, 224, 0.05);
-    border-color: var(--guna-primary);
+    background: rgba(255, 179, 0, 0.08);
+    border-color: var(--guna-sun);
 }
 
 .guna-text {
@@ -439,16 +510,24 @@
     gap: 0.5rem;
 }
 
-.learned-greetings h4::before {
-    content: '✅';
-}
-
-.cultural-notes h4::before {
-    content: '🌊';
-}
-
+.learned-greetings h4::before,
+.cultural-notes h4::before,
 .next-steps h4::before {
-    content: '🚀';
+    content: '';
+    width: 4px;
+    height: 1.1em;
+    border-radius: 2px;
+    background: var(--guna-mola-stripe);
+    flex-shrink: 0;
+}
+
+.learned-greetings li::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--guna-green);
+    flex-shrink: 0;
 }
 
 .learned-greetings ul,
@@ -474,19 +553,14 @@
     border-bottom: none;
 }
 
-.learned-greetings li::before {
-    content: '🎯';
-    font-size: 1.2rem;
-}
-
-.cultural-notes li::before {
-    content: '🏝️';
-    font-size: 1.2rem;
-}
-
+.cultural-notes li::before,
 .next-steps li::before {
-    content: '📚';
-    font-size: 1.2rem;
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--guna-sun);
+    flex-shrink: 0;
 }
 
 /* Lesson completion buttons */

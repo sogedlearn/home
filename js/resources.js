@@ -64,7 +64,7 @@ class ResourcesManager {
         let stars = '';
         for (let i = 1; i <= 5; i++) {
             stars += i <= count
-                ? '<i class="fas fa-star text-boutique-coral text-xs" aria-hidden="true"></i>'
+                ? '<i class="fas fa-star text-xs" aria-hidden="true"></i>'
                 : '<i class="far fa-star text-absolute-black/20 text-xs" aria-hidden="true"></i>';
         }
         return stars;
@@ -132,22 +132,22 @@ class ResourcesManager {
 
         if (isPrimary) {
             if (action.resourceKey && resource.active) {
-                return `<button type="button" class="resource-card-btn-primary w-full mt-2 py-2 bg-boutique-coral hover:bg-boutique-coral-hover text-white text-xs font-bold rounded-md transition-all duration-300 flex items-center justify-center gap-1.5" data-resource="${action.resourceKey}">
+                return `<button type="button" class="resource-card-btn-primary w-full mt-2 py-2 text-white text-xs font-bold rounded-md transition-all duration-300 flex items-center justify-center gap-1.5" data-resource="${action.resourceKey}">
                     <i class="fas ${icon} text-[10px]" aria-hidden="true"></i>${label}
                 </button>`;
             }
             if (action.href && resource.active) {
-                return `<a href="${action.href}" class="resource-card-btn-primary w-full mt-2 py-2 bg-boutique-coral hover:bg-boutique-coral-hover text-white text-xs font-bold rounded-md transition-all duration-300 flex items-center justify-center gap-1.5">
+                return `<a href="${action.href}" class="resource-card-btn-primary w-full mt-2 py-2 text-white text-xs font-bold rounded-md transition-all duration-300 flex items-center justify-center gap-1.5">
                     <i class="fas ${icon} text-[10px]" aria-hidden="true"></i>${label}
                 </a>`;
             }
-            return `<button type="button" class="resource-card-btn-primary w-full mt-2 py-2 bg-boutique-coral text-white text-xs font-bold rounded-md flex items-center justify-center gap-1.5 opacity-60 cursor-not-allowed" disabled>
+            return `<button type="button" class="resource-card-btn-primary w-full mt-2 py-2 text-white text-xs font-bold rounded-md flex items-center justify-center gap-1.5 opacity-60 cursor-not-allowed" disabled>
                 <i class="fas ${icon} text-[10px]" aria-hidden="true"></i>${label}
             </button>`;
         }
 
         if (action.href && resource.active) {
-            return `<a href="${action.href}" class="resource-card-btn-secondary w-full mt-1 inline-flex items-center justify-center gap-1 py-1.5 text-[11px] font-semibold text-absolute-black/50 hover:text-boutique-coral transition-colors duration-300">
+            return `<a href="${action.href}" class="resource-card-btn-secondary w-full mt-1 inline-flex items-center justify-center gap-1 py-1.5 text-[11px] font-semibold transition-colors duration-300">
                 <i class="fas ${icon} text-[10px]" aria-hidden="true"></i>${label}
             </a>`;
         }

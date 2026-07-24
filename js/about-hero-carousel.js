@@ -19,8 +19,8 @@
             if (!dotsWrap) return;
             dotsWrap.innerHTML = slides.map(function (_, index) {
                 return (
-                    '<button type="button" class="w-2.5 h-2.5 rounded-full transition-all duration-200 ' +
-                    (index === current ? 'bg-guna-sun scale-125' : 'bg-white/50 hover:bg-white/80') +
+                    '<button type="button" class="' +
+                    (index === current ? 'is-active' : '') +
                     '" data-index="' + index + '" aria-label="Go to photo ' + (index + 1) + '"></button>'
                 );
             }).join('');
@@ -33,9 +33,7 @@
             });
             if (dotsWrap) {
                 dotsWrap.querySelectorAll('button').forEach(function (dot, i) {
-                    dot.classList.toggle('bg-guna-sun', i === current);
-                    dot.classList.toggle('scale-125', i === current);
-                    dot.classList.toggle('bg-white/50', i !== current);
+                    dot.classList.toggle('is-active', i === current);
                 });
             }
         }

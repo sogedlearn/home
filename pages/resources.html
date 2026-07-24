@@ -8,18 +8,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/mola-guna.css">
     <link rel="stylesheet" href="../css/resources-boutique.css">
     <link rel="stylesheet" href="../css/dark-mode-fixes.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            corePlugins: { preflight: false },
             theme: {
                 extend: {
                     colors: {
-                        'boutique-coral': '#e8756a',
-                        'boutique-coral-hover': '#d4655a',
-                        'boutique-bg': '#f7f7f7',
-                        'boutique-border': '#ececec',
+                        'guna-earth': '#3d1f0a',
+                        'guna-green': '#11802b',
+                        'guna-jungle': '#1a5c2e',
+                        'guna-sun': '#ffb300',
+                        'guna-gold': '#d4a017',
+                        'guna-cream': '#f8f3ea',
+                        'guna-red': '#c0392b',
                         'absolute-black': '#000000',
                     },
                     fontFamily: {
@@ -27,8 +32,8 @@
                         body: ['Nunito', 'sans-serif'],
                     },
                     boxShadow: {
-                        'boutique': '0 8px 30px rgba(0, 0, 0, 0.08)',
-                        'boutique-hover': '0 16px 40px rgba(0, 0, 0, 0.14)',
+                        'mola': '0 8px 30px rgba(61, 31, 10, 0.1)',
+                        'mola-hover': '0 16px 40px rgba(17, 128, 43, 0.15)',
                     },
                 },
             },
@@ -40,24 +45,25 @@
     <div id="header-component"></div>
 
     <!-- Hero -->
-    <section class="pt-32 pb-10 md:pt-36 md:pb-14 bg-white border-b border-boutique-border">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 text-center">
+    <section class="resources-hero pt-32 pb-10 md:pt-36 md:pb-14 relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 text-center relative z-10">
+            <span class="resources-hero-badge">Guna Cultural Library</span>
             <h1 class="font-display text-4xl sm:text-5xl font-bold text-absolute-black tracking-tight mb-4">
                 Learning Resources
             </h1>
-            <p class="text-base sm:text-lg text-absolute-black/55 max-w-xl mx-auto leading-relaxed">
+            <p class="text-base sm:text-lg text-absolute-black/60 max-w-xl mx-auto leading-relaxed">
                 Discover comprehensive materials to master the Guna language
             </p>
         </div>
     </section>
 
     <!-- Filter Bar -->
-    <section class="bg-boutique-bg py-8 md:py-10 border-b border-boutique-border">
+    <section class="resources-filter-section py-8 md:py-10">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="resources-filter-bar flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
                 <div class="flex-1 min-w-0">
                     <label for="categoryFilter" class="sr-only">Category</label>
-                    <select id="categoryFilter" class="w-full h-12 px-4 bg-white border border-boutique-border rounded-lg text-absolute-black/80 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-boutique-coral/30 focus:border-boutique-coral transition-all cursor-pointer">
+                    <select id="categoryFilter" class="w-full h-12 px-4 bg-white border rounded-lg text-absolute-black/80 text-sm font-medium transition-all cursor-pointer">
                         <option value="all">All Category</option>
                         <option value="vocabulary">Vocabulary</option>
                         <option value="grammar">Grammar</option>
@@ -69,7 +75,7 @@
                 </div>
                 <div class="flex-1 min-w-0">
                     <label for="levelFilter" class="sr-only">Level</label>
-                    <select id="levelFilter" class="w-full h-12 px-4 bg-white border border-boutique-border rounded-lg text-absolute-black/80 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-boutique-coral/30 focus:border-boutique-coral transition-all cursor-pointer">
+                    <select id="levelFilter" class="w-full h-12 px-4 bg-white border rounded-lg text-absolute-black/80 text-sm font-medium transition-all cursor-pointer">
                         <option value="all">All Levels</option>
                         <option value="beginner">Beginner</option>
                         <option value="intermediate">Intermediate</option>
@@ -82,10 +88,10 @@
                     <input
                         type="text"
                         id="searchInput"
-                        class="flex-1 h-12 px-4 bg-white border border-boutique-border rounded-lg text-absolute-black text-sm placeholder:text-absolute-black/40 focus:outline-none focus:ring-2 focus:ring-boutique-coral/30 focus:border-boutique-coral transition-all"
+                        class="flex-1 h-12 px-4 bg-white border rounded-lg text-absolute-black text-sm placeholder:text-absolute-black/40 transition-all"
                         placeholder="Search Guna resources, vocabulary, grammar..."
                     >
-                    <button type="button" id="searchBtn" class="h-12 px-5 sm:px-7 bg-boutique-coral hover:bg-boutique-coral-hover text-white text-sm font-bold rounded-lg transition-all duration-300 flex items-center gap-2 whitespace-nowrap shadow-sm hover:shadow-md">
+                    <button type="button" id="searchBtn" class="resources-search-btn h-12 px-5 sm:px-7 text-white text-sm font-bold rounded-lg transition-all duration-300 flex items-center gap-2 whitespace-nowrap">
                         <i class="fas fa-search text-xs" aria-hidden="true"></i>
                         <span class="hidden sm:inline">Find Resource</span>
                         <span class="sm:hidden">Find</span>
@@ -96,9 +102,9 @@
     </section>
 
     <!-- Resources Grid -->
-    <section class="py-10 md:py-12 bg-boutique-bg">
+    <section class="resources-grid-section py-10 md:py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="font-display text-xl sm:text-2xl font-bold text-absolute-black text-center mb-8">
+            <h2 class="resources-grid-title font-display text-xl sm:text-2xl font-bold text-absolute-black text-center mb-8">
                 Popular Resources
             </h2>
 
@@ -107,7 +113,7 @@
             </div>
 
             <div class="text-center mt-8 md:mt-10">
-                <button type="button" id="loadMoreBtn" class="inline-flex items-center gap-2 px-6 py-2.5 border-2 border-absolute-black/15 text-absolute-black font-bold text-xs rounded-lg bg-white hover:border-boutique-coral hover:text-boutique-coral transition-all duration-300">
+                <button type="button" id="loadMoreBtn" class="resources-load-more inline-flex items-center gap-2 px-6 py-2.5 border-2 text-absolute-black font-bold text-xs rounded-lg bg-white transition-all duration-300">
                     <i class="fas fa-plus text-xs" aria-hidden="true"></i>
                     Load More Resources
                 </button>

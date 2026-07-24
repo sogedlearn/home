@@ -82,11 +82,13 @@ class GunaLessonViewer extends HTMLElement {
                     text-align: center;
                     margin-bottom: 3rem;
                     padding: 2rem;
-                    background: linear-gradient(135deg, #00A3E0, #29B6F6);
-                    color: white;
+                    background: linear-gradient(165deg, #fffef9 0%, #f8f3ea 35%, rgba(255, 179, 0, 0.2) 65%, rgba(17, 128, 43, 0.16) 100%);
+                    color: #3d1f0a;
                     border-radius: 16px;
                     position: relative;
                     overflow: hidden;
+                    border-bottom: 4px solid transparent;
+                    border-image: repeating-linear-gradient(90deg, #c0392b 0, #c0392b 12px, #ffb300 12px, #ffb300 24px, #11802b 24px, #11802b 36px, #d4a017 36px, #d4a017 48px) 1;
                 }
 
                 .lesson-back-btn {
@@ -95,9 +97,9 @@ class GunaLessonViewer extends HTMLElement {
                     left: 1rem;
                     z-index: 2;
                     padding: 0.5rem 1rem;
-                    background: rgba(255,255,255,0.2);
-                    color: white;
-                    border: 1px solid rgba(255,255,255,0.4);
+                    background: rgba(17, 128, 43, 0.12);
+                    color: #3d1f0a;
+                    border: 1px solid rgba(17, 128, 43, 0.25);
                     border-radius: 8px;
                     cursor: pointer;
                     font-weight: 500;
@@ -181,10 +183,10 @@ class GunaLessonViewer extends HTMLElement {
                 }
 
                 .section-tab.active {
-                    background: linear-gradient(135deg, #00A3E0, #29B6F6);
+                    background: linear-gradient(135deg, #11802b 0%, #1a5c2e 55%, #d4a017 100%);
                     color: white;
                     transform: translateY(-2px);
-                    box-shadow: 0 4px 12px rgba(0, 160, 224, 0.3);
+                    box-shadow: 0 4px 12px rgba(17, 128, 43, 0.28);
                 }
 
                 .section-tab:hover:not(.active) {
@@ -206,7 +208,7 @@ class GunaLessonViewer extends HTMLElement {
                 }
 
                 .intro-header h2 {
-                    color: var(--primary-color);
+                    color: #3d1f0a;
                     margin-bottom: 1rem;
                 }
 
@@ -264,7 +266,7 @@ class GunaLessonViewer extends HTMLElement {
                 }
 
                 .vocabulary-table th {
-                    background: var(--primary-color);
+                    background: linear-gradient(135deg, #11802b 0%, #1a5c2e 55%, #d4a017 100%);
                     color: white;
                     font-weight: 600;
                 }

@@ -198,7 +198,7 @@ const GunaLevelLessons = {
     getGreetingsLesson() {
         return {
             id: 1,
-            title: "🏝️ Island Greetings",
+            title: "Island Greetings",
             subtitle: "Learn traditional Guna welcome expressions",
             duration: 15,
             xp: 50,
@@ -207,13 +207,13 @@ const GunaLevelLessons = {
                     type: 'introduction',
                     title: "Welcome to Guna Language!",
                     content: `
-                        <div class="lesson-intro">
-                            <div class="intro-header">
-                                <h2>🏝️ Welcome to Guna Language</h2>
+                        <div class="lesson-intro lesson-intro--mola">
+                            <div class="intro-header intro-header--mola">
+                                <h2>Welcome to Guna Language</h2>
                                 <p>Discover the beautiful language of the Guna people, who live on the islands of Panama's Caribbean coast.</p>
                             </div>
-                            <div class="cultural-context">
-                                <h3>🌊 Cultural Context</h3>
+                            <div class="cultural-context cultural-context--mola">
+                                <h3>Cultural Context</h3>
                                 <p>The Guna people are known for their rich maritime culture, beautiful molas (traditional textiles), and strong community values. Their language reflects their deep connection to the sea and their island home.</p>
                                 <div class="cultural-highlights">
                                     <div class="highlight-item"><i class="fas fa-water"></i><span>Sea-faring people</span></div>
@@ -229,7 +229,7 @@ const GunaLevelLessons = {
                     title: "Essential Greetings",
                     content: `
                         <div class="vocabulary-section">
-                            <h3>📚 Basic Greetings Vocabulary</h3>
+                            <h3>Basic Greetings Vocabulary</h3>
                             <p>Let's learn the most important greeting words and phrases in Guna:</p>
                             <div class="vocabulary-table">
                                 <table>
@@ -245,7 +245,7 @@ const GunaLevelLessons = {
                                 </table>
                             </div>
                             <div class="pronunciation-tips">
-                                <h4>💡 Pronunciation Tips</h4>
+                                <h4>Pronunciation Tips</h4>
                                 <ul>
                                     <li><strong>¡ anna !</strong> - Similar to "ah-nah" with emphasis</li>
                                     <li><strong>¡ naa !</strong> - Sounds like "nah" with a long 'a'</li>
@@ -261,7 +261,7 @@ const GunaLevelLessons = {
                     title: "Practice Time!",
                     content: `
                         <div class="interactive-section">
-                            <h3>🎯 Let's Practice!</h3>
+                            <h3>Let's Practice!</h3>
                             <p>Test your knowledge of Guna greetings with these interactive exercises:</p>
                             <div class="quiz-container">
                                 <div class="quiz-question" data-question="1">
@@ -332,7 +332,7 @@ const GunaLevelLessons = {
                                 </div>
                             </div>
                             <div class="quiz-results" style="display: none;">
-                                <h4>🎉 Quiz Results</h4>
+                                <h4>Quiz Results</h4>
                                 <div class="results-summary">
                                     <p>You got <span class="correct-answers">0</span> out of <span class="total-questions">4</span> questions correct!</p>
                                     <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
@@ -348,7 +348,7 @@ const GunaLevelLessons = {
                     title: "Real Conversation Practice",
                     content: `
                         <div class="conversation-section">
-                            <h3>💬 Practice Conversation</h3>
+                            <h3>Practice Conversation</h3>
                             <p>Practice using Guna greetings in realistic scenarios:</p>
                             <div class="conversation-scenarios">
                                 <div class="scenario" data-scenario="1">
@@ -388,10 +388,10 @@ const GunaLevelLessons = {
                     title: "Lesson Summary",
                     content: `
                         <div class="lesson-summary">
-                            <h3>📝 What You've Learned</h3>
+                            <h3>What You've Learned</h3>
                             <div class="summary-content">
                                 <div class="learned-greetings">
-                                    <h4>✅ Greetings You Can Now Use:</h4>
+                                    <h4>Greetings You Can Now Use:</h4>
                                     <ul>
                                         <li><strong>¡ anna !</strong> - Hello (most common)</li>
                                         <li><strong>¡ naa !</strong> - Hi (informal)</li>
@@ -401,7 +401,7 @@ const GunaLevelLessons = {
                                     </ul>
                                 </div>
                                 <div class="cultural-notes">
-                                    <h4>🌊 Cultural Notes:</h4>
+                                    <h4>Cultural Notes:</h4>
                                     <ul>
                                         <li>Guna greetings often reflect their maritime culture</li>
                                         <li>Use "¡ anna !" as your go-to greeting</li>
@@ -409,7 +409,7 @@ const GunaLevelLessons = {
                                     </ul>
                                 </div>
                                 <div class="next-steps">
-                                    <h4>🚀 Next Steps:</h4>
+                                    <h4>Next Steps:</h4>
                                     <p>Great job! You're ready to move on to:</p>
                                     <ul>
                                         <li>Family vocabulary</li>
