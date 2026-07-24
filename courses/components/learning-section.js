@@ -102,8 +102,7 @@ class LearningSection extends HTMLElement {
                 .learning-section--guna .learning-header {
                     background: linear-gradient(165deg, #fffef9 0%, #f8f3ea 35%, rgba(255, 179, 0, 0.2) 65%, rgba(17, 128, 43, 0.16) 100%);
                     color: #3d1f0a;
-                    border-bottom: 4px solid transparent;
-                    border-image: repeating-linear-gradient(90deg, #c0392b 0, #c0392b 12px, #ffb300 12px, #ffb300 24px, #11802b 24px, #11802b 36px, #d4a017 36px, #d4a017 48px) 1;
+                    border-bottom: 3px solid rgba(255, 179, 0, 0.45);
                 }
 
                 .learning-section--guna .learning-header::before {
@@ -178,17 +177,17 @@ class LearningSection extends HTMLElement {
                 }
 
                 .learning-section--guna .path-step:nth-child(odd) .lesson-node {
-                    margin-right: calc(50% + 36px);
+                    margin-right: calc(50% + 48px);
                     margin-left: 0;
-                    width: calc(50% - 20px);
-                    max-width: calc(50% - 20px);
+                    width: calc(50% - 24px);
+                    max-width: calc(50% - 24px);
                 }
 
                 .learning-section--guna .path-step:nth-child(even) .lesson-node {
-                    margin-left: calc(50% + 36px);
+                    margin-left: calc(50% + 48px);
                     margin-right: 0;
-                    width: calc(50% - 20px);
-                    max-width: calc(50% - 20px);
+                    width: calc(50% - 24px);
+                    max-width: calc(50% - 24px);
                 }
 
                 .learning-section--guna .path-step-dot {
@@ -242,27 +241,168 @@ class LearningSection extends HTMLElement {
                 }
 
                 .learning-section--guna .lesson-node.current::before {
-                    background: linear-gradient(180deg, #11802b, #ffb300);
+                    display: none;
+                }
+
+                .learning-section--guna .lesson-node.completed::before {
+                    display: none;
+                }
+
+                .learning-section--guna .lesson-node.locked::before {
+                    display: none;
                 }
 
                 .learning-section--guna .lesson-node.current .lesson-icon {
-                    background: linear-gradient(135deg, #11802b 0%, #d4a017 100%);
+                    background: linear-gradient(135deg, #c0392b 0%, #ffb300 50%, #11802b 100%);
+                }
+
+                .learning-section--guna .lesson-node.completed .lesson-icon {
+                    background: linear-gradient(135deg, #11802b 0%, #ffb300 100%);
+                    color: #fff;
                 }
 
                 .learning-section--guna .lesson-node--island {
-                    background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(255, 179, 0, 0.12));
-                    border: 2px solid rgba(255, 179, 0, 0.4);
+                    background: linear-gradient(135deg, rgba(255, 254, 249, 0.96), rgba(255, 179, 0, 0.1));
+                    border: 1px solid rgba(255, 179, 0, 0.28);
                     backdrop-filter: blur(4px);
                 }
 
                 .learning-section--guna .lesson-node--island::before {
-                    background: repeating-linear-gradient(180deg, #c0392b, #ffb300, #11802b, #d4a017);
+                    display: none;
                 }
 
                 .learning-section--guna .lesson-node {
-                    background: rgba(255, 255, 255, 0.92);
+                    display: grid;
+                    grid-template-columns: 3.75rem 1fr;
+                    grid-template-rows: auto auto auto;
+                    column-gap: 1rem;
+                    row-gap: 0.55rem;
+                    align-items: start;
+                    background: rgba(255, 255, 255, 0.94);
                     backdrop-filter: blur(4px);
+                    border: 1px solid rgba(192, 57, 43, 0.1);
+                    border-radius: 16px;
+                    padding: 1.15rem 1.25rem 1rem;
+                    box-shadow: 0 8px 28px rgba(61, 31, 10, 0.07);
                     z-index: 2;
+                }
+
+                .learning-section--guna .lesson-node:hover {
+                    border-color: rgba(17, 128, 43, 0.32);
+                    box-shadow: 0 12px 32px rgba(17, 128, 43, 0.12);
+                }
+
+                .learning-section--guna .lesson-icon {
+                    grid-row: 1 / span 2;
+                    margin-right: 0;
+                    width: 3.75rem;
+                    height: 3.75rem;
+                    font-size: 1.35rem;
+                }
+
+                .learning-section--guna .lesson-info {
+                    grid-column: 2;
+                    min-width: 0;
+                }
+
+                .learning-section--guna .lesson-title {
+                    color: #3d1f0a;
+                    margin-bottom: 0.2rem;
+                }
+
+                .learning-section--guna .lesson-description {
+                    color: #6b4f3a;
+                    font-size: 0.88rem;
+                    line-height: 1.55;
+                    margin-bottom: 0.45rem;
+                }
+
+                .learning-section--guna .lesson-stats--guna {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 0.45rem;
+                }
+
+                .learning-section--guna .stat-pill {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.35rem;
+                    padding: 0.38rem 0.72rem;
+                    border-radius: 10px;
+                    font-size: 0.74rem;
+                    font-weight: 700;
+                    white-space: nowrap;
+                }
+
+                .learning-section--guna .stat-pill--xp {
+                    background: rgba(255, 179, 0, 0.16);
+                    color: #7a4e00;
+                    border: 1px solid rgba(255, 179, 0, 0.35);
+                }
+
+                .learning-section--guna .stat-pill--xp i {
+                    color: #ffb300;
+                }
+
+                .learning-section--guna .stat-pill--time {
+                    background: rgba(192, 57, 43, 0.1);
+                    color: #8b2635;
+                    border: 1px solid rgba(192, 57, 43, 0.28);
+                }
+
+                .learning-section--guna .stat-pill--time i {
+                    color: #c0392b;
+                }
+
+                .learning-section--guna .stat-pill--exercises {
+                    background: rgba(17, 128, 43, 0.1);
+                    color: #1a5c2e;
+                    border: 1px solid rgba(17, 128, 43, 0.28);
+                }
+
+                .learning-section--guna .stat-pill--exercises i {
+                    color: #11802b;
+                }
+
+                .learning-section--guna .lesson-actions {
+                    grid-column: 1 / -1;
+                    width: 100%;
+                    flex-direction: row;
+                    justify-content: flex-end;
+                    align-items: center;
+                    padding-top: 0.55rem;
+                    margin-top: 0.1rem;
+                    border-top: 1px dashed rgba(212, 160, 23, 0.35);
+                }
+
+                .learning-section--guna .guna-current-badge {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    width: 2rem;
+                    height: 2rem;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: conic-gradient(from 0deg, #c0392b, #ffb300, #11802b, #d4a017, #c0392b);
+                    box-shadow: 0 2px 10px rgba(61, 31, 10, 0.14);
+                    z-index: 5;
+                }
+
+                .learning-section--guna .guna-current-badge::before {
+                    content: '';
+                    position: absolute;
+                    inset: 3px;
+                    border-radius: 50%;
+                    background: linear-gradient(145deg, #11802b, #1a5c2e);
+                }
+
+                .learning-section--guna .guna-current-badge i {
+                    position: relative;
+                    z-index: 1;
+                    font-size: 0.68rem;
+                    color: #ffb300;
                 }
 
                 .learning-section--guna .module-header {
@@ -272,9 +412,8 @@ class LearningSection extends HTMLElement {
                     padding: 1.25rem 1.5rem;
                     background: linear-gradient(165deg, rgba(255, 254, 249, 0.98), rgba(248, 243, 234, 0.96));
                     color: #3d1f0a;
-                    border: 2px solid rgba(255, 179, 0, 0.3);
-                    border-bottom: 4px solid transparent;
-                    border-image: repeating-linear-gradient(90deg, #c0392b 0, #c0392b 10px, #ffb300 10px, #ffb300 20px, #11802b 20px, #11802b 30px, #d4a017 30px, #d4a017 40px) 1;
+                    border: 1px solid rgba(255, 179, 0, 0.28);
+                    border-bottom: 3px solid #11802b;
                     z-index: 4;
                 }
 
@@ -285,9 +424,9 @@ class LearningSection extends HTMLElement {
                 }
 
                 .learning-section--guna .module-divider {
-                    background: repeating-linear-gradient(90deg, #c0392b, #ffb300, #11802b, #d4a017);
-                    height: 3px;
-                    opacity: 0.75;
+                    background: linear-gradient(90deg, transparent, #ffb300, #c0392b, #11802b, transparent);
+                    height: 2px;
+                    opacity: 0.85;
                 }
 
                 .learning-section--guna .btn-primary,
@@ -713,6 +852,20 @@ class LearningSection extends HTMLElement {
                         transform: translate(-50%, -50%);
                     }
 
+                    .learning-section--guna .lesson-node {
+                        grid-template-columns: 1fr;
+                        text-align: left;
+                    }
+
+                    .learning-section--guna .lesson-icon {
+                        grid-row: auto;
+                        margin: 0 0 0.5rem;
+                    }
+
+                    .learning-section--guna .lesson-info {
+                        grid-column: 1;
+                    }
+
                     .lesson-node {
                         flex-direction: column;
                         text-align: center;
@@ -798,11 +951,19 @@ class LearningSection extends HTMLElement {
                     <div class="lesson-info">
                         <h3 class="lesson-title">${lesson.title}</h3>
                         <p class="lesson-description">${lesson.description}</p>
+                        ${this.currentCourse === 'guna' ? `
+                        <div class="lesson-stats lesson-stats--guna">
+                            <span class="stat-pill stat-pill--xp"><i class="fas fa-star"></i> +${lesson.xp} XP</span>
+                            <span class="stat-pill stat-pill--time"><i class="fas fa-clock"></i> ${lesson.duration} min</span>
+                            <span class="stat-pill stat-pill--exercises"><i class="fas fa-layer-group"></i> ${lesson.exercises} exercises</span>
+                        </div>
+                        ` : `
                         <div class="lesson-stats">
                             <span class="stat-item"><i class="fas fa-star"></i> +${lesson.xp} XP</span>
                             <span class="stat-item"><i class="fas fa-clock"></i> ${lesson.duration} min</span>
                             <span class="stat-item"><i class="fas fa-layer-group"></i> ${lesson.exercises} exercises</span>
                         </div>
+                        `}
                     </div>
                     <div class="lesson-actions">
                         ${this.getLessonButton(lesson)}
@@ -836,6 +997,14 @@ class LearningSection extends HTMLElement {
     }
 
     generateSoggyAvatar() {
+        if (this.currentCourse === 'guna') {
+            return `
+                <div class="guna-current-badge" title="Current lesson">
+                    <i class="fas fa-seedling"></i>
+                </div>
+            `;
+        }
+
         return `
             <div class="soggy-avatar-dynamic">
                 <img src="../Multimedia/Images/Soged/Newturttle.png" alt="Soggy" class="soggy-avatar-img">
