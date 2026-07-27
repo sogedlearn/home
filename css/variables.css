@@ -48,9 +48,9 @@
     --modal-blur: blur(8px);
     
     /* ===== TIPOGRAFÍA Y TAMAÑOS DE FUENTE ===== */
-    --font-primary: 'Fredoka', sans-serif;
-    --font-secondary: 'Nunito', sans-serif;
-    --font-body: 'Quicksand', sans-serif;
+    --font-primary: 'Baloo 2', sans-serif;
+    --font-secondary: 'Montserrat', sans-serif;
+    --font-body: 'Montserrat', sans-serif;
     
     /* Tamaños de fuente para títulos */
     --font-size-hero-title: 3.5rem;
@@ -139,9 +139,9 @@
     --modal-blur: blur(8px);
     
     /* Tipografía se mantiene igual en modo oscuro */
-    --font-primary: 'Fredoka', sans-serif;
-    --font-secondary: 'Nunito', sans-serif;
-    --font-body: 'Quicksand', sans-serif;
+    --font-primary: 'Baloo 2', sans-serif;
+    --font-secondary: 'Montserrat', sans-serif;
+    --font-body: 'Montserrat', sans-serif;
     
     /* Tamaños de fuente para títulos */
     --font-size-hero-title: 3.5rem;
