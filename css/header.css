@@ -46,7 +46,7 @@
 }
 
 .logo-text {
-    font-family: 'Fredoka', sans-serif;
+    font-family: 'Baloo 2', sans-serif;
     font-size: 1.8rem;
     font-weight: bold;
     background: var(--gradient-primary);
@@ -67,7 +67,7 @@
 
 .navbar-brand {
     color: var(--primary-color) !important;
-    font-family: 'Fredoka', sans-serif;
+    font-family: 'Baloo 2', sans-serif;
     font-size: 1.8rem;
     font-weight: bold;
     display: flex;

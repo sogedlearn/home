@@ -29,7 +29,7 @@ class SogedHeader extends HTMLElement {
 
         this.shadowRoot.innerHTML = `
             <style>
-                @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Fredoka+One&display=swap');
+                @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Montserrat:wght@400;500;600;700&display=swap');
                 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
                 @import url('${basePath}css/header.css');
                 @import url('${basePath}css/variables.css');
@@ -257,7 +257,8 @@ class SogedHeader extends HTMLElement {
                     display: flex;
                     align-items: center;
                     height: 100%;
-                    border-bottom: 3px solid transparent;
+                    border-top: 3px solid transparent;
+                    border-bottom: none;
                 }
 
                 .nav-link:hover {
@@ -268,14 +269,14 @@ class SogedHeader extends HTMLElement {
                 .nav-link::after {
                     content: '';
                     position: absolute;
-                    bottom: -1.5rem;
+                    top: 0;
                     left: 50%;
                     width: 0;
                     height: 3px;
                     background: var(--gradient-primary);
                     transition: all 0.3s ease;
                     transform: translateX(-50%);
-                    border-radius: 2px;
+                    border-radius: 0 0 2px 2px;
                 }
 
                 .nav-link:hover::after {
@@ -286,9 +287,10 @@ class SogedHeader extends HTMLElement {
                     color: var(--primary-color) !important;
                 }
 
-                /* Active state with permanent underline */
+                /* Active state with permanent top indicator */
                 .nav-link.active {
                     color: var(--primary-color) !important;
+                    font-weight: 700;
                 }
 
                 .nav-link.active::after {
@@ -677,6 +679,11 @@ class SogedHeader extends HTMLElement {
                     text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
                 }
 
+                .mobile-nav-link.active {
+                    color: #FFD600;
+                    border-top: 3px solid #FFD600;
+                }
+
                 .mobile-nav-buttons {
                     margin-top: 3rem;
                     display: flex;
@@ -985,12 +992,35 @@ class SogedHeader extends HTMLElement {
     }
 
     setActiveNavLink() {
-        const currentPath = window.location.pathname;
-        const navLinks = this.shadowRoot.querySelectorAll('.nav-link');
-        
+        const path = window.location.pathname;
+        const filename = path.split('/').pop().replace('.html', '') || 'index';
+
+        const pageMap = {
+            'index': 'home',
+            '': 'home',
+            'languages': 'learn',
+            'resources': 'resources',
+            'about': 'about-us'
+        };
+
+        const currentPage = pageMap[filename] || 'home';
+
+        const getPageFromHref = (href) => {
+            if (!href) return null;
+            if (href.includes('languages')) return 'learn';
+            if (href.includes('resources')) return 'resources';
+            if (href.includes('about')) return 'about-us';
+            if (href.includes('index') || href.endsWith('/') || href === './') return 'home';
+            return null;
+        };
+
+        const navLinks = this.shadowRoot.querySelectorAll('.nav-link, .mobile-nav-link');
+
         navLinks.forEach(link => {
+            link.classList.remove('active');
             const href = link.getAttribute('href');
-            if (href && currentPath.includes(href.replace('.html', ''))) {
+            const linkPage = getPageFromHref(href);
+            if (linkPage === currentPage) {
                 link.classList.add('active');
             }
         });

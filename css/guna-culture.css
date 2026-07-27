@@ -9,7 +9,7 @@
     --guna-dark: #1a0e05;
     --mola-border: 3px solid var(--guna-gold);
 
-    font-family: var(--font-body, 'Quicksand', sans-serif);
+    font-family: var(--font-body, 'Montserrat', sans-serif);
     background: var(--guna-cream);
     color: var(--guna-earth);
 }
@@ -20,7 +20,7 @@
 .guna-culture-page h5,
 .guna-culture-page .section-title,
 .guna-culture-page .stat-number {
-    font-family: var(--font-primary, 'Fredoka', sans-serif);
+    font-family: var(--font-primary, 'Baloo 2', sans-serif);
 }
 
 /* ── Hero ── */
@@ -1259,7 +1259,7 @@
 
 .guna-culture-page .coming-soon-card .language-title {
     color: var(--guna-dark);
-    font-family: var(--font-primary, 'Fredoka', sans-serif);
+    font-family: var(--font-primary, 'Baloo 2', sans-serif);
     margin-bottom: 0.75rem;
 }
 
