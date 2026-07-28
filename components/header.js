@@ -806,14 +806,14 @@ class SogedHeader extends HTMLElement {
                                 </li>
                                 <!-- Learn -->
                                 <li class="nav-item">
-                                    <a href="${basePath}languages.html" class="nav-link">
+                                    <a href="${basePath}pages/resources.html" class="nav-link">
                                         <span>Learn</span>
                                     </a>
                                 </li>
-                                <!-- Resources -->
+                                <!-- History -->
                                 <li class="nav-item">
-                                    <a href="${basePath}pages/resources.html" class="nav-link">
-                                        <span>Resources</span>
+                                    <a href="${basePath}languages.html" class="nav-link">
+                                        <span>History</span>
                                     </a>
                                 </li>
                                 <!-- About Us -->
@@ -855,10 +855,10 @@ class SogedHeader extends HTMLElement {
                             <a href="${basePath}index.html" class="mobile-nav-link">Home</a>
                         </li>
                         <li class="mobile-nav-item">
-                            <a href="${basePath}languages.html" class="mobile-nav-link">Learn</a>
+                            <a href="${basePath}pages/resources.html" class="mobile-nav-link">Learn</a>
                         </li>
                         <li class="mobile-nav-item">
-                            <a href="${basePath}pages/resources.html" class="mobile-nav-link">Resources</a>
+                            <a href="${basePath}languages.html" class="mobile-nav-link">History</a>
                         </li>
                         <li class="mobile-nav-item">
                             <a href="${basePath}pages/about.html" class="mobile-nav-link">About Us</a>
