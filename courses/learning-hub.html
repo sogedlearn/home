@@ -692,14 +692,17 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- El boton de guardar y cerrar debe estar dentro del modal, deberán arreglar los espacios -->
+                        <div class="modal-footer">
+                            <button class="btn-secondary" data-modal="profileModal">Cancel</button>
+                            <button class="btn-primary" id="saveProfileBtn">Save Changes</button>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <div class="modal-footer">
-                <button class="btn-secondary" data-modal="profileModal">Cancel</button>
-                <button class="btn-primary" id="saveProfileBtn">Save Changes</button>
-            </div>
+
         </div>
     </div>
 
@@ -843,10 +846,11 @@
                 </div>
             </div>
             
-            <div class="modal-footer">
+            <!-- Cual es la funcion de este div? Si esta fuera del modal -->
+            <!-- <div class="modal-footer">
                 <button class="btn-secondary" data-modal="settingsModal">Cancel</button>
                 <button class="btn-primary" id="saveSettingsBtn">Save Settings</button>
-            </div>
+            </div> -->
         </div>
     </div>
 
