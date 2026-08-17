@@ -1,48 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOGED - Learning Hub</title>
+    <title>SOGED — Learning Hub</title>
     <link rel="icon" type="image/png" href="../Multimedia/Images/Soged/Newturttle.png">
-    
-    <!-- External Libraries -->
+
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="css/dashboard-modern.css">
     <link rel="stylesheet" href="css/guna-lessons.css">
     <link rel="stylesheet" href="css/mola-puzzle.css">
     <link rel="stylesheet" href="css/cultural-hub.css">
     <link rel="stylesheet" href="css/my-bookshelf.css">
+    <link rel="stylesheet" href="css/guna-design-system.css">
+    <script src="components/guna-pattern.js"></script>
+
+    <style>
+    /* Hub shell tokens live in css/guna-design-system.css */
+    .accessory-card { cursor: pointer; }
+    .current-course { cursor: pointer; }
+    </style>
 </head>
 <body>
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-content">
             <img src="../Multimedia/Images/Soged/LOGO SOGED.png" alt="SOGED Logo" class="loading-logo">
-            <h2>SOGED Learning Hub</h2>
+            <h2 data-i18n="loadingTitle">SOGED Learning Hub</h2>
             <div class="loading-spinner">
                 <div class="spinner"></div>
             </div>
-            <p>Loading your learning journey...</p>
+            <p data-i18n="loadingSubtitle">Loading your learning journey...</p>
         </div>
     </div>
 
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header sidebar-header--logo-only">
-            <div class="logo-section logo-section--centered">
-                <img src="../Multimedia/Images/Soged/LOGO SOGED.png" alt="SOGED" class="sidebar-logo">
+        <guna-pattern variant="sidebar"></guna-pattern>
+        <div class="sidebar-header">
+            <div class="sidebar-brand">
+                <div class="brand-mark">
+                    <img src="../Multimedia/Images/Soged/Newturttle.png" alt="">
+                </div>
+                <div class="brand-text">
+                    <div class="brand-name">SOGED</div>
+                    <div class="brand-sub" data-i18n="tagline">Indigenous Language Hub</div>
+                </div>
             </div>
-            <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+            <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar" data-i18n-aria="toggleSidebar">
                 <i class="fas fa-chevron-left"></i>
             </button>
         </div>
 
-        <!-- User Profile -->
+        <div class="course-selector">
+            <div class="current-course" id="currentCourseDisplay">
+                <div class="course-flag course-flag-img-wrap">
+                    <img src="../Multimedia/Images/Soged/mola-icon.png" alt="Guna" class="course-flag-img" data-no-mola-attribution="true">
+                </div>
+                <div class="course-info">
+                    <span class="course-name">Guna</span>
+                    <span class="course-desc" data-i18n="courseActive">10 lessons active</span>
+                </div>
+                <button class="course-dropdown-btn" id="courseDropdownBtn" aria-label="Select course" data-i18n-aria="selectCourse">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+
+            <div class="course-dropdown" id="courseDropdown">
+                <div class="course-option active" data-course="guna">
+                    <span class="option-flag"><img src="../Multimedia/Images/Soged/mola-icon.png" alt="" class="option-flag-img" data-no-mola-attribution="true"></span>
+                    <div class="option-info">
+                        <span class="option-name">Guna</span>
+                        <span class="option-progress" data-i18n="levelsAvailable" data-i18n-n="10">10 levels available</span>
+                    </div>
+                </div>
+                <div class="course-option course-option--soon" data-course="ngabe" data-soon="true">
+                    <span class="option-flag"><img src="../Multimedia/Images/Languages/Ngabe.png" alt="Ngäbe" class="option-flag-img"></span>
+                    <div class="option-info">
+                        <span class="option-name">Ngäbe</span>
+                        <span class="option-progress coming-soon-label" data-i18n="comingSoon">Coming Soon</span>
+                    </div>
+                </div>
+                <div class="course-option course-option--soon" data-course="embera" data-soon="true">
+                    <span class="option-flag"><img src="../Multimedia/Images/Languages/Embera.png" alt="Embera" class="option-flag-img"></span>
+                    <div class="option-info">
+                        <span class="option-name">Embera</span>
+                        <span class="option-progress coming-soon-label" data-i18n="comingSoon">Coming Soon</span>
+                    </div>
+                </div>
+                <div class="course-option course-option--soon" data-course="naso" data-soon="true">
+                    <span class="option-flag"><img src="../Multimedia/Images/Languages/Naso.gif" alt="Naso" class="option-flag-img"></span>
+                    <div class="option-info">
+                        <span class="option-name">Naso</span>
+                        <span class="option-progress coming-soon-label" data-i18n="comingSoon">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="user-profile">
             <div class="profile-avatar">
                 <img src="../Multimedia/Images/Soged/Newturttle.png" alt="Avatar" class="avatar-img">
@@ -51,277 +109,172 @@
             <div class="profile-info">
                 <h3 class="username">Explorer</h3>
                 <div class="xp-info">
-                    <span class="xp-current">1,250 XP</span>
+                    <span class="xp-current">0 XP</span>
                     <div class="xp-bar">
-                        <div class="xp-fill" style="width: 65%"></div>
+                        <div class="xp-fill" style="width: 0%"></div>
                     </div>
-                    <span class="xp-next">Next: 2,000 XP</span>
+                    <span class="xp-next">Next: 200 XP</span>
                 </div>
             </div>
         </div>
 
-        <!-- Navigation -->
         <nav class="sidebar-nav">
-            <!-- Main Dashboard -->
             <div class="nav-section">
                 <a href="#overview" class="nav-item active" data-section="overview">
-                    <div class="nav-icon">
-                        <i class="fas fa-home"></i>
-                    </div>
+                    <div class="nav-icon"><i class="fas fa-home"></i></div>
                     <div class="nav-content">
                         <span class="nav-text" data-i18n="overview">Overview</span>
-                        <div class="nav-meta">
-                            <span class="overview-desc">Your learning hub</span>
-                        </div>
+                        <div class="nav-meta"><span class="overview-desc" data-i18n="overviewDesc">Your learning hub</span></div>
                     </div>
                 </a>
             </div>
 
-            <!-- Learning Section -->
             <div class="nav-section">
                 <h4 class="nav-section-title">
                     <i class="fas fa-graduation-cap"></i>
-                    <span class="title-text">Learning</span>
+                    <span class="title-text" data-i18n="navLearning">Learning</span>
                 </h4>
-                
-                <a href="#learning-path" class="nav-item" data-section="learn">
-                    <div class="nav-icon">
-                        <i class="fas fa-map"></i>
-                    </div>
+
+                <a href="#learn" class="nav-item" data-section="learn">
+                    <div class="nav-icon"><i class="fas fa-map"></i></div>
                     <div class="nav-content">
                         <span class="nav-text" data-i18n="learn">Learning Path</span>
                         <div class="nav-progress-wrap">
                             <div class="nav-progress">
-                                <div class="progress-bar" data-path-progress style="width: 35%"></div>
+                                <div class="progress-bar" data-path-progress style="width: 0%"></div>
                             </div>
-                            <span class="progress-text" data-path-percent>35% complete</span>
+                            <span class="progress-text" data-path-percent data-i18n="percentComplete" data-i18n-n="0">0% complete</span>
                         </div>
                     </div>
                 </a>
 
                 <a href="#vocabulary" class="nav-item" data-section="vocabulary">
-                    <div class="nav-icon">
-                        <i class="fas fa-book"></i>
-                    </div>
+                    <div class="nav-icon"><i class="fas fa-book"></i></div>
                     <div class="nav-content">
                         <span class="nav-text" data-i18n="vocabulary">Vocabulary</span>
-                        <div class="nav-meta">
-                            <span class="vocab-nav-hint">Interactive dictionary</span>
-                        </div>
+                        <div class="nav-meta"><span class="vocab-nav-hint" data-i18n="vocabHint">Interactive dictionary</span></div>
                     </div>
+                    <span class="ni-badge" id="vocabCountBadge">0</span>
                 </a>
 
                 <a href="#cultural" class="nav-item" data-section="cultural">
-                    <div class="nav-icon">
-                        <i class="fas fa-scroll"></i>
-                    </div>
+                    <div class="nav-icon"><i class="fas fa-scroll"></i></div>
                     <div class="nav-content">
-                        <span class="nav-text">Cultural Readings</span>
-                        <div class="nav-meta">
-                            <span>Readings & territories</span>
-                        </div>
+                        <span class="nav-text" data-i18n="cultural">Cultural Readings</span>
+                        <div class="nav-meta"><span data-i18n="culturalHint">Readings & territories</span></div>
                     </div>
                 </a>
 
                 <a href="#store" class="nav-item" data-section="store">
-                    <div class="nav-icon">
-                        <i class="fas fa-store"></i>
-                    </div>
+                    <div class="nav-icon"><i class="fas fa-store"></i></div>
                     <div class="nav-content">
                         <span class="nav-text" data-i18n="store">Guna Store</span>
                         <div class="nav-meta">
-                            <span class="store-nav-hint"><img src="../Multimedia/Images/Soged/oggob.png" alt="" class="nav-hint-oggob-icon" aria-hidden="true"> Spend your Oggob</span>
+                            <span class="store-nav-hint"><img src="../Multimedia/Images/Soged/oggob.png" alt="" class="nav-hint-oggob-icon" aria-hidden="true"> <span data-i18n="storeHint">Spend your Oggob</span></span>
                         </div>
                     </div>
                 </a>
-                
+
                 <a href="#stories" class="nav-item" data-section="stories">
-                    <div class="nav-icon">
-                        <i class="fas fa-book-open"></i>
-                    </div>
+                    <div class="nav-icon"><i class="fas fa-book-open"></i></div>
                     <div class="nav-content">
-                        <span class="nav-text">Stories</span>
-                        <div class="nav-meta">
-                            <span class="story-count">12 available</span>
-                        </div>
+                        <span class="nav-text" data-i18n="stories">Stories</span>
+                        <div class="nav-meta"><span class="story-count" id="storyCountBadge" data-i18n="storiesAvailable" data-i18n-n="0">0 available</span></div>
                     </div>
                 </a>
-                
+
                 <a href="#chat" class="nav-item" data-section="chat">
-                    <div class="nav-icon">
-                        <i class="fas fa-microphone"></i>
-                    </div>
+                    <div class="nav-icon"><i class="fas fa-microphone"></i></div>
                     <div class="nav-content">
-                        <span class="nav-text">Soggy Tutor</span>
+                        <span class="nav-text" data-i18n="chat">Soggy Tutor</span>
                         <div class="nav-meta">
                             <div class="ai-status online">
                                 <i class="fas fa-circle"></i>
-                                <span class="status-text">Speaking practice</span>
+                                <span class="status-text" data-i18n="tutorHint">Speaking practice</span>
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
 
-            <!-- Games Section -->
             <div class="nav-section nav-section--games">
                 <h4 class="nav-section-title">
                     <i class="fas fa-gamepad"></i>
-                    <span class="title-text">Games</span>
+                    <span class="title-text" data-i18n="navGames">Games</span>
                 </h4>
 
                 <a href="#games" class="nav-item" data-section="games">
-                    <div class="nav-icon">
-                        <i class="fas fa-th-large"></i>
-                    </div>
+                    <div class="nav-icon"><i class="fas fa-th-large"></i></div>
                     <div class="nav-content">
-                        <span class="nav-text">Games Hub</span>
-                        <div class="nav-meta">
-                            <span>All minigames</span>
-                        </div>
+                        <span class="nav-text" data-i18n="gamesHub">Games Hub</span>
+                        <div class="nav-meta"><span data-i18n="gamesHint">All minigames</span></div>
                     </div>
                 </a>
 
                 <a href="#games/memory" class="nav-item" data-section="games" data-game="memory">
-                    <div class="nav-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
+                    <div class="nav-icon"><i class="fas fa-brain"></i></div>
                     <div class="nav-content">
-                        <span class="nav-text">Memory Match</span>
-                        <div class="nav-meta">
-                            <span>Match Guna words</span>
-                        </div>
+                        <span class="nav-text" data-i18n="memoryMatch">Memory Match</span>
+                        <div class="nav-meta"><span data-i18n="memoryHint">Match Guna words</span></div>
                     </div>
                 </a>
 
                 <a href="#games/puzzle" class="nav-item" data-section="games" data-game="puzzle">
-                    <div class="nav-icon">
-                        <i class="fas fa-puzzle-piece"></i>
-                    </div>
+                    <div class="nav-icon"><i class="fas fa-puzzle-piece"></i></div>
                     <div class="nav-content">
-                        <span class="nav-text">Mola Puzzle</span>
-                        <div class="nav-meta">
-                            <span>Drag & drop molas</span>
-                        </div>
+                        <span class="nav-text" data-i18n="molaPuzzle">Mola Puzzle</span>
+                        <div class="nav-meta"><span data-i18n="puzzleHint">Drag & drop molas</span></div>
                     </div>
                 </a>
 
                 <a href="#games/wordsearch" class="nav-item" data-section="games" data-game="wordsearch">
-                    <div class="nav-icon">
-                        <i class="fas fa-search"></i>
-                    </div>
+                    <div class="nav-icon"><i class="fas fa-search"></i></div>
                     <div class="nav-content">
-                        <span class="nav-text">Word Search</span>
-                        <div class="nav-meta">
-                            <span>Guna vocabulary</span>
-                        </div>
+                        <span class="nav-text" data-i18n="wordSearch">Word Search</span>
+                        <div class="nav-meta"><span data-i18n="wordSearchHint">Guna vocabulary</span></div>
                     </div>
                 </a>
             </div>
 
-            <!-- Community Section -->
             <div class="nav-section secondary">
                 <h4 class="nav-section-title">
                     <i class="fas fa-users"></i>
-                    <span class="title-text">Community</span>
+                    <span class="title-text" data-i18n="navCommunity">Community</span>
                 </h4>
 
                 <a href="#community" class="nav-item" data-section="community">
-                    <div class="nav-icon">
-                        <i class="fas fa-landmark"></i>
-                    </div>
+                    <div class="nav-icon"><i class="fas fa-landmark"></i></div>
                     <div class="nav-content">
-                        <span class="nav-text">Culture Center</span>
-                        <div class="nav-meta">
-                            <span>History & traditions</span>
-                        </div>
+                        <span class="nav-text" data-i18n="community">Culture Center</span>
+                        <div class="nav-meta"><span data-i18n="communityHint">History & traditions</span></div>
                     </div>
                 </a>
 
                 <a href="#territory" class="nav-item" data-section="territory">
-                    <div class="nav-icon">
-                        <i class="fas fa-map-marked-alt"></i>
-                    </div>
+                    <div class="nav-icon"><i class="fas fa-map-marked-alt"></i></div>
                     <div class="nav-content">
-                        <span class="nav-text">Guna Territory</span>
-                        <div class="nav-meta">
-                            <span>Interactive map</span>
-                        </div>
+                        <span class="nav-text" data-i18n="territory">Guna Territory</span>
+                        <div class="nav-meta"><span data-i18n="territoryHint">Interactive map</span></div>
                     </div>
                 </a>
-                
+
                 <a href="#leaderboard" class="nav-item" data-section="leaderboard">
-                    <div class="nav-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
+                    <div class="nav-icon"><i class="fas fa-trophy"></i></div>
                     <div class="nav-content">
-                        <span class="nav-text">Leaderboard</span>
-                        <div class="nav-meta">
-                            <span class="rank-info">#12 this week</span>
-                        </div>
+                        <span class="nav-text" data-i18n="leaderboard">Leaderboard</span>
                     </div>
+                    <span class="ni-badge rank-info">#12</span>
                 </a>
-                
+
                 <a href="#achievements" class="nav-item" data-section="achievements">
-                    <div class="nav-icon">
-                        <i class="fas fa-medal"></i>
-                    </div>
+                    <div class="nav-icon"><i class="fas fa-medal"></i></div>
                     <div class="nav-content">
-                        <span class="nav-text">Achievements</span>
-                        <div class="nav-meta">
-                            <span class="achievement-count">7 of 20</span>
-                        </div>
+                        <span class="nav-text" data-i18n="achievements">Achievements</span>
                     </div>
+                    <span class="ni-badge achievement-count" id="achievementCountBadge"><span data-badge-count>0</span>/20</span>
                 </a>
             </div>
         </nav>
-
-        <!-- Course Selector -->
-        <div class="course-selector">
-            <div class="current-course" id="currentCourseDisplay">
-                <div class="course-flag course-flag-img-wrap">
-                    <img src="../Multimedia/Images/Soged/mola-icon.png" alt="Guna" class="course-flag-img" data-no-mola-attribution="true">
-                </div>
-                <div class="course-info">
-                    <span class="course-name">Guna</span>
-                    <span class="course-desc">Island Culture</span>
-                </div>
-                <button class="course-dropdown-btn" id="courseDropdownBtn" aria-label="Select course">
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-            </div>
-            
-            <div class="course-dropdown" id="courseDropdown">
-                <div class="course-option active" data-course="guna">
-                    <span class="option-flag"><img src="../Multimedia/Images/Soged/mola-icon.png" alt="" class="option-flag-img" data-no-mola-attribution="true"></span>
-                    <div class="option-info">
-                        <span class="option-name">Guna</span>
-                        <span class="option-progress">10 levels available</span>
-                    </div>
-                </div>
-                <div class="course-option course-option--soon" data-course="ngabe" data-soon="true">
-                    <span class="option-flag"><img src="../Multimedia/Images/Languages/Ngabe.png" alt="Ngäbe" class="option-flag-img"></span>
-                    <div class="option-info">
-                        <span class="option-name">Ngäbe</span>
-                        <span class="option-progress coming-soon-label">Coming Soon</span>
-                    </div>
-                </div>
-                <div class="course-option course-option--soon" data-course="embera" data-soon="true">
-                    <span class="option-flag"><img src="../Multimedia/Images/Languages/Embera.png" alt="Embera" class="option-flag-img"></span>
-                    <div class="option-info">
-                        <span class="option-name">Embera</span>
-                        <span class="option-progress coming-soon-label">Coming Soon</span>
-                    </div>
-                </div>
-                <div class="course-option course-option--soon" data-course="naso" data-soon="true">
-                    <span class="option-flag"><img src="../Multimedia/Images/Languages/Naso.gif" alt="Naso" class="option-flag-img"></span>
-                    <div class="option-info">
-                        <span class="option-name">Naso</span>
-                        <span class="option-progress coming-soon-label">Coming Soon</span>
-                    </div>
-                </div>
-            </div>
-        </div>
     </aside>
 
     <!-- Main Content -->
@@ -333,7 +286,11 @@
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="breadcrumb">
-                    <span class="breadcrumb-item active">Dashboard</span>
+                    <span class="breadcrumb-item active" data-i18n="dashboard">Dashboard</span>
+                </div>
+                <div class="lang-switch" role="group" aria-label="Interface language" data-i18n-aria="langInterfaceAria">
+                    <button type="button" data-set-lang="es" id="langEsBtn">ES</button>
+                    <button type="button" data-set-lang="en" id="langEnBtn" class="active">EN</button>
                 </div>
             </div>
 
@@ -342,7 +299,7 @@
             </div>
 
             <div class="header-right">
-                <button type="button" class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle dark mode">
+                <button type="button" class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle dark mode" data-i18n-aria="toggleDark">
                     <i class="fas fa-moon"></i>
                 </button>
                 <div class="user-stats">
@@ -351,12 +308,12 @@
                             <img src="../Multimedia/Images/Soged/Streak.png" alt="" class="streak-icon" aria-hidden="true">
                         </div>
                         <div class="stat-info">
-                            <span class="stat-value" data-streak-count>7</span>
+                            <span class="stat-value" data-streak-count>0</span>
                             <span class="stat-label" data-i18n="streak">Streak</span>
                         </div>
                     </div>
                     
-                    <div class="stat-item lives" title="Burba — energy to keep practicing">
+                    <div class="stat-item lives" title="Burba — energy to keep practicing" data-i18n-title="burbaTitle">
                         <div class="stat-icon burba-icon-wrap">
                             <img src="../Multimedia/Images/Soged/Burba.png" alt="" class="burba-icon" aria-hidden="true">
                         </div>
@@ -366,15 +323,15 @@
                         </div>
                     </div>
                     
-                    <div class="stat-item oggob oggob-counter" title="Oggob earned during your learning" tabindex="0" role="status" aria-label="Oggob earned during your learning">
+                    <div class="stat-item oggob oggob-counter" title="Oggob earned during your learning" tabindex="0" role="status" aria-label="Oggob earned during your learning" data-i18n-title="oggobTooltip" data-i18n-aria="oggobTooltip">
                         <div class="stat-icon oggob-icon-wrap">
                             <img src="../Multimedia/Images/Soged/oggob.png" alt="" class="oggob-icon" aria-hidden="true">
                         </div>
                         <div class="stat-info">
-                            <span class="stat-value" data-oggob-balance>1,250</span>
+                            <span class="stat-value" data-oggob-balance>0</span>
                             <span class="stat-label">Oggob</span>
                         </div>
-                        <span class="oggob-tooltip">Oggob earned during your learning</span>
+                            <span class="oggob-tooltip" data-i18n="oggobTooltip">Oggob earned during your learning</span>
                     </div>
                 </div>
 
@@ -397,20 +354,20 @@
                         <div class="dropdown-menu">
                             <button class="dropdown-item active" data-action="dashboard">
                                 <i class="fas fa-home"></i>
-                                <span>Dashboard</span>
+                                <span data-i18n="dashboard">Dashboard</span>
                             </button>
                             <button class="dropdown-item" data-action="profile">
                                 <i class="fas fa-user"></i>
-                                <span>Profile</span>
+                                <span data-i18n="menuProfile">Profile</span>
                             </button>
                             <button class="dropdown-item" data-action="settings">
                                 <i class="fas fa-cog"></i>
-                                <span>Settings</span>
+                                <span data-i18n="menuSettings">Settings</span>
                             </button>
                             <div class="dropdown-divider"></div>
                             <button class="dropdown-item logout" data-action="logout">
                                 <i class="fas fa-sign-out-alt"></i>
-                                <span>Logout</span>
+                                <span data-i18n="logout">Logout</span>
                             </button>
                         </div>
                     </div>
@@ -436,14 +393,20 @@
             <div class="modal-header">
                 <h2 class="modal-title">
                     <i class="fas fa-user"></i>
-                    Your Profile
+                    <span data-i18n="profileTitle">Your Profile</span>
                 </h2>
                 <button class="modal-close" data-modal="profileModal">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
+
+            <div class="profile-tabs">
+                <button type="button" class="profile-tab active" data-profile-tab="info" data-i18n="profileTabInfo">Profile</button>
+                <button type="button" class="profile-tab" data-profile-tab="closet" data-i18n="profileTabCloset">Dress Soggy</button>
+            </div>
             
             <div class="modal-content">
+                <div class="profile-tab-panel" id="profileTabInfo">
                 <div class="profile-section">
                     <div class="profile-avatar-section">
                         <div class="large-avatar">
@@ -461,53 +424,55 @@
 
                     <div class="profile-form">
                         <div class="form-group">
-                            <label for="username">Username</label>
+                            <label for="username" data-i18n="usernameLabel">Username</label>
                             <input type="text" id="username" value="Language Explorer" class="form-input">
                         </div>
                         
                         <div class="form-group">
-                            <label for="email">Email</label>
+                            <label for="email" data-i18n="emailLabel">Email</label>
                             <input type="email" id="email" value="explorer@soged.org" class="form-input">
                         </div>
                         
                         <div class="form-group">
-                            <label for="bio">Bio</label>
-                            <textarea id="bio" class="form-textarea" rows="3" placeholder="Tell us about your language learning journey...">Passionate about preserving indigenous languages and cultures of Panama.</textarea>
+                            <label for="bio" data-i18n="bioLabel">Bio</label>
+                            <textarea id="bio" class="form-textarea" rows="3" placeholder="Tell us about your language learning journey..." data-i18n-placeholder="bioPlaceholder">Passionate about preserving indigenous languages and cultures of Panama.</textarea>
                         </div>
 
                         <div class="form-group">
-                            <label>Learning Goals</label>
+                            <label data-i18n="learningGoals">Learning Goals</label>
                             <div class="goals-grid">
                                 <label class="goal-checkbox">
                                     <input type="checkbox" id="goalCultural" checked>
                                     <span class="checkmark"></span>
-                                    <span class="goal-text">Cultural Understanding</span>
+                                    <span class="goal-text" data-i18n="goalCultural">Cultural Understanding</span>
                                 </label>
                                 <label class="goal-checkbox">
                                     <input type="checkbox" id="goalFluent" checked>
                                     <span class="checkmark"></span>
-                                    <span class="goal-text">Fluent Conversation</span>
+                                    <span class="goal-text" data-i18n="goalFluent">Fluent Conversation</span>
                                 </label>
                                 <label class="goal-checkbox">
                                     <input type="checkbox" id="goalTeaching">
                                     <span class="checkmark"></span>
-                                    <span class="goal-text">Teaching Others</span>
+                                    <span class="goal-text" data-i18n="goalTeaching">Teaching Others</span>
                                 </label>
                                 <label class="goal-checkbox">
                                     <input type="checkbox" id="goalResearch">
                                     <span class="checkmark"></span>
-                                    <span class="goal-text">Academic Research</span>
+                                    <span class="goal-text" data-i18n="goalResearch">Academic Research</span>
                                 </label>
                             </div>
                         </div>
                     </div>
 
                     <div class="avatar-picker" id="avatarPicker" hidden>
-                        <p class="avatar-picker-label">Choose your avatar</p>
+                        <p class="avatar-picker-label" data-i18n="chooseAvatar">Choose your avatar</p>
                         <div class="avatar-picker-grid" id="avatarPickerGrid"></div>
                     </div>
                 </div>
-                        
+                </div>
+
+                <div class="profile-tab-panel" id="profileTabCloset" hidden>
                         <div class="virtual-closet-modern">
                             <!-- Left Column: Soggy Preview -->
                             <div class="closet-left-column">
@@ -517,9 +482,10 @@
                                         <div class="soggy-clothing-overlay" id="soggyClothingOverlay"></div>
                                     </div>
                                     <div class="soggy-status-info">
-                                        <span class="current-level-badge">Level 3 in Guna</span>
-                                        <span class="accessories-count">3 accessories equipped</span>
+                                        <span class="current-level-badge" data-i18n="levelInGuna" data-i18n-n="3">Level 3 in Guna</span>
+                                        <span class="accessories-count" id="accessoriesCount">0 accessories equipped</span>
                                     </div>
+                                    <div class="closet-equipped-chips" id="equippedChips"></div>
                                 </div>
                             </div>
 
@@ -555,8 +521,8 @@
                                                 <i class="fas fa-tshirt"></i>
                                             </div>
                                             <div class="accessory-info">
-                                                <span class="accessory-name">Mola Blouse</span>
-                                                <span class="accessory-level">Level 1</span>
+                                                <span class="accessory-name" data-i18n="molaBlouse">Mola Blouse</span>
+                                                <span class="accessory-level" data-i18n="levelN" data-i18n-n="1">Level 1</span>
                                             </div>
                                             <div class="accessory-action">
                                                 <button class="equip-btn" onclick="equipAccessory('mola-blouse')">
@@ -570,8 +536,8 @@
                                                 <i class="fas fa-vest"></i>
                                             </div>
                                             <div class="accessory-info">
-                                                <span class="accessory-name">Saburet</span>
-                                                <span class="accessory-level">Level 2</span>
+                                                <span class="accessory-name" data-i18n="saburet">Saburet</span>
+                                                <span class="accessory-level" data-i18n="levelN" data-i18n-n="2">Level 2</span>
                                             </div>
                                             <div class="accessory-action">
                                                 <button class="equip-btn" onclick="equipAccessory('saburet')">
@@ -585,8 +551,8 @@
                                                 <i class="fas fa-hat-cowboy"></i>
                                             </div>
                                             <div class="accessory-info">
-                                                <span class="accessory-name">Headscarf</span>
-                                                <span class="accessory-level">Level 3</span>
+                                                <span class="accessory-name" data-i18n="headscarf">Headscarf</span>
+                                                <span class="accessory-level" data-i18n="levelN" data-i18n-n="3">Level 3</span>
                                             </div>
                                             <div class="accessory-action">
                                                 <button class="equip-btn equipped" onclick="unequipAccessory('headscarf')">
@@ -600,8 +566,8 @@
                                                 <i class="fas fa-ring"></i>
                                             </div>
                                             <div class="accessory-info">
-                                                <span class="accessory-name">Beads</span>
-                                                <span class="accessory-level">Level 3</span>
+                                                <span class="accessory-name" data-i18n="beads">Beads</span>
+                                                <span class="accessory-level" data-i18n="levelN" data-i18n-n="3">Level 3</span>
                                             </div>
                                             <div class="accessory-action">
                                                 <button class="equip-btn" onclick="equipAccessory('beads')">
@@ -615,12 +581,12 @@
                                                 <i class="fas fa-crown"></i>
                                             </div>
                                             <div class="accessory-info">
-                                                <span class="accessory-name">Traditional Hat</span>
-                                                <span class="accessory-level">Level 5</span>
+                                                <span class="accessory-name" data-i18n="traditionalHat">Traditional Hat</span>
+                                                <span class="accessory-level" data-i18n="levelN" data-i18n-n="5">Level 5</span>
                                             </div>
                                             <div class="accessory-lock-overlay">
                                                 <i class="fas fa-lock"></i>
-                                                <span>Requires Level 5</span>
+                                                <span data-i18n="requiresLevel" data-i18n-n="5">Requires Level 5</span>
                                             </div>
                                         </div>
 
@@ -629,12 +595,12 @@
                                                 <i class="fas fa-gem"></i>
                                             </div>
                                             <div class="accessory-info">
-                                                <span class="accessory-name">Mola Necklace</span>
-                                                <span class="accessory-level">Level 7</span>
+                                                <span class="accessory-name" data-i18n="molaNecklace">Mola Necklace</span>
+                                                <span class="accessory-level" data-i18n="levelN" data-i18n-n="7">Level 7</span>
                                             </div>
                                             <div class="accessory-lock-overlay">
                                                 <i class="fas fa-lock"></i>
-                                                <span>Requires Level 7</span>
+                                                <span data-i18n="requiresLevel" data-i18n-n="7">Requires Level 7</span>
                                             </div>
                                         </div>
                                     </div>
@@ -646,12 +612,12 @@
                                                 <i class="fas fa-tshirt"></i>
                                             </div>
                                             <div class="accessory-info">
-                                                <span class="accessory-name">Ngäbe Dress</span>
-                                                <span class="accessory-level">Level 2</span>
+                                                <span class="accessory-name" data-i18n="ngabeDress">Ngäbe Dress</span>
+                                                <span class="accessory-level" data-i18n="levelN" data-i18n-n="2">Level 2</span>
                                             </div>
                                             <div class="accessory-lock-overlay">
                                                 <i class="fas fa-lock"></i>
-                                                <span>Requires Level 2</span>
+                                                <span data-i18n="requiresLevel" data-i18n-n="2">Requires Level 2</span>
                                             </div>
                                         </div>
                                     </div>
@@ -663,12 +629,12 @@
                                                 <i class="fas fa-tshirt"></i>
                                             </div>
                                             <div class="accessory-info">
-                                                <span class="accessory-name">Naso Attire</span>
-                                                <span class="accessory-level">Level 2</span>
+                                                <span class="accessory-name" data-i18n="nasoAttire">Naso Attire</span>
+                                                <span class="accessory-level" data-i18n="levelN" data-i18n-n="2">Level 2</span>
                                             </div>
                                             <div class="accessory-lock-overlay">
                                                 <i class="fas fa-lock"></i>
-                                                <span>Requires Level 2</span>
+                                                <span data-i18n="requiresLevel" data-i18n-n="2">Requires Level 2</span>
                                             </div>
                                         </div>
                                     </div>
@@ -680,25 +646,24 @@
                                                 <i class="fas fa-tshirt"></i>
                                             </div>
                                             <div class="accessory-info">
-                                                <span class="accessory-name">Embera Skirt</span>
-                                                <span class="accessory-level">Level 2</span>
+                                                <span class="accessory-name" data-i18n="emberaSkirt">Embera Skirt</span>
+                                                <span class="accessory-level" data-i18n="levelN" data-i18n-n="2">Level 2</span>
                                             </div>
                                             <div class="accessory-lock-overlay">
                                                 <i class="fas fa-lock"></i>
-                                                <span>Requires Level 2</span>
+                                                <span data-i18n="requiresLevel" data-i18n-n="2">Requires Level 2</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
             
             <div class="modal-footer">
-                <button class="btn-secondary" data-modal="profileModal">Cancel</button>
-                <button class="btn-primary" id="saveProfileBtn">Save Changes</button>
+                <button class="btn-secondary" data-modal="profileModal" data-i18n="cancel">Cancel</button>
+                <button class="btn-primary" id="saveProfileBtn" data-i18n="saveChanges">Save Changes</button>
             </div>
         </div>
     </div>
@@ -709,7 +674,7 @@
             <div class="modal-header">
                 <h2 class="modal-title">
                     <i class="fas fa-cog"></i>
-                    Settings
+                    <span data-i18n="settingsTitle">Settings</span>
                 </h2>
                 <button class="modal-close" data-modal="settingsModal">
                     <i class="fas fa-times"></i>
@@ -720,28 +685,28 @@
                 <div class="settings-section">
                     <h3 class="section-title">
                         <i class="fas fa-palette"></i>
-                        Appearance
+                        <span data-i18n="settingsAppearance">Appearance</span>
                     </h3>
                     <div class="setting-item">
                         <div class="setting-info">
-                            <label class="setting-label">Theme</label>
-                            <span class="setting-desc">Choose your preferred theme</span>
+                            <label class="setting-label" data-i18n="settingsTheme">Theme</label>
+                            <span class="setting-desc" data-i18n="settingsThemeDesc">Choose your preferred theme</span>
                         </div>
                         <select class="setting-select" id="settingTheme">
-                            <option value="light">Light</option>
-                            <option value="dark">Dark</option>
-                            <option value="auto">Auto</option>
+                            <option value="light" data-i18n="themeLight">Light</option>
+                            <option value="dark" data-i18n="themeDark">Dark</option>
+                            <option value="auto" data-i18n="themeAuto">Auto</option>
                         </select>
                     </div>
                     
                     <div class="setting-item">
                         <div class="setting-info">
-                            <label class="setting-label">Language Interface</label>
-                            <span class="setting-desc">Interface language</span>
+                            <label class="setting-label" data-i18n="settingsLanguage">Language Interface</label>
+                            <span class="setting-desc" data-i18n="settingsLanguageDesc">Interface language</span>
                         </div>
                         <select class="setting-select" id="settingLanguage">
                             <option value="en">English</option>
-                            <option value="es">Spanish</option>
+                            <option value="es">Español</option>
                         </select>
                     </div>
                 </div>
@@ -749,12 +714,12 @@
                 <div class="settings-section">
                     <h3 class="section-title">
                         <i class="fas fa-bell"></i>
-                        Notifications
+                        <span data-i18n="settingsNotifications">Notifications</span>
                     </h3>
                     <div class="setting-item">
                         <div class="setting-info">
-                            <label class="setting-label">Daily Reminders</label>
-                            <span class="setting-desc">Get reminded to practice daily</span>
+                            <label class="setting-label" data-i18n="dailyReminders">Daily Reminders</label>
+                            <span class="setting-desc" data-i18n="dailyRemindersDesc">Get reminded to practice daily</span>
                         </div>
                         <label class="toggle-switch">
                             <input type="checkbox" id="settingDailyReminders" checked>
@@ -764,8 +729,8 @@
                     
                     <div class="setting-item">
                         <div class="setting-info">
-                            <label class="setting-label">Achievement Notifications</label>
-                            <span class="setting-desc">Celebrate your milestones</span>
+                            <label class="setting-label" data-i18n="achievementNotif">Achievement Notifications</label>
+                            <span class="setting-desc" data-i18n="achievementNotifDesc">Celebrate your milestones</span>
                         </div>
                         <label class="toggle-switch">
                             <input type="checkbox" id="settingAchievementNotif" checked>
@@ -775,8 +740,8 @@
                     
                     <div class="setting-item">
                         <div class="setting-info">
-                            <label class="setting-label">Streak Reminders</label>
-                            <span class="setting-desc">Don't break your Streak</span>
+                            <label class="setting-label" data-i18n="streakReminders">Streak Reminders</label>
+                            <span class="setting-desc" data-i18n="streakRemindersDesc">Don't break your Streak</span>
                         </div>
                         <label class="toggle-switch">
                             <input type="checkbox" id="settingStreakReminders">
@@ -788,12 +753,12 @@
                 <div class="settings-section">
                     <h3 class="section-title">
                         <i class="fas fa-volume-up"></i>
-                        Audio & Speech
+                        <span data-i18n="settingsAudio">Audio & Speech</span>
                     </h3>
                     <div class="setting-item">
                         <div class="setting-info">
-                            <label class="setting-label">Audio Playback</label>
-                            <span class="setting-desc">Automatic pronunciation playback</span>
+                            <label class="setting-label" data-i18n="audioPlayback">Audio Playback</label>
+                            <span class="setting-desc" data-i18n="audioPlaybackDesc">Automatic pronunciation playback</span>
                         </div>
                         <label class="toggle-switch">
                             <input type="checkbox" id="settingAudioPlayback" checked>
@@ -803,8 +768,8 @@
                     
                     <div class="setting-item">
                         <div class="setting-info">
-                            <label class="setting-label">Speech Recognition</label>
-                            <span class="setting-desc">Enable voice practice</span>
+                            <label class="setting-label" data-i18n="speechRecognition">Speech Recognition</label>
+                            <span class="setting-desc" data-i18n="speechRecognitionDesc">Enable voice practice</span>
                         </div>
                         <label class="toggle-switch">
                             <input type="checkbox" id="settingSpeechRecognition" checked>
@@ -816,42 +781,39 @@
                 <div class="settings-section">
                     <h3 class="section-title">
                         <i class="fas fa-graduation-cap"></i>
-                        Learning
+                        <span data-i18n="settingsLearning">Learning</span>
                     </h3>
                     <div class="setting-item">
                         <div class="setting-info">
-                            <label class="setting-label">Daily Goal</label>
-                            <span class="setting-desc">XP target per day</span>
+                            <label class="setting-label" data-i18n="dailyGoal">Daily Goal</label>
+                            <span class="setting-desc" data-i18n="dailyGoalDesc">XP target per day</span>
                         </div>
                         <select class="setting-select" id="settingDailyGoal">
-                            <option value="100" selected>100 XP (Regular)</option>
-                            <option value="200">200 XP (Serious)</option>
-                            <option value="300">300 XP (Intense)</option>
+                            <option value="100" selected data-i18n="goalRegular">100 XP (Regular)</option>
+                            <option value="200" data-i18n="goalSerious">200 XP (Serious)</option>
+                            <option value="300" data-i18n="goalIntense">300 XP (Intense)</option>
                         </select>
                     </div>
                     
                     <div class="setting-item">
                         <div class="setting-info">
-                            <label class="setting-label">Difficulty Level</label>
-                            <span class="setting-desc">Learning pace preference</span>
+                            <label class="setting-label" data-i18n="difficulty">Difficulty Level</label>
+                            <span class="setting-desc" data-i18n="difficultyDesc">Learning pace preference</span>
                         </div>
                         <select class="setting-select" id="settingDifficulty">
-                            <option value="intermediate" selected>Intermediate</option>
-                            <option value="advanced">Advanced</option>
+                            <option value="intermediate" selected data-i18n="diffIntermediate">Intermediate</option>
+                            <option value="advanced" data-i18n="diffAdvanced">Advanced</option>
                         </select>
                     </div>
                 </div>
             </div>
             
             <div class="modal-footer">
-                <button class="btn-secondary" data-modal="settingsModal">Cancel</button>
-                <button class="btn-primary" id="saveSettingsBtn">Save Settings</button>
+                <button class="btn-secondary" data-modal="settingsModal" data-i18n="cancel">Cancel</button>
+                <button class="btn-primary" id="saveSettingsBtn" data-i18n="saveSettings">Save Settings</button>
             </div>
         </div>
     </div>
-
-    <!-- Closet Quick Access Component -->
-    <div id="closetQuickAccess"></div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
@@ -898,14 +860,181 @@
     
     <!-- Main App Script -->
     <script src="js/learning-hub.js"></script>
-    
-    <!-- Load Closet Quick Access -->
     <script>
-        fetch('../components/closet-quick-access.html')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('closetQuickAccess').innerHTML = html;
+        (function hubShell() {
+            function lang() {
+                return (typeof GunaI18n !== 'undefined' && GunaI18n.getLanguage()) || 'en';
+            }
+
+            function syncLangButtons() {
+                const current = lang();
+                document.documentElement.lang = current;
+                document.documentElement.dataset.lang = current;
+                document.getElementById('langEsBtn')?.classList.toggle('active', current === 'es');
+                document.getElementById('langEnBtn')?.classList.toggle('active', current === 'en');
+                const setting = document.getElementById('settingLanguage');
+                if (setting) setting.value = current;
+            }
+
+            function refreshHubMeta() {
+                const current = lang();
+                const vocabBadge = document.getElementById('vocabCountBadge');
+                if (vocabBadge && typeof GUNA_VOCABULARY !== 'undefined') {
+                    vocabBadge.textContent = String(
+                        (GUNA_VOCABULARY.CATEGORIES || []).reduce((n, cat) => n + (cat.words?.length || 0), 0)
+                    );
+                }
+
+                const storyBadge = document.getElementById('storyCountBadge');
+                if (storyBadge && typeof BOOKSHELF_CATALOG !== 'undefined') {
+                    const n = BOOKSHELF_CATALOG.length;
+                    storyBadge.textContent = current === 'es' ? `${n} disponibles` : `${n} available`;
+                }
+
+                const achBadge = document.getElementById('achievementCountBadge');
+                if (achBadge && typeof GunaGamification !== 'undefined') {
+                    const total = GunaGamification.BADGE_CATALOG.length;
+                    const unlocked = GunaGamification.getState().badges.length;
+                    achBadge.innerHTML = `<span data-badge-count>${unlocked}</span>/${total}`;
+                }
+
+                const lessonCount = (typeof GunaProgress !== 'undefined' && GunaProgress.TOTAL_LESSONS) || 10;
+                document.querySelectorAll('[data-i18n="courseActive"]').forEach(el => {
+                    el.textContent = current === 'es'
+                        ? `${lessonCount} lecciones activas`
+                        : `${lessonCount} lessons active`;
+                });
+            }
+
+            function setLanguage(next) {
+                if (typeof GunaUserData !== 'undefined') {
+                    GunaUserData.saveSettings({ ...GunaUserData.getSettings(), language: next });
+                }
+                if (typeof GunaI18n !== 'undefined') GunaI18n.setLanguage(next);
+                syncLangButtons();
+                refreshHubMeta();
+            }
+
+            if (typeof GunaI18n !== 'undefined') {
+                const originalApply = GunaI18n.apply.bind(GunaI18n);
+                GunaI18n.apply = function patchedApply() {
+                    originalApply();
+                    syncLangButtons();
+                    refreshHubMeta();
+                    if (typeof renderCloset === 'function') renderCloset();
+                    if (window.learningHub && typeof window.learningHub.updatePathProgressUI === 'function') {
+                        window.learningHub.updatePathProgressUI();
+                    }
+                };
+            }
+
+            document.getElementById('langEsBtn')?.addEventListener('click', () => setLanguage('es'));
+            document.getElementById('langEnBtn')?.addEventListener('click', () => setLanguage('en'));
+            syncLangButtons();
+            refreshHubMeta();
+
+            const sidebar = document.getElementById('sidebar');
+            const sidebarNav = document.querySelector('.sidebar-nav');
+            if (sidebar && sidebarNav) {
+                sidebar.addEventListener('wheel', (e) => {
+                    if (e.target.closest('.course-dropdown')) return;
+                    if (e.target.closest('.sidebar-nav')) return;
+                    sidebarNav.scrollTop += e.deltaY;
+                    e.preventDefault();
+                }, { passive: false });
+            }
+
+            document.getElementById('currentCourseDisplay')?.addEventListener('click', (e) => {
+                if (e.target.closest('#courseDropdownBtn')) return;
+                e.stopPropagation();
+                document.getElementById('courseDropdown')?.classList.toggle('show');
             });
+
+            const CLOSET_KEY = 'guna_soggy_equipped';
+            function getEquipped() {
+                try { return JSON.parse(localStorage.getItem(CLOSET_KEY) || '[]'); } catch { return []; }
+            }
+            function saveEquipped(list) {
+                localStorage.setItem(CLOSET_KEY, JSON.stringify(list));
+                renderCloset();
+            }
+            window.equipAccessory = function (id) {
+                const list = getEquipped();
+                if (!list.includes(id)) list.push(id);
+                saveEquipped(list);
+            };
+            window.unequipAccessory = function (id) {
+                saveEquipped(getEquipped().filter(item => item !== id));
+            };
+            function renderCloset() {
+                const equipped = getEquipped();
+                document.querySelectorAll('.accessory-card[data-item]').forEach(card => {
+                    if (card.classList.contains('locked')) return;
+                    const id = card.dataset.item;
+                    const on = equipped.includes(id);
+                    card.classList.toggle('equipped-card', on);
+                    const btn = card.querySelector('.equip-btn');
+                    if (!btn) return;
+                    btn.classList.toggle('equipped', on);
+                    const es = lang() === 'es';
+                    btn.innerHTML = on
+                        ? `<i class="fas fa-times"></i> ${es ? 'Quitar' : 'Unequip'}`
+                        : `<i class="fas fa-check"></i> ${es ? 'Poner' : 'Equip'}`;
+                    btn.onclick = (ev) => {
+                        ev.preventDefault();
+                        ev.stopPropagation();
+                        if (on) window.unequipAccessory(id);
+                        else window.equipAccessory(id);
+                    };
+                    card.onclick = (ev) => {
+                        if (ev.target.closest('.equip-btn')) return;
+                        if (on) window.unequipAccessory(id);
+                        else window.equipAccessory(id);
+                    };
+                });
+                const n = equipped.length;
+                const es = lang() === 'es';
+                const countEl = document.getElementById('accessoriesCount');
+                if (countEl) {
+                    countEl.textContent = es
+                        ? `${n} accesorio${n === 1 ? '' : 's'} puesto${n === 1 ? '' : 's'}`
+                        : `${n} accessor${n === 1 ? 'y' : 'ies'} equipped`;
+                }
+                const chips = document.getElementById('equippedChips');
+                if (chips) {
+                    chips.innerHTML = equipped.map(id => {
+                        const name = document.querySelector(`.accessory-card[data-item="${id}"] .accessory-name`)?.textContent || id;
+                        return `<span class="closet-chip">${name}</span>`;
+                    }).join('');
+                }
+            }
+
+            document.querySelectorAll('.profile-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const which = tab.dataset.profileTab;
+                    const info = document.getElementById('profileTabInfo');
+                    const closet = document.getElementById('profileTabCloset');
+                    if (info) info.hidden = which !== 'info';
+                    if (closet) closet.hidden = which !== 'closet';
+                    if (which === 'closet') renderCloset();
+                });
+            });
+
+            document.querySelectorAll('.closet-tab-modern:not([disabled])').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.closet-tab-modern').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const key = tab.dataset.language;
+                    document.querySelectorAll('.accessories-grid-content').forEach(grid => {
+                        grid.hidden = grid.dataset.language !== key;
+                    });
+                });
+            });
+
+            renderCloset();
+        })();
     </script>
     
     <script>

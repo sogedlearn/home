@@ -2,8 +2,28 @@
  * Shared navigation and reward flow for Cultural Hub & Games
  */
 const HubFlow = {
+    scrollToTop() {
+        const jump = () => {
+            window.scrollTo(0, 0);
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+            const main = document.getElementById('mainContent');
+            const content = document.getElementById('contentContainer');
+            const viewer = document.querySelector('.lesson-viewer, guna-lesson-viewer');
+            if (main) main.scrollTop = 0;
+            if (content) content.scrollTop = 0;
+            if (viewer) viewer.scrollTop = 0;
+        };
+        jump();
+        requestAnimationFrame(() => {
+            jump();
+            requestAnimationFrame(jump);
+        });
+        [0, 50, 150, 300].forEach((ms) => setTimeout(jump, ms));
+    },
+
     handleNext() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        this.scrollToTop();
     },
 
     returnHome() {

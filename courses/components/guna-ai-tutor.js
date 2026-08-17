@@ -53,14 +53,14 @@ class GunaAiTutor extends HTMLElement {
                 <div class="ai-tutor-header">
                     <div class="ai-tutor-avatar" aria-hidden="true"><img src="../../Multimedia/Images/Soged/Soggy IA.jpg" alt="Soggy Tutor" class="ai-tutor-avatar-img"></div>
                     <div>
-                        <h2 class="ai-tutor-title">Soggy Tutor</h2>
-                        <p class="ai-tutor-subtitle">Your personal ${this.getCourseName()} language assistant</p>
+                        <h2 class="ai-tutor-title">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('chat') : 'Soggy Tutor'}</h2>
+                        <p class="ai-tutor-subtitle">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('tutorSubtitle', { name: this.getCourseName() }) : `Your personal ${this.getCourseName()} language assistant`}</p>
                     </div>
                     <div class="ai-tutor-controls">
                         <button type="button" id="aiToggleSpeech" class="ai-ctrl-btn" title="Toggle text-to-speech" aria-label="Toggle speech">
                             <i class="fas fa-volume-up"></i>
                         </button>
-                        <div class="ai-tutor-status"><i class="fas fa-circle"></i> Online</div>
+                        <div class="ai-tutor-status"><i class="fas fa-circle"></i> ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('online') : 'Online'}</div>
                     </div>
                 </div>
 
@@ -68,16 +68,16 @@ class GunaAiTutor extends HTMLElement {
 
                 <div class="ai-tutor-input-area">
                     <div class="ai-tutor-suggestions" role="group" aria-label="Suggested questions">
-                        <button type="button" class="ai-suggestion" data-prompt="How do I say hello in Guna?">Say hello</button>
-                        <button type="button" class="ai-suggestion" data-prompt="Tell me about Guna molas and their meaning">About molas</button>
-                        <button type="button" class="ai-suggestion" data-prompt="Give me a mini quiz on family words">Mini quiz</button>
-                        <button type="button" class="ai-suggestion" data-prompt="Practice a short conversation greeting someone">Practice conversation</button>
+                        <button type="button" class="ai-suggestion" data-prompt="How do I say hello in Guna?">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('sayHello') : 'Say hello'}</button>
+                        <button type="button" class="ai-suggestion" data-prompt="Tell me about Guna molas and their meaning">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('aboutMolas') : 'About molas'}</button>
+                        <button type="button" class="ai-suggestion" data-prompt="Give me a mini quiz on family words">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('miniQuiz') : 'Mini quiz'}</button>
+                        <button type="button" class="ai-suggestion" data-prompt="Practice a short conversation greeting someone">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('practiceConversation') : 'Practice conversation'}</button>
                     </div>
                     <div class="ai-tutor-input-row">
                         <button type="button" id="aiMicBtn" class="ai-mic-btn" aria-label="Speak to Soggy Tutor" title="Voice input">
                             <i class="fas fa-microphone"></i>
                         </button>
-                        <textarea id="aiChatInput" rows="2" placeholder="Ask about ${this.getCourseName()} language, culture, or pronunciation..." aria-label="Message to Soggy Tutor"></textarea>
+                        <textarea id="aiChatInput" rows="2" placeholder="${typeof GunaI18n !== 'undefined' ? GunaI18n.t('tutorPlaceholder', { name: this.getCourseName() }) : `Ask about ${this.getCourseName()} language, culture, or pronunciation...`}" aria-label="Message to Soggy Tutor"></textarea>
                         <button type="button" id="aiChatSend" class="ai-send-btn" aria-label="Send message">
                             <i class="fas fa-paper-plane"></i>
                         </button>

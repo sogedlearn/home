@@ -146,8 +146,8 @@ class GunaStore extends HTMLElement {
             <div class="guna-store-modern" role="region" aria-label="Guna Store">
                 <header class="store-hero-modern" data-aos="fade-up">
                     <div class="store-hero-content-modern">
-                        <h1 class="store-title-modern">🛒 Soged Market</h1>
-                        <p class="store-subtitle-modern">Exchange your Oggob for exclusive rewards</p>
+                        <h1 class="store-title-modern">🛒 ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('sogedMarket') : 'Soged Market'}</h1>
+                        <p class="store-subtitle-modern">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('storeSubtitle') : 'Exchange your Oggob for exclusive rewards'}</p>
                     </div>
                     <div class="oggob-wallet-modern oggob-balance-display" title="Oggob earned during your learning">
                         <div class="wallet-icon-wrapper">
@@ -155,7 +155,7 @@ class GunaStore extends HTMLElement {
                             <div class="wallet-sparkle"></div>
                         </div>
                         <div class="wallet-info">
-                            <span class="wallet-label">My Wallet</span>
+                            <span class="wallet-label">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('myWallet') : 'My Wallet'}</span>
                             <span class="wallet-balance" data-oggob-balance>${CocosEconomy.formatCocos(balance)}</span>
                             <span class="wallet-currency"><img src="${GUNA_STORE_ASSETS.oggob}" alt="" class="wallet-currency-icon" aria-hidden="true"> Oggob</span>
                         </div>

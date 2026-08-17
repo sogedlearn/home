@@ -25,10 +25,11 @@ class GamesHub extends HTMLElement {
     }
 
     getGames() {
+        const t = (k) => typeof GunaI18n !== 'undefined' ? GunaI18n.t(k) : k;
         return [
-            { id: 'memory', title: 'Memory Match', icon: '🧠', desc: '5s preview → flip → match English & Guna words. Earn Ogods on victory.', tag: 'memory-match-game' },
-            { id: 'puzzle', title: 'Mola Puzzle', icon: '🧩', desc: 'Drag & drop mola pieces to reconstruct traditional art.', tag: 'mola-puzzle-game' },
-            { id: 'wordsearch', title: 'Word Search', icon: '🔤', desc: 'Find hidden Guna vocabulary in a thematic letter grid.', tag: 'word-search-game' }
+            { id: 'memory', title: t('memoryMatch'), icon: '🧠', desc: t('memoryDesc'), tag: 'memory-match-game' },
+            { id: 'puzzle', title: t('molaPuzzle'), icon: '🧩', desc: t('puzzleDesc'), tag: 'mola-puzzle-game' },
+            { id: 'wordsearch', title: t('wordSearch'), icon: '🔤', desc: t('wordsearchDesc'), tag: 'word-search-game' }
         ];
     }
 
@@ -39,7 +40,7 @@ class GamesHub extends HTMLElement {
                 <div class="hub-module games-hub-active">
                     <soggy-avatar></soggy-avatar>
                     <button class="hub-btn hub-btn-secondary" id="backToGamesHub" style="margin-bottom:1.5rem;">
-                        <i class="fas fa-arrow-left"></i> Back to Games
+                        <i class="fas fa-arrow-left"></i> ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('backToGames') : 'Back to Games'}
                     </button>
                     <${game.tag}></${game.tag}>
                 </div>
@@ -61,8 +62,8 @@ class GamesHub extends HTMLElement {
             <div class="hub-module games-hub">
                 <soggy-avatar></soggy-avatar>
                 <header>
-                    <h1 class="hub-section-title">Games Hub</h1>
-                    <p class="hub-section-subtitle">Play minigames to practice Guna vocabulary and culture. Win Ogods, but lose 1 Burda on failure.</p>
+                    <h1 class="hub-section-title">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('gamesHub') : 'Games Hub'}</h1>
+                    <p class="hub-section-subtitle">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('gamesHubSub') : 'Play minigames to practice Guna vocabulary and culture. Win Oggob, but lose 1 Burba on failure.'}</p>
                 </header>
                 <div class="games-hub-grid">
                     ${this.getGames().map(g => `
@@ -70,7 +71,7 @@ class GamesHub extends HTMLElement {
                             <div class="game-icon">${g.icon}</div>
                             <h3>${g.title}</h3>
                             <p style="opacity:0.75;font-size:0.9rem;">${g.desc}</p>
-                            <button class="hub-btn hub-btn-primary" style="margin-top:1rem;">Play</button>
+                            <button class="hub-btn hub-btn-primary" style="margin-top:1rem;">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('play') : 'Play'}</button>
                         </div>
                     `).join('')}
                 </div>

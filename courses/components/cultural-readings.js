@@ -117,13 +117,13 @@ class CulturalReadings extends HTMLElement {
             <div class="hub-module cultural-readings-hub">
                 <soggy-avatar></soggy-avatar>
                 <header>
-                    <h1 class="hub-section-title">Cultural Learning Hub</h1>
-                    <p class="hub-section-subtitle">Explore readings, territories, and Guna heritage — earn Ogods by mastering each lesson.</p>
+                    <h1 class="hub-section-title">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('culturalHubTitle') : 'Cultural Learning Hub'}</h1>
+                    <p class="hub-section-subtitle">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('culturalHubSub') : 'Explore readings, territories, and Guna heritage — earn Oggob by mastering each lesson.'}</p>
                 </header>
                 <div class="hub-tabs" role="tablist">
-                    <button type="button" class="hub-tab ${this.activeTab === 'readings' ? 'active' : ''}" data-tab="readings">Cultural Readings</button>
-                    <button type="button" class="hub-tab ${this.activeTab === 'bookshelf' ? 'active' : ''}" data-tab="bookshelf">My Bookshelf</button>
-                    <button type="button" class="hub-tab ${this.activeTab === 'territories' ? 'active' : ''}" data-tab="territories">Guna Yala & Territories</button>
+                    <button type="button" class="hub-tab ${this.activeTab === 'readings' ? 'active' : ''}" data-tab="readings">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('tabReadings') : 'Cultural Readings'}</button>
+                    <button type="button" class="hub-tab ${this.activeTab === 'bookshelf' ? 'active' : ''}" data-tab="bookshelf">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('tabBookshelf') : 'My Bookshelf'}</button>
+                    <button type="button" class="hub-tab ${this.activeTab === 'territories' ? 'active' : ''}" data-tab="territories">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('tabTerritories') : 'Guna Yala & Territories'}</button>
                 </div>
                 <div id="culturalHubContent"></div>
             </div>
