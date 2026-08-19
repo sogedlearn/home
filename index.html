@@ -20,11 +20,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="css/theme-components.css">
+    <link rel="stylesheet" href="css/mola-guna.css">
+    <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/dark-mode-fixes.css">
     <style>
         /* Locked course styles */
         .step-card.locked {
             filter: grayscale(100%);
+            
             opacity: 0.6;
             pointer-events: none !important;
             cursor: not-allowed;
@@ -70,232 +73,197 @@
     </style>
 
 </head>
-<body>
+<body class="home-page">
     <div id="header-component"></div>
+    <div class="home-mola-stripe" aria-hidden="true"></div>
 
-    <!-- Hero Section -->
-    <section class="hero-section" id="home">
-        <div class="hero-background">
-            <div class="floating-shapes">
-                <div class="shape shape-1"></div>
-                <div class="shape shape-2"></div>
-                <div class="shape shape-3"></div>
-                <div class="shape shape-4"></div>
-            </div>
-        </div>
-        
+    <!-- Hero -->
+    <section class="home-hero hero-section" id="home">
+        <div class="home-hero__pattern" aria-hidden="true"></div>
+        <div class="home-hero__orb home-hero__orb--1" aria-hidden="true"></div>
+        <div class="home-hero__orb home-hero__orb--2" aria-hidden="true"></div>
+        <div class="home-hero__orb home-hero__orb--3" aria-hidden="true"></div>
+
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-7" data-aos="fade-right" data-aos-duration="1000">
-                    <div class="hero-content">
-                        
-                        <h1 class="hero-title">
-                            Speak the <span class="keyword-secondary">Living Languages</span> of <span class="keyword-blue">Panama</span>
+            <div class="row align-items-center gy-4">
+                <div class="col-lg-7" data-aos="fade-right" data-aos-duration="900">
+                    <div class="home-hero-copy">
+                        <span class="home-kicker">
+                            <i class="fas fa-leaf"></i>
+                            Indigenous Languages of Panama
+                        </span>
+                        <h1 class="home-hero-title">
+                            Speak the <span class="word-sun">Living Languages</span> of <span class="word-blue">Panama</span>
                         </h1>
-                        
-                        <p class="hero-description">
-                            Level up your skills with bite-sized lessons, real cultural stories, and rewards that celebrate your dedication — not just your grades.
+                        <p class="home-hero-lead">
+                            Bite-sized lessons, native audio, and cultural stories — with badges that celebrate your dedication, not just your grades.
                         </p>
-                        
-                        <div class="hero-buttons">
-                            <a href="auth/register.html" class="btn btn-secondary btn-lg">
+                        <div class="home-hero-actions">
+                            <a href="auth/register.html" class="home-btn home-btn--sun">
                                 <i class="fas fa-play"></i>
-                                Start Learning
+                                Start Learning Free
                             </a>
-                            <a href="#how-it-works" class="btn btn-outline-primary btn-lg">
-                                <i class="fas fa-info-circle"></i>
+                            <a href="#how-it-works" class="home-btn home-btn--ghost">
+                                <i class="fas fa-route"></i>
                                 How To Start
                             </a>
                         </div>
+                        <div class="home-chip-row">
+                            <span class="home-chip home-chip--live"><span class="home-chip-dot home-chip-dot--green"></span> Guna live now</span>
+                            <span class="home-chip home-chip--soon"><span class="home-chip-dot home-chip-dot--blue"></span> Ngäbe soon</span>
+                            <span class="home-chip home-chip--soon"><span class="home-chip-dot home-chip-dot--yellow"></span> Naso soon</span>
+                            <span class="home-chip home-chip--soon"><span class="home-chip-dot home-chip-dot--orange"></span> Emberá soon</span>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="col-lg-5" data-aos="fade-left" data-aos-duration="1000">
-                    <div class="hero-visual d-flex justify-content-center align-items-center position-relative" style="min-height:350px; padding-top: 1rem;">
-                        <div class="turtle-glow-bg"></div>
-                        <img src="Multimedia/Images/Soged/Newturttle.png" alt="Soged Turtle Mascot" class="hero-img-turtle turtle-glow-blue" style="width: 480px; max-width: 98vw;">
+
+                <div class="col-lg-5" data-aos="fade-left" data-aos-duration="900">
+                    <div class="home-hero-visual">
+                        <div class="home-turtle-ring" aria-hidden="true"></div>
+                        <div class="home-turtle-glow" aria-hidden="true"></div>
+                        <img src="Multimedia/Images/Soged/Newturttle.png" alt="Soged turtle mascot" class="home-turtle">
                     </div>
+                </div>
+            </div>
+
+            <div class="home-stats" data-aos="fade-up" data-aos-delay="150">
+                <div class="home-stat">
+                    <span class="home-stat__value">4</span>
+                    <span class="home-stat__label">Indigenous languages</span>
+                </div>
+                <div class="home-stat">
+                    <span class="home-stat__value">Guna</span>
+                    <span class="home-stat__label">Available to learn now</span>
+                </div>
+                <div class="home-stat">
+                    <span class="home-stat__value">Native</span>
+                    <span class="home-stat__label">Audio &amp; cultural stories</span>
+                </div>
+                <div class="home-stat">
+                    <span class="home-stat__value">Free</span>
+                    <span class="home-stat__label">To start, rewards to stay</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features-section" id="features">
+    <!-- Features -->
+    <section class="home-section home-section--surface features-section" id="features">
         <div class="container">
-            <div class="section-header text-center" data-aos="fade-up">
-                <h2 class="section-title">Why Learners Love Soged</h2>
-                <p class="section-subtitle">Fun, cultural, and built to keep you coming back — one word at a time.</p>
-            </div>
-            
-            <div class="app-showcase-container">
-                <div class="app-showcase-content">
-                    <!-- Central Phone Mockup -->
-                    <div class="phone-mockup-container" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="phone-mockup">
-                            <div class="phone-screen">
-                                <div class="app-header">
-                                    <div class="app-status-bar">
-                                        <span class="status-time">9:41</span>
-                                        <div class="status-icons">
-                                            <i class="fas fa-signal"></i>
-                                            <i class="fas fa-wifi"></i>
-                                            <i class="fas fa-battery-three-quarters"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="app-content">
-                                    <div class="app-logo">
-                                        <img src="Multimedia/Images/Soged/LOGO SOGED.png" alt="SOGED Logo" class="app-logo-img">
-                                    </div>
-                                    <div class="app-welcome">
-                                        <h3>Your language adventure starts here!</h3>
-                                        <p>A dynamic platform to learn, practice, and grow — with badges, games, and culture-rich resources.</p>
-                                    </div>
-                                    <div class="app-features-preview">
-                                        <div class="feature-preview-item">
-                                            <i class="fas fa-medal"></i>
-                                            <span>Recognition Badges</span>
-                                        </div>
-                                        <div class="feature-preview-item">
-                                            <i class="fas fa-graduation-cap"></i>
-                                            <span>Learning Platform</span>
-                                        </div>
-                                        <div class="feature-preview-item">
-                                            <i class="fas fa-bolt"></i>
-                                            <span>Dynamic &amp; Interactive</span>
-                                        </div>
-                                        <div class="feature-preview-item">
-                                            <i class="fas fa-book-open"></i>
-                                            <span>Resources for You</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Statistics Superimposed on Phone -->
-                    <div class="features-superimposed">
-                        <!-- Highlight 1: Recognition Badges -->
-                        <div class="feature-superimposed four-languages" data-aos="fade-right" data-aos-delay="300">
-                            <div class="feature-icon">
-                                <i class="fas fa-medal"></i>
-                            </div>
-                            <div class="feature-info">
-                                <h4>Recognition Badges</h4>
-                                <p>Earn insignias for every milestone you reach</p>
-                            </div>
-                        </div>
-
-                        <!-- Highlight 2: Learning Platform -->
-                        <div class="feature-superimposed enrolled-students" data-aos="fade-left" data-aos-delay="400">
-                            <div class="feature-icon">
-                                <i class="fas fa-graduation-cap"></i>
-                            </div>
-                            <div class="feature-info">
-                                <h4>Learning Platform</h4>
-                                <p>Your all-in-one space to master indigenous languages</p>
-                            </div>
-                        </div>
-
-                        <!-- Highlight 3: Dynamic Experience -->
-                        <div class="feature-superimposed partners" data-aos="fade-right" data-aos-delay="500">
-                            <div class="feature-icon">
-                                <i class="fas fa-bolt"></i>
-                            </div>
-                            <div class="feature-info">
-                                <h4>Dynamic &amp; Fun</h4>
-                                <p>Interactive lessons that keep you engaged daily</p>
-                            </div>
-                        </div>
-
-                        <!-- Highlight 4: User Resources -->
-                        <div class="feature-superimposed market-valuation" data-aos="fade-left" data-aos-delay="600">
-                            <div class="feature-icon">
-                                <i class="fas fa-book-open"></i>
-                            </div>
-                            <div class="feature-info">
-                                <h4>Resources Ready</h4>
-                                <p>Culture-rich material at your fingertips</p>
-                            </div>
-                        </div>
-                    </div>
+            <div class="home-header" data-aos="fade-up">
+                <div class="home-header-row">
+                    <span class="home-mola-line" aria-hidden="true"></span>
+                    <span class="home-kicker"><i class="fas fa-star"></i> Why Soged</span>
+                    <span class="home-mola-line" aria-hidden="true"></span>
                 </div>
+                <h2 class="home-title section-title">Why learners come back every day</h2>
+                <p class="home-subtitle">Fun, cultural, and built to keep you coming back — one word at a time.</p>
+            </div>
+
+            <div class="home-bento">
+                <article class="home-bento-card home-bento-card--wide home-bento-card--green" data-aos="fade-up">
+                    <div class="home-bento-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>A learning platform that feels alive</h3>
+                    <p>Your all-in-one space to master indigenous languages with bite-sized lessons, games, and a path that grows with you — from first words to real conversation.</p>
+                </article>
+                <article class="home-bento-card home-bento-card--mid home-bento-card--yellow" data-aos="fade-up" data-aos-delay="100">
+                    <div class="home-bento-icon"><i class="fas fa-medal"></i></div>
+                    <h3>Recognition badges</h3>
+                    <p>Earn insignias for every milestone. Celebrate progress the way communities celebrate craft: with pride you can see.</p>
+                </article>
+                <article class="home-bento-card home-bento-card--third home-bento-card--blue" data-aos="fade-up" data-aos-delay="150">
+                    <div class="home-bento-icon"><i class="fas fa-headphones"></i></div>
+                    <h3>Native audio</h3>
+                    <p>Hear the language as it is spoken — rhythm, tone, and stories from the people who live it.</p>
+                </article>
+                <article class="home-bento-card home-bento-card--third home-bento-card--orange" data-aos="fade-up" data-aos-delay="200">
+                    <div class="home-bento-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Dynamic &amp; fun</h3>
+                    <p>Interactive lessons and daily practice that keep you engaged without feeling like homework.</p>
+                </article>
+                <article class="home-bento-card home-bento-card--third home-bento-card--green" data-aos="fade-up" data-aos-delay="250">
+                    <div class="home-bento-icon"><i class="fas fa-book-open"></i></div>
+                    <h3>Culture-rich resources</h3>
+                    <p>Molas, stories, and traditions at your fingertips — learning that honors where the language comes from.</p>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- Languages Section -->
-    <section class="languages-section" id="languages">
+    <!-- Languages -->
+    <section class="home-section home-section--warm languages-section" id="languages">
         <div class="container">
-            <div class="section-header text-center" data-aos="fade-up">
-                <h2 class="section-title">Explore our Languages</h2>
-                <p class="section-subtitle">Each language carries the wisdom and culture of its people.</p>
-                <p class="section-subtitle" style="color: #28A745 !important; font-weight: 600 !important; font-size: 1.1rem !important; margin-top: 0.5rem;">Start learning Guna today — more languages coming soon!</p>
-            </div>
-            
-            <div class="languages-bg position-relative">
-                <div class="row g-4">
-                    <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="step-card language-step ngabe-blue coming-soon h-100">
-                            <div class="step-icon icon-bg-blue">
-                                <img src="Multimedia/Images/Languages/Ngabe.png" alt="Ngäbe Language" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
-                            </div>
-                            <h3 class="step-title gradient-text">Ngäbe</h3>
-                            <p class="lang-description">Learn the language of the Ngäbe people, the largest indigenous group in Panama.</p>
-                            <button class="btn btn-coming-soon w-100 mt-3" disabled>
-                                <i class="fas fa-clock me-2"></i>COMING SOON
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
-                        <div class="step-card language-step naso-orange coming-soon h-100">
-                            <div class="step-icon icon-bg-orange">
-                                <img src="Multimedia/Images/Languages/Naso.gif" alt="Naso Language" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
-                            </div>
-                            <h3 class="step-title gradient-text">Naso</h3>
-                            <p class="lang-description">Discover the musical language of the Naso people with its unique rhythms.</p>
-                            <button class="btn btn-coming-soon w-100 mt-3" disabled>
-                                <i class="fas fa-clock me-2"></i>COMING SOON
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="600">
-                        <div class="step-card language-step guna-green h-100">
-                            <div class="step-icon icon-bg-green">
-                                <img src="Multimedia/Images/Languages/Guna.png" alt="Guna Language" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
-                            </div>
-                            <h3 class="step-title gradient-text">Guna</h3>
-                            <p class="lang-description">Master the language of the Guna people from the beautiful San Blas Islands.</p>
-                            <button onclick="window.location.href='courses/learning-hub.html?course=guna'" class="btn btn-guna w-100 mt-3">
-                                <i class="fas fa-play me-2"></i>Start Learning
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="800">
-                        <div class="step-card language-step embera-yellow coming-soon h-100">
-                            <div class="step-icon icon-bg-yellow">
-                                <img src="Multimedia/Images/Languages/Embera.png" alt="Emberá Language" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
-                            </div>
-                            <h3 class="step-title gradient-text">Emberá</h3>
-                            <p class="lang-description">Explore the ancient language of the Emberá people and their traditions.</p>
-                            <button class="btn btn-coming-soon w-100 mt-3" disabled>
-                                <i class="fas fa-clock me-2"></i>COMING SOON
-                            </button>
-                        </div>
-                    </div>
+            <div class="home-header" data-aos="fade-up">
+                <div class="home-header-row">
+                    <span class="home-mola-line" aria-hidden="true"></span>
+                    <span class="home-kicker"><i class="fas fa-globe-americas"></i> Languages</span>
+                    <span class="home-mola-line" aria-hidden="true"></span>
                 </div>
+                <h2 class="home-title section-title">Explore our languages</h2>
+                <p class="home-subtitle">Each language carries the wisdom and culture of its people. Start with Guna today — more voices are on the way.</p>
+            </div>
+
+            <article class="home-lang-featured" data-aos="fade-up">
+                <div class="home-lang-featured__media">
+                    <span class="home-lang-live"><span></span> Available now</span>
+                    <img src="Multimedia/Images/Languages/Guna.png" alt="Guna language">
+                </div>
+                <div class="home-lang-featured__body">
+                    <h3>Guna</h3>
+                    <p>Master the language of the Guna people from the San Blas Islands. Interactive lessons, cultural readings, games, and a community-backed path designed with respect for Guna Yala.</p>
+                    <a href="courses/learning-hub.html?course=guna" class="home-btn home-btn--green">
+                        <i class="fas fa-play"></i>
+                        Start Learning Guna
+                    </a>
+                </div>
+            </article>
+
+            <div class="home-lang-grid">
+                <article class="home-lang-card home-lang-card--blue is-soon" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="home-lang-card__avatar">
+                        <img src="Multimedia/Images/Languages/Ngabe.png" alt="Ngäbe language">
+                    </div>
+                    <h3>Ngäbe</h3>
+                    <p>Learn the language of the Ngäbe people, the largest indigenous group in Panama.</p>
+                    <button class="btn btn-coming-soon w-100" disabled>
+                        <i class="fas fa-clock me-2"></i>Coming soon
+                    </button>
+                </article>
+                <article class="home-lang-card home-lang-card--yellow is-soon" data-aos="zoom-in" data-aos-delay="180">
+                    <div class="home-lang-card__avatar">
+                        <img src="Multimedia/Images/Languages/Naso.gif" alt="Naso language">
+                    </div>
+                    <h3>Naso</h3>
+                    <p>Discover the musical language of the Naso people with its unique rhythms.</p>
+                    <button class="btn btn-coming-soon w-100" disabled>
+                        <i class="fas fa-clock me-2"></i>Coming soon
+                    </button>
+                </article>
+                <article class="home-lang-card home-lang-card--orange is-soon" data-aos="zoom-in" data-aos-delay="260">
+                    <div class="home-lang-card__avatar">
+                        <img src="Multimedia/Images/Languages/Embera.png" alt="Emberá language">
+                    </div>
+                    <h3>Emberá</h3>
+                    <p>Explore the ancient language of the Emberá people and their traditions.</p>
+                    <button class="btn btn-coming-soon w-100" disabled>
+                        <i class="fas fa-clock me-2"></i>Coming soon
+                    </button>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- Monetization Plans Section -->
+    <!-- Plans -->
     <section class="pricing-section" id="pricing">
         <div class="container">
-            <div class="section-header text-center" data-aos="fade-up">
-                <h2 class="section-title">Choose Your Learning Plan</h2>
-                <p class="section-subtitle">Start free and upgrade when you're ready for more.</p>
+            <div class="home-header" data-aos="fade-up">
+                <div class="home-header-row">
+                    <span class="home-mola-line" aria-hidden="true"></span>
+                    <span class="home-kicker"><i class="fas fa-seedling"></i> Plans</span>
+                    <span class="home-mola-line" aria-hidden="true"></span>
+                </div>
+                <h2 class="home-title section-title">Choose your learning plan</h2>
+                <p class="home-subtitle">Start free and upgrade when you're ready for more — same colors, same mission.</p>
             </div>
             
             <div class="pricing-grid">
@@ -436,7 +404,7 @@
                         </ul>
                     </div>
                     
-                    <button class="btn btn-pricing btn-b2b" style="background: linear-gradient(135deg, #22c55e, #16a34a);" onclick="openB2BModal()">
+                    <button class="btn btn-pricing btn-b2b" onclick="openB2BModal()">
                         <i class="fas fa-building me-2"></i>Request Quote
                     </button>
                 </div>
@@ -444,116 +412,102 @@
         </div>
     </section>
 
-    <!-- How It Works Section -->
-    <section class="how-it-works-section" id="how-it-works">
+    <!-- How It Works -->
+    <section class="home-section home-section--cream how-it-works-section" id="how-it-works">
         <div class="container">
-            <div class="section-header text-center" data-aos="fade-up">
-                <h2 class="section-title">How To Start</h2>
-                <p class="section-subtitle">Learn indigenous languages of Panama in four simple steps with Soged.</p>
+            <div class="home-header" data-aos="fade-up">
+                <div class="home-header-row">
+                    <span class="home-mola-line" aria-hidden="true"></span>
+                    <span class="home-kicker"><i class="fas fa-route"></i> Get started</span>
+                    <span class="home-mola-line" aria-hidden="true"></span>
+                </div>
+                <h2 class="home-title section-title">How to start</h2>
+                <p class="home-subtitle">Learn indigenous languages of Panama in four simple steps with Soged.</p>
             </div>
-            
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="step-card glass-card step-blue h-100">
-                        <span class="feature-badge badge-blue">1</span>
-                        <div class="feature-icon-bg icon-bg-blue"><i class="fas fa-user-plus"></i></div>
-                        <h3 class="feature-title gradient-text">Create Your Account</h3>
-                        <p>Sign up for free, choose your language — Guna, Ngäbe, Emberá, and more — and set your learning goals in minutes.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                    <div class="step-card glass-card step-orange h-100">
-                        <span class="feature-badge badge-orange">2</span>
-                        <div class="feature-icon-bg icon-bg-orange"><i class="fas fa-book-open"></i></div>
-                        <h3 class="feature-title gradient-text">Explore & Learn</h3>
-                        <p>Dive into bite-sized lessons with native audio, cultural stories, and interactive exercises designed for real-world conversation.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="600">
-                    <div class="step-card glass-card step-green h-100">
-                        <span class="feature-badge badge-green">3</span>
-                        <div class="feature-icon-bg icon-bg-green"><i class="fas fa-gamepad"></i></div>
-                        <h3 class="feature-title gradient-text">Practice Daily</h3>
-                        <p>Reinforce what you learn with games, quizzes, and speaking drills that adapt to your pace and keep you motivated.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="800">
-                    <div class="step-card glass-card step-yellow h-100">
-                        <span class="feature-badge badge-yellow">4</span>
-                        <div class="feature-icon-bg icon-bg-yellow"><i class="fas fa-trophy"></i></div>
-                        <h3 class="feature-title gradient-text">Track Your Progress</h3>
-                        <p>Earn badges, unlock new levels, and celebrate milestones as you help preserve Panama's living indigenous languages.</p>
-                    </div>
-                </div>
+
+            <div class="home-steps">
+                <article class="home-step home-step--blue" data-aos="fade-up" data-aos-delay="100">
+                    <div class="home-step__num">1</div>
+                    <div class="home-step__icon"><i class="fas fa-user-plus"></i></div>
+                    <h3>Create your account</h3>
+                    <p>Sign up for free, choose your language — Guna first, then Ngäbe, Emberá, and more — and set your goals in minutes.</p>
+                </article>
+                <article class="home-step home-step--yellow" data-aos="fade-up" data-aos-delay="180">
+                    <div class="home-step__num">2</div>
+                    <div class="home-step__icon"><i class="fas fa-book-open"></i></div>
+                    <h3>Explore &amp; learn</h3>
+                    <p>Dive into bite-sized lessons with native audio, cultural stories, and exercises designed for real-world conversation.</p>
+                </article>
+                <article class="home-step home-step--green" data-aos="fade-up" data-aos-delay="260">
+                    <div class="home-step__num">3</div>
+                    <div class="home-step__icon"><i class="fas fa-gamepad"></i></div>
+                    <h3>Practice daily</h3>
+                    <p>Reinforce what you learn with games, quizzes, and speaking drills that adapt to your pace.</p>
+                </article>
+                <article class="home-step home-step--orange" data-aos="fade-up" data-aos-delay="340">
+                    <div class="home-step__num">4</div>
+                    <div class="home-step__icon"><i class="fas fa-trophy"></i></div>
+                    <h3>Track your progress</h3>
+                    <p>Earn badges, unlock levels, and celebrate milestones as you help preserve Panama's living languages.</p>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials-section">
+    <!-- Testimonials -->
+    <section class="home-section home-section--surface testimonials-section">
         <div class="container">
-            <div class="section-header text-center" data-aos="fade-up">
-                <h2 class="section-title">What our Students Say</h2>
-                <p class="section-subtitle">Join thousands of learners who have discovered the beauty of indigenous languages.</p>
+            <div class="home-header" data-aos="fade-up">
+                <div class="home-header-row">
+                    <span class="home-mola-line" aria-hidden="true"></span>
+                    <span class="home-kicker"><i class="fas fa-quote-left"></i> Voices</span>
+                    <span class="home-mola-line" aria-hidden="true"></span>
+                </div>
+                <h2 class="home-title section-title">What our students say</h2>
+                <p class="home-subtitle">Join learners discovering the beauty of indigenous languages — and the culture they carry.</p>
             </div>
-            
-            <div class="row g-4">
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>"Soged helped me connect with my Ngäbe roots. The native speakers make all the difference!"</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">
-                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face" alt="María Santos" class="author-photo">
-                            </div>
-                            <div class="author-info">
-                                <h4>María Santos</h4>
-                                <span>Student</span>
-                            </div>
+
+            <div class="home-quotes">
+                <article class="home-quote" data-aos="fade-up" data-aos-delay="100">
+                    <div class="home-quote__mark" aria-hidden="true">“</div>
+                    <p>Soged helped me connect with my Ngäbe roots. The native speakers make all the difference!</p>
+                    <div class="home-quote__author">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face" alt="María Santos">
+                        <div>
+                            <h4>María Santos</h4>
+                            <span>Student</span>
                         </div>
                     </div>
-                </div>
-                
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="400">
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>"The interactive lessons and games make learning Guna so much fun. Highly recommended!"</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">
-                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Carlos Rodríguez" class="author-photo">
-                            </div>
-                            <div class="author-info">
-                                <h4>Carlos Rodríguez</h4>
-                                <span>Student</span>
-                            </div>
+                </article>
+                <article class="home-quote" data-aos="fade-up" data-aos-delay="180">
+                    <div class="home-quote__mark" aria-hidden="true">“</div>
+                    <p>The interactive lessons and games make learning Guna so much fun. Highly recommended!</p>
+                    <div class="home-quote__author">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Carlos Rodríguez">
+                        <div>
+                            <h4>Carlos Rodríguez</h4>
+                            <span>Student</span>
                         </div>
                     </div>
-                </div>
-                
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="600">
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>"I love how Soged preserves our cultural heritage through modern technology."</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">
-                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Ana Martínez" class="author-photo">
-                            </div>
-                            <div class="author-info">
-                                <h4>Ana Martínez</h4>
-                                <span>Student</span>
-                            </div>
+                </article>
+                <article class="home-quote" data-aos="fade-up" data-aos-delay="260">
+                    <div class="home-quote__mark" aria-hidden="true">“</div>
+                    <p>I love how Soged preserves our cultural heritage through modern technology.</p>
+                    <div class="home-quote__author">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Ana Martínez">
+                        <div>
+                            <h4>Ana Martínez</h4>
+                            <span>Student</span>
                         </div>
                     </div>
-                </div>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- Partners Infinite Marquee -->
+    <div class="home-mola-stripe" aria-hidden="true"></div>
     <partners-marquee data-aos="fade-up"></partners-marquee>
+    <div class="home-mola-stripe" aria-hidden="true"></div>
 
     <!-- CTA Section Component -->
     <cta-section id="main-cta"></cta-section>
@@ -564,7 +518,7 @@
     <div class="modal fade" id="premiumModal" tabindex="-1" aria-labelledby="premiumModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header" style="background: white; color: #1f2937; border-bottom: 2px solid #F59E0B;">
+                <div class="modal-header" style="background: white; color: #1f2937; border-bottom: 2px solid #FFB300;">
                     <h5 class="modal-title" id="premiumModalLabel">
                         <i class="fas fa-crown me-2"></i>Get Premium Plan
                     </h5>
@@ -594,7 +548,7 @@
                             Price: $9.99/month - Ad-free, unlimited lives and access to Soggy AI
                         </div>
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary" id="submitPremiumBtn" style="background: linear-gradient(135deg, #F59E0B, #FBBF24); border: none;">
+                            <button type="submit" class="btn btn-primary" id="submitPremiumBtn" style="background: linear-gradient(135deg, #FFB300, #FFA000); border: none; color: #3d1f0a;">
                                 <i class="fas fa-lock me-2"></i>Proceed to Payment
                             </button>
                         </div>
