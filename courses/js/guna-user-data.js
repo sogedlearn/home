@@ -122,9 +122,13 @@ const GunaUserData = {
             const state = GunaGamification.getState();
             const xpNext = GunaGamification.xpForLevel(state.level);
             const levelEl = document.querySelector('.profile-level');
-            if (levelEl) levelEl.textContent = `Level ${state.level} • ${profile.title}`;
+            if (levelEl) levelEl.textContent = (typeof GunaI18n !== 'undefined'
+                ? GunaI18n.t('profileLevelLine', { n: state.level, title: profile.title })
+                : `Level ${state.level} • ${profile.title}`);
             const xpEl = document.querySelector('.profile-xp');
-            if (xpEl) xpEl.textContent = `${state.xp.toLocaleString()} / ${xpNext.toLocaleString()} XP to next level`;
+            if (xpEl) xpEl.textContent = (typeof GunaI18n !== 'undefined'
+                ? GunaI18n.t('xpToNextFull', { xp: state.xp.toLocaleString(), next: xpNext.toLocaleString() })
+                : `${state.xp.toLocaleString()} / ${xpNext.toLocaleString()} XP to next level`);
         }
     },
 

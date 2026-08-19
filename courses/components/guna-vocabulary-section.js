@@ -185,20 +185,20 @@ class GunaVocabularySection extends HTMLElement {
         this.innerHTML = `
             <div class="vocab-section">
                 <header class="vocab-hero" data-aos="fade-up">
-                    <h1>📖 Guna Vocabulary</h1>
-                    <p>Interactive dictionary — flashcards, pronunciation & practice</p>
+                    <h1>📖 ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('vocabHeroTitle') : 'Guna Vocabulary'}</h1>
+                    <p>${typeof GunaI18n !== 'undefined' ? GunaI18n.t('vocabHeroSub') : 'Interactive dictionary — flashcards, pronunciation & practice'}</p>
                     <div class="vocab-search-wrap">
                         <i class="fas fa-search"></i>
-                        <input type="search" class="vocab-search" placeholder="Search Guna, Spanish or English..." id="vocabSearch" value="${this.searchQuery}">
+                        <input type="search" class="vocab-search" placeholder="${typeof GunaI18n !== 'undefined' ? GunaI18n.t('vocabSearch') : 'Search Guna, Spanish or English...'}" id="vocabSearch" value="${this.searchQuery}">
                     </div>
                 </header>
 
                 <div class="vocab-modes" role="tablist">
-                    <button type="button" class="vocab-mode-btn ${this.mode === 'browse' ? 'active' : ''}" data-mode="browse">📚 Dictionary</button>
-                    <button type="button" class="vocab-mode-btn ${this.mode === 'flashcards' ? 'active' : ''}" data-mode="flashcards">🃏 Flashcards</button>
+                    <button type="button" class="vocab-mode-btn ${this.mode === 'browse' ? 'active' : ''}" data-mode="browse">📚 ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('vocabDictionary') : 'Dictionary'}</button>
+                    <button type="button" class="vocab-mode-btn ${this.mode === 'flashcards' ? 'active' : ''}" data-mode="flashcards">🃏 ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('vocabFlashcards') : 'Flashcards'}</button>
                     <button type="button" class="vocab-mode-btn ${this.mode === 'guna-es' ? 'active' : ''}" data-mode="guna-es">Guna → ES</button>
                     <button type="button" class="vocab-mode-btn ${this.mode === 'es-guna' ? 'active' : ''}" data-mode="es-guna">ES → Guna</button>
-                    <button type="button" class="vocab-mode-btn ${this.mode === 'review' ? 'active' : ''}" data-mode="review">🔄 Review</button>
+                    <button type="button" class="vocab-mode-btn ${this.mode === 'review' ? 'active' : ''}" data-mode="review">🔄 ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('vocabReview') : 'Review'}</button>
                 </div>
 
                 <div class="vocab-categories" role="tablist">
@@ -219,9 +219,9 @@ class GunaVocabularySection extends HTMLElement {
                 </div>
 
                 <div class="vocab-footer-cta">
-                    <p>Ready to practice? Go to the Learning Path and complete a level.</p>
+                    <p>${typeof GunaI18n !== 'undefined' ? GunaI18n.t('vocabFooter') : 'Ready to practice? Go to the Learning Path and complete a level.'}</p>
                     <button type="button" class="btn-duo btn-duo-primary" id="goToLearnBtn">
-                        Start Learning <i class="fas fa-arrow-right"></i>
+                        ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('startLearning') : 'Start Learning'} <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
             </div>

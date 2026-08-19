@@ -577,35 +577,35 @@ class StoriesSection extends HTMLElement {
 
             <div class="stories-section">
                 <div class="stories-header" data-aos="fade-up">
-                    <h2 class="section-title">📖 Cultural Stories</h2>
-                    <p class="section-subtitle">Immerse yourself in the rich traditions and wisdom of ${this.getCourseName()} culture through interactive storytelling</p>
+                    <h2 class="section-title">📖 ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('culturalStories') : 'Cultural Stories'}</h2>
+                    <p class="section-subtitle">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('storiesSubtitle', { name: this.getCourseName() }) : `Immerse yourself in the rich traditions and wisdom of ${this.getCourseName()} culture through interactive storytelling`}</p>
                     
                     <div class="cultural-badge">
                         <i class="fas fa-mountain"></i>
-                        <span>Authentic ${this.getCourseName()} Heritage</span>
+                        <span>${typeof GunaI18n !== 'undefined' ? GunaI18n.t('authenticHeritage', { name: this.getCourseName() }) : `Authentic ${this.getCourseName()} Heritage`}</span>
                     </div>
                 </div>
 
                 <div class="story-categories" data-aos="fade-up" data-aos-delay="100">
                     <button class="category-filter active" data-category="all">
                         <i class="fas fa-globe"></i>
-                        All Stories
+                        ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('allStories') : 'All Stories'}
                     </button>
                     <button class="category-filter" data-category="documents">
                         <i class="fas fa-file-pdf"></i>
-                        Documents
+                        ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('documents') : 'Documents'}
                     </button>
                     <button class="category-filter" data-category="legends">
                         <i class="fas fa-dragon"></i>
-                        Legends
+                        ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('legends') : 'Legends'}
                     </button>
                     <button class="category-filter" data-category="wisdom">
                         <i class="fas fa-lightbulb"></i>
-                        Wisdom
+                        ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('wisdom') : 'Wisdom'}
                     </button>
                     <button class="category-filter" data-category="nature">
                         <i class="fas fa-leaf"></i>
-                        Nature
+                        ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('nature') : 'Nature'}
                     </button>
                     <button class="category-filter" data-category="family">
                         <i class="fas fa-heart"></i>

@@ -16,6 +16,11 @@ class LearningSection extends HTMLElement {
         this.loadUserProgress();
         this.setupSidebarListener();
         this.updateProgressIndicator();
+        if (window.learningHub && typeof window.learningHub.scrollToPageTop === 'function') {
+            window.learningHub.scrollToPageTop();
+        } else {
+            window.scrollTo(0, 0);
+        }
     }
 
     updateProgressIndicator() {
@@ -23,7 +28,11 @@ class LearningSection extends HTMLElement {
         const completed = lessons.filter(l => l.status === 'completed').length;
         const total = lessons.length;
         const el = this.querySelector('#progressText');
-        if (el) el.textContent = `${completed}/${total} Lessons`;
+        if (el) {
+            el.textContent = typeof GunaI18n !== 'undefined'
+                ? GunaI18n.t('pathLessons', { completed, total })
+                : `${completed}/${total} Lessons`;
+        }
     }
 
     setupSidebarListener() {
@@ -53,14 +62,14 @@ class LearningSection extends HTMLElement {
             this.innerHTML = `
                 <div class="learning-section learning-section--soon">
                     <div class="learning-header" data-aos="fade-up">
-                        <h2 class="section-title">🎯 ${this.getCourseName()} Learning Path</h2>
-                        <p class="section-subtitle">This language course is being prepared for you</p>
+                        <h2 class="section-title">🎯 ${this.getCourseName()} ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('learn') : 'Learning Path'}</h2>
+                        <p class="section-subtitle">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('coursePreparing') : 'This language course is being prepared for you'}</p>
                     </div>
                     <div class="coming-soon-panel">
-                        <span class="coming-soon-badge-lg">Coming Soon</span>
-                        <p>We're building interactive lessons for ${this.getCourseName()}. For now, explore the <strong>Guna</strong> learning path with 10 levels of culture and vocabulary.</p>
+                        <span class="coming-soon-badge-lg">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('comingSoon') : 'Coming Soon'}</span>
+                        <p>${typeof GunaI18n !== 'undefined' ? GunaI18n.t('buildingLessons', { name: this.getCourseName() }) : `We're building interactive lessons for ${this.getCourseName()}. For now, explore the Guna learning path.`}</p>
                         <button class="lesson-btn btn-primary" onclick="window.learningHub && window.learningHub.switchCourse('guna')">
-                            <i class="fas fa-play"></i> Go to Guna Path
+                            <i class="fas fa-play"></i> ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('goToGunaPath') : 'Go to Guna Path'}
                         </button>
                     </div>
                 </div>
@@ -886,15 +895,15 @@ class LearningSection extends HTMLElement {
 
             <div class="learning-section ${this.currentCourse === 'guna' ? 'learning-section--guna' : ''}">
                 <div class="learning-header" data-aos="fade-up">
-                    <h2 class="section-title">${this.currentCourse === 'guna' ? 'Interactive Learning Path' : '🎯 Interactive Learning Path'}</h2>
-                    <p class="section-subtitle">Master ${this.getCourseName()} through gamified lessons and cultural immersion</p>
+                    <h2 class="section-title">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('interactivePath') : 'Interactive Learning Path'}</h2>
+                    <p class="section-subtitle">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('masterCourse', { name: this.getCourseName() }) : `Master ${this.getCourseName()} through gamified lessons and cultural immersion`}</p>
                     
 
                 </div>
 
                 <div class="learning-path" data-aos="fade-up" data-aos-delay="100">
                     <div class="progress-indicator" id="pathProgressIndicator">
-                        Progress: <span id="progressText">0/0 Lessons</span>
+                        <span id="progressText">0/0 Lessons</span>
                     </div>
                     
                     <div class="path-container" id="pathContainer">
@@ -1212,6 +1221,13 @@ function openGunaLessonViewer(lessonId, review = false) {
 
     const reviewAttr = review ? ' review="true"' : '';
     contentContainer.innerHTML = `<guna-lesson-viewer lesson-id="${id}"${reviewAttr}></guna-lesson-viewer>`;
+    if (window.learningHub && typeof window.learningHub.scrollToPageTop === 'function') {
+        window.learningHub.scrollToPageTop();
+    } else {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+    }
 
     const viewer = contentContainer.querySelector('guna-lesson-viewer');
     if (viewer) {

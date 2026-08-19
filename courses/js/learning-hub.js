@@ -22,6 +22,7 @@ class SimpleLearningHub {
         }
         
         this.hideLoadingScreen();
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
         this.syncCourseDisplay();
         this.setupSidebar();
         this.setupNavigation();
@@ -47,6 +48,12 @@ class SimpleLearningHub {
         }
         if (typeof GunaI18n !== 'undefined') GunaI18n.apply();
         if (typeof GameRewards !== 'undefined') GameRewards.syncFromServer();
+        document.addEventListener('guna-language-changed', () => {
+            this.updateBreadcrumb(this.currentSection);
+            this.updatePathProgressUI();
+            if (typeof GunaUserData !== 'undefined') GunaUserData.applyProfileToUI();
+            if (this.currentSection) this.loadSectionContent(this.currentSection, { instant: true });
+        });
         
         // Apply saved sidebar state
         if (this.sidebarCollapsed) {
@@ -136,7 +143,7 @@ class SimpleLearningHub {
                 const game = item.getAttribute('data-game') || '';
                 if (section) {
                     this.pendingGame = game;
-                    this.loadSection(section);
+                    this.navigateToSection(section, game);
                 }
             });
         });
@@ -166,7 +173,7 @@ class SimpleLearningHub {
         courseOptions.forEach(option => {
             option.addEventListener('click', () => {
                 if (option.dataset.soon === 'true') {
-                    this.showNotification('Coming Soon — Guna is available now!', 'info');
+                    this.showNotification(this.t('comingSoonGunaNow'), 'info');
                     courseDropdown.classList.remove('show');
                     return;
                 }
@@ -275,12 +282,15 @@ class SimpleLearningHub {
     }
 
     setupHashRouting() {
-        window.addEventListener('hashchange', () => {
+        const onRoute = () => {
             const section = this.resolveSectionFromUrl();
             if (section && section !== this.currentSection) {
                 this.loadSection(section, true);
             }
-        });
+            this.scrollToPageTop();
+        };
+        window.addEventListener('hashchange', onRoute);
+        window.addEventListener('popstate', onRoute);
     }
 
     resolveSectionFromUrl() {
@@ -307,18 +317,60 @@ class SimpleLearningHub {
     }
 
     navigateToSection(section, game = '') {
-        const hashMap = { learn: 'learning-path', store: 'store', overview: 'overview' };
+        const hashMap = { learn: 'learn', store: 'store', overview: 'overview' };
         let hash = hashMap[section] || section;
         if (section === 'games' && game) hash = `games/${game}`;
+        const next = `#${hash}`;
+        const sameSection = section === this.currentSection && (section !== 'games' || game === this.pendingGame);
         this.pendingGame = game;
-        if (window.location.hash !== `#${hash}`) {
-            window.location.hash = hash;
+        if (window.location.hash !== next) {
+            history.pushState({ section, game }, '', next);
         }
-        this.loadSection(section, true);
+        if (!sameSection) this.loadSection(section, true);
+        this.scrollToPageTop();
+    }
+
+    scrollToPageTop() {
+        const jump = () => {
+            window.scrollTo(0, 0);
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+            const main = document.getElementById('mainContent');
+            const content = document.getElementById('contentContainer');
+            if (main) main.scrollTop = 0;
+            if (content) content.scrollTop = 0;
+        };
+        jump();
+        requestAnimationFrame(() => {
+            jump();
+            requestAnimationFrame(jump);
+        });
+        [0, 16, 50, 100, 200, 350].forEach((ms) => setTimeout(jump, ms));
+    }
+
+    scrollToPageTop() {
+        const jump = () => {
+            window.scrollTo(0, 0);
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+            const main = document.getElementById('mainContent');
+            const content = document.getElementById('contentContainer');
+            if (main) main.scrollTop = 0;
+            if (content) content.scrollTop = 0;
+        };
+        jump();
+        requestAnimationFrame(() => {
+            jump();
+            requestAnimationFrame(jump);
+        });
+        setTimeout(jump, 0);
+        setTimeout(jump, 50);
     }
 
     loadSection(section, force = false) {
         if (!force && section === this.currentSection) return;
+
+        this.scrollToPageTop();
 
         // Update navigation active state
         document.querySelectorAll('.nav-item').forEach(item => {
@@ -334,27 +386,33 @@ class SimpleLearningHub {
         this.updateBreadcrumb(section);
 
         // Load section content
-        this.loadSectionContent(section);
+        this.loadSectionContent(section, { instant: true });
         
         this.currentSection = section;
     }
 
-    loadSectionContent(section) {
-        const contentContainer = document.getElementById('contentContainer');
-        
-        // Show loading state
-        contentContainer.innerHTML = `
-            <div class="section-loading" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 400px; text-align: center; padding: 4rem 2rem;">
-                <div class="spinner" style="margin: 0 auto 2rem;"></div>
-                                  <h3 style="color: var(--text-secondary); font-weight: 500; margin: 0;">Loading ${this.getSectionTitle(section)}...</h3>
-                                        <p style="color: var(--text-light); margin-top: 0.5rem; font-size: 0.9rem;">Preparing your learning experience</p>
-            </div>
-        `;
+    t(key, vars) {
+        return typeof GunaI18n !== 'undefined' ? GunaI18n.t(key, vars) : key;
+    }
 
-        // Load appropriate content
-        setTimeout(() => {
+    loadSectionContent(section, options = {}) {
+        const contentContainer = document.getElementById('contentContainer');
+        const instant = !!options.instant;
+
+        if (!instant) {
+            contentContainer.innerHTML = `
+                <div class="section-loading" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 400px; text-align: center; padding: 4rem 2rem;">
+                    <div class="spinner" style="margin: 0 auto 2rem;"></div>
+                    <h3 style="color: var(--text-secondary); font-weight: 500; margin: 0;">${this.t('loadingSection', { name: this.getSectionTitle(section) })}</h3>
+                    <p style="color: var(--text-light); margin-top: 0.5rem; font-size: 0.9rem;">${this.t('preparingExperience')}</p>
+                </div>
+            `;
+        }
+
+        const renderSection = () => {
             let content = '';
-            
+
+            try {
             switch(section) {
                 case 'overview':
                     content = this.generateOverviewContent();
@@ -401,20 +459,31 @@ class SimpleLearningHub {
                         <div style="text-align: center; padding: 4rem 2rem;">
                             <i class="fas fa-construction" style="font-size: 4rem; color: var(--text-light); margin-bottom: 2rem;"></i>
                             <h2 style="color: var(--text-primary); margin-bottom: 1rem;">${this.getSectionTitle(section)}</h2>
-                            <p style="color: var(--text-secondary); max-width: 400px; margin: 0 auto;">This section is being developed. Check back soon for exciting new features!</p>
+                            <p style="color: var(--text-secondary); max-width: 400px; margin: 0 auto;">${this.t('sectionInDevelopment')}</p>
                         </div>
                     `;
             }
-            
+
             contentContainer.innerHTML = content;
-            
+            this.scrollToPageTop();
+            } catch (err) {
+                console.error('Failed to render hub section', section, err);
+                contentContainer.innerHTML = `
+                    <div class="overview-dashboard" style="padding: 2rem;">
+                        <h2 class="hero-title">${this.getSectionTitle(section)}</h2>
+                        <p class="hero-subtitle">${this.t('sectionInDevelopment')}</p>
+                    </div>
+                `;
+                return;
+            }
+
             if (section === 'overview') {
                 this.setupOverviewInteractions();
             }
             if (section === 'store') {
                 localStorage.setItem('guna_store_visited', '1');
             }
-            if (section === 'community') {
+            if (section === 'community' && !instant) {
                 const visits = parseInt(localStorage.getItem('guna_community_visits') || '0', 10);
                 localStorage.setItem('guna_community_visits', String(visits + 1));
                 if (typeof GunaGamification !== 'undefined') GunaGamification.checkAllBadges();
@@ -426,14 +495,16 @@ class SimpleLearningHub {
                 if (typeof GunaGamification !== 'undefined') GunaGamification.checkAllBadges();
                 this.setupAchievementsInteractions();
             }
-            if (section === 'chat') {
+            if (section === 'chat' && !instant) {
                 localStorage.setItem('guna_ai_used', '1');
             }
-            
+
             if (typeof AOS !== 'undefined') {
-                AOS.refresh();
+                if (typeof AOS.refreshHard === 'function') AOS.refreshHard();
+                else AOS.refresh();
             }
-            
+            this.scrollToPageTop();
+
             if (typeof CocosEconomy !== 'undefined') {
                 CocosEconomy.updateAllDisplays();
             }
@@ -441,7 +512,10 @@ class SimpleLearningHub {
                 GunaGamification.updateDisplays();
             }
             this.updatePathProgressUI();
-        }, 600);
+        };
+
+        if (instant) renderSection();
+        else setTimeout(renderSection, 600);
     }
 
     generateChatContent() {
@@ -508,33 +582,33 @@ class SimpleLearningHub {
         return `
             <div class="leaderboard-section lb-modern">
                 <header class="lb-header">
-                    <h2>🏆 Leaderboard</h2>
-                    <p>Compete with other ${this.getCourseName()} students</p>
+                    <h2>🏆 ${this.t('leaderboard')}</h2>
+                    <p>${this.t('lbCompete', { name: this.getCourseName() })}</p>
                 </header>
 
-                <div class="lb-user-stats" aria-label="Your statistics">
-                    <div class="lb-stat-card"><span class="lb-stat-val">${userStats.xp || 0}</span><span class="lb-stat-lbl">Total XP</span></div>
-                    <div class="lb-stat-card"><span class="lb-stat-val">${userStats.lessons || 0}</span><span class="lb-stat-lbl">Lessons</span></div>
-                    <div class="lb-stat-card"><span class="lb-stat-val">${userStats.vocab || 0}</span><span class="lb-stat-lbl">Vocabulary</span></div>
-                    <div class="lb-stat-card"><span class="lb-stat-val">${userStats.streak || 0}</span><span class="lb-stat-lbl"><img src="../Multimedia/Images/Soged/Streak.png" alt="" class="lb-streak-icon" aria-hidden="true"> Streak</span></div>
-                    <div class="lb-stat-card"><span class="lb-stat-val">${userStats.badges || 0}</span><span class="lb-stat-lbl">Badges</span></div>
-                    <div class="lb-stat-card"><span class="lb-stat-val">${userStats.community || 0}</span><span class="lb-stat-lbl">Community</span></div>
+                <div class="lb-user-stats" aria-label="${this.t('yourStatistics')}">
+                    <div class="lb-stat-card"><span class="lb-stat-val">${userStats.xp || 0}</span><span class="lb-stat-lbl">${this.t('totalXp')}</span></div>
+                    <div class="lb-stat-card"><span class="lb-stat-val">${userStats.lessons || 0}</span><span class="lb-stat-lbl">${this.t('lbLessons')}</span></div>
+                    <div class="lb-stat-card"><span class="lb-stat-val">${userStats.vocab || 0}</span><span class="lb-stat-lbl">${this.t('lbVocabulary')}</span></div>
+                    <div class="lb-stat-card"><span class="lb-stat-val">${userStats.streak || 0}</span><span class="lb-stat-lbl"><img src="../Multimedia/Images/Soged/Streak.png" alt="" class="lb-streak-icon" aria-hidden="true"> ${this.t('streak')}</span></div>
+                    <div class="lb-stat-card"><span class="lb-stat-val">${userStats.badges || 0}</span><span class="lb-stat-lbl">${this.t('lbBadges')}</span></div>
+                    <div class="lb-stat-card"><span class="lb-stat-val">${userStats.community || 0}</span><span class="lb-stat-lbl">${this.t('lbCommunity')}</span></div>
                 </div>
 
                 <div class="lb-tabs" role="tablist">
-                    <button type="button" class="lb-tab ${period === 'week' ? 'active' : ''}" data-period="week" role="tab">This Week</button>
-                    <button type="button" class="lb-tab ${period === 'month' ? 'active' : ''}" data-period="month" role="tab">This Month</button>
-                    <button type="button" class="lb-tab ${period === 'all' ? 'active' : ''}" data-period="all" role="tab">All Time</button>
+                    <button type="button" class="lb-tab ${period === 'week' ? 'active' : ''}" data-period="week" role="tab">${this.t('thisWeek')}</button>
+                    <button type="button" class="lb-tab ${period === 'month' ? 'active' : ''}" data-period="month" role="tab">${this.t('thisMonth')}</button>
+                    <button type="button" class="lb-tab ${period === 'all' ? 'active' : ''}" data-period="all" role="tab">${this.t('allTime')}</button>
                 </div>
 
-                <div class="lb-sort" role="group" aria-label="Sort by">
+                <div class="lb-sort" role="group" aria-label="${this.t('sortBy')}">
                     <button type="button" class="lb-sort-btn ${sortBy === 'xp' ? 'active' : ''}" data-sort="xp">XP</button>
-                    <button type="button" class="lb-sort-btn ${sortBy === 'lessons' ? 'active' : ''}" data-sort="lessons">Lessons</button>
-                    <button type="button" class="lb-sort-btn ${sortBy === 'vocab' ? 'active' : ''}" data-sort="vocab">Vocabulary</button>
+                    <button type="button" class="lb-sort-btn ${sortBy === 'lessons' ? 'active' : ''}" data-sort="lessons">${this.t('lbLessons')}</button>
+                    <button type="button" class="lb-sort-btn ${sortBy === 'vocab' ? 'active' : ''}" data-sort="vocab">${this.t('lbVocabulary')}</button>
                 </div>
 
                 <div class="lb-rewards-note">
-                    <i class="fas fa-gift"></i> Top weekly players earn +25 cocos and an exclusive badge!
+                    <i class="fas fa-gift"></i> ${this.t('lbRewards')}
                 </div>
 
                 <div class="leaderboard-list lb-list">
@@ -545,12 +619,12 @@ class SimpleLearningHub {
     }
 
     generateLeaderboardItems(rankings, sortBy = 'xp') {
-        if (!rankings?.length) return '<p class="lb-empty">No rankings available.</p>';
+        if (!rankings?.length) return `<p class="lb-empty">${this.t('lbEmpty')}</p>`;
 
         return rankings.map(user => {
             const rankIcon = user.rank <= 3 ? ['🥇', '🥈', '🥉'][user.rank - 1] : `#${user.rank}`;
             const value = user[sortBy] ?? user.xp;
-            const valueLabel = sortBy === 'lessons' ? 'lessons' : sortBy === 'vocab' ? 'words' : 'XP';
+            const valueLabel = sortBy === 'lessons' ? this.t('lbLessons').toLowerCase() : sortBy === 'vocab' ? this.t('words') : 'XP';
             const avatarHtml = user.avatarImg
                 ? `<img src="${user.avatarImg}" alt="" class="lb-avatar-img">`
                 : (user.avatar || '🐢');
@@ -560,10 +634,10 @@ class SimpleLearningHub {
                     <div class="rank-display">${rankIcon}</div>
                     <div class="user-avatar lb-avatar">${avatarHtml}</div>
                     <div class="user-info">
-                        <div class="user-name">${user.name} ${user.isCurrentUser ? '(You)' : ''}</div>
+                        <div class="user-name">${user.name} ${user.isCurrentUser ? this.t('you') : ''}</div>
                         <div class="user-stats">
-                            <span><img src="../Multimedia/Images/Soged/Streak.png" alt="" class="inline-streak-icon" aria-hidden="true"> ${user.streak} day Streak</span>
-                            <span><i class="fas fa-book"></i> ${user.lessons} lessons</span>
+                            <span><img src="../Multimedia/Images/Soged/Streak.png" alt="" class="inline-streak-icon" aria-hidden="true"> ${this.t('dayStreakCount', { n: user.streak })}</span>
+                            <span><i class="fas fa-book"></i> ${this.t('lessonsCount', { n: user.lessons })}</span>
                         </div>
                     </div>
                     <div class="user-xp">
@@ -605,21 +679,30 @@ class SimpleLearningHub {
         const unlocked = badges.filter(b => b.status === 'unlocked').length;
         const locked = badges.length - unlocked;
 
+        const catLabels = {
+            all: this.t('achAll'),
+            vocabulary: this.t('achVocabulary'),
+            learning: this.t('achLearning'),
+            community: this.t('achCommunity'),
+            streak: this.t('achStreak'),
+            special: this.t('achSpecial')
+        };
+
         return `
             <div class="achievements-section ach-modern">
                 <header class="ach-header">
-                    <h2>🏅 Achievements</h2>
-                    <p>Celebrate your milestones learning ${this.getCourseName()}</p>
+                    <h2>🏅 ${this.t('achievements')}</h2>
+                    <p>${this.t('achCelebrate', { name: this.getCourseName() })}</p>
                     <div class="ach-summary">
-                        <div><strong>${unlocked}</strong><span>Unlocked</span></div>
-                        <div><strong>${locked}</strong><span>To Unlock</span></div>
+                        <div><strong>${unlocked}</strong><span>${this.t('unlocked')}</span></div>
+                        <div><strong>${locked}</strong><span>${this.t('toUnlock')}</span></div>
                     </div>
                 </header>
 
                 <div class="ach-categories" role="tablist">
                     ${['all', 'vocabulary', 'learning', 'community', 'streak', 'special'].map(cat => `
                         <button type="button" class="ach-cat-btn ${(this.achievementCategory || 'all') === cat ? 'active' : ''}" data-cat="${cat}">
-                            ${cat === 'all' ? 'All' : cat.charAt(0).toUpperCase() + cat.slice(1)}
+                            ${catLabels[cat]}
                         </button>
                     `).join('')}
                 </div>
@@ -645,12 +728,12 @@ class SimpleLearningHub {
     }
 
     generateAchievementItems(badges) {
-        if (!badges?.length) return '<p class="ach-empty">No achievements in this category yet.</p>';
+        if (!badges?.length) return `<p class="ach-empty">${this.t('achEmpty')}</p>`;
 
         return badges.map(achievement => {
             const statusClass = achievement.status;
             const statusIcon = achievement.status === 'unlocked' ? '✅' : '🔒';
-            const statusText = achievement.status === 'unlocked' ? 'Unlocked' : 'Locked';
+            const statusText = achievement.status === 'unlocked' ? this.t('unlocked') : this.t('locked');
 
             return `
                 <article class="achievement-card ach-card ${statusClass}" aria-label="${achievement.title}">
@@ -799,7 +882,10 @@ class SimpleLearningHub {
         const completed = typeof GunaProgress !== 'undefined' ? GunaProgress.getCompletedCount() : 0;
         const pct = Math.round((completed / 10) * 100);
         document.querySelectorAll('[data-path-progress]').forEach(el => { el.style.width = `${pct}%`; });
-        document.querySelectorAll('[data-path-percent]').forEach(el => { el.textContent = `${pct}% complete`; });
+        document.querySelectorAll('[data-path-percent]').forEach(el => {
+            el.dataset.i18nN = String(pct);
+            el.textContent = this.t('percentComplete', { n: pct });
+        });
     }
 
     getDisplayUsername() {
@@ -811,7 +897,9 @@ class SimpleLearningHub {
     }
 
     getWeekCalendar() {
-        const days = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+        const days = this.t('overview') && (typeof GunaI18n !== 'undefined' && GunaI18n.getLanguage() === 'es')
+            ? ['L', 'M', 'X', 'J', 'V', 'S', 'D']
+            : ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
         const today = new Date().getDay();
         const todayIndex = today === 0 ? 6 : today - 1;
         const streak = this.getUserStats().streak;
@@ -856,88 +944,97 @@ class SimpleLearningHub {
             <div class="overview-dashboard overview-gamified overview-mola-bg">
                 <section class="hero-section" data-aos="fade-up">
                     <div class="hero-greeting">
-                        <h1 class="hero-title">Welcome back, <span class="hero-username">${username}</span>!</h1>
-                        <p class="hero-subtitle">Keep strengthening your knowledge of Guna culture and language.</p>
+                        <h1 class="hero-title">${this.t('welcomeBack', { name: username })}</h1>
+                        <p class="hero-subtitle">${this.t('heroSubtitle')}</p>
                     </div>
                     <div class="hero-stats-row">
                         <div class="hero-stat-pill level">
                             <i class="fas fa-star"></i>
                             <div>
-                                <span class="hero-stat-value">Level ${stats.level}</span>
-                                <span class="hero-stat-label">Current</span>
+                                <span class="hero-stat-value">${this.t('levelN', { n: stats.level })}</span>
+                                <span class="hero-stat-label">${this.t('current')}</span>
                             </div>
                         </div>
                         <div class="hero-stat-pill xp">
                             <i class="fas fa-bolt"></i>
                             <div>
-                                <span class="hero-stat-value">${stats.xp.toLocaleString('en-US')} XP</span>
-                                <span class="hero-stat-label">Earned</span>
+                                <span class="hero-stat-value">${stats.xp.toLocaleString()} XP</span>
+                                <span class="hero-stat-label">${this.t('earned')}</span>
                             </div>
                         </div>
                         <div class="hero-stat-pill streak">
                             <img src="../Multimedia/Images/Soged/Streak.png" alt="" class="hero-streak-icon" aria-hidden="true">
                             <div>
-                                <span class="hero-stat-value">${stats.streak} days</span>
-                                <span class="hero-stat-label">Streak</span>
+                                <span class="hero-stat-value">${this.t('streakDays', { n: stats.streak })}</span>
+                                <span class="hero-stat-label">${this.t('streak')}</span>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <button type="button" class="main-course-card" id="mainCourseCard"
-                        aria-label="Continue learning ${courseData.name} - ${courseData.description}"
+                <button type="button" class="main-course-card guna-hero" id="mainCourseCard"
+                        aria-label="${this.t('continueAria', { name: courseData.name, desc: courseData.description })}"
                         data-aos="fade-up" data-aos-delay="50">
-                    <div class="main-course-icon">${this.getCourseIcon(courseData)}</div>
-                    <div class="main-course-content">
-                        <h2 class="main-course-name">${courseData.name}</h2>
-                        <p class="main-course-desc">${courseData.description}</p>
-                        <span class="main-course-cta">Continue Learning <i class="fas fa-arrow-right"></i></span>
+                    ${(window.GunaPattern && window.GunaPattern.html('hero')) || ''}
+                    <div class="guna-hero__content main-course-content">
+                        <span class="guna-hero__eyebrow">${courseData.description}</span>
+                        <h2 class="main-course-name guna-hero__title">${courseData.name}</h2>
+                        <p class="main-course-desc guna-hero__copy">${this.t('heroSubtitle')}</p>
+                        <span class="main-course-cta guna-button guna-button--dark">${this.t('continueLearning')} <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                     </div>
-                    <div class="main-course-glow" aria-hidden="true"></div>
+                    <div class="guna-hero__visual" aria-hidden="true">
+                        <div class="guna-hero__scene">
+                            <div class="guna-hero__sea"></div>
+                            <img class="guna-hero__map" src="../Multimedia/Images/panama-guna-map.svg" alt="">
+                            <div class="guna-hero__island"></div>
+                            <div class="guna-hero__palm"></div>
+                            <img class="guna-hero__mascot" src="../Multimedia/Images/Soged/Newturttle.png" alt="">
+                        </div>
+                    </div>
                 </button>
 
-                <section class="mini-stats-grid" data-aos="fade-up" data-aos-delay="100" aria-label="Progress statistics">
+                <section class="mini-stats-grid" data-aos="fade-up" data-aos-delay="100" aria-label="${this.t('progressStats')}">
                     <div class="mini-stat-card lessons">
-                        <span class="mini-stat-emoji" aria-hidden="true">📚</span>
+                        ${(window.GunaIcon && window.GunaIcon.html('fas fa-book-open', 'blue')) || '<span class="guna-icon guna-icon--blue" aria-hidden="true"><i class="fas fa-book-open"></i></span>'}
                         <span class="mini-stat-number">${stats.lessons}</span>
-                        <span class="mini-stat-label">Lessons completed</span>
+                        <span class="mini-stat-label">${this.t('lessonsCompleted')}</span>
                     </div>
                     <div class="mini-stat-card xp-total">
-                        <span class="mini-stat-emoji" aria-hidden="true">⭐</span>
-                        <span class="mini-stat-number">${stats.xp.toLocaleString('en-US')}</span>
-                        <span class="mini-stat-label">Total XP</span>
+                        ${(window.GunaIcon && window.GunaIcon.html('fas fa-bolt', 'gold')) || '<span class="guna-icon guna-icon--gold" aria-hidden="true"><i class="fas fa-bolt"></i></span>'}
+                        <span class="mini-stat-number">${stats.xp.toLocaleString()}</span>
+                        <span class="mini-stat-label">${this.t('totalXp')}</span>
                     </div>
                     <div class="mini-stat-card oggob-earned oggob-counter">
                         <img src="../Multimedia/Images/Soged/oggob.png" alt="" class="mini-stat-oggob-img" aria-hidden="true">
-                        <span class="mini-stat-number" data-oggob-balance>${stats.cocos.toLocaleString('en-US')}</span>
-                        <span class="mini-stat-label">Oggob earned</span>
+                        <span class="mini-stat-number" data-oggob-balance>${stats.cocos.toLocaleString()}</span>
+                        <span class="mini-stat-label">${this.t('oggobEarned')}</span>
                     </div>
                     <div class="mini-stat-card burba-current">
                         <img src="../Multimedia/Images/Soged/Burba.png" alt="" class="mini-stat-burba-img" aria-hidden="true">
                         <span class="mini-stat-number" data-lives-count>${stats.lives}</span>
-                        <span class="mini-stat-label">Burba remaining</span>
+                        <span class="mini-stat-label">${this.t('burbaRemaining')}</span>
                     </div>
                     <div class="mini-stat-card streak-current">
                         <img src="../Multimedia/Images/Soged/Streak.png" alt="" class="mini-stat-streak-img" aria-hidden="true">
                         <span class="mini-stat-number">${stats.streak}</span>
-                        <span class="mini-stat-label">Current Streak</span>
+                        <span class="mini-stat-label">${this.t('currentStreak')}</span>
                     </div>
                 </section>
 
                 <div class="dashboard-grid" data-aos="fade-up" data-aos-delay="150">
                     <div class="dashboard-card progress-card-modern">
                         <div class="card-header">
-                            <div class="card-icon progress">
+                            <div class="card-icon progress guna-icon guna-icon--gold">
                                 <i class="fas fa-chart-line"></i>
                             </div>
                             <div>
-                                <h3 class="card-title">Your Progress</h3>
-                                <p class="card-subtitle">Guna Learning Path</p>
+                                <h3 class="card-title">${this.t('yourProgress')}</h3>
+                                <p class="card-subtitle">${this.t('gunaLearningPath')}</p>
                             </div>
                         </div>
                         <div class="overall-progress">
                             <div class="progress-label">
-                                <span>Overall progress</span>
+                                <span>${this.t('overallProgress')}</span>
                                 <span>${stats.pathProgress}%</span>
                             </div>
                             <div class="progress-track progress-track-lg">
@@ -946,7 +1043,7 @@ class SimpleLearningHub {
                         </div>
                         <div class="progress-xp-bar">
                             <div class="progress-label">
-                                <span>XP to next level</span>
+                                <span>${this.t('xpToNextLevel')}</span>
                                 <span>${xpPercent}%</span>
                             </div>
                             <div class="progress-track">
@@ -961,11 +1058,11 @@ class SimpleLearningHub {
                                 <img src="../Multimedia/Images/Soged/Streak.png" alt="" class="streak-card-icon" aria-hidden="true">
                             </div>
                             <div>
-                                <h3 class="card-title">Learning Streak</h3>
-                                <p class="card-subtitle streak-highlight"><img src="../Multimedia/Images/Soged/Streak.png" alt="" class="inline-streak-icon" aria-hidden="true"> ${stats.streak} consecutive days</p>
+                                <h3 class="card-title">${this.t('learningStreak')}</h3>
+                                <p class="card-subtitle streak-highlight"><img src="../Multimedia/Images/Soged/Streak.png" alt="" class="inline-streak-icon" aria-hidden="true"> ${this.t('consecutiveDays', { n: stats.streak })}</p>
                             </div>
                         </div>
-                        <div class="week-calendar" role="group" aria-label="Weekly Streak calendar">
+                        <div class="week-calendar" role="group" aria-label="${this.t('weekCalendar')}">
                             ${this.getWeekCalendar()}
                         </div>
                     </div>
@@ -974,37 +1071,38 @@ class SimpleLearningHub {
                 <div class="store-promo-banner" data-aos="fade-up" data-aos-delay="200">
                     <img src="../Multimedia/Images/Molas - Guna/Mola 2.jpg" alt="" class="store-promo-mola" data-no-mola-attribution="true" aria-hidden="true">
                     <div class="store-promo-content">
-                        <span class="store-promo-icon">🛒</span>
+                        <span class="store-promo-icon" aria-hidden="true"><i class="fas fa-store"></i></span>
                         <div>
-                            <h3>Visit the Guna Store</h3>
-                            <p>Spend your <img src="../Multimedia/Images/Soged/oggob.png" alt="" class="inline-oggob-icon" aria-hidden="true"> Oggob to recover <img src="../Multimedia/Images/Soged/Burba.png" alt="" class="inline-burba-icon" aria-hidden="true"> Burba and unlock cultural rewards.</p>
+                            <h3>${this.t('visitStore')}</h3>
+                            <p>${this.t('storePromoText')}</p>
                         </div>
                     </div>
                     <button type="button" class="store-promo-btn" onclick="window.learningHub.navigateToSection('store')">
-                        Go to Store <i class="fas fa-arrow-right"></i>
+                        ${this.t('goToStore')} <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
 
                 <div class="other-courses" data-aos="fade-up" data-aos-delay="250">
-                    <div class="section-header">
-                        <h2 class="section-title">Other Languages</h2>
-                        <p class="section-subtitle">Explore more indigenous cultures of Panama</p>
+                    <div class="section-header guna-section-header">
+                        <h2 class="section-title">${this.t('otherLanguages')}</h2>
+                        ${(window.GunaPattern && window.GunaPattern.html('divider')) || ''}
+                        <p class="section-subtitle">${this.t('otherLanguagesSub')}</p>
                     </div>
                     <div class="courses-grid">
                         ${otherCourses.map(course => `
                             <div class="course-card course-card--soon" aria-disabled="true">
-                                <span class="coming-soon-badge">Coming Soon</span>
+                                <span class="coming-soon-badge">${this.t('comingSoon')}</span>
                                 <div class="course-flag"><img src="${course.flag}" alt="${course.name}" class="course-flag-img"></div>
                                 <h3 class="course-name">${course.name}</h3>
                                 <p class="course-description">${course.description}</p>
                                 <div class="course-progress">
-                                    <div class="course-progress-label">Not available yet</div>
+                                    <div class="course-progress-label">${this.t('notAvailableYet')}</div>
                                     <div class="course-progress-bar">
                                         <div class="course-progress-fill" style="width: 0%"></div>
                                     </div>
                                 </div>
                                 <button class="course-button course-button--disabled" disabled>
-                                    Coming Soon
+                                    ${this.t('comingSoon')}
                                 </button>
                             </div>
                         `).join('')}
@@ -1016,41 +1114,41 @@ class SimpleLearningHub {
 
     getCourseData() {
         const courses = {
-            'ngabe': { name: 'Ngäbe', flag: '🏔️', description: 'Mountain People' },
-            'guna': { name: 'Guna', flag: '🏝️', description: 'Island Culture' },
-            'embera': { name: 'Emberá', flag: '🌊', description: 'River Dwellers' },
-            'naso': { name: 'Naso', flag: '🦋', description: 'Ancient Kingdom' }
+            'ngabe': { name: 'Ngäbe', flag: '🏔️', description: this.t('mountainPeople') },
+            'guna': { name: 'Guna', flag: '🏝️', description: this.t('islandCulture') },
+            'embera': { name: 'Emberá', flag: '🌊', description: this.t('riverDwellers') },
+            'naso': { name: 'Naso', flag: '🦋', description: this.t('ancientKingdom') }
         };
         return courses[this.currentCourse] || courses['ngabe'];
     }
 
     getOtherCourses() {
         const allCourses = [
-            { id: 'ngabe', name: 'Ngäbe', flag: '../Multimedia/Images/Languages/Ngabe.png', description: 'Mountain People' },
-            { id: 'embera', name: 'Emberá', flag: '../Multimedia/Images/Languages/Embera.png', description: 'River Dwellers' },
-            { id: 'naso', name: 'Naso', flag: '../Multimedia/Images/Languages/Naso.gif', description: 'Ancient Kingdom' }
+            { id: 'ngabe', name: 'Ngäbe', flag: '../Multimedia/Images/Languages/Ngabe.png', description: this.t('mountainPeople') },
+            { id: 'embera', name: 'Emberá', flag: '../Multimedia/Images/Languages/Embera.png', description: this.t('riverDwellers') },
+            { id: 'naso', name: 'Naso', flag: '../Multimedia/Images/Languages/Naso.gif', description: this.t('ancientKingdom') }
         ];
         return allCourses;
     }
 
     getSectionTitle(section) {
-        const titles = {
-            overview: 'Dashboard',
-            learn: 'Learning Path',
-            vocabulary: 'Vocabulary',
-            memory: 'Memory Match',
-            games: 'Games Hub',
-            cultural: 'Cultural Readings',
-            puzzle: 'Mola Puzzle',
-            community: 'Culture Center',
-            territory: 'Guna Territory',
-            store: 'Guna Store',
-            stories: 'Cultural Stories',
-            chat: 'AI Tutor',
-            leaderboard: 'Leaderboard',
-            achievements: 'Achievements'
+        const keys = {
+            overview: 'dashboard',
+            learn: 'learn',
+            vocabulary: 'vocabulary',
+            memory: 'memoryMatch',
+            games: 'gamesHub',
+            cultural: 'cultural',
+            puzzle: 'molaPuzzle',
+            community: 'community',
+            territory: 'territory',
+            store: 'store',
+            stories: 'culturalStories',
+            chat: 'chat',
+            leaderboard: 'leaderboard',
+            achievements: 'achievements'
         };
-        return titles[section] || section.charAt(0).toUpperCase() + section.slice(1);
+        return this.t(keys[section] || section);
     }
 
     getCurrentCourse() {
@@ -1204,7 +1302,10 @@ class SimpleLearningHub {
         const pathBar = document.querySelector('[data-path-progress]');
         const pathPercent = document.querySelector('[data-path-percent]');
         if (pathBar) pathBar.style.width = `${stats.pathProgress}%`;
-        if (pathPercent) pathPercent.textContent = `${stats.pathProgress}% complete`;
+        if (pathPercent) {
+            pathPercent.dataset.i18nN = String(stats.pathProgress);
+            pathPercent.textContent = this.t('percentComplete', { n: stats.pathProgress });
+        }
 
         if (typeof CocosEconomy !== 'undefined') {
             CocosEconomy.updateAllDisplays();
@@ -1226,14 +1327,14 @@ class SimpleLearningHub {
 
     switchCourse(courseId) {
         if (courseId !== 'guna') {
-            this.showNotification('Coming Soon — only Guna is available right now!', 'info');
+            this.showNotification(this.t('comingSoonOnlyGuna'), 'info');
             document.getElementById('courseDropdown')?.classList.remove('show');
             return;
         }
         if (courseId === this.currentCourse) return;
 
         const courses = {
-            'guna': { name: 'Guna', flag: '🏝️', desc: 'Island Culture' }
+            'guna': { name: 'Guna', flag: '🏝️', desc: this.t('islandCulture') }
         };
 
         const course = courses[courseId];
@@ -1253,7 +1354,7 @@ class SimpleLearningHub {
             this.loadSection(this.currentSection);
         }
 
-        this.showNotification(`Switched to ${course.name}! 🎯`, 'success');
+        this.showNotification(this.t('switchedTo', { name: course.name }), 'success');
     }
 
     updateCourseDisplay(course) {
@@ -1269,8 +1370,6 @@ class SimpleLearningHub {
         }
         const nameEl = document.querySelector('.course-name');
         if (nameEl) nameEl.textContent = course.name;
-        const descEl = document.querySelector('.course-desc');
-        if (descEl) descEl.textContent = course.desc || course.description || '';
 
         document.querySelectorAll('.course-option').forEach(option => {
             option.classList.remove('active');

@@ -86,8 +86,8 @@ class GunaTerritorySection extends HTMLElement {
         this.innerHTML = `
             <div class="territory-section territory-section--map-only">
                 <header class="territory-hero" data-aos="fade-up">
-                    <h1>🗺️ Guna Territory Map</h1>
-                    <p>Tap the points on the red zone (Guna Yala) to explore molas and culture</p>
+                    <h1>🗺️ ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('territoryMapTitle') : 'Guna Territory Map'}</h1>
+                    <p>${typeof GunaI18n !== 'undefined' ? GunaI18n.t('territoryMapSub') : 'Tap the points on the red zone (Guna Yala) to explore molas and culture'}</p>
                 </header>
 
                 <div class="panama-map-layout">
@@ -112,7 +112,7 @@ class GunaTerritorySection extends HTMLElement {
                     <aside class="panama-map-panel" id="panamaMapPanel">
                         <div class="map-panel-placeholder">
                             <i class="fas fa-hand-pointer"></i>
-                            <p>Select a point on the <strong>red zone</strong> to learn about molas and Guna culture</p>
+                            <p>${typeof GunaI18n !== 'undefined' ? GunaI18n.t('mapSelectHint') : 'Select a point on the red zone to learn about molas and Guna culture'}</p>
                         </div>
                     </aside>
                 </div>

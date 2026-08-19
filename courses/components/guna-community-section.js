@@ -9,12 +9,13 @@ class GunaCommunitySection extends HTMLElement {
     }
 
     getTabs() {
+        const t = (k) => typeof GunaI18n !== 'undefined' ? GunaI18n.t(k) : k;
         return [
-            { id: 'history', label: 'History', icon: '📜' },
-            { id: 'bookshelf', label: 'My Bookshelf', icon: '📚' },
-            { id: 'culture', label: 'Culture', icon: '🧵' },
-            { id: 'spirituality', label: 'Spirituality', icon: '🌟' },
-            { id: 'nature', label: 'Nature', icon: '🌊' }
+            { id: 'history', label: t('tabHistory'), icon: '📜' },
+            { id: 'bookshelf', label: t('tabBookshelf'), icon: '📚' },
+            { id: 'culture', label: t('tabCulture'), icon: '🧵' },
+            { id: 'spirituality', label: t('tabSpirituality'), icon: '🌟' },
+            { id: 'nature', label: t('tabNature'), icon: '🌊' }
         ];
     }
 
@@ -244,8 +245,8 @@ class GunaCommunitySection extends HTMLElement {
         this.innerHTML = `
             <div class="community-section">
                 <header class="community-hero" data-aos="fade-up">
-                    <h1>🏝️ Guna Community</h1>
-                    <p>Cultural center — history, traditions and wisdom of the Guna people</p>
+                    <h1>🏝️ ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('communityHeroTitle') : 'Guna Community'}</h1>
+                    <p>${typeof GunaI18n !== 'undefined' ? GunaI18n.t('communityHeroSub') : 'Cultural center — history, traditions and wisdom of the Guna people'}</p>
                 </header>
 
                 <nav class="community-tabs" role="tablist">
@@ -262,16 +263,16 @@ class GunaCommunitySection extends HTMLElement {
                 </div>
 
                 <div class="community-resources">
-                    <h3>📚 Explore More</h3>
+                    <h3>📚 ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('exploreMore') : 'Explore More'}</h3>
                     <div class="community-resource-links">
                         <button type="button" class="resource-link-btn" data-go="stories">
-                            <i class="fas fa-book-open"></i> Read Stories & PDFs
+                            <i class="fas fa-book-open"></i> ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('readStories') : 'Read Stories & PDFs'}
                         </button>
                         <button type="button" class="resource-link-btn" data-go="vocabulary">
-                            <i class="fas fa-book"></i> Browse Vocabulary
+                            <i class="fas fa-book"></i> ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('browseVocab') : 'Browse Vocabulary'}
                         </button>
                         <button type="button" class="resource-link-btn" data-go="learn">
-                            <i class="fas fa-map"></i> Learning Path
+                            <i class="fas fa-map"></i> ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('learn') : 'Learning Path'}
                         </button>
                     </div>
                 </div>

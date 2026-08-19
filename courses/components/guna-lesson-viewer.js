@@ -574,158 +574,6 @@ class GunaLessonViewer extends HTMLElement {
                     box-shadow: none;
                 }
 
-                .audio-player-container {
-                    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-                    border-radius: 12px;
-                    padding: 1.5rem;
-                    margin: 2rem 0;
-                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                }
-
-                .audio-player-header {
-                    display: flex;
-                    align-items: center;
-                    gap: 1rem;
-                    margin-bottom: 1rem;
-                }
-
-                .audio-player-header i {
-                    font-size: 1.5rem;
-                    color: var(--primary-color);
-                }
-
-                .audio-player-header h4 {
-                    margin: 0;
-                    color: var(--text-primary);
-                }
-
-                .audio-controls {
-                    display: flex;
-                    align-items: center;
-                    gap: 1rem;
-                    margin-bottom: 1rem;
-                }
-
-                .play-btn {
-                    width: 50px;
-                    height: 50px;
-                    border-radius: 50%;
-                    background: var(--gradient-primary);
-                    color: white;
-                    border: none;
-                    cursor: pointer;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 1.2rem;
-                    transition: all 0.3s ease;
-                }
-
-                .play-btn:hover {
-                    transform: scale(1.1);
-                    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
-                }
-
-                .progress-container {
-                    flex: 1;
-                    height: 8px;
-                    background: #e9ecef;
-                    border-radius: 4px;
-                    overflow: hidden;
-                    cursor: pointer;
-                }
-
-                .progress-bar-audio {
-                    height: 100%;
-                    background: var(--gradient-primary);
-                    width: 0%;
-                    transition: width 0.1s linear;
-                }
-
-                .time-display {
-                    font-size: 0.9rem;
-                    color: var(--text-secondary);
-                    min-width: 80px;
-                    text-align: center;
-                }
-
-                .volume-control {
-                    display: flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                }
-
-                .volume-slider {
-                    width: 80px;
-                    cursor: pointer;
-                }
-
-                .download-resources {
-                    background: white;
-                    border-radius: 12px;
-                    padding: 1.5rem;
-                    margin: 2rem 0;
-                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                }
-
-                .download-resources h4 {
-                    margin-bottom: 1rem;
-                    color: var(--text-primary);
-                    display: flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                }
-
-                .download-resources h4 i {
-                    color: var(--primary-color);
-                }
-
-                .download-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                    gap: 1rem;
-                }
-
-                .download-item {
-                    display: flex;
-                    align-items: center;
-                    gap: 0.75rem;
-                    padding: 1rem;
-                    background: var(--bg-tertiary);
-                    border-radius: 8px;
-                    text-decoration: none;
-                    color: var(--text-primary);
-                    transition: all 0.3s ease;
-                }
-
-                .download-item:hover {
-                    background: var(--primary-light);
-                    transform: translateY(-2px);
-                }
-
-                .download-item i {
-                    font-size: 1.2rem;
-                    color: var(--primary-color);
-                }
-
-                .download-item .file-info {
-                    flex: 1;
-                }
-
-                .download-item .file-name {
-                    font-weight: 600;
-                    font-size: 0.9rem;
-                }
-
-                .download-item .file-size {
-                    font-size: 0.8rem;
-                    color: var(--text-secondary);
-                }
-
-                .download-item .download-icon {
-                    color: var(--primary-color);
-                }
-
                 @media (max-width: 768px) {
                     .lesson-viewer {
                         padding: 1rem;
@@ -803,62 +651,6 @@ class GunaLessonViewer extends HTMLElement {
                     ${this.lessonContent.sections[this.currentSectionIndex]?.content || '<p>Loading section…</p>'}
                 </div>
 
-                <!-- Audio Player Section -->
-                <div class="audio-player-container">
-                    <div class="audio-player-header">
-                        <i class="fas fa-headphones"></i>
-                        <h4>Native Audio</h4>
-                    </div>
-                    <div class="audio-controls">
-                        <button class="play-btn" id="audioPlayBtn">
-                            <i class="fas fa-play"></i>
-                        </button>
-                        <div class="progress-container" id="audioProgress">
-                            <div class="progress-bar-audio" id="audioProgressBar"></div>
-                        </div>
-                        <span class="time-display" id="audioTime">0:00 / 0:00</span>
-                        <div class="volume-control">
-                            <i class="fas fa-volume-up"></i>
-                            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="80">
-                        </div>
-                    </div>
-                    <audio id="audioElement" src="../audio/guna-lesson-${this.currentLessonId}.mp3" preload="auto"></audio>
-                </div>
-
-                <!-- Download Resources Section -->
-                <div class="download-resources">
-                    <h4>
-                        <i class="fas fa-download"></i>
-                        Offline Resources
-                    </h4>
-                    <div class="download-grid">
-                        <a href="../resources/lesson-${this.currentLessonId}-audio.mp3" download class="download-item">
-                            <i class="fas fa-file-audio"></i>
-                            <div class="file-info">
-                                <span class="file-name">Lesson Audio</span>
-                                <span class="file-size">2.5 MB</span>
-                            </div>
-                            <i class="fas fa-download download-icon"></i>
-                        </a>
-                        <a href="../resources/lesson-${this.currentLessonId}-vocabulary.pdf" download class="download-item">
-                            <i class="fas fa-file-pdf"></i>
-                            <div class="file-info">
-                                <span class="file-name">Vocabulary PDF</span>
-                                <span class="file-size">1.2 MB</span>
-                            </div>
-                            <i class="fas fa-download download-icon"></i>
-                        </a>
-                        <a href="../resources/lesson-${this.currentLessonId}-transcript.pdf" download class="download-item">
-                            <i class="fas fa-file-alt"></i>
-                            <div class="file-info">
-                                <span class="file-name">Transcript</span>
-                                <span class="file-size">0.8 MB</span>
-                            </div>
-                            <i class="fas fa-download download-icon"></i>
-                        </a>
-                    </div>
-                </div>
-
                 <div class="navigation-buttons">
                     <button class="nav-btn" id="prevBtn" ${this.currentSectionIndex === 0 ? 'disabled' : ''}>
                         <i class="fas fa-arrow-left"></i> Previous
@@ -926,9 +718,6 @@ class GunaLessonViewer extends HTMLElement {
         this.querySelector('#goToStoreBtn')?.addEventListener('click', () => {
             window.learningHub?.loadSection('store', true);
         });
-
-        // Audio player functionality
-        this.initializeAudioPlayer();
 
         // Section navigation
         this.querySelectorAll('.section-tab:not([disabled])').forEach(tab => {
@@ -1038,77 +827,6 @@ class GunaLessonViewer extends HTMLElement {
             this.speakText(speak.dataset.speak);
         });
         renderCard();
-    }
-
-    initializeAudioPlayer() {
-        const audioElement = this.querySelector('#audioElement');
-        const playBtn = this.querySelector('#audioPlayBtn');
-        const progressBar = this.querySelector('#audioProgressBar');
-        const progressContainer = this.querySelector('#audioProgress');
-        const timeDisplay = this.querySelector('#audioTime');
-        const volumeSlider = this.querySelector('#volumeSlider');
-
-        if (!audioElement || !playBtn) return;
-
-        let isPlaying = false;
-
-        const formatTime = (seconds) => {
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs.toString().padStart(2, '0')}`;
-        };
-
-        const updateTimeDisplay = () => {
-            const current = audioElement.currentTime;
-            const duration = audioElement.duration || 0;
-            timeDisplay.textContent = `${formatTime(current)} / ${formatTime(duration)}`;
-        };
-
-        const updateProgress = () => {
-            const progress = (audioElement.currentTime / audioElement.duration) * 100;
-            progressBar.style.width = `${progress}%`;
-        };
-
-        playBtn.addEventListener('click', () => {
-            if (isPlaying) {
-                audioElement.pause();
-                playBtn.innerHTML = '<i class="fas fa-play"></i>';
-            } else {
-                audioElement.play();
-                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            }
-            isPlaying = !isPlaying;
-        });
-
-        audioElement.addEventListener('timeupdate', () => {
-            updateTimeDisplay();
-            updateProgress();
-        });
-
-        audioElement.addEventListener('ended', () => {
-            isPlaying = false;
-            playBtn.innerHTML = '<i class="fas fa-play"></i>';
-            progressBar.style.width = '0%';
-        });
-
-        audioElement.addEventListener('loadedmetadata', () => {
-            updateTimeDisplay();
-        });
-
-        progressContainer.addEventListener('click', (e) => {
-            const rect = progressContainer.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const width = rect.width;
-            const percentage = x / width;
-            audioElement.currentTime = percentage * audioElement.duration;
-        });
-
-        volumeSlider.addEventListener('input', (e) => {
-            audioElement.volume = e.target.value / 100;
-        });
-
-        // Set initial volume
-        audioElement.volume = 0.8;
     }
 
     setupMemoryGame() {
@@ -1293,6 +1011,15 @@ class GunaLessonViewer extends HTMLElement {
             this.saveSession();
             this.render();
             this.initializeEventListeners();
+            if (window.HubFlow && typeof HubFlow.scrollToTop === 'function') {
+                HubFlow.scrollToTop();
+            } else if (window.learningHub && typeof window.learningHub.scrollToPageTop === 'function') {
+                window.learningHub.scrollToPageTop();
+            } else {
+                window.scrollTo(0, 0);
+                document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
+            }
         }
     }
 
