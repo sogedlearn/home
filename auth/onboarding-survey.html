@@ -525,6 +525,7 @@
                 <div class="completion-message">
                     <i class="fas fa-check-circle"></i>
                     <h2>Perfect! Let's start your journey</h2>
+                    <p>Please confirm your email in your inbox to continue.</p>
                     <p>We're setting up your personalized learning experience...</p>
                 </div>
             </div>
@@ -689,7 +690,7 @@
             document.getElementById('completion').classList.add('active');
             document.getElementById('navButtons').style.display = 'none';
             
-            // Redirect to the selected course after 3 seconds
+            // Redirect to the selected course after 5 seconds
             setTimeout(() => {
                 const selectedLanguage = surveyData.question1;
                 let courseUrl = '';
@@ -708,11 +709,11 @@
                         courseUrl = '../courses/learning-hub.html?course=embera';
                         break;
                     default:
-                        courseUrl = '../courses/learning-hub.html?course=guna'; // Default to Guna course
+                        courseUrl = '../courses/learning-hub.html#learn?'; // Default to Guna course
                 }
                 
                 window.location.href = courseUrl;
-            }, 3000);
+            }, 5000);
         }
 
         // Initialize
