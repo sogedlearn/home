@@ -88,11 +88,25 @@ const GunaGamification = {
 
     recordStudyDay() {
         const state = this.getState();
-        const today = new Date().toISOString().slice(0, 10);
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+        let today;
+        try {
+            today = new Intl.DateTimeFormat('en-CA', {
+                timeZone, year: 'numeric', month: '2-digit', day: '2-digit'
+            }).format(new Date());
+        } catch {
+            today = new Date().toISOString().slice(0, 10);
+        }
         if (state.lastStudyDate === today) return state;
-        const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 1);
-        const yStr = yesterday.toISOString().slice(0, 10);
+        const yesterdayDate = new Date(Date.now() - 86400000);
+        let yStr;
+        try {
+            yStr = new Intl.DateTimeFormat('en-CA', {
+                timeZone, year: 'numeric', month: '2-digit', day: '2-digit'
+            }).format(yesterdayDate);
+        } catch {
+            yStr = yesterdayDate.toISOString().slice(0, 10);
+        }
         state.streak = state.lastStudyDate === yStr ? state.streak + 1 : 1;
         state.lastStudyDate = today;
         this.saveState(state);
@@ -115,7 +129,6 @@ const GunaGamification = {
         this.saveState(state);
         if (perfect) localStorage.setItem('guna_memory_perfect', '1');
         this.addXP(perfect ? 40 : 20);
-        if (typeof CocosEconomy !== 'undefined') CocosEconomy.addOggob(perfect ? 15 : 8);
         this.checkAllBadges();
     },
 

@@ -91,14 +91,82 @@ const GunaUserData = {
         if (merged.theme === 'dark') {
             document.body.classList.add('dark-mode');
             localStorage.setItem('gunaTheme', 'dark');
-        } else {
+        } else if (merged.theme === 'light') {
             document.body.classList.remove('dark-mode');
             localStorage.setItem('gunaTheme', 'light');
+        } else if (merged.theme === 'auto') {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.body.classList.toggle('dark-mode', prefersDark);
+            localStorage.setItem('gunaTheme', prefersDark ? 'dark' : 'light');
         }
         if (typeof GunaI18n !== 'undefined') {
             GunaI18n.setLanguage(merged.language);
         }
         return merged;
+    },
+
+    collectSettingsFromForm() {
+        const profileName = document.getElementById('username')?.value?.trim()
+            || document.getElementById('profileUsername')?.value?.trim()
+            || this.getProfile().username
+            || '';
+        const form = {
+            language: document.getElementById('settingLanguage')?.value || 'en',
+            theme: document.getElementById('settingTheme')?.value || 'light',
+            notifications: {
+                dailyReminders: !!document.getElementById('settingDailyReminders')?.checked,
+                achievementNotif: !!document.getElementById('settingAchievementNotif')?.checked,
+                streakReminders: !!document.getElementById('settingStreakReminders')?.checked
+            },
+            audioPlayback: !!document.getElementById('settingAudioPlayback')?.checked,
+            speechRecognition: !!document.getElementById('settingSpeechRecognition')?.checked,
+            dailyGoal: parseInt(document.getElementById('settingDailyGoal')?.value || '100', 10),
+            difficulty: document.getElementById('settingDifficulty')?.value || 'intermediate'
+        };
+        if (profileName) form.name = profileName;
+        return form;
+    },
+
+    async persistSettingsToServer(formData) {
+        if (typeof SogedSession === 'undefined') {
+            return { settings: this.saveSettings(formData) };
+        }
+        const updated = await SogedSession.api('/api/v1/user/settings', {
+            method: 'PATCH',
+            body: formData
+        });
+        const settings = updated.settings || formData;
+        this.saveSettings({
+            displayName: settings.displayName || settings.name,
+            language: settings.language,
+            theme: settings.theme,
+            dailyReminders: settings.dailyReminders ?? settings.notifications?.dailyReminders,
+            achievementNotif: settings.achievementNotif ?? settings.notifications?.achievementNotif,
+            streakReminders: settings.streakReminders ?? settings.notifications?.streakReminders,
+            audioPlayback: settings.audioPlayback,
+            speechRecognition: settings.speechRecognition,
+            dailyGoal: settings.dailyGoal,
+            difficulty: settings.difficulty
+        });
+        if (settings.displayName || settings.name) {
+            this.saveProfile({ username: settings.displayName || settings.name });
+        }
+        return updated;
+    },
+
+    async loadSettingsFromServer() {
+        if (typeof SogedSession === 'undefined') return this.getSettings();
+        try {
+            const data = await SogedSession.api('/api/v1/user/settings');
+            if (data?.settings) {
+                this.saveSettings(data.settings);
+                this.applySettingsToForm(data.settings);
+                return data.settings;
+            }
+        } catch (error) {
+            console.warn('Could not load settings from server:', error);
+        }
+        return this.getSettings();
     },
 
     applyProfileToUI(profile) {

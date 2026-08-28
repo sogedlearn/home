@@ -1272,28 +1272,21 @@ class GunaLessonViewer extends HTMLElement {
         if (quizResults) quizResults.style.display = 'none';
     }
 
-    completeLesson() {
+    async completeLesson() {
         if (typeof GunaProgress !== 'undefined' && !GunaProgress.canAccessLesson(this.currentLessonId)) {
             this.showNotification('Cannot complete a locked lesson.', 'error');
             return;
         }
         if (typeof GunaProgress !== 'undefined') {
-            GunaProgress.completeLesson(this.currentLessonId);
-        }
-        if (typeof GunaGamification !== 'undefined') {
-            GunaGamification.onLessonComplete(this.currentLessonId, this.lessonContent?.xp || 50);
-            if (this.currentLessonId === 10) {
-                GunaGamification.awardBadge('guna-master');
-                if (typeof CocosEconomy !== 'undefined') CocosEconomy.addOggob(25);
-            }
+            await GunaProgress.completeLesson(this.currentLessonId);
         }
         this.gunaLessons.saveProgress(this.currentLessonId, {
             completed: true,
             completedAt: new Date().toISOString()
         });
-        
+
         this.showNotification('🎉 Lesson completed! Great job!', 'success');
-        
+
         this.dispatchEvent(new CustomEvent('lessonCompleted', {
             detail: {
                 lessonId: this.currentLessonId,

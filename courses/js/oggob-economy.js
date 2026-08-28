@@ -4,7 +4,7 @@
 const OggobEconomy = {
     STORAGE_KEY: 'guna_oggob',
     PURCHASES_KEY: 'guna_purchases',
-    DEFAULT_BALANCE: 1250,
+    DEFAULT_BALANCE: 0,
 
     getBalance() {
         const stored = localStorage.getItem(this.STORAGE_KEY);

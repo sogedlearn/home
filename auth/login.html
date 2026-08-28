@@ -482,7 +482,7 @@
             </form>
 
             <div class="forgot-password">
-                <a href="#"><i class="fas fa-question-circle me-1"></i>Forgot your password?</a>
+                <a href="forgot-password.html"><i class="fas fa-question-circle me-1"></i>Forgot your password?</a>
             </div>
 
             <div class="register-link">
@@ -505,6 +505,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../js/auth-background.js"></script>
     <script src="../js/supabase-config.js"></script>
+    <script src="../js/soged-session.js"></script>
     
     <script>
         // Initialize AOS
@@ -561,32 +562,33 @@
                 if (error) {
                     loginBtn.classList.remove('btn-loading');
                     console.error('Login error:', error);
-                    
-                    // Show specific error message
+
                     let errorMessage = 'Correo o contraseña incorrectos';
                     if (error.message.includes('Email not confirmed')) {
                         errorMessage = 'Por favor confirma tu correo electrónico antes de iniciar sesión';
                     } else if (error.message.includes('Invalid login credentials')) {
                         errorMessage = 'Correo o contraseña incorrectos';
+                    } else if (/expired/i.test(error.message)) {
+                        errorMessage = 'El enlace expiró. Solicita uno nuevo.';
                     } else {
                         errorMessage = 'Error: ' + error.message;
                     }
-                    
+
                     showNotification(errorMessage, 'error');
                     return;
                 }
 
-                // Show success animation
+                if (data.session && window.SogedSession) {
+                    SogedSession.persistSession(data.session);
+                } else if (data.session) {
+                    localStorage.setItem('soged_token', data.session.access_token);
+                }
+
                 loginBtn.classList.remove('btn-loading');
                 loginBtn.classList.add('success-animation');
-                
-                // Show success message
                 showNotification('Login successful! Redirecting...', 'success');
-                
-                // Redirect after animation
-                setTimeout(() => {
-                    window.location.href = '../courses/learning-hub.html';
-                }, 1500);
+
+                window.location.href = '../courses/learning-hub.html';
             } catch (error) {
                 loginBtn.classList.remove('btn-loading');
                 console.error('Login exception:', error);

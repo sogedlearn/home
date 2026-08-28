@@ -4,7 +4,7 @@
 const CocosEconomy = {
     STORAGE_KEY: 'guna_oggob',
     PURCHASES_KEY: 'guna_purchases',
-    DEFAULT_BALANCE: 1250,
+    DEFAULT_BALANCE: 0,
 
     getBalance() {
         const stored = localStorage.getItem(this.STORAGE_KEY);
@@ -29,9 +29,38 @@ const CocosEconomy = {
         return newBalance;
     },
 
-    spendOggob(amount) {
+    async spendOggob(amount, { itemId, oneTime = false, source = 'store', idempotencyKey, burdaDelta = 0 } = {}) {
         const balance = this.getBalance();
         if (balance < amount) return false;
+        if (typeof SogedSession !== 'undefined') {
+            try {
+                const result = await SogedSession.api('/api/v1/economy/transact', {
+                    method: 'POST',
+                    body: {
+                        action: oneTime ? 'purchase' : 'spend',
+                        amount: -Math.abs(amount),
+                        burdaDelta,
+                        source,
+                        itemId,
+                        oneTime,
+                        idempotencyKey: idempotencyKey || `${source}:${itemId || 'spend'}`
+                    }
+                });
+                this.setBalance(result.ogods);
+                if (result.burdas != null && typeof GunaLives !== 'undefined') {
+                    const state = GunaLives.getState();
+                    state.lives = result.burdas;
+                    GunaLives.saveState(state);
+                }
+                this.animateOggobChange('spend');
+                return result;
+            } catch (error) {
+                if (error.payload?.code === 'ALREADY_PURCHASED' || error.payload?.code === 'INSUFFICIENT_FUNDS') {
+                    return false;
+                }
+                console.warn('Economy spend sync failed, using local fallback:', error);
+            }
+        }
         this.setBalance(balance - amount);
         this.animateOggobChange('spend');
         return true;

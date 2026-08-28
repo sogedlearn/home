@@ -13,11 +13,12 @@ const GunaProgress = {
                     completed: [],
                     current: 1,
                     sessions: {},
+                    maxCompletedLevel: 0,
                     ...data
                 };
             }
         } catch { /* ignore */ }
-        return { completed: [], current: 1, sessions: {} };
+        return { completed: [], current: 1, sessions: {}, maxCompletedLevel: 0 };
     },
 
     saveProgress(data) {
@@ -32,7 +33,11 @@ const GunaProgress = {
         const id = parseInt(lessonId, 10);
         if (allowReview && this.isCompleted(id)) return true;
         if (id === 1) return true;
-        return this.getProgress().completed.includes(id - 1);
+        const progress = this.getProgress();
+        const maxCompleted = Number.isFinite(progress.maxCompletedLevel)
+            ? progress.maxCompletedLevel
+            : Math.max(0, ...(progress.completed || [0]));
+        return id <= maxCompleted + 1 && (progress.completed.includes(id - 1) || maxCompleted >= id - 1);
     },
 
     getLessonsWithStatus(baseLessons) {
@@ -75,7 +80,7 @@ const GunaProgress = {
         this.saveProgress(progress);
     },
 
-    completeLesson(lessonId) {
+    async completeLesson(lessonId) {
         const id = parseInt(lessonId, 10);
         if (!this.canAccessLesson(id)) return this.getProgress();
 
@@ -89,10 +94,74 @@ const GunaProgress = {
         this.clearLessonSession(id);
         this.saveProgress(progress);
 
+        try {
+            if (typeof SogedSession !== 'undefined') {
+                const result = await SogedSession.api('/api/v1/progress/complete', {
+                    method: 'POST',
+                    body: {
+                        levelId: id,
+                        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC',
+                        idempotencyKey: `complete-level-${id}`
+                    }
+                });
+                if (result.progress) {
+                    this.saveProgress({
+                        ...this.getProgress(),
+                        completed: result.progress.completed || progress.completed,
+                        current: result.progress.current || progress.current,
+                        maxCompletedLevel: result.progress.maxCompletedLevel
+                    });
+                }
+                if (result.ogods != null && typeof CocosEconomy !== 'undefined') {
+                    CocosEconomy.setBalance(result.ogods);
+                }
+                if (typeof GunaGamification !== 'undefined' && result.progress) {
+                    const state = GunaGamification.getState();
+                    state.xp = result.progress.xp;
+                    state.level = result.progress.level;
+                    state.streak = result.progress.streak;
+                    state.lastStudyDate = result.progress.lastStudyDate;
+                    state.totalLessons = Math.max(state.totalLessons || 0, id);
+                    GunaGamification.saveState(state);
+                }
+                window.dispatchEvent(new CustomEvent('soged:progress-updated', { detail: result }));
+                return this.getProgress();
+            }
+        } catch (error) {
+            console.warn('Progress sync failed, keeping local completion:', error);
+        }
+
         if (typeof CocosEconomy !== 'undefined') {
             CocosEconomy.addOggob(25);
         }
-        return progress;
+        return this.getProgress();
+    },
+
+    async syncFromServer() {
+        if (typeof SogedSession === 'undefined') return this.getProgress();
+        try {
+            const data = await SogedSession.api('/api/v1/progress');
+            if (data?.progress) {
+                const current = this.getProgress();
+                this.saveProgress({
+                    ...current,
+                    completed: data.progress.completed || current.completed,
+                    current: data.progress.current || current.current,
+                    maxCompletedLevel: data.progress.maxCompletedLevel
+                });
+                if (typeof GunaGamification !== 'undefined') {
+                    const state = GunaGamification.getState();
+                    state.xp = data.progress.xp ?? state.xp;
+                    state.level = data.progress.level ?? state.level;
+                    state.streak = data.progress.streak ?? state.streak;
+                    state.lastStudyDate = data.progress.lastStudyDate ?? state.lastStudyDate;
+                    GunaGamification.saveState(state);
+                }
+            }
+        } catch (error) {
+            console.warn('Could not sync progress:', error);
+        }
+        return this.getProgress();
     },
 
     getCompletedCount() {

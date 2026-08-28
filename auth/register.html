@@ -522,7 +522,7 @@
                 <div class="terms-check">
                     <input class="form-check-input" type="checkbox" id="agreeTerms" required>
                     <label class="form-check-label" for="agreeTerms">
-                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                        I agree to the <a href="../pages/about.html">Terms of Service</a> and <a href="../pages/about.html">Privacy Policy</a>
                     </label>
                 </div>
 
@@ -547,6 +547,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../js/supabase-config.js"></script>
+    <script src="../js/soged-session.js"></script>
     
     <script>
         // Initialize AOS
@@ -621,8 +622,13 @@
                 return;
             }
 
-            if (password.length < 6) {
-                showNotification('Password must be at least 6 characters long', 'error');
+            if (password.length < 8) {
+                showNotification('Password must be at least 8 characters long', 'error');
+                return;
+            }
+
+            if (!/[A-Za-z]/.test(password) || !/\d/.test(password)) {
+                showNotification('Password must include at least one letter and one number', 'error');
                 return;
             }
 
@@ -644,27 +650,31 @@
                             first_name: firstName,
                             last_name: lastName,
                             username: username
-                        }
+                        },
+                        emailRedirectTo: window.location.origin + '/auth/login.html'
                     }
                 });
 
                 if (error) {
                     registerBtn.classList.remove('btn-loading');
-                    showNotification('Error: ' + error.message, 'error');
+                    const already = /already registered/i.test(error.message);
+                    showNotification(already ? 'This email is already registered.' : ('Error: ' + error.message), 'error');
                     return;
                 }
 
-                // Show success animation
                 registerBtn.classList.remove('btn-loading');
                 registerBtn.classList.add('success-animation');
-                
-                // Show success message
-                showNotification('Account created successfully! Redirecting...', 'success');
-                
-                // Redirect after animation
-                setTimeout(() => {
+
+                if (data.session && window.SogedSession) {
+                    SogedSession.persistSession(data.session);
+                    try { await SogedSession.api('/api/v1/economy'); } catch (e) { console.warn(e); }
+                    showNotification('Account created successfully! Redirecting...', 'success');
                     window.location.href = 'onboarding-survey.html';
-                }, 1500);
+                    return;
+                }
+
+                showNotification('Account created. Check your email to verify your account before signing in.', 'success');
+                setTimeout(() => { window.location.href = 'login.html'; }, 2500);
             } catch (error) {
                 registerBtn.classList.remove('btn-loading');
                 showNotification('Error: ' + error.message, 'error');

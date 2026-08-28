@@ -44,10 +44,13 @@ class SimpleLearningHub {
         if (typeof GunaUserData !== 'undefined') {
             GunaUserData.applyProfileToUI();
             GunaUserData.applySettingsToForm();
-            GunaUserData.saveSettings(GunaUserData.getSettings());
+            GunaUserData.loadSettingsFromServer();
         }
         if (typeof GunaI18n !== 'undefined') GunaI18n.apply();
         if (typeof GameRewards !== 'undefined') GameRewards.syncFromServer();
+        if (typeof GunaProgress !== 'undefined' && GunaProgress.syncFromServer) {
+            GunaProgress.syncFromServer();
+        }
         document.addEventListener('guna-language-changed', () => {
             this.updateBreadcrumb(this.currentSection);
             this.updatePathProgressUI();
@@ -76,6 +79,22 @@ class SimpleLearningHub {
     setupSidebar() {
         const sidebarToggle = document.getElementById('sidebarToggle');
         const sidebar = document.getElementById('sidebar');
+        const brand = document.querySelector('.sidebar-brand');
+
+        if (brand && !brand.dataset.homeBound) {
+            brand.dataset.homeBound = '1';
+            brand.setAttribute('role', 'link');
+            brand.setAttribute('tabindex', '0');
+            brand.style.cursor = 'pointer';
+            const goHome = () => { window.location.href = '../index.html'; };
+            brand.addEventListener('click', goHome);
+            brand.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    goHome();
+                }
+            });
+        }
 
         if (sidebarToggle) {
             sidebarToggle.addEventListener('click', () => {
@@ -1196,7 +1215,6 @@ class SimpleLearningHub {
         const username = localStorage.getItem('username');
         
         if (isLoggedIn === 'true' && userEmail && userName) {
-            // Convert legacy format to Soged format and save it
             const userData = {
                 name: userName,
                 email: userEmail,
@@ -1204,11 +1222,7 @@ class SimpleLearningHub {
                 role: 'user',
                 subscription: 'basic'
             };
-            
-            // Save in Soged format for future use
-            localStorage.setItem('soged_token', 'dummy_token_' + Date.now());
             localStorage.setItem('soged_user', JSON.stringify(userData));
-            
             return userData;
         }
         
@@ -1216,54 +1230,41 @@ class SimpleLearningHub {
     }
 
     async checkAuthentication() {
-        // Check Supabase session instead of currentUser
+        if (typeof SogedSession !== 'undefined') {
+            try {
+                const session = await SogedSession.hydrate();
+                if (session) {
+                    this.currentUser = SogedSession.getUser();
+                    return true;
+                }
+            } catch (error) {
+                console.error('Error checking authentication:', error);
+            }
+        }
+
         if (typeof supabaseClient !== 'undefined') {
             try {
                 const { data: { session } } = await supabaseClient.auth.getSession();
-                if (!session) {
-                    // Allow guest mode - set guest user data
-                    const guestData = {
-                        name: 'Explorer',
-                        username: 'Explorer',
-                        email: 'guest@soged.org',
-                        role: 'guest',
-                        subscription: 'basic'
-                    };
-                    localStorage.setItem('soged_token', 'guest_token');
-                    localStorage.setItem('soged_user', JSON.stringify(guestData));
-                    this.currentUser = guestData;
+                if (session) {
+                    if (typeof SogedSession !== 'undefined') SogedSession.persistSession(session);
+                    this.currentUser = this.getCurrentUser();
                     return true;
                 }
-                return true;
             } catch (error) {
                 console.error('Error checking authentication:', error);
-                // Allow guest mode on error
-                const guestData = {
-                    name: 'Explorer',
-                    username: 'Explorer',
-                    email: 'guest@soged.org',
-                    role: 'guest',
-                    subscription: 'basic'
-                };
-                localStorage.setItem('soged_token', 'guest_token');
-                localStorage.setItem('soged_user', JSON.stringify(guestData));
-                this.currentUser = guestData;
-                return true;
             }
-        } else {
-            // Allow guest mode if Supabase not available
-            const guestData = {
-                name: 'Explorer',
-                username: 'Explorer',
-                email: 'guest@soged.org',
-                role: 'guest',
-                subscription: 'basic'
-            };
-            localStorage.setItem('soged_token', 'guest_token');
-            localStorage.setItem('soged_user', JSON.stringify(guestData));
-            this.currentUser = guestData;
-            return true;
         }
+
+        const guestData = {
+            name: 'Explorer',
+            username: 'Explorer',
+            email: 'guest@soged.org',
+            role: 'guest',
+            subscription: 'basic'
+        };
+        localStorage.setItem('soged_user', JSON.stringify(guestData));
+        this.currentUser = guestData;
+        return true;
     }
 
     updateUserInfo() {
@@ -1475,30 +1476,7 @@ class SimpleLearningHub {
             this.showNotification(typeof GunaI18n !== 'undefined' ? GunaI18n.t('profileSaved') : 'Profile saved!', 'success');
         });
 
-        document.getElementById('saveSettingsBtn')?.addEventListener('click', () => {
-            const settings = GunaUserData.saveSettings({
-                theme: document.getElementById('settingTheme')?.value || 'light',
-                language: document.getElementById('settingLanguage')?.value || 'en',
-                dailyReminders: !!document.getElementById('settingDailyReminders')?.checked,
-                achievementNotif: !!document.getElementById('settingAchievementNotif')?.checked,
-                streakReminders: !!document.getElementById('settingStreakReminders')?.checked,
-                audioPlayback: !!document.getElementById('settingAudioPlayback')?.checked,
-                speechRecognition: !!document.getElementById('settingSpeechRecognition')?.checked,
-                dailyGoal: parseInt(document.getElementById('settingDailyGoal')?.value || '100', 10),
-                difficulty: document.getElementById('settingDifficulty')?.value || 'intermediate'
-            });
-            if (settings.theme === 'dark') {
-                document.body.classList.add('dark-mode');
-            } else if (settings.theme === 'light') {
-                document.body.classList.remove('dark-mode');
-            } else if (settings.theme === 'auto') {
-                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                document.body.classList.toggle('dark-mode', prefersDark);
-            }
-            if (typeof GunaI18n !== 'undefined') GunaI18n.setLanguage(settings.language);
-            this.closeModal('settingsModal');
-            this.showNotification(typeof GunaI18n !== 'undefined' ? GunaI18n.t('settingsSaved') : 'Settings saved!', 'success');
-        });
+        document.getElementById('saveSettingsBtn')?.addEventListener('click', () => this.handleSaveChanges());
 
         document.getElementById('profileModal')?.addEventListener('click', (e) => {
             if (e.target.closest('.modal-header') || e.target.closest('.modal-content')) {
@@ -1506,6 +1484,38 @@ class SimpleLearningHub {
                 GunaUserData.applySettingsToForm();
             }
         });
+    }
+
+    async handleSaveChanges() {
+        const saveButton = document.getElementById('saveSettingsBtn') || document.getElementById('btn-save-settings');
+        if (!saveButton || typeof GunaUserData === 'undefined') return;
+
+        const formData = GunaUserData.collectSettingsFromForm();
+        const originalLabel = saveButton.innerText;
+        saveButton.disabled = true;
+        saveButton.innerText = typeof GunaI18n !== 'undefined' ? GunaI18n.t('savingChanges') : 'Guardando...';
+
+        try {
+            const updatedData = await GunaUserData.persistSettingsToServer(formData);
+            const settings = updatedData.settings || GunaUserData.getSettings();
+            GunaUserData.applySettingsToForm(settings);
+            saveButton.innerText = typeof GunaI18n !== 'undefined' ? GunaI18n.t('changesSaved') : 'Cambios guardados';
+            this.showNotification(
+                typeof GunaI18n !== 'undefined' ? GunaI18n.t('settingsSaved') : 'Configuración actualizada correctamente.',
+                'success'
+            );
+            setTimeout(() => {
+                saveButton.disabled = false;
+                saveButton.innerText = originalLabel || (typeof GunaI18n !== 'undefined' ? GunaI18n.t('saveSettings') : 'Guardar Cambios');
+            }, 2500);
+        } catch (error) {
+            saveButton.disabled = false;
+            saveButton.innerText = originalLabel || (typeof GunaI18n !== 'undefined' ? GunaI18n.t('saveSettings') : 'Guardar Cambios');
+            this.showNotification(
+                error.payload?.message || 'No se pudieron guardar los cambios. Intente de nuevo.',
+                'error'
+            );
+        }
     }
 
     handleUserAction(action) {
@@ -1553,34 +1563,26 @@ class SimpleLearningHub {
     }
 
     async logout() {
-        // Show confirmation first
         if (!confirm('Are you sure you want to log out?')) {
             return;
         }
-        
-        // Sign out from Supabase
+
         if (typeof supabaseClient !== 'undefined') {
             try {
                 await supabaseClient.auth.signOut();
-                console.log('Successfully signed out from Supabase');
             } catch (error) {
                 console.error('Error signing out from Supabase:', error);
             }
         }
-        
-        // Clear user data
-        localStorage.removeItem('currentCourse');
-        localStorage.removeItem('sidebarCollapsed');
-        localStorage.removeItem('userProgress');
-        
-        // Clear Soged authentication data
-        localStorage.removeItem('soged_token');
-        localStorage.removeItem('soged_user');
-        
-        // Clear any remaining Supabase session data
-        localStorage.removeItem('sb-ocmxpaxhcdwrfycsojyc-auth-token');
-        
-        // Redirect to login page instead of main page
+
+        if (typeof SogedSession !== 'undefined') {
+            SogedSession.clearAllUserState();
+        } else {
+            localStorage.removeItem('soged_token');
+            localStorage.removeItem('soged_user');
+            localStorage.removeItem('sb-ocmxpaxhcdwrfycsojyc-auth-token');
+        }
+
         window.location.href = '../auth/login.html';
     }
 

@@ -189,7 +189,7 @@ class GunaStore extends HTMLElement {
         });
     }
 
-    handlePurchase(itemId, price, btn) {
+    async handlePurchase(itemId, price) {
         const catalog = this.getCatalog();
         let item = null;
         for (const cat of Object.values(catalog)) {
@@ -197,6 +197,8 @@ class GunaStore extends HTMLElement {
             if (item) break;
         }
         if (!item) return;
+
+        const clickKey = `store:${itemId}:${item.special ? 'once' : Date.now()}`;
 
         if (item.burba) {
             if (typeof GunaLives === 'undefined') return;
@@ -210,13 +212,20 @@ class GunaStore extends HTMLElement {
                 this.bindEvents();
                 return;
             }
-            if (!CocosEconomy.spendOggob(price)) {
+            const spent = await CocosEconomy.spendOggob(price, {
+                itemId,
+                oneTime: !!item.special,
+                source: 'store',
+                burdaDelta: item.burba,
+                idempotencyKey: item.special ? `store:one-time:${itemId}` : clickKey
+            });
+            if (!spent) {
                 this.showToast(typeof GunaI18n !== 'undefined' ? GunaI18n.t('notEnoughOggob') : 'You do not have enough Oggob.', 'error');
                 return;
             }
-            GunaLives.addLives(item.burba);
             if (item.special) GunaLives.markSpecialOfferUsed();
-            CocosEconomy.recordPurchase(`purchase-${itemId}-${Date.now()}`);
+            if (spent === true) GunaLives.addLives(item.burba);
+            CocosEconomy.recordPurchase(`purchase-${itemId}`);
             CocosEconomy.triggerConfetti();
             this.showToast(`+${item.burba} burba added!`, 'success');
             this.render();
@@ -226,7 +235,13 @@ class GunaStore extends HTMLElement {
 
         if (CocosEconomy.isPurchased(itemId)) return;
 
-        if (!CocosEconomy.spendOggob(price)) {
+        const spent = await CocosEconomy.spendOggob(price, {
+            itemId,
+            oneTime: true,
+            source: 'store',
+            idempotencyKey: `store:one-time:${itemId}`
+        });
+        if (!spent) {
             this.showToast('You do not have enough Oggob. Complete more lessons!', 'error');
             return;
         }
