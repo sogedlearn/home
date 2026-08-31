@@ -114,11 +114,14 @@ class CulturalReadings extends HTMLElement {
 
     render() {
         this.innerHTML = `
-            <div class="hub-module cultural-readings-hub">
-                <soggy-avatar></soggy-avatar>
-                <header>
-                    <h1 class="hub-section-title">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('culturalHubTitle') : 'Cultural Learning Hub'}</h1>
-                    <p class="hub-section-subtitle">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('culturalHubSub') : 'Explore readings, territories, and Guna heritage — earn Oggob by mastering each lesson.'}</p>
+            <div class="hub-module cultural-readings-hub culture-library">
+                <header class="culture-library-hero">
+                    <div>
+                        <p class="culture-library-kicker">SOGED · Cultural Library</p>
+                        <h1 class="hub-section-title">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('culturalHubTitle') : 'Cultural Learning Hub'}</h1>
+                        <p class="hub-section-subtitle">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('culturalHubSub') : 'Explore readings, territories, and Guna heritage — earn Oggob by mastering each lesson.'}</p>
+                    </div>
+                    <div class="culture-library-hero-art" aria-hidden="true"></div>
                 </header>
                 <div class="hub-tabs" role="tablist">
                     <button type="button" class="hub-tab ${this.activeTab === 'readings' ? 'active' : ''}" data-tab="readings">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('tabReadings') : 'Cultural Readings'}</button>
@@ -173,16 +176,23 @@ class CulturalReadings extends HTMLElement {
                 break;
             default:
                 container.innerHTML = `
-                    <div class="hub-card-grid">
-                        ${this.readings.map(r => `
-                            <div class="hub-card reading-select-card" data-id="${r.id}">
-                                <span style="font-size:0.85rem;opacity:0.6;">${r.category}</span>
-                                <h3 style="margin:0.5rem 0;">${r.title}</h3>
-                                <button class="hub-btn hub-btn-primary" style="margin-top:1rem;">
-                                    <i class="fas fa-book-open"></i> Read
-                                </button>
-                            </div>
-                        `).join('')}
+                    <div class="culture-library-shelf">
+                        <div class="culture-library-shelf-label"><i class="fas fa-books"></i> Featured readings</div>
+                        <div class="culture-library-grid">
+                            ${this.readings.map((r, i) => `
+                                <article class="culture-book-card reading-select-card" data-id="${r.id}" style="--book-tone:${['#11802b','#0973a1','#c00000'][i % 3]}">
+                                    <div class="culture-book-spine" aria-hidden="true"></div>
+                                    <div class="culture-book-cover">
+                                        <span class="culture-book-cat">${r.category}</span>
+                                        <h3>${r.title}</h3>
+                                        <p>${(r.content.replace(/<[^>]+>/g, ' ').trim()).slice(0, 110)}…</p>
+                                        <button type="button" class="hub-btn hub-btn-primary">
+                                            <i class="fas fa-book-open"></i> Open book
+                                        </button>
+                                    </div>
+                                </article>
+                            `).join('')}
+                        </div>
                     </div>
                 `;
                 container.querySelectorAll('.reading-select-card').forEach(card => {

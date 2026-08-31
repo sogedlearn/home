@@ -19,633 +19,49 @@ class StoriesSection extends HTMLElement {
 
     render() {
         this.innerHTML = `
-            <style>
-                /* Stories Section Styles */
-                .stories-section {
-                    padding: 2rem;
-                    max-width: 1200px;
-                    margin: 0 auto;
-                }
-
-                .stories-header {
-                    text-align: center;
-                    margin-bottom: 3rem;
-                    background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
-                    color: white;
-                    padding: 3rem 2rem;
-                    border-radius: var(--border-radius-xl);
-                    position: relative;
-                    overflow: hidden;
-                }
-
-                .stories-header::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="0.5" fill="rgba(255,255,255,0.3)"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>');
-                    opacity: 0.4;
-                }
-
-                .section-title {
-                    font-size: 2.8rem;
-                    font-weight: 700;
-                    margin-bottom: 0.5rem;
-                    position: relative;
-                    z-index: 1;
-                }
-
-                .section-subtitle {
-                    font-size: 1.3rem;
-                    opacity: 0.9;
-                    position: relative;
-                    z-index: 1;
-                    max-width: 600px;
-                    margin: 0 auto;
-                }
-
-                .cultural-badge {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                    background: rgba(255, 255, 255, 0.2);
-                    padding: 0.75rem 1.5rem;
-                    border-radius: var(--border-radius-lg);
-                    margin-top: 1.5rem;
-                    backdrop-filter: blur(10px);
-                    position: relative;
-                    z-index: 1;
-                    font-weight: 600;
-                }
-
-                .stories-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-                    gap: 2rem;
-                    margin-bottom: 3rem;
-                }
-
-                .story-card {
-                    background: var(--bg-secondary);
-                    border-radius: var(--border-radius-lg);
-                    overflow: hidden;
-                    box-shadow: var(--shadow-md);
-                    transition: all var(--transition-fast);
-                    cursor: pointer;
-                    position: relative;
-                    border: 2px solid transparent;
-                }
-
-                .story-card:hover {
-                    transform: translateY(-8px);
-                    box-shadow: var(--shadow-xl);
-                    border-color: var(--primary-color);
-                }
-
-                .story-image {
-                    width: 100%;
-                    height: 200px;
-                    background: linear-gradient(135deg, var(--gradient-primary));
-                    position: relative;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 3rem;
-                    color: white;
-                    overflow: hidden;
-                }
-
-                .story-image::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background: radial-gradient(circle at center, rgba(255,255,255,0.1) 20%, transparent 70%);
-                }
-
-                .story-content {
-                    padding: 2rem;
-                }
-
-                .story-title {
-                    font-size: 1.5rem;
-                    font-weight: 600;
-                    margin-bottom: 1rem;
-                    color: var(--text-primary);
-                    line-height: 1.3;
-                }
-
-                .story-description {
-                    color: var(--text-secondary);
-                    margin-bottom: 1.5rem;
-                    line-height: 1.6;
-                }
-
-                .story-meta {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: 1.5rem;
-                    padding: 1rem;
-                    background: var(--bg-tertiary);
-                    border-radius: var(--border-radius);
-                }
-
-                .story-difficulty {
-                    display: flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                    font-size: 0.9rem;
-                    font-weight: 500;
-                }
-
-                .difficulty-dots {
-                    display: flex;
-                    gap: 0.25rem;
-                }
-
-                .difficulty-dot {
-                    width: 8px;
-                    height: 8px;
-                    border-radius: 50%;
-                    background: var(--text-light);
-                }
-
-                .difficulty-dot.active {
-                    background: var(--primary-color);
-                }
-
-                .story-duration {
-                    display: flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                    color: var(--text-secondary);
-                    font-size: 0.9rem;
-                }
-
-                .story-progress {
-                    width: 100%;
-                    height: 4px;
-                    background: var(--bg-primary);
-                    border-radius: 2px;
-                    margin-bottom: 1rem;
-                    overflow: hidden;
-                }
-
-                .story-progress-bar {
-                    height: 100%;
-                    background: var(--gradient-primary);
-                    border-radius: 2px;
-                    transition: width var(--transition-slow);
-                }
-
-                .story-actions {
-                    display: flex;
-                    gap: 1rem;
-                }
-
-                .story-button {
-                    flex: 1;
-                    padding: 1rem;
-                    border: none;
-                    border-radius: var(--border-radius);
-                    font-weight: 600;
-                    cursor: pointer;
-                    transition: all var(--transition-fast);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 0.5rem;
-                }
-
-                .btn-primary {
-                    background: var(--gradient-primary);
-                    color: white;
-                }
-
-                .btn-secondary {
-                    background: var(--bg-primary);
-                    color: var(--text-primary);
-                    border: 1px solid var(--text-light);
-                }
-
-                .story-button:hover {
-                    transform: translateY(-2px);
-                    box-shadow: var(--shadow-sm);
-                }
-
-                .story-tags {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 0.5rem;
-                    margin-top: 1rem;
-                }
-
-                .story-tag {
-                    padding: 0.25rem 0.75rem;
-                    background: var(--gradient-secondary);
-                    color: white;
-                    border-radius: var(--border-radius);
-                    font-size: 0.8rem;
-                    font-weight: 500;
-                }
-
-                .featured-story {
-                    grid-column: 1 / -1;
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: 2rem;
-                    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.1));
-                    border: 2px solid rgba(245, 158, 11, 0.2);
-                }
-
-                .featured-story .story-image {
-                    height: 300px;
-                    background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
-                }
-
-                .reading-stats {
-                    background: var(--bg-secondary);
-                    border-radius: var(--border-radius-lg);
-                    padding: 2rem;
-                    box-shadow: var(--shadow-md);
-                    margin-bottom: 2rem;
-                }
-
-                .stats-header {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    margin-bottom: 2rem;
-                }
-
-                .stats-title {
-                    font-size: 1.8rem;
-                    font-weight: 600;
-                    color: var(--text-primary);
-                    display: flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                }
-
-                .stats-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                    gap: 1.5rem;
-                }
-
-                .stat-item {
-                    text-align: center;
-                    padding: 1.5rem;
-                    background: var(--bg-tertiary);
-                    border-radius: var(--border-radius);
-                    transition: all var(--transition-fast);
-                }
-
-                .stat-item:hover {
-                    background: var(--bg-primary);
-                    transform: translateY(-4px);
-                }
-
-                .stat-number {
-                    font-size: 2.5rem;
-                    font-weight: 700;
-                    color: var(--primary-color);
-                    display: block;
-                    margin-bottom: 0.5rem;
-                }
-
-                .stat-label {
-                    color: var(--text-secondary);
-                    font-weight: 500;
-                }
-
-                .story-categories {
-                    display: flex;
-                    justify-content: center;
-                    gap: 1rem;
-                    margin-bottom: 2rem;
-                    flex-wrap: wrap;
-                }
-
-                .category-filter {
-                    padding: 0.75rem 1.5rem;
-                    border: 2px solid var(--text-light);
-                    background: var(--bg-secondary);
-                    color: var(--text-primary);
-                    border-radius: var(--border-radius-lg);
-                    cursor: pointer;
-                    transition: all var(--transition-fast);
-                    font-weight: 500;
-                    display: flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                }
-
-                .category-filter:hover {
-                    border-color: var(--primary-color);
-                    background: var(--primary-color);
-                    color: white;
-                }
-
-                    .category-filter.active {
-                        background: var(--gradient-primary);
-                        border-color: var(--primary-color);
-                        color: white;
-                    }
-
-                .story-card.pdf-resource .story-image {
-                    background: none;
-                }
-
-                .story-image-mola {
-                    position: relative;
-                    padding: 0 !important;
-                }
-
-                .story-image-mola img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    display: block;
-                }
-
-                .story-image-mola::before {
-                    display: none;
-                }
-
-                .story-pdf-label {
-                    position: absolute;
-                    bottom: 0.75rem;
-                    right: 0.75rem;
-                    background: rgba(0, 0, 0, 0.65);
-                    color: white;
-                    padding: 0.35rem 0.65rem;
-                    border-radius: 8px;
-                    font-size: 0.75rem;
-                    font-weight: 600;
-                    display: flex;
-                    align-items: center;
-                    gap: 0.35rem;
-                }
-
-                .story-card.pdf-resource {
-                    border: 2px solid rgba(40, 167, 69, 0.15);
-                }
-
-                .story-card.pdf-resource:hover {
-                    border-color: var(--primary-color);
-                }
-
-                .story-badge {
-                    display: inline-block;
-                    padding: 0.25rem 0.65rem;
-                    border-radius: 20px;
-                    font-size: 0.7rem;
-                    font-weight: 700;
-                    text-transform: uppercase;
-                    letter-spacing: 0.4px;
-                    margin-bottom: 0.75rem;
-                }
-
-                .story-badge.pdf { background: rgba(231, 76, 60, 0.12); color: #C0392B; }
-                .story-badge.reference { background: rgba(0, 163, 224, 0.12); color: #0077A3; }
-                .story-badge.culture { background: rgba(40, 167, 69, 0.12); color: #218838; }
-
-                .story-source {
-                    font-size: 0.8rem;
-                    color: var(--text-secondary);
-                    margin-bottom: 1rem;
-                    font-style: italic;
-                }
-
-                .pdf-actions {
-                    display: flex;
-                    gap: 0.75rem;
-                    flex-wrap: wrap;
-                }
-
-                .pdf-actions .story-button {
-                    flex: 1;
-                    min-width: 120px;
-                }
-
-                /* PDF Viewer Modal */
-                .pdf-viewer-overlay {
-                    position: fixed;
-                    inset: 0;
-                    background: rgba(0, 0, 0, 0.75);
-                    z-index: 10050;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 1rem;
-                    opacity: 0;
-                    visibility: hidden;
-                    transition: all 0.3s ease;
-                }
-
-                .pdf-viewer-overlay.show {
-                    opacity: 1;
-                    visibility: visible;
-                }
-
-                .pdf-viewer-modal {
-                    background: white;
-                    border-radius: 16px;
-                    width: min(1100px, 100%);
-                    height: min(90vh, 900px);
-                    display: flex;
-                    flex-direction: column;
-                    overflow: hidden;
-                    box-shadow: 0 24px 64px rgba(0,0,0,0.35);
-                }
-
-                .pdf-viewer-header {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    gap: 1rem;
-                    padding: 1rem 1.5rem;
-                    background: var(--gradient-primary);
-                    color: white;
-                    flex-shrink: 0;
-                }
-
-                .pdf-viewer-title {
-                    font-size: 1.1rem;
-                    font-weight: 600;
-                }
-
-                .pdf-viewer-actions {
-                    display: flex;
-                    gap: 0.5rem;
-                }
-
-                .pdf-viewer-btn {
-                    padding: 0.5rem 1rem;
-                    border: none;
-                    border-radius: 8px;
-                    cursor: pointer;
-                    font-family: inherit;
-                    font-weight: 600;
-                    font-size: 0.85rem;
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 0.4rem;
-                    transition: all 0.2s ease;
-                }
-
-                .pdf-viewer-btn.download {
-                    background: rgba(255,255,255,0.2);
-                    color: white;
-                }
-
-                .pdf-viewer-btn.close {
-                    background: white;
-                    color: var(--text-primary);
-                }
-
-                .pdf-viewer-body {
-                    flex: 1;
-                    background: #525659;
-                }
-
-                .pdf-viewer-body iframe {
-                    width: 100%;
-                    height: 100%;
-                    border: none;
-                }
-
-                .documents-section-title {
-                    grid-column: 1 / -1;
-                    font-size: 1.35rem;
-                    font-weight: 700;
-                    color: var(--text-primary);
-                    margin: 0.5rem 0 0;
-                    display: flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                }
-
-                /* Responsive Design */
-                @media (max-width: 768px) {
-                    .stories-section {
-                        padding: 1rem;
-                    }
-
-                    .section-title {
-                        font-size: 2.2rem;
-                    }
-
-                    .stories-grid {
-                        grid-template-columns: 1fr;
-                        gap: 1rem;
-                    }
-
-                    .featured-story {
-                        grid-template-columns: 1fr;
-                    }
-
-                    .story-content {
-                        padding: 1.5rem;
-                    }
-
-                    .story-actions {
-                        flex-direction: column;
-                    }
-
-                    .stats-grid {
-                        grid-template-columns: repeat(2, 1fr);
-                        gap: 1rem;
-                    }
-
-                    .story-categories {
-                        gap: 0.5rem;
-                    }
-
-                    .category-filter {
-                        padding: 0.5rem 1rem;
-                        font-size: 0.9rem;
-                    }
-                }
-            </style>
-
-            <div class="stories-section">
-                <div class="stories-header" data-aos="fade-up">
-                    <h2 class="section-title">📖 ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('culturalStories') : 'Cultural Stories'}</h2>
-                    <p class="section-subtitle">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('storiesSubtitle', { name: this.getCourseName() }) : `Immerse yourself in the rich traditions and wisdom of ${this.getCourseName()} culture through interactive storytelling`}</p>
-                    
-                    <div class="cultural-badge">
-                        <i class="fas fa-mountain"></i>
-                        <span>${typeof GunaI18n !== 'undefined' ? GunaI18n.t('authenticHeritage', { name: this.getCourseName() }) : `Authentic ${this.getCourseName()} Heritage`}</span>
+            <div class="stories-section stories-library">
+                <section class="stories-hero" data-aos="fade-up">
+                    <div class="stories-hero-copy">
+                        <h2>📖 Cultural Library</h2>
+                        <p>Explore stories, legends and reference books in a warm library layout — tap a cover to start reading.</p>
+                        <button type="button" class="stories-hero-cta" id="storiesBrowseBtn">
+                            <i class="fas fa-book-open"></i> Browse collection
+                        </button>
                     </div>
+                    <div class="stories-hero-visual" aria-hidden="true"></div>
+                </section>
+
+                <div class="stories-perks" data-aos="fade-up">
+                    <div class="stories-perk"><i class="fas fa-leaf"></i><div><strong>Living culture</strong><span>Stories rooted in indigenous territory</span></div></div>
+                    <div class="stories-perk"><i class="fas fa-graduation-cap"></i><div><strong>Learn by reading</strong><span>Build vocabulary through narrative</span></div></div>
+                    <div class="stories-perk"><i class="fas fa-book"></i><div><strong>Documents & PDFs</strong><span>Dictionaries and cultural guides</span></div></div>
                 </div>
 
-                <div class="story-categories" data-aos="fade-up" data-aos-delay="100">
-                    <button class="category-filter active" data-category="all">
-                        <i class="fas fa-globe"></i>
-                        ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('allStories') : 'All Stories'}
-                    </button>
-                    <button class="category-filter" data-category="documents">
-                        <i class="fas fa-file-pdf"></i>
-                        ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('documents') : 'Documents'}
-                    </button>
-                    <button class="category-filter" data-category="legends">
-                        <i class="fas fa-dragon"></i>
-                        ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('legends') : 'Legends'}
-                    </button>
-                    <button class="category-filter" data-category="wisdom">
-                        <i class="fas fa-lightbulb"></i>
-                        ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('wisdom') : 'Wisdom'}
-                    </button>
-                    <button class="category-filter" data-category="nature">
-                        <i class="fas fa-leaf"></i>
-                        ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('nature') : 'Nature'}
-                    </button>
-                    <button class="category-filter" data-category="family">
-                        <i class="fas fa-heart"></i>
-                        Family
-                    </button>
+                <div class="story-categories" data-aos="fade-up">
+                    <button class="category-filter active" data-category="all"><i class="fas fa-globe"></i> All</button>
+                    <button class="category-filter" data-category="documents"><i class="fas fa-file-pdf"></i> Documents</button>
+                    <button class="category-filter" data-category="legends"><i class="fas fa-dragon"></i> Legends</button>
+                    <button class="category-filter" data-category="wisdom"><i class="fas fa-lightbulb"></i> Wisdom</button>
+                    <button class="category-filter" data-category="nature"><i class="fas fa-leaf"></i> Nature</button>
+                    <button class="category-filter" data-category="family"><i class="fas fa-heart"></i> Family</button>
                 </div>
 
-                <div class="reading-stats" data-aos="fade-up" data-aos-delay="150">
-                    <div class="stats-header">
-                        <h3 class="stats-title">
-                            <i class="fas fa-chart-line"></i>
-                            Your Reading Journey
-                        </h3>
-                    </div>
-                    
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <span class="stat-number">7</span>
-                            <span class="stat-label">Stories Completed</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">45</span>
-                            <span class="stat-label">Minutes Reading</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">156</span>
-                            <span class="stat-label">New Words Learned</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">89%</span>
-                            <span class="stat-label">Comprehension Rate</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="stories-grid" data-aos="fade-up" data-aos-delay="200">
+                <div class="stories-section-title"><h3>Popular Books</h3></div>
+                <div class="stories-grid" data-aos="fade-up">
                     ${this.generateStoriesForCourse()}
+                </div>
+
+                <div class="stories-shelf-strip" data-aos="fade-up">
+                    <div class="stories-shelf-books">
+                        ${this.generateShelfStrip()}
+                    </div>
                 </div>
             </div>
         `;
+
+        this.querySelector('#storiesBrowseBtn')?.addEventListener('click', () => {
+            this.querySelector('.stories-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
     }
 
     getCourseName() {
@@ -658,99 +74,66 @@ class StoriesSection extends HTMLElement {
         return names[this.currentCourse] || 'Indigenous';
     }
 
+    generateShelfStrip() {
+        return this.getStoriesData().slice(0, 8).map((story) => {
+            const cover = story.molaImage || story.cover || '';
+            return `
+                <button type="button" class="stories-shelf-book" onclick="readStory('${story.id}')" aria-label="${story.title}">
+                    ${cover
+                        ? `<img src="${cover}" alt="" loading="lazy">`
+                        : `<span><i class="fas ${story.icon || 'fa-book'}"></i></span>`}
+                </button>
+            `;
+        }).join('');
+    }
+
     generateStoriesForCourse() {
         const stories = this.getStoriesData();
-        const pdfs = stories.filter(s => s.type === 'pdf');
-        const regular = stories.filter(s => s.type !== 'pdf');
+        const coverPalette = ['#11802b', '#0973a1', '#c00000', '#e3a008', '#0c5c1f', '#075a7e'];
 
-        const renderCard = (story, index) => {
-            const isFeatured = index === 0 && story.type !== 'pdf';
+        return stories.map((story, index) => {
             const progressPercent = this.readingProgress[story.id] || 0;
-
-            if (story.type === 'pdf') {
-                return `
-                    <div class="story-card pdf-resource" data-story="${story.id}" data-category="${story.category}">
-                        <div class="story-image story-image-mola">
-                            <img src="${story.molaImage}" alt="${story.title}" loading="lazy">
-                            <span class="story-pdf-label"><i class="fas fa-file-pdf"></i> PDF</span>
-                        </div>
-                        <div class="story-content">
-                            <span class="story-badge pdf">📄 PDF Document</span>
-                            <h3 class="story-title">${story.title}</h3>
-                            <p class="story-source">${story.source}</p>
-                            <p class="story-description">${story.description}</p>
-                            <div class="story-meta">
-                                <div class="story-duration">
-                                    <i class="fas fa-file-alt"></i>
-                                    <span>${story.pages || 'Reference'}</span>
-                                </div>
-                            </div>
-                            <div class="pdf-actions">
-                                <button class="story-button btn-primary" onclick="readStory('${story.id}')">
-                                    <i class="fas fa-eye"></i> View PDF
-                                </button>
-                                <button class="story-button btn-secondary" onclick="downloadStoryPdf('${story.id}')">
-                                    <i class="fas fa-download"></i> Download
-                                </button>
-                            </div>
-                            <div class="story-tags">
-                                ${story.tags.map(tag => `<span class="story-tag">${tag}</span>`).join('')}
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
+            const cover = story.molaImage || story.cover || '';
+            const author = story.source || `SOGED · ${this.getCourseName()}`;
+            const badge = story.type === 'pdf' ? 'PDF' : (progressPercent > 0 ? 'Reading' : 'Story');
+            const stars = Math.max(1, Math.min(5, story.difficulty || 3));
+            const starHtml = '★'.repeat(stars) + '☆'.repeat(5 - stars);
+            const bg = coverPalette[index % coverPalette.length];
+            const primaryLabel = story.type === 'pdf'
+                ? '<i class="fas fa-eye"></i> View'
+                : (progressPercent > 0 ? '<i class="fas fa-play"></i> Continue' : '<i class="fas fa-book-open"></i> Read');
 
             return `
-                <div class="story-card ${isFeatured ? 'featured-story' : ''}" data-story="${story.id}" data-category="${story.category}">
-                    <div class="story-image">
-                        <i class="fas ${story.icon}"></i>
+                <article class="story-card story-book-card" data-story="${story.id}" data-category="${story.category}">
+                    <div class="story-book-cover" style="background:${bg}">
+                        ${cover
+                            ? `<img src="${cover}" alt="${story.title}" loading="lazy">`
+                            : `<i class="fas ${story.icon || 'fa-book'} story-cover-icon"></i>`}
+                        <span class="story-book-badge">${badge}</span>
                     </div>
-                    <div class="story-content">
-                        <h3 class="story-title">${story.title}</h3>
-                        <p class="story-description">${story.description}</p>
-                        <div class="story-meta">
-                            <div class="story-difficulty">
-                                <span>Difficulty:</span>
-                                <div class="difficulty-dots">
-                                    ${this.generateDifficultyDots(story.difficulty)}
-                                </div>
-                            </div>
-                            <div class="story-duration">
-                                <i class="fas fa-clock"></i>
-                                <span>${story.duration} min</span>
-                            </div>
+                    <div class="story-book-body">
+                        <h3 class="story-book-title">${story.title}</h3>
+                        <p class="story-book-author">${author}</p>
+                        <div class="story-book-meta">
+                            <span class="story-book-stars">${starHtml}</span>
+                            <span class="story-book-price">${story.type === 'pdf' ? (story.pages || 'PDF') : (story.duration || 10) + ' min'}</span>
                         </div>
-                        <div class="story-progress">
-                            <div class="story-progress-bar" style="width: ${progressPercent}%"></div>
+                        <p class="story-book-desc">${story.description}</p>
+                        <div class="story-book-tags">
+                            ${(story.tags || []).slice(0, 3).map((tag) => `<span class="story-book-tag">${tag}</span>`).join('')}
                         </div>
-                        <div class="story-actions">
-                            <button class="story-button btn-primary" onclick="readStory('${story.id}')">
-                                <i class="fas ${progressPercent > 0 ? 'fa-play' : 'fa-book-open'}"></i>
-                                ${progressPercent > 0 ? 'Continue' : 'Start Reading'}
-                            </button>
-                            ${progressPercent > 0 ? `
-                                <button class="story-button btn-secondary" onclick="reviewStory('${story.id}')">
-                                    <i class="fas fa-redo"></i> Review
-                                </button>
-                            ` : ''}
-                        </div>
-                        <div class="story-tags">
-                            ${story.tags.map(tag => `<span class="story-tag">${tag}</span>`).join('')}
+                        <div class="story-book-actions">
+                            <button type="button" class="story-book-btn primary" onclick="readStory('${story.id}')">${primaryLabel}</button>
+                            ${story.type === 'pdf'
+                                ? `<button type="button" class="story-book-btn secondary" onclick="downloadStoryPdf('${story.id}')"><i class="fas fa-download"></i></button>`
+                                : (progressPercent > 0
+                                    ? `<button type="button" class="story-book-btn secondary" onclick="reviewStory('${story.id}')"><i class="fas fa-redo"></i></button>`
+                                    : '')}
                         </div>
                     </div>
-                </div>
+                </article>
             `;
-        };
-
-        let html = '';
-        if (pdfs.length > 0) {
-            html += `<h3 class="documents-section-title"><i class="fas fa-folder-open"></i> Guna Reference Documents</h3>`;
-            html += pdfs.map((s, i) => renderCard(s, i)).join('');
-            html += `<h3 class="documents-section-title" style="margin-top: 2rem;"><i class="fas fa-book-open"></i> Cultural Stories</h3>`;
-        }
-        html += regular.map((s, i) => renderCard(s, i)).join('');
-        return html;
+        }).join('');
     }
 
     getStoriesData() {
@@ -854,7 +237,16 @@ class StoriesSection extends HTMLElement {
                     difficulty: 2,
                     duration: 18,
                     tags: ['Creation', 'Islands', 'Ocean'],
-                    category: 'legends'
+                    category: 'legends',
+                    molaImage: '../Multimedia/Images/Molas - Guna/Mola 2.jpg',
+                    content: `
+                        <h2>The Golden Islands</h2>
+                        <p>Long before the islands were called San Blas, the Guna people told of a time when the Caribbean was a living mirror of the sky. Ibeorgun shaped pathways of coral and sand so that families could live close to the sea and still hear the voice of Nabgwana, Mother Earth.</p>
+                        <h3>Why the islands matter</h3>
+                        <p>Each inhabited island became a classroom of balance: fishing without greed, sharing coconut and cassava, and gathering in the congress house to decide together.</p>
+                        <h3>Language note</h3>
+                        <p>Words like <strong>Yar</strong> (sea) and <strong>Guna Yala</strong> remind learners that territory and speech travel together.</p>
+                    `
                 },
                 {
                     id: 'mola-patterns',
@@ -864,7 +256,14 @@ class StoriesSection extends HTMLElement {
                     difficulty: 1,
                     duration: 8,
                     tags: ['Art', 'Textiles', 'Symbols'],
-                    category: 'wisdom'
+                    category: 'wisdom',
+                    molaImage: '../Multimedia/Images/Molas - Guna/Mola 5.jpg',
+                    content: `
+                        <h2>Sacred Mola Patterns</h2>
+                        <p>A mola is never only decoration. Layers of cloth hide and reveal colors the way stories hide and reveal meaning.</p>
+                        <h3>Made by hand, kept by community</h3>
+                        <p>Women stitch identity into everyday dress. Saying <strong>Mola</strong> names a living archive of Guna creativity.</p>
+                    `
                 },
                 {
                     id: 'sea-turtle',
@@ -874,7 +273,12 @@ class StoriesSection extends HTMLElement {
                     difficulty: 2,
                     duration: 14,
                     tags: ['Legend', 'Sea', 'Protection'],
-                    category: 'legends'
+                    category: 'legends',
+                    content: `
+                        <h2>The Great Sea Turtle</h2>
+                        <p>Some elders say a great turtle, <strong>Ardi</strong>, carries the memory of the islands on its shell. When storms rise, the turtle teaches patience: move with the tide, protect the nest, return home.</p>
+                        <p>For SOGED learners, the turtle is also a reminder that language grows slowly — one careful word at a time.</p>
+                    `
                 },
                 {
                     id: 'coconut-wisdom',
@@ -1055,8 +459,82 @@ class StoriesSection extends HTMLElement {
         }
 
         this.selectStory(storyId);
-        if (typeof showNotification === 'function') {
-            showNotification(`Opening story: ${story.title}`, 'info');
+        this.openStoryReader(story);
+        this.saveStoryProgress(storyId, Math.max(this.readingProgress[storyId] || 0, 40));
+    }
+
+    getStoryBody(story) {
+        if (story.content) return story.content;
+        return `
+            <h2>${story.title}</h2>
+            <p>${story.description || ''}</p>
+            <p>This story is part of the ${this.getCourseName()} cultural library. Elders teach that listening carefully keeps language and memory alive.</p>
+            <h3>What to notice</h3>
+            <ul>
+                ${(story.tags || []).map((t) => `<li>${t}</li>`).join('') || '<li>Community values</li><li>Connection to territory</li>'}
+            </ul>
+            <p><em>Tip: After reading, revisit Vocabulary and Games to practice related words.</em></p>
+        `;
+    }
+
+    openStoryReader(story) {
+        let overlay = document.getElementById('storyReaderOverlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.id = 'storyReaderOverlay';
+            overlay.className = 'pdf-viewer-overlay story-reader-overlay';
+            overlay.innerHTML = `
+                <div class="pdf-viewer-modal story-reader-modal" role="dialog" aria-modal="true" aria-label="Story reader">
+                    <div class="pdf-viewer-header">
+                        <div>
+                            <div class="pdf-viewer-title" id="storyReaderTitle"></div>
+                            <small id="storyReaderMeta" style="opacity:0.85"></small>
+                        </div>
+                        <div class="pdf-viewer-actions">
+                            <button class="pdf-viewer-btn close" id="storyReaderClose" type="button">
+                                <i class="fas fa-times"></i> Close
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pdf-viewer-body story-reader-body">
+                        <article class="story-reader-article" id="storyReaderArticle"></article>
+                        <div class="story-reader-actions">
+                            <button type="button" class="hub-btn hub-btn-primary" id="storyReaderDone">
+                                <i class="fas fa-check"></i> Mark as read
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) this.closeStoryReader();
+            });
+            document.getElementById('storyReaderClose').addEventListener('click', () => this.closeStoryReader());
+            document.getElementById('storyReaderDone').addEventListener('click', () => {
+                if (this.selectedStory) this.saveStoryProgress(this.selectedStory, 100);
+                if (typeof showNotification === 'function') {
+                    showNotification('Story marked as read. Nice work!', 'success');
+                }
+                this.closeStoryReader();
+                this.render();
+                this.initializeEventListeners();
+            });
+        }
+
+        document.getElementById('storyReaderTitle').textContent = story.title;
+        document.getElementById('storyReaderMeta').textContent =
+            `${story.source || this.getCourseName()} · ${story.duration || 10} min · ${story.category || 'story'}`;
+        document.getElementById('storyReaderArticle').innerHTML = this.getStoryBody(story);
+        overlay.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+
+    closeStoryReader() {
+        const overlay = document.getElementById('storyReaderOverlay');
+        if (overlay) {
+            overlay.classList.remove('show');
+            document.body.style.overflow = '';
         }
     }
 

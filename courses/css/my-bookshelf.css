@@ -1,47 +1,66 @@
-/* My Bookshelf — wooden shelf aesthetic */
+/* My Bookshelf — library aesthetic + branding palette */
 
 .my-bookshelf {
-    --bs-cream: #f5f0e6;
-    --bs-wood-light: #d4b896;
+    --bs-cream: #f7f1e6;
+    --bs-cream-deep: #efe4d2;
+    --bs-wood-light: #d8b896;
     --bs-wood-mid: #b8956a;
     --bs-wood-dark: #8b6914;
-    --bs-black: #000000;
-    --bs-soged-green: #11802b;
-    --bs-soged-gold: #ffb300;
-    font-family: 'Poppins', sans-serif;
+    --bs-shelf-edge: #0c5c1f;
+    --bs-black: #12261a;
+    --bs-red: var(--brand-red, #c00000);
+    --bs-green: var(--brand-green, #11802b);
+    --bs-gold: var(--brand-gold, #e3a008);
+    --bs-brown: var(--brand-green, #11802b);
+    --bs-blue: var(--brand-blue, #0973a1);
+    font-family: 'Nunito', 'Poppins', sans-serif;
     color: var(--bs-black);
 }
 
 .my-bookshelf-inner {
-    background: var(--bs-cream);
-    border-radius: 20px;
-    padding: 1.75rem 1.5rem 2rem;
+    background:
+        radial-gradient(circle at 12% 10%, rgba(227, 160, 8, 0.12), transparent 35%),
+        radial-gradient(circle at 90% 0%, rgba(17, 128, 43, 0.08), transparent 40%),
+        linear-gradient(180deg, #fbf6ee 0%, var(--bs-cream) 55%, var(--bs-cream-deep) 100%);
+    border-radius: 24px;
+    padding: 1.75rem 1.5rem 2.25rem;
     min-height: 420px;
+    border: 1px solid rgba(17, 128, 43, 0.12);
+    box-shadow: 0 12px 36px rgba(17, 128, 43, 0.1);
 }
 
 .my-bookshelf-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
+    position: relative;
+}
+
+.my-bookshelf-header::before {
+    content: '🌿';
+    display: block;
+    font-size: 1.1rem;
+    opacity: 0.7;
+    margin-bottom: 0.25rem;
 }
 
 .my-bookshelf-header h2 {
     font-family: Georgia, 'Times New Roman', serif;
-    font-size: 1.75rem;
+    font-size: 1.85rem;
     font-weight: 400;
     letter-spacing: 0.04em;
-    color: var(--bs-black);
+    color: var(--bs-brown);
     margin: 0 0 0.35rem;
     text-transform: lowercase;
 }
 
 .my-bookshelf-header p {
     font-size: 0.9rem;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(42, 28, 18, 0.55);
     margin: 0;
 }
 
 .bookshelf-row {
-    margin-bottom: 2.25rem;
+    margin-bottom: 2rem;
 }
 
 .bookshelf-row-header {
@@ -56,25 +75,36 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.8rem;
-    font-weight: 700;
+    font-size: 0.78rem;
+    font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--bs-black);
+    color: var(--bs-brown);
 }
 
 .bookshelf-row-count {
     font-size: 0.75rem;
-    color: rgba(0, 0, 0, 0.45);
-    font-weight: 500;
+    color: rgba(42, 28, 18, 0.45);
+    font-weight: 600;
 }
 
 .bookshelf-plank {
     position: relative;
-    background: linear-gradient(180deg, var(--bs-wood-light) 0%, var(--bs-wood-mid) 55%, var(--bs-wood-dark) 100%);
-    border-radius: 6px;
-    padding: 1.25rem 1rem 0.65rem;
-    box-shadow: 0 6px 18px rgba(61, 31, 10, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    background: linear-gradient(180deg, #e2c49a 0%, var(--bs-wood-mid) 55%, #9a7238 100%);
+    border-radius: 10px 10px 4px 4px;
+    padding: 1.35rem 1rem 0.85rem;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        0 8px 18px rgba(61, 31, 10, 0.18);
+}
+
+.bookshelf-plank::before {
+    content: '';
+    position: absolute;
+    inset: 8px 10px auto;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.25);
+    pointer-events: none;
 }
 
 .bookshelf-plank::after {
@@ -82,45 +112,50 @@
     position: absolute;
     left: 0;
     right: 0;
-    bottom: -6px;
-    height: 8px;
-    background: linear-gradient(180deg, #6b4423 0%, #4a2f18 100%);
-    border-radius: 0 0 4px 4px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    bottom: -7px;
+    height: 10px;
+    background: linear-gradient(180deg, var(--bs-shelf-edge) 0%, #094a19 100%);
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.18);
 }
 
 .bookshelf-books {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.85rem;
+    gap: 0.95rem;
     align-items: flex-end;
-    min-height: 110px;
+    min-height: 124px;
 }
 
 .bookshelf-book {
     flex-shrink: 0;
-    width: 72px;
+    width: 78px;
     cursor: pointer;
     transition: transform 0.25s ease;
     border: none;
     background: none;
     padding: 0;
+    position: relative;
 }
 
 .bookshelf-book:hover,
 .bookshelf-book:focus-visible {
-    transform: translateY(-10px) scale(1.04);
+    transform: translateY(-12px) scale(1.05);
     outline: none;
+    z-index: 2;
 }
 
 .bookshelf-book-cover {
-    width: 72px;
-    height: 102px;
-    border-radius: 3px 6px 6px 3px;
+    width: 78px;
+    height: 112px;
+    border-radius: 3px 7px 7px 3px;
     object-fit: cover;
-    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.28);
+    box-shadow:
+        3px 5px 12px rgba(0, 0, 0, 0.28),
+        inset -2px 0 0 rgba(255, 255, 255, 0.15);
     display: block;
-    background: var(--bs-soged-green);
+    background: linear-gradient(145deg, var(--bs-green), var(--bs-blue));
+    border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .bookshelf-book-cover--placeholder {
@@ -133,15 +168,37 @@
 
 .bookshelf-empty {
     font-size: 0.8rem;
-    color: rgba(0, 0, 0, 0.35);
+    color: rgba(42, 28, 18, 0.4);
     font-style: italic;
     padding: 1rem 0.5rem;
 }
 
+.bookshelf-decor-row {
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    opacity: 0.85;
+    pointer-events: none;
+}
+
+.bookshelf-decor-item {
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(17, 128, 43, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+}
+
+/* Detail panel */
 .bookshelf-detail-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(42, 28, 18, 0.45);
     backdrop-filter: blur(4px);
     z-index: 9000;
     display: flex;
@@ -158,13 +215,13 @@
 
 .bookshelf-detail-panel {
     width: 100%;
-    max-width: 420px;
+    max-width: 430px;
     height: 100%;
-    background: var(--bs-cream);
+    background: linear-gradient(180deg, #fbf6ee, var(--bs-cream));
     overflow-y: auto;
     transform: translateX(100%);
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: -8px 0 40px rgba(0, 0, 0, 0.15);
+    box-shadow: -8px 0 40px rgba(0, 0, 0, 0.18);
 }
 
 .bookshelf-detail-overlay.is-open .bookshelf-detail-panel {
@@ -176,8 +233,8 @@
     align-items: center;
     justify-content: space-between;
     padding: 1rem 1.25rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    background: rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid rgba(17, 128, 43, 0.1);
+    background: rgba(255, 255, 255, 0.65);
     position: sticky;
     top: 0;
     z-index: 2;
@@ -188,7 +245,7 @@
     height: 36px;
     border: none;
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.06);
+    background: rgba(17, 128, 43, 0.08);
     color: var(--bs-black);
     font-size: 1.1rem;
     cursor: pointer;
@@ -199,8 +256,8 @@
     align-items: center;
     gap: 0.35rem;
     font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--bs-black);
+    font-weight: 700;
+    color: var(--bs-brown);
 }
 
 .bookshelf-lives-badge img {
@@ -219,32 +276,39 @@
 }
 
 .bookshelf-detail-cover {
-    width: 100px;
-    height: 140px;
-    border-radius: 6px;
+    width: 108px;
+    height: 152px;
+    border-radius: 8px;
     object-fit: cover;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
     flex-shrink: 0;
+    border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .bookshelf-detail-meta h3 {
     font-family: Georgia, serif;
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     font-weight: 700;
-    color: var(--bs-black);
+    color: var(--bs-brown);
     margin: 0 0 0.25rem;
 }
 
 .bookshelf-detail-author {
     font-size: 0.85rem;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(42, 28, 18, 0.55);
     margin: 0 0 0.5rem;
 }
 
 .bookshelf-detail-stars {
-    color: var(--bs-soged-gold);
-    font-size: 0.75rem;
-    margin-bottom: 0.5rem;
+    color: var(--bs-gold);
+    font-size: 0.8rem;
+    margin-bottom: 0.55rem;
+}
+
+.bookshelf-detail-stars .rating-num {
+    margin-left: 0.35rem;
+    color: var(--bs-brown);
+    font-weight: 700;
 }
 
 .bookshelf-genre-tags {
@@ -255,28 +319,28 @@
 
 .bookshelf-genre-tag {
     font-size: 0.65rem;
-    font-weight: 600;
-    padding: 0.2rem 0.55rem;
+    font-weight: 700;
+    padding: 0.22rem 0.6rem;
     border-radius: 999px;
-    background: rgba(17, 128, 43, 0.1);
-    color: var(--bs-soged-green);
-    border: 1px solid rgba(17, 128, 43, 0.2);
+    background: rgba(9, 115, 161, 0.1);
+    color: var(--bs-blue);
+    border: 1px solid rgba(9, 115, 161, 0.22);
 }
 
 .bookshelf-status-bar {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    border: 1px solid rgba(17, 128, 43, 0.1);
     margin-bottom: 1.25rem;
     overflow: hidden;
 }
 
 .bookshelf-status-item {
-    padding: 0.65rem 0.5rem;
+    padding: 0.7rem 0.5rem;
     text-align: center;
-    border-right: 1px solid rgba(0, 0, 0, 0.06);
+    border-right: 1px solid rgba(17, 128, 43, 0.08);
 }
 
 .bookshelf-status-item:last-child { border-right: none; }
@@ -285,54 +349,98 @@
     display: block;
     font-size: 0.6rem;
     text-transform: uppercase;
-    color: rgba(0, 0, 0, 0.4);
+    letter-spacing: 0.04em;
+    color: rgba(42, 28, 18, 0.42);
     margin-bottom: 0.15rem;
 }
 
 .bookshelf-status-item span {
     font-size: 0.72rem;
-    font-weight: 600;
-    color: var(--bs-black);
+    font-weight: 700;
+    color: var(--bs-brown);
 }
 
 .bookshelf-card {
-    background: rgba(255, 255, 255, 0.75);
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(17, 128, 43, 0.1);
     border-radius: 14px;
     padding: 1rem 1.1rem;
     margin-bottom: 1rem;
 }
 
 .bookshelf-card h4 {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--bs-black);
-    margin: 0 0 0.65rem;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--bs-brown);
+    margin: 0 0 0.7rem;
+}
+
+.bookshelf-moods {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+}
+
+.bookshelf-mood {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    min-width: 58px;
+    padding: 0.45rem 0.35rem;
+    border-radius: 12px;
+    background: rgba(247, 241, 230, 0.9);
+    border: 1px solid rgba(17, 128, 43, 0.08);
+}
+
+.bookshelf-mood span:first-child {
+    font-size: 1.1rem;
+}
+
+.bookshelf-mood span:last-child {
+    font-size: 0.62rem;
+    color: rgba(42, 28, 18, 0.55);
+    font-weight: 600;
+}
+
+.bookshelf-quote {
+    margin: 0;
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    background: rgba(227, 160, 8, 0.1);
+    border-left: 3px solid var(--bs-gold);
+    font-family: Georgia, serif;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--bs-brown);
+    font-style: italic;
 }
 
 .bookshelf-notes-area {
     width: 100%;
     min-height: 100px;
-    border: 1px dashed rgba(0, 0, 0, 0.15);
+    border: 1px dashed rgba(17, 128, 43, 0.2);
     border-radius: 10px;
     padding: 0.75rem;
     font-family: inherit;
     font-size: 0.85rem;
     color: var(--bs-black);
-    background: rgba(245, 240, 230, 0.5);
+    background: rgba(247, 241, 230, 0.65);
     resize: vertical;
     line-height: 1.55;
 }
 
 .bookshelf-notes-area:focus {
-    outline: 2px solid var(--bs-soged-green);
+    outline: 2px solid var(--bs-green);
 }
 
 .bookshelf-notes-save {
     margin-top: 0.5rem;
     font-size: 0.75rem;
-    color: var(--bs-soged-green);
-    font-weight: 600;
+    color: var(--bs-green);
+    font-weight: 700;
     background: none;
     border: none;
     cursor: pointer;
@@ -341,7 +449,7 @@
 .bookshelf-quiz-btn {
     width: 100%;
     padding: 0.85rem;
-    background: var(--bs-soged-green);
+    background: linear-gradient(135deg, var(--bs-green), #0c5c1f);
     color: #fff;
     border: none;
     border-radius: 10px;
@@ -358,26 +466,26 @@
 
 .bookshelf-quiz-complete {
     font-size: 0.85rem;
-    color: var(--bs-soged-green);
-    font-weight: 600;
+    color: var(--bs-green);
+    font-weight: 700;
 }
 
 .bookshelf-quiz-progress {
     height: 4px;
-    background: rgba(0, 0, 0, 0.08);
+    background: rgba(17, 128, 43, 0.1);
     border-radius: 2px;
     margin-bottom: 1rem;
 }
 
 .bookshelf-quiz-progress-fill {
     height: 100%;
-    background: var(--bs-soged-green);
+    background: linear-gradient(90deg, var(--bs-gold), var(--bs-green));
     transition: width 0.3s ease;
 }
 
 .bookshelf-quiz-question {
     font-size: 0.95rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--bs-black);
     margin-bottom: 1rem;
 }
@@ -390,7 +498,7 @@
 
 .bookshelf-quiz-option {
     padding: 0.75rem 1rem;
-    border: 1.5px solid rgba(0, 0, 0, 0.12);
+    border: 1.5px solid rgba(17, 128, 43, 0.14);
     border-radius: 10px;
     background: #fff;
     text-align: left;
@@ -400,7 +508,7 @@
 }
 
 .bookshelf-quiz-option.selected {
-    border-color: var(--bs-soged-green);
+    border-color: var(--bs-green);
     background: rgba(17, 128, 43, 0.08);
 }
 
@@ -408,11 +516,11 @@
     margin-top: 1rem;
     width: 100%;
     padding: 0.75rem;
-    background: var(--bs-black);
+    background: var(--bs-brown);
     color: #fff;
     border: none;
     border-radius: 10px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
 }
 
@@ -422,9 +530,19 @@
     margin-top: 1.25rem;
     padding: 0.85rem;
     background: rgba(255, 255, 255, 0.9);
-    border: 1px dashed rgba(0, 0, 0, 0.12);
+    border: 1px dashed rgba(192, 0, 0, 0.25);
     border-radius: 8px;
     text-align: center;
     font-size: 0.8rem;
-    color: rgba(0, 0, 0, 0.55);
+    color: rgba(42, 28, 18, 0.6);
+}
+
+@media (max-width: 640px) {
+    .bookshelf-book,
+    .bookshelf-book-cover {
+        width: 64px;
+    }
+    .bookshelf-book-cover {
+        height: 94px;
+    }
 }

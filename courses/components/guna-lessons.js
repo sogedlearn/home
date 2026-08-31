@@ -10,21 +10,56 @@ class GunaLessons {
         this.lessonProgress = {};
     }
 
-    // Get lesson content by ID
+    // Get lesson content by ID (levels 1–20)
     getLessonContent(lessonId) {
-        const lessons = {
-            1: this.getGreetingsLesson(),
-            2: this.getFamilyLesson(),
-            3: this.getHomeObjectsLesson(),
-            4: this.getNatureLesson(),
-            5: this.getAnimalsLesson(),
-            6: this.getPlantsLesson(),
-            7: this.getBasicConversationLesson(),
-            8: this.getAdvancedConversationLesson(),
-            9: this.getCultureLesson(),
-            10: this.getFinalExamLesson()
+        const id = parseInt(lessonId, 10) || 1;
+        const rich = {
+            1: () => this.getGreetingsLesson(),
+            2: () => this.getFamilyLesson(),
+            3: () => this.getHomeObjectsLesson()
         };
-        return lessons[lessonId] || lessons[1];
+        if (rich[id]) return rich[id]();
+
+        if (window.GUNA_LESSON_CONFIGS?.[id]) {
+            const lesson = this.buildLessonFromConfig(id);
+            if (id === 20) return this.attachMasteryCertificate(lesson);
+            return lesson;
+        }
+
+        // Legacy fallbacks for older builds
+        const legacy = {
+            4: () => this.getNatureLesson(),
+            5: () => this.getAnimalsLesson(),
+            6: () => this.getPlantsLesson(),
+            7: () => this.getBasicConversationLesson(),
+            8: () => this.getAdvancedConversationLesson(),
+            9: () => this.getCultureLesson(),
+            10: () => this.getFinalExamLesson()
+        };
+        return (legacy[id] || rich[1])();
+    }
+
+    attachMasteryCertificate(base) {
+        const completion = base.sections?.find((s) => s.type === 'completion');
+        if (completion) {
+            completion.content = `
+                <div class="completion-section">
+                    <div class="certificate-card">
+                        <h3>🏆 Certificate of Guna Linguistic Mastery</h3>
+                        <p>This certifies that you completed all 20 levels of the Guna Learning Path.</p>
+                        <p class="cert-date">Date: ${new Date().toLocaleDateString('en-US')}</p>
+                    </div>
+                    <div class="lesson-xp-reward">
+                        <span class="xp-badge">+300 XP</span>
+                        <span class="cocos-badge">+50 🥥</span>
+                    </div>
+                    <div class="lesson-completion">
+                        <button class="complete-lesson-btn">Claim Certificate</button>
+                    </div>
+                </div>
+            `;
+        }
+        return base;
     }
 
     buildVocabRows(words) {

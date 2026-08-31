@@ -114,6 +114,14 @@ class MyBookshelf extends HTMLElement {
 
     renderInfoView(book, quiz, quizDone, notes) {
         const shelfLabel = { read: 'Completed', tbr: 'To Be Read', dnf: 'Did Not Finish' }[book.shelf] || book.shelf;
+        const moods = book.moods || [
+            { icon: '🌿', label: 'cultural' },
+            { icon: '💡', label: 'inspired' },
+            { icon: '❤️', label: 'proud' },
+            { icon: '🌊', label: 'reflective' }
+        ];
+        const quote = book.quote || notes || book.defaultNotes ||
+            'Every reading brings you closer to Guna language, territory and living memory.';
 
         return `
             <div class="bookshelf-detail-hero">
@@ -145,6 +153,23 @@ class MyBookshelf extends HTMLElement {
             </div>
 
             <div class="bookshelf-card">
+                <h4>Mood & Feelings</h4>
+                <div class="bookshelf-moods">
+                    ${moods.map(m => `
+                        <div class="bookshelf-mood">
+                            <span>${m.icon}</span>
+                            <span>${m.label}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+
+            <div class="bookshelf-card">
+                <h4>Favorite Quotes</h4>
+                <p class="bookshelf-quote">“${quote}”</p>
+            </div>
+
+            <div class="bookshelf-card">
                 <h4>Notes & Reflections</h4>
                 <textarea class="bookshelf-notes-area" id="bookshelfNotes" placeholder="Write your reading notes and reflections here...">${notes}</textarea>
                 <button type="button" class="bookshelf-notes-save" id="bookshelfSaveNotes">Save notes</button>
@@ -163,7 +188,7 @@ class MyBookshelf extends HTMLElement {
 
             ${book.shelf === 'read' ? `
                 <div class="bookshelf-recommend-tape">
-                    <i class="fas fa-heart" style="color:#e8756a;margin-right:0.35rem"></i>
+                    <i class="fas fa-heart" style="color:#c00000;margin-right:0.35rem"></i>
                     would recommend to a friend!
                 </div>
             ` : ''}
@@ -225,6 +250,12 @@ class MyBookshelf extends HTMLElement {
                         <p>Your personal reading library — tap a cover to explore</p>
                     </header>
                     ${shelves.map(shelf => this.renderShelfRow(shelf, books)).join('')}
+                    <div class="bookshelf-decor-row" aria-hidden="true">
+                        <div class="bookshelf-decor-item">🪴</div>
+                        <div class="bookshelf-decor-item">🕯️</div>
+                        <div class="bookshelf-decor-item">🖼️</div>
+                        <div class="bookshelf-decor-item">📚</div>
+                    </div>
                 </div>
             </div>
             ${this.renderDetailPanel()}

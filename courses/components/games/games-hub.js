@@ -38,7 +38,6 @@ class GamesHub extends HTMLElement {
             const game = this.getGames().find(g => g.id === this.activeGame);
             this.innerHTML = `
                 <div class="hub-module games-hub-active">
-                    <soggy-avatar></soggy-avatar>
                     <button class="hub-btn hub-btn-secondary" id="backToGamesHub" style="margin-bottom:1.5rem;">
                         <i class="fas fa-arrow-left"></i> ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('backToGames') : 'Back to Games'}
                     </button>
@@ -60,7 +59,6 @@ class GamesHub extends HTMLElement {
 
         this.innerHTML = `
             <div class="hub-module games-hub">
-                <soggy-avatar></soggy-avatar>
                 <header>
                     <h1 class="hub-section-title">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('gamesHub') : 'Games Hub'}</h1>
                     <p class="hub-section-subtitle">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('gamesHubSub') : 'Play minigames to practice Guna vocabulary and culture. Win Oggob, but lose 1 Burba on failure.'}</p>

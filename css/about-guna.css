@@ -15,7 +15,7 @@
     --absolute-black: #000000;
     font-family: 'Quicksand', sans-serif;
     color: var(--absolute-black);
-    background: linear-gradient(180deg, #fffef9 0%, var(--guna-cream) 35%, #f0faf4 100%);
+    background: transparent;
     overflow-x: hidden;
 }
 

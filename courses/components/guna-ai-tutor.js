@@ -49,7 +49,6 @@ class GunaAiTutor extends HTMLElement {
     render() {
         this.innerHTML = `
             <div class="ai-tutor-section soggy-chat-section">
-                <soggy-avatar></soggy-avatar>
                 <div class="ai-tutor-header">
                     <div class="ai-tutor-avatar" aria-hidden="true"><img src="../../Multimedia/Images/Soged/Soggy IA.jpg" alt="Soggy Tutor" class="ai-tutor-avatar-img"></div>
                     <div>

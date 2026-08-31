@@ -88,17 +88,20 @@ const GunaUserData = {
     saveSettings(settings) {
         const merged = { ...this.getSettings(), ...settings };
         localStorage.setItem(this.SETTINGS_KEY, JSON.stringify(merged));
-        if (merged.theme === 'dark') {
-            document.body.classList.add('dark-mode');
-            localStorage.setItem('gunaTheme', 'dark');
-        } else if (merged.theme === 'light') {
-            document.body.classList.remove('dark-mode');
-            localStorage.setItem('gunaTheme', 'light');
-        } else if (merged.theme === 'auto') {
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            document.body.classList.toggle('dark-mode', prefersDark);
-            localStorage.setItem('gunaTheme', prefersDark ? 'dark' : 'light');
+
+        let resolved = merged.theme;
+        if (resolved === 'auto') {
+            resolved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
+        if (resolved !== 'dark' && resolved !== 'light') resolved = 'light';
+
+        document.body.classList.toggle('dark-mode', resolved === 'dark');
+        document.documentElement.setAttribute('data-theme', resolved);
+        localStorage.setItem('gunaTheme', resolved);
+        localStorage.setItem('theme', resolved);
+        localStorage.setItem('soged_theme', resolved);
+        window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: resolved } }));
+
         if (typeof GunaI18n !== 'undefined') {
             GunaI18n.setLanguage(merged.language);
         }

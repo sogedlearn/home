@@ -16,10 +16,20 @@ class LearningSection extends HTMLElement {
         this.loadUserProgress();
         this.setupSidebarListener();
         this.updateProgressIndicator();
+        this.scrollToCurrentDuoStep();
         if (window.learningHub && typeof window.learningHub.scrollToPageTop === 'function') {
+            // Keep hub scroll; path will nudge current node into view shortly after
             window.learningHub.scrollToPageTop();
         } else {
             window.scrollTo(0, 0);
+        }
+        setTimeout(() => this.scrollToCurrentDuoStep(), 350);
+    }
+
+    scrollToCurrentDuoStep() {
+        const current = this.querySelector('.duo-step.is-current');
+        if (current) {
+            current.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     }
 
@@ -27,12 +37,12 @@ class LearningSection extends HTMLElement {
         const lessons = this.getLessonsData();
         const completed = lessons.filter(l => l.status === 'completed').length;
         const total = lessons.length;
-        const el = this.querySelector('#progressText');
-        if (el) {
-            el.textContent = typeof GunaI18n !== 'undefined'
-                ? GunaI18n.t('pathLessons', { completed, total })
-                : `${completed}/${total} Lessons`;
-        }
+        const label = typeof GunaI18n !== 'undefined'
+            ? GunaI18n.t('pathLessons', { completed, total })
+            : `${completed}/${total} Lessons`;
+        this.querySelectorAll('#progressText, .duo-progress-pill span').forEach((el) => {
+            el.textContent = label;
+        });
     }
 
     setupSidebarListener() {
@@ -901,14 +911,12 @@ class LearningSection extends HTMLElement {
 
                 </div>
 
-                <div class="learning-path" data-aos="fade-up" data-aos-delay="100">
+                <div class="learning-path learning-path--duo" data-aos="fade-up" data-aos-delay="100">
                     <div class="progress-indicator" id="pathProgressIndicator">
                         <span id="progressText">0/0 Lessons</span>
                     </div>
-                    
-                    <div class="path-container" id="pathContainer">
-                        ${this.generateLessonsForCourse()}
-                    </div>
+                    ${this.generateDuoPath()}
+                    <div class="path-container" id="pathContainer" hidden></div>
                 </div>
             </div>
         `;
@@ -924,65 +932,161 @@ class LearningSection extends HTMLElement {
         return names[this.currentCourse] || 'Indigenous Language';
     }
 
-    generateLessonsForCourse() {
-        const lessons = this.getLessonsData();
+    getDuoOffsets() {
+        // Snake / Duolingo zigzag pattern
+        return [0, -72, -120, -72, 0, 72, 120, 72];
+    }
+
+    generateDuoPath() {
+        const lessons = this.getLessonsData().map((lesson) => ({ ...lesson }));
         const currentLevel = this.getCurrentLevel();
         const isGuest = localStorage.getItem('isGuest') === 'true';
         const guestAccessLevel = parseInt(localStorage.getItem('guestAccessLevel') || '2', 10);
-        
-        let html = '';
-        let currentModule = 0;
+        const offsets = this.getDuoOffsets();
+        const completed = lessons.filter((l) => l.status === 'completed').length;
+        const total = lessons.length;
+        const progressLabel = typeof GunaI18n !== 'undefined'
+            ? GunaI18n.t('pathLessons', { completed, total })
+            : `${completed}/${total} Lessons`;
 
-        lessons.forEach((lesson, index) => {
-            // Check if guest mode and level is beyond access
+        let trackHtml = '';
+        let currentModule = 0;
+        let pathIndex = 0;
+
+        lessons.forEach((lesson) => {
             if (isGuest && lesson.id > guestAccessLevel) {
                 lesson.status = 'locked';
                 lesson.isLockedForGuest = true;
             }
 
-            // Add module header when module changes
             if (lesson.module && lesson.module !== currentModule) {
                 currentModule = lesson.module;
-                html += this.generateModuleHeader(currentModule);
+                const titles = {
+                    1: 'MODULE 1 · Roots & Community',
+                    2: 'MODULE 2 · Cosmovision & Identity'
+                };
+                trackHtml += `
+                    <div class="duo-module">
+                        <h3>${titles[currentModule] || `MODULE ${currentModule}`}</h3>
+                    </div>
+                `;
             }
 
-            html += `
-            <div class="path-step">
-                ${this.currentCourse === 'guna' ? `<div class="path-step-dot ${lesson.status}" aria-hidden="true"><span>${lesson.id}</span></div>` : ''}
-                <div class="lesson-node ${lesson.status} ${lesson.type === 'boss' ? 'boss-node' : ''} ${lesson.status === 'locked' ? 'opacity-60 pointer-events-none' : ''} ${this.currentCourse === 'guna' && lesson.id === 1 ? 'lesson-node--island' : ''}" data-lesson="${lesson.id}">
-                    ${lesson.type === 'boss' ? '<div class="boss-badge">BOSS</div>' : ''}
-                    ${lesson.isLockedForGuest ? '<div class="lock-overlay"><i class="fas fa-lock"></i><span>Register to unlock</span></div>' : ''}
-                    ${this.currentCourse === 'guna' ? '' : `<div class="lesson-level-num">${lesson.id}</div>`}
-                    ${lesson.id === currentLevel ? this.generateSoggyAvatar() : ''}
-                    <div class="lesson-icon">
-                        <i class="fas ${this.getLessonIcon(lesson.status, lesson.type)}"></i>
-                    </div>
-                    <div class="lesson-info">
-                        <h3 class="lesson-title">${lesson.title}</h3>
-                        <p class="lesson-description">${lesson.description}</p>
-                        ${this.currentCourse === 'guna' ? `
-                        <div class="lesson-stats lesson-stats--guna">
-                            <span class="stat-pill stat-pill--xp"><i class="fas fa-star"></i> +${lesson.xp} XP</span>
-                            <span class="stat-pill stat-pill--time"><i class="fas fa-clock"></i> ${lesson.duration} min</span>
-                            <span class="stat-pill stat-pill--exercises"><i class="fas fa-layer-group"></i> ${lesson.exercises} exercises</span>
-                        </div>
-                        ` : `
-                        <div class="lesson-stats">
-                            <span class="stat-item"><i class="fas fa-star"></i> +${lesson.xp} XP</span>
-                            <span class="stat-item"><i class="fas fa-clock"></i> ${lesson.duration} min</span>
-                            <span class="stat-item"><i class="fas fa-layer-group"></i> ${lesson.exercises} exercises</span>
-                        </div>
-                        `}
-                    </div>
-                    <div class="lesson-actions">
-                        ${this.getLessonButton(lesson)}
+            const x = offsets[pathIndex % offsets.length];
+            const isRight = x > 0;
+            const isCurrent = lesson.status === 'current' || lesson.id === currentLevel;
+            const showChest = lesson.type === 'boss' || lesson.id % 5 === 0;
+            const icon = lesson.status === 'completed'
+                ? '<i class="fas fa-check"></i>'
+                : lesson.status === 'locked'
+                    ? '<i class="fas fa-lock"></i>'
+                    : lesson.type === 'boss'
+                        ? '<i class="fas fa-crown"></i>'
+                        : `<span>${lesson.id}</span>`;
+
+            trackHtml += `
+                <div class="duo-step ${isRight ? 'is-right' : ''} ${isCurrent ? 'is-current' : ''}"
+                     style="--duo-x: ${x}px"
+                     data-lesson-step="${lesson.id}">
+                    <div class="duo-node-wrap">
+                        ${isCurrent ? `
+                            <span class="duo-ring" aria-hidden="true"></span>
+                            <div class="duo-mascot" aria-hidden="true">
+                                <img src="../Multimedia/Images/Soged/Newturttle.png" alt="">
+                                <div class="duo-speech">${lesson.status === 'completed' ? 'Review!' : 'START!'}</div>
+                            </div>
+                        ` : ''}
+                        <button type="button"
+                            class="duo-node duo-node--${lesson.status} ${lesson.type === 'boss' ? 'duo-node--boss' : ''} ${isCurrent ? 'selected' : ''}"
+                            data-lesson="${lesson.id}"
+                            data-status="${lesson.status}"
+                            aria-label="Level ${lesson.id}: ${lesson.title}">
+                            ${icon}
+                        </button>
+                        ${showChest ? `
+                            <div class="duo-chest ${lesson.status === 'locked' ? 'duo-chest--locked' : ''}" aria-hidden="true">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                        ` : ''}
+                        <div class="duo-label">${lesson.title}</div>
                     </div>
                 </div>
-            </div>
             `;
+            pathIndex += 1;
         });
 
-        return html;
+        const focusLesson = lessons.find((l) => l.status === 'current')
+            || lessons.find((l) => l.id === currentLevel)
+            || lessons[0];
+
+        return `
+            <div class="duo-path">
+                <div class="duo-path__board">
+                    <div class="duo-progress-pill">
+                        <i class="fas fa-route"></i>
+                        <span id="progressText">${progressLabel}</span>
+                    </div>
+                    <div class="duo-track" id="duoTrack">
+                        ${trackHtml}
+                    </div>
+                </div>
+                <aside class="duo-detail" id="duoLessonDetail" data-active-lesson="${focusLesson?.id || 1}">
+                    ${this.renderDuoDetail(focusLesson)}
+                </aside>
+            </div>
+        `;
+    }
+
+    renderDuoDetail(lesson) {
+        if (!lesson) {
+            return `<div class="duo-detail__empty">Select a level on the path</div>`;
+        }
+
+        const badgeClass = lesson.status === 'completed'
+            ? 'is-completed'
+            : lesson.status === 'locked'
+                ? 'is-locked'
+                : '';
+        const badgeText = lesson.status === 'completed'
+            ? 'Completed'
+            : lesson.status === 'locked'
+                ? 'Locked'
+                : 'Current level';
+
+        let cta = '';
+        if (lesson.status === 'completed') {
+            cta = `<button type="button" class="duo-detail__cta duo-detail__cta--review" data-duo-action="review" data-lesson="${lesson.id}">
+                <i class="fas fa-redo"></i> Review lesson
+            </button>`;
+        } else if (lesson.status === 'current') {
+            const session = typeof GunaProgress !== 'undefined' ? GunaProgress.getLessonSession(lesson.id) : null;
+            cta = `<button type="button" class="duo-detail__cta" data-duo-action="start" data-lesson="${lesson.id}">
+                <i class="fas fa-play"></i> ${session ? 'Continue' : 'START'}
+            </button>`;
+        } else {
+            cta = `<button type="button" class="duo-detail__cta" disabled>
+                <i class="fas fa-lock"></i> Locked
+            </button>`;
+        }
+
+        return `
+            <img class="duo-detail__mascot" src="../Multimedia/Images/Soged/Newturttle.png" alt="SOGED turtle">
+            <div class="duo-detail__badge ${badgeClass}">
+                <i class="fas fa-flag"></i> Level ${lesson.id} · ${badgeText}
+            </div>
+            <h3>${lesson.title}</h3>
+            <p>${lesson.description}</p>
+            <div class="duo-detail__stats">
+                <span><i class="fas fa-star"></i> +${lesson.xp} XP</span>
+                <span><i class="fas fa-clock"></i> ${lesson.duration} min</span>
+                <span><i class="fas fa-layer-group"></i> ${lesson.exercises} exercises</span>
+            </div>
+            ${cta}
+        `;
+    }
+
+    generateLessonsForCourse() {
+        return this.generateDuoPath();
     }
 
     generateModuleHeader(moduleNumber) {
@@ -1038,11 +1142,11 @@ class LearningSection extends HTMLElement {
                 { id: 3, title: 'Household Objects', description: 'House, table, plate and daily objects', status: 'completed', xp: 75, duration: 20, exercises: 10, type: 'normal', module: 1 },
                 { id: 4, title: 'Nature', description: 'Rivers, seas, mountains and local flora', status: 'current', xp: 100, duration: 25, exercises: 12, type: 'normal', module: 1 },
                 { id: 5, title: 'Sacred Animals', description: 'Panama fauna, birds, jaguars and marine animals', status: 'locked', xp: 125, duration: 30, exercises: 14, type: 'normal', module: 1 },
-                { id: 6, title: 'Numbers and Counting', description: 'Traditional number system and quantities', status: 'locked', xp: 125, duration: 30, exercises: 14, type: 'normal', module: 1 },
-                { id: 7, title: 'Food and Cooking', description: 'Traditional foods, crops and utensils', status: 'locked', xp: 125, duration: 30, exercises: 14, type: 'normal', module: 1 },
-                { id: 8, title: 'Weather and Seasons', description: 'Months, days, climate and lunar cycles', status: 'locked', xp: 150, duration: 35, exercises: 16, type: 'normal', module: 1 },
-                { id: 9, title: 'Clothing and Symbolism', description: 'Molas, beads, textiles and traditional crafts', status: 'locked', xp: 150, duration: 35, exercises: 16, type: 'normal', module: 1 },
-                { id: 10, title: 'Traditional Medicine', description: 'Medicinal plants, healing songs and botany', status: 'locked', xp: 175, duration: 40, exercises: 18, type: 'normal', module: 1 },
+                { id: 6, title: 'Plants & Food', description: 'Crops, coconut, cassava and traditional foods', status: 'locked', xp: 125, duration: 30, exercises: 14, type: 'normal', module: 1 },
+                { id: 7, title: 'Basic Conversations', description: 'Everyday questions and useful phrases', status: 'locked', xp: 125, duration: 30, exercises: 14, type: 'normal', module: 1 },
+                { id: 8, title: 'Weather & Seasons', description: 'Sun, rain, wind and lunar cycles', status: 'locked', xp: 150, duration: 35, exercises: 16, type: 'normal', module: 1 },
+                { id: 9, title: 'Clothing & Symbolism', description: 'Molas, beads, textiles and traditional dress', status: 'locked', xp: 150, duration: 35, exercises: 16, type: 'normal', module: 1 },
+                { id: 10, title: 'Traditional Medicine', description: 'Medicinal plants, healers and healing songs', status: 'locked', xp: 175, duration: 40, exercises: 18, type: 'normal', module: 1 },
                 // MODULE 2: "Worldview and Advanced Identity" (Levels 11-20)
                 { id: 11, title: 'Stories and Legends', description: 'Creation myths and grandparents narrations', status: 'locked', xp: 175, duration: 40, exercises: 18, type: 'normal', module: 2 },
                 { id: 12, title: 'Community Organization', description: 'The Congress, comarcas and traditional authorities', status: 'locked', xp: 200, duration: 45, exercises: 20, type: 'normal', module: 2 },
@@ -1124,15 +1228,36 @@ class LearningSection extends HTMLElement {
     }
 
     initializeEventListeners() {
-        // Lesson nodes
-        this.querySelectorAll('.lesson-node').forEach(node => {
-            node.addEventListener('click', (e) => {
+        this.querySelectorAll('.duo-node').forEach((node) => {
+            node.addEventListener('click', () => {
+                const lessonId = node.getAttribute('data-lesson');
+                this.selectLesson(lessonId);
+            });
+        });
+
+        this.querySelectorAll('.lesson-node').forEach((node) => {
+            node.addEventListener('click', () => {
                 if (!node.classList.contains('locked')) {
                     const lessonId = node.getAttribute('data-lesson');
                     this.selectLesson(lessonId);
                 }
             });
         });
+
+        const detail = this.querySelector('#duoLessonDetail');
+        if (detail) {
+            detail.addEventListener('click', (e) => {
+                const btn = e.target.closest('[data-duo-action]');
+                if (!btn) return;
+                const lessonId = btn.getAttribute('data-lesson');
+                const action = btn.getAttribute('data-duo-action');
+                if (action === 'review' && typeof window.reviewLesson === 'function') {
+                    window.reviewLesson(lessonId);
+                } else if (action === 'start' && typeof window.startLesson === 'function') {
+                    window.startLesson(lessonId);
+                }
+            });
+        }
     }
 
     switchCourse(course) {
@@ -1158,17 +1283,23 @@ class LearningSection extends HTMLElement {
     }
 
     selectLesson(lessonId) {
-        // Highlight selected lesson
-        this.querySelectorAll('.lesson-node').forEach(node => {
+        this.querySelectorAll('.lesson-node, .duo-node').forEach((node) => {
             node.classList.remove('selected');
         });
-        
-        const selectedNode = this.querySelector(`[data-lesson="${lessonId}"]`);
+
+        const selectedNode = this.querySelector(`.duo-node[data-lesson="${lessonId}"], .lesson-node[data-lesson="${lessonId}"]`);
         if (selectedNode) {
             selectedNode.classList.add('selected');
         }
 
-        // Trigger lesson selection event
+        const lessons = this.getLessonsData();
+        const lesson = lessons.find((l) => String(l.id) === String(lessonId));
+        const detail = this.querySelector('#duoLessonDetail');
+        if (detail && lesson) {
+            detail.dataset.activeLesson = String(lesson.id);
+            detail.innerHTML = this.renderDuoDetail(lesson);
+        }
+
         this.dispatchEvent(new CustomEvent('lessonSelected', {
             detail: { lessonId: lessonId, course: this.currentCourse },
             bubbles: true

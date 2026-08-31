@@ -3,7 +3,7 @@
  */
 const GunaProgress = {
     STORAGE_KEY: 'guna_lesson_progress',
-    TOTAL_LESSONS: 10,
+    TOTAL_LESSONS: 20,
 
     getProgress() {
         try {
@@ -89,6 +89,11 @@ const GunaProgress = {
             progress.completed.push(id);
             progress.completed.sort((a, b) => a - b);
         }
+        progress.maxCompletedLevel = Math.max(
+            Number(progress.maxCompletedLevel) || 0,
+            id,
+            ...progress.completed
+        );
         const next = id + 1;
         progress.current = next <= this.TOTAL_LESSONS ? next : id;
         this.clearLessonSession(id);

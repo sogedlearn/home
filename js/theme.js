@@ -7,8 +7,12 @@ class ThemeManager {
     }
 
     init() {
-        // Get saved theme or default to light
-        this.currentTheme = localStorage.getItem('theme') || 'light';
+        // Unify keys used across public site + learning hub
+        this.currentTheme =
+            localStorage.getItem('theme') ||
+            localStorage.getItem('gunaTheme') ||
+            localStorage.getItem('soged_theme') ||
+            'light';
         
         // Apply theme immediately
         this.setTheme(this.currentTheme);
@@ -16,9 +20,11 @@ class ThemeManager {
         // Initialize theme switch after components are loaded
         this.initializeThemeSwitch();
         
-        // Listen for theme changes from other components
+        // Listen for theme changes from other components (header switch, hub, etc.)
         window.addEventListener('themeChanged', (e) => {
-            this.setTheme(e.detail.theme);
+            const next = e.detail?.theme === 'dark' ? 'dark' : 'light';
+            if (next === this.currentTheme) return;
+            this.setTheme(next);
         });
         
         console.log('Theme Manager initialized:', this.currentTheme);
@@ -78,62 +84,52 @@ class ThemeManager {
     }
 
     setTheme(theme) {
-        // Update current theme
-        this.currentTheme = theme;
-        
-        // Set theme attribute on document
-        document.documentElement.setAttribute('data-theme', theme);
-        
-        // Save to localStorage
-        localStorage.setItem('theme', theme);
-        
-        // Update switch if it exists
+        const next = theme === 'dark' ? 'dark' : 'light';
+        this.currentTheme = next;
+
+        document.documentElement.setAttribute('data-theme', next);
+        document.body.classList.toggle('dark-mode', next === 'dark');
+        document.body.classList.remove('theme-light', 'theme-dark');
+        document.body.classList.add(`theme-${next}`);
+
+        localStorage.setItem('theme', next);
+        localStorage.setItem('gunaTheme', next);
+        localStorage.setItem('soged_theme', next);
+
         if (this.themeSwitch) {
-            this.themeSwitch.checked = theme === 'dark';
+            this.themeSwitch.checked = next === 'dark';
         }
-        
-        // Force a reflow to ensure CSS variables are applied
+
         document.body.offsetHeight;
-        
-        // Dispatch custom event for other components
-        window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
-        
-        console.log('Theme changed to:', theme);
-        
-        // Update all theme-dependent elements
-        this.updateThemeElements(theme);
+        window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: next } }));
+        this.updateThemeElements(next);
     }
 
     updateThemeElements(theme) {
-        // Update body class
-        document.body.className = document.body.className.replace(/theme-\w+/g, '');
-        document.body.classList.add(`theme-${theme}`);
-        
-        // Force CSS variable updates for immediate effect
         const root = document.documentElement;
         if (theme === 'dark') {
-            root.style.setProperty('--bg-primary', '#0F172A');
-            root.style.setProperty('--bg-secondary', '#1E293B');
-            root.style.setProperty('--bg-tertiary', '#334155');
-            root.style.setProperty('--card-bg', '#1E293B');
-            root.style.setProperty('--header-bg', '#0F172A');
-            root.style.setProperty('--footer-bg', '#0F172A');
-            root.style.setProperty('--navbar-bg', '#0F172A');
-            root.style.setProperty('--text-primary', '#F1F5F9');
-            root.style.setProperty('--text-secondary', '#94A3B8');
-            root.style.setProperty('--text-color', '#F1F5F9');
-            root.style.setProperty('--border-color', '#334155');
-            root.style.setProperty('--input-bg', '#1E293B');
-            root.style.setProperty('--input-border', '#475569');
-            root.style.setProperty('--input-text', '#F1F5F9');
-            root.style.setProperty('--shadow-color', 'rgba(40, 167, 69, 0.15)');
+            root.style.setProperty('--bg-primary', '#0d1a12');
+            root.style.setProperty('--bg-secondary', '#12261a');
+            root.style.setProperty('--bg-tertiary', '#163222');
+            root.style.setProperty('--card-bg', '#12261a');
+            root.style.setProperty('--header-bg', '#0d1a12');
+            root.style.setProperty('--footer-bg', '#0d1a12');
+            root.style.setProperty('--navbar-bg', '#0d1a12');
+            root.style.setProperty('--text-primary', '#F3FBF5');
+            root.style.setProperty('--text-secondary', '#B7D0C0');
+            root.style.setProperty('--text-color', '#F3FBF5');
+            root.style.setProperty('--border-color', '#163222');
+            root.style.setProperty('--input-bg', '#12261a');
+            root.style.setProperty('--input-border', '#2a4a34');
+            root.style.setProperty('--input-text', '#F3FBF5');
+            root.style.setProperty('--shadow-color', 'rgba(17, 128, 43, 0.22)');
         } else {
-            root.style.setProperty('--bg-primary', '#F8FAFC');
+            root.style.setProperty('--bg-primary', '#F8F3EA');
             root.style.setProperty('--bg-secondary', '#ffffff');
             root.style.setProperty('--bg-tertiary', '#F1F5F9');
             root.style.setProperty('--card-bg', '#fff');
             root.style.setProperty('--header-bg', '#fff');
-            root.style.setProperty('--footer-bg', '#F8FAFC');
+            root.style.setProperty('--footer-bg', '#F8F3EA');
             root.style.setProperty('--navbar-bg', '#fff');
             root.style.setProperty('--text-primary', '#1E293B');
             root.style.setProperty('--text-secondary', '#64748B');
@@ -167,14 +163,35 @@ class ThemeManager {
     }
 }
 
+// Apply saved theme ASAP (before paint when possible)
+(function applyThemeEarly() {
+    try {
+        const saved =
+            localStorage.getItem('theme') ||
+            localStorage.getItem('gunaTheme') ||
+            localStorage.getItem('soged_theme') ||
+            'light';
+        const next = saved === 'dark' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        if (document.body) {
+            document.body.classList.toggle('dark-mode', next === 'dark');
+            document.body.classList.remove('theme-light', 'theme-dark');
+            document.body.classList.add(`theme-${next}`);
+        }
+    } catch (_) { /* ignore */ }
+})();
+
 // Initialize theme manager when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     window.themeManager = new ThemeManager();
-    
+
     // Sync theme with header component after it's loaded
     setTimeout(() => {
         window.themeManager.syncWithHeader();
     }, 500);
+    setTimeout(() => {
+        window.themeManager.syncWithHeader();
+    }, 1500);
 });
 
 // Make theme manager globally available

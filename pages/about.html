@@ -13,7 +13,14 @@
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/mola-guna.css">
     <link rel="stylesheet" href="../css/about-guna.css">
+    <link rel="stylesheet" href="../css/mola-site-background.css">
     <link rel="stylesheet" href="../css/dark-mode-fixes.css">
+    <script>
+        (function () {
+            var t = localStorage.getItem('theme') || localStorage.getItem('gunaTheme') || localStorage.getItem('soged_theme');
+            if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        })();
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {

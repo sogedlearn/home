@@ -181,8 +181,12 @@
 /* ===== GENERAL DARK MODE IMPROVEMENTS ===== */
 
 [data-theme="dark"] body {
-    background: var(--bg-primary);
+    background: transparent;
     color: var(--text-primary);
+}
+
+[data-theme="dark"] body.home-page {
+    background: transparent !important;
 }
 
 [data-theme="dark"] h1, 
@@ -272,4 +276,90 @@
 
 [data-theme="dark"] .guna-culture-page .tier-diagram-label {
     color: var(--text-secondary);
+}
+
+/* ===== ABOUT (Guna) DARK MODE ===== */
+
+[data-theme="dark"] body.about-guna-page {
+    color: #F3FBF5;
+    background: transparent !important;
+}
+
+[data-theme="dark"] body.about-guna-page .about-hero-gradient,
+[data-theme="dark"] body.about-guna-page .about-hero-mola-bg,
+[data-theme="dark"] body.about-guna-page .about-mola-soft-bg {
+    background-color: transparent !important;
+}
+
+[data-theme="dark"] body.about-guna-page h1,
+[data-theme="dark"] body.about-guna-page h2,
+[data-theme="dark"] body.about-guna-page h3,
+[data-theme="dark"] body.about-guna-page h4,
+[data-theme="dark"] body.about-guna-page .font-display,
+[data-theme="dark"] body.about-guna-page .text-absolute-black {
+    color: #F3FBF5 !important;
+}
+
+[data-theme="dark"] body.about-guna-page .text-absolute-black\/75,
+[data-theme="dark"] body.about-guna-page p,
+[data-theme="dark"] body.about-guna-page .text-guna-earth,
+[data-theme="dark"] body.about-guna-page li {
+    color: #B7D0C0 !important;
+}
+
+[data-theme="dark"] body.about-guna-page .bg-white,
+[data-theme="dark"] body.about-guna-page .bg-guna-cream,
+[data-theme="dark"] body.about-guna-page [class*="bg-white"],
+[data-theme="dark"] body.about-guna-page .mission-card,
+[data-theme="dark"] body.about-guna-page .value-card,
+[data-theme="dark"] body.about-guna-page .team-slide,
+[data-theme="dark"] body.about-guna-page .rounded-3xl,
+[data-theme="dark"] body.about-guna-page .rounded-2xl {
+    background-color: rgba(18, 38, 26, 0.9) !important;
+    border-color: #163222 !important;
+    color: #F3FBF5;
+}
+
+[data-theme="dark"] body.about-guna-page .border,
+[data-theme="dark"] body.about-guna-page [class*="border-"] {
+    border-color: #163222 !important;
+}
+
+/* ===== RESOURCES / CONTACT / GENERAL CARDS ===== */
+
+[data-theme="dark"] .resource-card,
+[data-theme="dark"] .contact-card,
+[data-theme="dark"] .faq-item,
+[data-theme="dark"] .card,
+[data-theme="dark"] .feature-card {
+    background: rgba(18, 38, 26, 0.9) !important;
+    border-color: #163222 !important;
+    color: #F3FBF5 !important;
+}
+
+[data-theme="dark"] .footer,
+[data-theme="dark"] footer {
+    background: rgba(10, 22, 16, 0.95) !important;
+    color: #B7D0C0 !important;
+    border-top-color: #163222 !important;
+}
+
+[data-theme="dark"] .navbar,
+[data-theme="dark"] .header-component,
+[data-theme="dark"] header {
+    background: rgba(13, 26, 18, 0.92) !important;
+    border-bottom-color: #163222 !important;
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+    background: #12261a !important;
+    border-color: #2a4a34 !important;
+    color: #F3FBF5 !important;
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+    color: #7fa892 !important;
 }

@@ -16,8 +16,9 @@ const GunaGamification = {
         { id: 'first-unit', category: 'learning', icon: '📦', title: 'First Unit Completed', description: 'Complete 3 lessons', check: () => (GunaProgress?.getCompletedCount() || 0) >= 3 },
         { id: 'learning-explorer', category: 'learning', icon: '🧭', title: 'Learning Explorer', description: 'Complete 5 lessons', check: () => (GunaProgress?.getCompletedCount() || 0) >= 5 },
         { id: 'learning-champion', category: 'learning', icon: '⭐', title: 'Learning Champion', description: 'Complete 8 lessons', check: () => (GunaProgress?.getCompletedCount() || 0) >= 8 },
-        { id: 'path-master', category: 'learning', icon: '👑', title: 'Path Master', description: 'Complete all 10 lessons', check: () => (GunaProgress?.getCompletedCount() || 0) >= 10 },
-        { id: 'guna-master', category: 'learning', icon: '🏝️', title: 'Guna Grand Master', description: 'Beat the final challenge', check: () => (GunaProgress?.getCompletedCount() || 0) >= 10 },
+        { id: 'path-master', category: 'learning', icon: '👑', title: 'Path Master', description: 'Complete 10 lessons', check: () => (GunaProgress?.getCompletedCount() || 0) >= 10 },
+        { id: 'module-two', category: 'learning', icon: '🧭', title: 'Module Two Explorer', description: 'Complete 15 lessons', check: () => (GunaProgress?.getCompletedCount() || 0) >= 15 },
+        { id: 'guna-master', category: 'learning', icon: '🏝️', title: 'Guna Grand Master', description: 'Complete all 20 levels', check: () => (GunaProgress?.getCompletedCount() || 0) >= 20 },
         // Community
         { id: 'history-explorer', category: 'community', icon: '📜', title: 'History Explorer', description: 'Visit the History section', check: () => localStorage.getItem('guna_history_visited') === '1' },
         { id: 'culture-enthusiast', category: 'community', icon: '🧵', title: 'Culture Enthusiast', description: 'Explore Guna culture', check: () => localStorage.getItem('guna_culture_visited') === '1' },

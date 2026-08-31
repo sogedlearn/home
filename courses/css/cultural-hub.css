@@ -223,11 +223,148 @@
 
 /* Soggy Avatar — fixed top-right */
 soggy-avatar {
-    position: fixed;
-    top: 80px;
-    right: 24px;
-    z-index: 900;
-    pointer-events: none;
+  position: fixed;
+  top: 80px;
+  right: 24px;
+  z-index: 900;
+  pointer-events: none;
+}
+
+/* Hide floating mascot outside the dedicated chat tutor */
+body:not([data-hub-section="chat"]) soggy-avatar {
+  display: none !important;
+}
+
+/* Modern cultural library */
+.culture-library-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(140px, 0.6fr);
+  gap: 1.25rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding: 1.25rem 1.4rem;
+  border-radius: 1.5rem;
+  background:
+    linear-gradient(135deg, rgba(17, 128, 43, 0.08), rgba(227, 160, 8, 0.1)),
+    #fffef9;
+  border: 1px solid rgba(17, 128, 43, 0.14);
+}
+
+.culture-library-kicker {
+  margin: 0 0 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #11802b;
+}
+
+.culture-library-hero .hub-section-subtitle {
+  margin-bottom: 0;
+}
+
+.culture-library-hero-art {
+  min-height: 120px;
+  border-radius: 1.1rem;
+  background:
+    linear-gradient(145deg, rgba(192, 0, 0, 0.35), rgba(17, 128, 43, 0.35)),
+    url('../../Multimedia/Images/Molas - Guna/mola-bg-pattern.jpg') center/cover;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.culture-library-shelf {
+  margin-top: 0.5rem;
+}
+
+.culture-library-shelf-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+  color: #3d1f0a;
+}
+
+.culture-library-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.culture-book-card {
+  display: grid;
+  grid-template-columns: 14px 1fr;
+  border-radius: 1.1rem;
+  overflow: hidden;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid rgba(61, 31, 10, 0.08);
+  box-shadow: 0 14px 30px rgba(61, 31, 10, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.culture-book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 36px rgba(17, 128, 43, 0.14);
+}
+
+.culture-book-spine {
+  background: linear-gradient(180deg, var(--book-tone, #11802b), #0c5c1f);
+}
+
+.culture-book-cover {
+  padding: 1.2rem 1.15rem 1.25rem;
+}
+
+.culture-book-cat {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--book-tone, #11802b);
+  background: rgba(17, 128, 43, 0.08);
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  margin-bottom: 0.55rem;
+}
+
+.culture-book-cover h3 {
+  margin: 0 0 0.45rem;
+  font-size: 1.15rem;
+  color: #1e293b;
+}
+
+.culture-book-cover p {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #64748b;
+}
+
+body.dark-mode .culture-library-hero,
+body.dark-mode .culture-book-card,
+html[data-theme="dark"] .culture-library-hero,
+html[data-theme="dark"] .culture-book-card {
+  background: rgba(18, 38, 26, 0.94);
+  border-color: #163222;
+  color: #F3FBF5;
+}
+
+body.dark-mode .culture-book-cover h3,
+html[data-theme="dark"] .culture-book-cover h3 {
+  color: #F3FBF5;
+}
+
+body.dark-mode .culture-book-cover p,
+body.dark-mode .culture-library-shelf-label,
+html[data-theme="dark"] .culture-book-cover p,
+html[data-theme="dark"] .culture-library-shelf-label {
+  color: #B7D0C0;
+}
+
+@media (max-width: 720px) {
+  .culture-library-hero {
+    grid-template-columns: 1fr;
+  }
 }
 
 .soggy-avatar-wrap {

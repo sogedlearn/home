@@ -15,8 +15,20 @@
     <link rel="stylesheet" href="css/mola-puzzle.css">
     <link rel="stylesheet" href="css/cultural-hub.css">
     <link rel="stylesheet" href="css/my-bookshelf.css">
+    <link rel="stylesheet" href="css/stories-library.css">
     <link rel="stylesheet" href="css/guna-design-system.css">
+    <link rel="stylesheet" href="css/learning-path-duo.css">
+    <link rel="stylesheet" href="../css/mola-site-background.css">
     <script src="components/guna-pattern.js"></script>
+    <script>
+        (function () {
+            var t = localStorage.getItem('gunaTheme') || localStorage.getItem('theme') || localStorage.getItem('soged_theme');
+            if (t === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.documentElement.classList.add('preload-dark');
+            }
+        })();
+    </script>
 
     <style>
     /* Hub shell tokens live in css/guna-design-system.css */
@@ -62,7 +74,7 @@
                 </div>
                 <div class="course-info">
                     <span class="course-name">Guna</span>
-                    <span class="course-desc" data-i18n="courseActive">10 lessons active</span>
+                    <span class="course-desc" data-i18n="courseActive">20 lessons active</span>
                 </div>
                 <button class="course-dropdown-btn" id="courseDropdownBtn" aria-label="Select course" data-i18n-aria="selectCourse">
                     <i class="fas fa-chevron-down"></i>
@@ -833,6 +845,7 @@
     <script src="js/guna-leaderboard.js"></script>
     <script src="components/guna-vocabulary.js"></script>
     <script src="js/guna-lesson-configs.js"></script>
+    <script src="js/guna-module2-content.js"></script>
     <script src="js/guna-level-lessons.js"></script>
     
     <!-- Web Components -->

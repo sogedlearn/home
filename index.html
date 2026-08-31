@@ -22,7 +22,14 @@
     <link rel="stylesheet" href="css/theme-components.css">
     <link rel="stylesheet" href="css/mola-guna.css">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/mola-site-background.css">
     <link rel="stylesheet" href="css/dark-mode-fixes.css">
+    <script>
+        (function () {
+            var t = localStorage.getItem('theme') || localStorage.getItem('gunaTheme') || localStorage.getItem('soged_theme');
+            if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        })();
+    </script>
     <style>
         /* Locked course styles */
         .step-card.locked {

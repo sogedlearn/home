@@ -408,6 +408,7 @@ class SimpleLearningHub {
         this.loadSectionContent(section, { instant: true });
         
         this.currentSection = section;
+        document.body.dataset.hubSection = section;
     }
 
     t(key, vars) {
@@ -415,6 +416,7 @@ class SimpleLearningHub {
     }
 
     loadSectionContent(section, options = {}) {
+        document.body.dataset.hubSection = section;
         const contentContainer = document.getElementById('contentContainer');
         const instant = !!options.instant;
 
@@ -868,7 +870,8 @@ class SimpleLearningHub {
         const gunaState = typeof GunaGamification !== 'undefined' ? GunaGamification.getState() : {};
         const progress = JSON.parse(localStorage.getItem('userProgress') || '{}');
         const gunaCompleted = typeof GunaProgress !== 'undefined' ? GunaProgress.getCompletedCount() : 3;
-        const pathProgress = Math.round((gunaCompleted / 10) * 100);
+        const totalPathLessons = (typeof GunaProgress !== 'undefined' && GunaProgress.TOTAL_LESSONS) || 20;
+        const pathProgress = Math.round((gunaCompleted / totalPathLessons) * 100);
         return {
             level: gunaState.level || progress.level || 5,
             xp: gunaState.xp || progress.xp || 1250,
@@ -883,23 +886,37 @@ class SimpleLearningHub {
 
     setupThemeToggle() {
         const btn = document.getElementById('themeToggleBtn');
-        const saved = localStorage.getItem('gunaTheme');
-        if (saved === 'dark') document.body.classList.add('dark-mode');
-        if (btn) {
-            btn.innerHTML = document.body.classList.contains('dark-mode')
-                ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-            btn.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-                const dark = document.body.classList.contains('dark-mode');
-                localStorage.setItem('gunaTheme', dark ? 'dark' : 'light');
+        const applyTheme = (dark) => {
+            document.body.classList.toggle('dark-mode', dark);
+            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+            localStorage.setItem('gunaTheme', dark ? 'dark' : 'light');
+            localStorage.setItem('theme', dark ? 'dark' : 'light');
+            localStorage.setItem('soged_theme', dark ? 'dark' : 'light');
+            if (btn) {
                 btn.innerHTML = dark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            }
+            window.dispatchEvent(new CustomEvent('themeChanged', {
+                detail: { theme: dark ? 'dark' : 'light' }
+            }));
+        };
+
+        const saved =
+            localStorage.getItem('gunaTheme') ||
+            localStorage.getItem('theme') ||
+            localStorage.getItem('soged_theme');
+        applyTheme(saved === 'dark');
+
+        if (btn) {
+            btn.addEventListener('click', () => {
+                applyTheme(!document.body.classList.contains('dark-mode'));
             });
         }
     }
 
     updatePathProgressUI() {
         const completed = typeof GunaProgress !== 'undefined' ? GunaProgress.getCompletedCount() : 0;
-        const pct = Math.round((completed / 10) * 100);
+        const totalLessons = (typeof GunaProgress !== 'undefined' && GunaProgress.TOTAL_LESSONS) || 20;
+        const pct = Math.round((completed / totalLessons) * 100);
         document.querySelectorAll('[data-path-progress]').forEach(el => { el.style.width = `${pct}%`; });
         document.querySelectorAll('[data-path-percent]').forEach(el => {
             el.dataset.i18nN = String(pct);

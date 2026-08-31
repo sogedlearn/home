@@ -5,32 +5,39 @@
    ============================================================ */
 
 :root {
-    --guna-gold: #F5B51B;
-    --guna-gold-deep: #D49A12;
-    --guna-chocolate: #5A301A;
-    --guna-chocolate-lt: #7A4628;
-    --guna-blue: #087EA4;
-    --guna-blue-deep: #06657F;
-    --guna-red: #C83A32;
-    --guna-red-deep: #9E2C26;
-    --guna-green: #16834A;
-    --guna-green-deep: #0F5E35;
+    /* Official branding guideline — no chocolate chrome */
+    --brand-red: #c00000;
+    --brand-green: #11802b;
+    --brand-gold: #e3a008;
+    --brand-blue: #0973a1;
+
+    --guna-gold: #e3a008;
+    --guna-gold-deep: #c48906;
+    /* Legacy alias: map old "chocolate" tokens → deep green (brand) */
+    --guna-chocolate: #0c5c1f;
+    --guna-chocolate-lt: #11802b;
+    --guna-blue: #0973a1;
+    --guna-blue-deep: #075a7e;
+    --guna-red: #c00000;
+    --guna-red-deep: #9a0000;
+    --guna-green: #11802b;
+    --guna-green-deep: #0c5c1f;
 
     --guna-cream: #FFF8ED;
-    --guna-cream-dim: #F3E6D2;
+    --guna-cream-dim: #EEF6F0;
     --guna-surface: #FFFFFF;
-    --guna-text: #3D261A;
-    --guna-text-soft: #6B5643;
+    --guna-text: #12261a;
+    --guna-text-soft: #3d5a45;
 
-    --guna-gold-rgb: 245, 181, 27;
-    --guna-chocolate-rgb: 90, 48, 26;
-    --guna-blue-rgb: 8, 126, 164;
-    --guna-red-rgb: 200, 58, 50;
-    --guna-green-rgb: 22, 131, 74;
+    --guna-gold-rgb: 227, 160, 8;
+    --guna-chocolate-rgb: 12, 92, 31;
+    --guna-blue-rgb: 9, 115, 161;
+    --guna-red-rgb: 192, 0, 0;
+    --guna-green-rgb: 17, 128, 43;
 
-    --primary-color: var(--guna-gold);
-    --primary-hover: var(--guna-gold-deep);
-    --primary-light: #FFF4D4;
+    --primary-color: var(--guna-green);
+    --primary-hover: var(--guna-green-deep);
+    --primary-light: #E8F6EC;
     --secondary-color: var(--guna-gold);
     --secondary-hover: var(--guna-gold-deep);
     --secondary-light: #FFF4D4;
@@ -44,34 +51,35 @@
     --warning-color: var(--guna-gold);
     --danger-color: var(--guna-red);
 
-    --gradient-primary: linear-gradient(160deg, var(--guna-gold), var(--guna-gold-deep));
+    --gradient-primary: linear-gradient(160deg, var(--guna-green), var(--guna-green-deep));
     --gradient-secondary: linear-gradient(160deg, var(--guna-gold), var(--guna-gold-deep));
     --gradient-accent: linear-gradient(160deg, var(--guna-red), var(--guna-red-deep));
     --gradient-success: linear-gradient(160deg, var(--guna-green), var(--guna-green-deep));
     --gradient-info: linear-gradient(160deg, var(--guna-blue), var(--guna-blue-deep));
+    --gradient-sidebar: linear-gradient(180deg, #11802b 0%, #0c5c1f 55%, #094a19 100%);
 
     --bg-primary: var(--guna-cream);
     --bg-secondary: var(--guna-surface);
     --bg-tertiary: var(--guna-cream-dim);
-    --bg-sidebar: var(--guna-chocolate);
-    --bg-sidebar-collapsed: #46280F;
+    --bg-sidebar: #0c5c1f;
+    --bg-sidebar-collapsed: #094a19;
 
     --text-primary: var(--guna-text);
     --text-secondary: var(--guna-text-soft);
-    --text-light: #A89078;
-    --text-white: var(--guna-cream);
-    --text-muted: #8A7460;
+    --text-light: #6a8a74;
+    --text-white: #ffffff;
+    --text-muted: #5f7a68;
 
     --font-display: 'Baloo 2', sans-serif;
     --font-body: 'Nunito', sans-serif;
-    --shadow-card: 0 4px 14px rgba(var(--guna-chocolate-rgb), .12);
-    --shadow-pop: 0 10px 30px rgba(var(--guna-chocolate-rgb), .2);
-    --shadow-sm: 0 2px 6px rgba(var(--guna-chocolate-rgb), .08);
-    --shadow-md: 0 4px 14px rgba(var(--guna-chocolate-rgb), .12);
-    --shadow-lg: 0 10px 30px rgba(var(--guna-chocolate-rgb), .2);
+    --shadow-card: 0 4px 14px rgba(var(--guna-green-rgb), .12);
+    --shadow-pop: 0 10px 30px rgba(var(--guna-green-rgb), .18);
+    --shadow-sm: 0 2px 6px rgba(var(--guna-green-rgb), .08);
+    --shadow-md: 0 4px 14px rgba(var(--guna-green-rgb), .12);
+    --shadow-lg: 0 10px 30px rgba(var(--guna-green-rgb), .18);
 
     --guna-radius-card: 20px;
-    --guna-border-subtle: 1px solid rgba(var(--guna-chocolate-rgb), .1);
+    --guna-border-subtle: 1px solid rgba(var(--guna-green-rgb), .12);
 
     --paper: var(--guna-cream);
     --paper-dim: var(--guna-cream-dim);
@@ -88,22 +96,14 @@ h1, h2, h3, h4, h5, button, .sidebar-title, .nav-section-title, .breadcrumb-item
 body {
     font-family: var(--font-body);
     color: var(--guna-text);
-    background-color: var(--guna-cream);
-    background-image:
-        radial-gradient(circle at 8% 6%, rgba(var(--guna-blue-rgb), .07), transparent 38%),
-        radial-gradient(circle at 92% 12%, rgba(var(--guna-green-rgb), .07), transparent 40%),
-        radial-gradient(circle at 50% 100%, rgba(var(--guna-gold-rgb), .08), transparent 42%);
+    background-color: transparent;
+    background-image: none;
 }
 
+/* Mola fabric + wash: see css/mola-site-background.css (html::before) */
 body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    opacity: .055;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Crect x='4' y='4' width='40' height='40' fill='none' stroke='%235A301A' stroke-width='1.4'/%3E%3Crect x='12' y='12' width='24' height='24' fill='none' stroke='%23C83A32' stroke-width='1.2'/%3E%3Cpolygon points='24,18 30,24 24,30 18,24' fill='%23087EA4'/%3E%3C/svg%3E");
-    background-size: 48px 48px;
+    content: none;
+    display: none;
 }
 
 html, body, .main-content, .content-container {
@@ -229,7 +229,7 @@ guna-pattern[variant="sidebar"],
 }
 
 .guna-button--dark:hover {
-    background: #46280F;
+    background: #094a19;
 }
 
 .guna-button--secondary {
@@ -341,14 +341,65 @@ guna-pattern[variant="sidebar"],
     color: var(--guna-red);
 }
 
-/* ---------- Loading ---------- */
+/* ---------- Loading (Guna / mola background) ---------- */
 .loading-screen {
-    background: linear-gradient(160deg, var(--guna-chocolate) 0%, #46280F 100%);
-    color: var(--guna-cream);
+    position: relative;
+    isolation: isolate;
+    background-color: #0c5c1f;
+    background-image:
+        linear-gradient(
+            160deg,
+            rgba(12, 92, 31, 0.88) 0%,
+            rgba(9, 74, 25, 0.78) 45%,
+            rgba(61, 31, 10, 0.72) 100%
+        ),
+        radial-gradient(ellipse 70% 50% at 20% 15%, rgba(227, 160, 8, 0.22) 0%, transparent 55%),
+        radial-gradient(ellipse 55% 45% at 85% 80%, rgba(192, 0, 0, 0.16) 0%, transparent 55%),
+        url("../../Multimedia/Images/Molas - Guna/mola-bg-pattern.jpg");
+    background-size: cover, auto, auto, cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
 }
-.loading-content h2 { color: var(--guna-cream); font-family: var(--font-display); }
-.loading-content p { color: rgba(255, 248, 237, .8); }
-.spinner { border-color: rgba(255, 248, 237, .25); border-top-color: var(--guna-gold); }
+
+.loading-screen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.18;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40' viewBox='0 0 80 40'%3E%3Cpath d='M0 20 L10 10 L20 20 L30 10 L40 20 L50 10 L60 20 L70 10 L80 20' fill='none' stroke='%23e3a008' stroke-opacity='0.7' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-size: 80px 40px;
+}
+
+.loading-content {
+    position: relative;
+    z-index: 1;
+    padding: 1.75rem 1.5rem;
+    border-radius: 1.35rem;
+    background: rgba(8, 28, 16, 0.42);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(6px);
+}
+
+.loading-content h2 { color: #fff; font-family: var(--font-display); }
+.loading-content p { color: rgba(255, 255, 255, .88); }
+.spinner { border-color: rgba(255, 255, 255, .25); border-top-color: var(--guna-gold); }
+
+body.dark-mode .loading-screen,
+html[data-theme="dark"] .loading-screen {
+    background-image:
+        linear-gradient(
+            160deg,
+            rgba(10, 22, 16, 0.9) 0%,
+            rgba(13, 26, 18, 0.82) 50%,
+            rgba(18, 38, 26, 0.78) 100%
+        ),
+        radial-gradient(ellipse 70% 50% at 20% 15%, rgba(227, 160, 8, 0.18) 0%, transparent 55%),
+        url("../../Multimedia/Images/Molas - Guna/mola-bg-pattern.jpg");
+}
 
 /* ---------- Sidebar ---------- */
 .sidebar {
@@ -356,10 +407,10 @@ guna-pattern[variant="sidebar"],
     left: 0;
     top: 0;
     z-index: 1000;
-    background: var(--guna-chocolate);
-    color: var(--guna-cream);
+    background: var(--gradient-sidebar);
+    color: #fff;
     border-right: none;
-    box-shadow: 6px 0 24px rgba(70, 40, 15, .28);
+    box-shadow: 6px 0 24px rgba(12, 92, 31, .28);
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -368,7 +419,7 @@ guna-pattern[variant="sidebar"],
     pointer-events: auto;
 }
 
-.sidebar.collapsed { background: var(--guna-chocolate); }
+.sidebar.collapsed { background: var(--bg-sidebar-collapsed); }
 .sidebar.collapsed .guna-pattern--sidebar { display: none; }
 
 .sidebar-header {
@@ -502,11 +553,11 @@ guna-pattern[variant="sidebar"],
 
 .nav-item.active {
     background: var(--guna-gold);
-    color: var(--guna-chocolate);
+    color: #0c5c1f;
     box-shadow: none;
 }
 
-.nav-item.active:hover { color: var(--guna-chocolate); transform: none; }
+.nav-item.active:hover { color: #0c5c1f; transform: none; }
 
 .nav-item:not(.active) .nav-icon {
     background: rgba(255, 255, 255, .08);
@@ -519,8 +570,8 @@ guna-pattern[variant="sidebar"],
 }
 
 .nav-item.active .nav-icon {
-    background: rgba(var(--guna-chocolate-rgb), .18);
-    color: var(--guna-chocolate);
+    background: rgba(12, 92, 31, .16);
+    color: #0c5c1f;
 }
 
 .nav-text { font-family: var(--font-body); font-weight: 700; }
@@ -837,7 +888,7 @@ guna-pattern[variant="sidebar"],
 }
 
 .main-course-card.guna-hero:hover .main-course-cta {
-    background: #46280F;
+    background: #094a19;
     gap: 0.75rem;
 }
 
@@ -1114,45 +1165,73 @@ guna-pattern[variant="sidebar"],
 .accessory-card.equipped-card { outline: 3px solid var(--guna-green); }
 
 /* ---------- Dark mode ---------- */
-body.dark-mode {
-    --guna-cream: #24180F;
-    --guna-cream-dim: #3A2A1C;
-    --guna-surface: #2E2116;
-    --guna-text: #FBF3E7;
-    --guna-text-soft: #D4C4B0;
-    --bg-primary: #24180F;
-    --bg-secondary: #2E2116;
-    --bg-tertiary: #3A2A1C;
-    --text-primary: #FBF3E7;
-    --text-secondary: #D4C4B0;
+body.dark-mode,
+html[data-theme="dark"] body {
+    --guna-cream: #0d1a12;
+    --guna-cream-dim: #163222;
+    --guna-surface: #12261a;
+    --guna-text: #F3FBF5;
+    --guna-text-soft: #B7D0C0;
+    --bg-primary: #0d1a12;
+    --bg-secondary: #12261a;
+    --bg-tertiary: #163222;
+    --text-primary: #F3FBF5;
+    --text-secondary: #B7D0C0;
 }
 
-body.dark-mode .lang-switch {
-    background: #3A2A1C;
-    border-color: #3A2A1C;
+body.dark-mode .lang-switch,
+html[data-theme="dark"] body .lang-switch {
+    background: #163222;
+    border-color: #163222;
 }
 
-body.dark-mode .lang-switch button { color: var(--guna-cream); }
+body.dark-mode .lang-switch button,
+html[data-theme="dark"] body .lang-switch button { color: var(--guna-cream); }
 
 body.dark-mode .sidebar,
-body.dark-mode .sidebar.collapsed {
-    background: var(--guna-chocolate) !important;
+body.dark-mode .sidebar.collapsed,
+html[data-theme="dark"] body .sidebar,
+html[data-theme="dark"] body .sidebar.collapsed {
+    background: var(--gradient-sidebar) !important;
 }
 
-body.dark-mode .main-header {
-    background: rgba(46, 33, 22, .92);
-    border-bottom-color: #3A2A1C;
+body.dark-mode .main-header,
+html[data-theme="dark"] body .main-header {
+    background: rgba(18, 38, 26, .92);
+    border-bottom-color: #163222;
 }
 
-body.dark-mode .stat-item {
-    background: #2E2116;
-    border-color: #3A2A1C;
+body.dark-mode .stat-item,
+html[data-theme="dark"] body .stat-item {
+    background: rgba(18, 38, 26, .88);
+    border-color: #163222;
 }
 
 body.dark-mode .guna-hero,
-body.dark-mode .main-course-card.guna-hero {
+body.dark-mode .main-course-card.guna-hero,
+html[data-theme="dark"] body .guna-hero,
+html[data-theme="dark"] body .main-course-card.guna-hero {
     background: var(--guna-gold);
-    color: #3D261A;
+    color: #12261a;
+}
+
+body.dark-mode .card,
+body.dark-mode .dashboard-card,
+body.dark-mode .mini-stat-card,
+body.dark-mode .path-card,
+body.dark-mode .bookshelf-shell,
+body.dark-mode .stories-library,
+html[data-theme="dark"] body .card,
+html[data-theme="dark"] body .dashboard-card,
+html[data-theme="dark"] body .mini-stat-card {
+    background: rgba(18, 38, 26, .9);
+    border-color: #163222;
+    color: var(--guna-text);
+}
+
+body.dark-mode .content-container,
+html[data-theme="dark"] body .content-container {
+    color: var(--guna-text);
 }
 
 /* ---------- Responsive ---------- */

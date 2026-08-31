@@ -102,22 +102,22 @@
     --warning-color: #F39C12;
     --danger-color: #E74C3C;
     
-    /* Dark theme variables */
-    --bg-primary: #0F172A;
-    --bg-secondary: #1E293B;
-    --bg-tertiary: #334155;
-    --card-bg: #1E293B;
-    --header-bg: #0F172A;
-    --footer-bg: #0F172A;
-    --navbar-bg: #0F172A;
-    --shadow-color: rgba(40, 167, 69, 0.15);
-    --text-primary: #F1F5F9;
-    --text-secondary: #94A3B8;
-    --text-color: #F1F5F9;
-    --border-color: #334155;
-    --input-bg: #1E293B;
-    --input-border: #475569;
-    --input-text: #F1F5F9;
+    /* Dark theme — green jungle tint (brand) */
+    --bg-primary: #0d1a12;
+    --bg-secondary: #12261a;
+    --bg-tertiary: #163222;
+    --card-bg: #12261a;
+    --header-bg: #0d1a12;
+    --footer-bg: #0d1a12;
+    --navbar-bg: #0d1a12;
+    --shadow-color: rgba(17, 128, 43, 0.22);
+    --text-primary: #F3FBF5;
+    --text-secondary: #B7D0C0;
+    --text-color: #F3FBF5;
+    --border-color: #163222;
+    --input-bg: #12261a;
+    --input-border: #2a4a34;
+    --input-text: #F3FBF5;
     --transition: all 0.3s cubic-bezier(.4,0,.2,1);
     
     /* Gradientes para modo oscuro */

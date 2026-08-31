@@ -1,0 +1,177 @@
+/* Shared mola fabric background + readability gradient (site-wide) */
+
+/* Generic loading screens site-wide (auth overlays, etc.) */
+.loading-screen,
+.page-loader,
+.splash-screen {
+    background-color: #0c5c1f;
+    background-image:
+        linear-gradient(
+            160deg,
+            rgba(12, 92, 31, 0.88) 0%,
+            rgba(9, 74, 25, 0.78) 45%,
+            rgba(61, 31, 10, 0.72) 100%
+        ),
+        radial-gradient(ellipse 70% 50% at 18% 12%, rgba(227, 160, 8, 0.2) 0%, transparent 55%),
+        url("../Multimedia/Images/Molas - Guna/mola-bg-pattern.jpg");
+    background-size: cover, auto, cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+:root {
+    --mola-bg-image: url("../Multimedia/Images/Molas - Guna/mola-bg-pattern.jpg");
+    --mola-wash-light: linear-gradient(
+        165deg,
+        rgba(248, 243, 234, 0.94) 0%,
+        rgba(255, 254, 249, 0.88) 35%,
+        rgba(240, 250, 244, 0.90) 70%,
+        rgba(248, 243, 234, 0.93) 100%
+    );
+    --mola-wash-dark: linear-gradient(
+        165deg,
+        rgba(10, 22, 16, 0.94) 0%,
+        rgba(13, 26, 18, 0.90) 40%,
+        rgba(18, 38, 26, 0.92) 75%,
+        rgba(10, 22, 16, 0.95) 100%
+    );
+}
+
+/* Fixed layer on html so it never fights body::before page borders */
+html::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-color: #f8f3ea;
+    background-image: var(--mola-wash-light), var(--mola-bg-image);
+    background-size: cover, cover;
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
+    background-attachment: fixed, fixed;
+}
+
+html[data-theme="dark"]::before,
+html:has(body.dark-mode)::before {
+    background-color: #0d1a12;
+    background-image: var(--mola-wash-dark), var(--mola-bg-image);
+}
+
+/* Keep page chrome readable above the fabric */
+body {
+    position: relative;
+    z-index: 1;
+    background-color: transparent !important;
+}
+
+/* Soften opaque section fills so the mola peeks through */
+body.home-page,
+body.about-guna-page,
+body.guna-culture-page,
+.resources-boutique-page,
+.about-guna-page {
+    background-color: transparent !important;
+    background-image: none;
+}
+
+/*
+ * Home light mode only: soft diagonal + brand tint gradients
+ * Dark mode styles below stay unchanged.
+ */
+html:has(body.home-page)::before {
+    background-color: #ffffff;
+    background-image:
+        /* Soft diagonal white → mola */
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #ffffff 32%,
+            rgba(255, 255, 255, 0.94) 44%,
+            rgba(255, 255, 255, 0.62) 56%,
+            rgba(255, 255, 255, 0.28) 68%,
+            rgba(255, 255, 255, 0.1) 82%
+        ),
+        /* Extra white wash so the mola fades brighter / softer */
+        linear-gradient(
+            160deg,
+            rgba(255, 255, 255, 0.88) 0%,
+            rgba(255, 255, 255, 0.55) 45%,
+            rgba(255, 255, 255, 0.42) 100%
+        ),
+        var(--mola-bg-image);
+    background-size: cover, cover, cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    opacity: 1;
+}
+
+/* No divider line */
+html:has(body.home-page)::after {
+    content: none;
+    display: none;
+}
+
+/* Dark mode home: same diagonal idea, green-black + visible mola */
+html[data-theme="dark"]:has(body.home-page)::before,
+html:has(body.home-page.dark-mode)::before {
+    background-color: #0d1a12;
+    background-image:
+        linear-gradient(
+            135deg,
+            #0d1a12 0%,
+            #0d1a12 34%,
+            rgba(13, 26, 18, 0.9) 44%,
+            rgba(13, 26, 18, 0.45) 56%,
+            rgba(13, 26, 18, 0.18) 68%,
+            transparent 80%
+        ),
+        linear-gradient(
+            135deg,
+            rgba(13, 26, 18, 0.88) 0%,
+            rgba(13, 26, 18, 0.4) 50%,
+            rgba(18, 38, 26, 0.35) 100%
+        ),
+        var(--mola-bg-image);
+    background-size: cover, cover, cover;
+}
+
+body.home-page .home-hero,
+.about-hero-mola-bg,
+.about-mola-soft-bg,
+.mola-pattern-bg,
+.mola-soft-bg {
+    background-color: transparent;
+}
+
+body.home-page .home-hero {
+    background-image: none;
+    background-color: transparent;
+}
+
+.about-hero-mola-bg {
+    background-image:
+        radial-gradient(ellipse 100% 70% at 50% -5%, rgba(255, 179, 0, 0.12) 0%, transparent 58%),
+        radial-gradient(ellipse 55% 45% at 0% 85%, rgba(192, 57, 43, 0.08) 0%, transparent 52%),
+        radial-gradient(ellipse 50% 40% at 100% 75%, rgba(17, 128, 43, 0.08) 0%, transparent 50%) !important;
+    background-size: auto !important;
+}
+
+html[data-theme="dark"] body.home-page .home-hero,
+html:has(body.dark-mode) body.home-page .home-hero {
+    background-image:
+        radial-gradient(ellipse 55% 50% at 8% 18%, rgba(40, 167, 69, 0.16) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 45% at 92% 12%, rgba(255, 179, 0, 0.12) 0%, transparent 58%),
+        radial-gradient(ellipse 45% 40% at 78% 88%, rgba(0, 163, 224, 0.10) 0%, transparent 55%);
+}
+
+@media (max-width: 768px) {
+    html::before {
+        background-attachment: scroll, scroll;
+    }
+
+    html:has(body.home-page)::before {
+        background-attachment: scroll, scroll, scroll;
+    }
+}

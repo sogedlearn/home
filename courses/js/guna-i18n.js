@@ -183,7 +183,7 @@ const GunaI18n = {
             masterCourse: 'Master {name} through gamified lessons and cultural immersion',
             pathLessons: 'Progress: {completed}/{total} Lessons',
             coursePreparing: 'This language course is being prepared for you',
-            buildingLessons: "We're building interactive lessons for {name}. For now, explore the Guna learning path with 10 levels of culture and vocabulary.",
+            buildingLessons: "We're building interactive lessons for {name}. For now, explore the Guna learning path with 20 levels of culture and vocabulary.",
             goToGunaPath: 'Go to Guna Path',
             sogedMarket: 'Soged Market',
             storeSubtitle: 'Exchange your Oggob for exclusive rewards',
