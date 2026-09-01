@@ -43,10 +43,15 @@ const GunaLevelLessons = {
                 `;
             }
             return `
-                <div class="quiz-question" data-question="${q.num}">
-                    <h4>Question ${q.num}: ${q.text}</h4>
-                    <div class="quiz-options">
-                        ${q.options.map(o => `<button type="button" class="quiz-option" data-answer="${o.value}">${o.label}</button>`).join('')}
+                <div class="quiz-question duo-exercise" data-question="${q.num}" data-prompt="Choose the correct answer">
+                    <h4 class="duo-sr-only">Question ${q.num}: ${q.text}</h4>
+                    <div class="duo-mascot-row">
+                        <img class="duo-mascot" src="../Multimedia/Images/Soged/Newturttle.png" alt="Soggy" onerror="this.style.display='none'">
+                        <div class="duo-bubble">${q.text}</div>
+                    </div>
+                    <div class="duo-answer-bank" aria-live="polite"></div>
+                    <div class="quiz-options duo-chips">
+                        ${q.options.map(o => `<button type="button" class="quiz-option duo-chip" data-answer="${o.value}">${o.label}</button>`).join('')}
                     </div>
                     <div class="quiz-feedback" style="display: none;"></div>
                 </div>
@@ -118,6 +123,25 @@ const GunaLevelLessons = {
                                     <tbody>${this.buildVocabTableRows(cfg.words)}</tbody>
                                 </table>
                             </div>
+                        </div>
+                    `
+                },
+                {
+                    type: 'pronunciation',
+                    title: 'Pronunciation',
+                    content: `
+                        <div class="pronunciation-section">
+                            <h3>🔊 Pronunciation Practice</h3>
+                            <p>Say each word aloud, then review the tips below.</p>
+                            <div class="pronunciation-grid">
+                                ${cfg.words.map(w => `
+                                    <button type="button" class="pronunciation-card" data-speak="${w.guna}">
+                                        <span class="pron-icon">🔊</span>
+                                        <strong>${w.guna}</strong>
+                                        <small>${w.en}</small>
+                                    </button>
+                                `).join('')}
+                            </div>
                             <div class="pronunciation-tips">
                                 <h4>💡 Pronunciation Tips</h4>
                                 <ul>${this.buildPronunciationTips(cfg.pronunciationTips)}</ul>
@@ -129,7 +153,7 @@ const GunaLevelLessons = {
                     type: 'interactive',
                     title: 'Practice Time!',
                     content: `
-                        <div class="interactive-section">
+                        <div class="interactive-section" data-paged="true">
                             <h3>🎯 Let's Practice!</h3>
                             <p>${cfg.practiceIntro}</p>
                             <div class="quiz-container">

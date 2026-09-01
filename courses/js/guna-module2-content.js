@@ -117,14 +117,19 @@
 
     if (Array.isArray(V.CATEGORIES)) {
         const extra = [
-            { id: 'weather', label: 'Weather', icon: '🌧️', words: V.weather },
-            { id: 'clothing', label: 'Clothing', icon: '👗', words: V.clothing },
-            { id: 'medicine', label: 'Medicine', icon: '🌿', words: V.medicine },
-            { id: 'legends', label: 'Legends', icon: '📖', words: V.legends },
-            { id: 'community', label: 'Community', icon: '🏛️', words: V.community },
-            { id: 'celebrations', label: 'Celebrations', icon: '🎉', words: V.celebrations },
-            { id: 'geography', label: 'Geography', icon: '🗺️', words: V.geography },
-            { id: 'crafts', label: 'Crafts', icon: '🧺', words: V.crafts }
+            { id: 'weather', label: 'Weather', icon: '🌧️', words: V.weather, module: 'daily' },
+            { id: 'clothing', label: 'Clothing', icon: '👗', words: V.clothing, module: 'daily' },
+            { id: 'medicine', label: 'Medicine', icon: '🌿', words: V.medicine, module: 'daily' },
+            { id: 'legends', label: 'Legends', icon: '📖', words: V.legends, module: 'daily' },
+            { id: 'community', label: 'Community', icon: '🏛️', words: V.community, module: 'daily' },
+            { id: 'celebrations', label: 'Celebrations', icon: '🎉', words: V.celebrations, module: 'daily' },
+            { id: 'geography', label: 'Geography', icon: '🗺️', words: V.geography, module: 'advanced' },
+            { id: 'crafts', label: 'Crafts', icon: '🧺', words: V.crafts, module: 'advanced' },
+            { id: 'idioms', label: 'Idioms', icon: '💬', words: V.idioms, module: 'advanced' },
+            { id: 'values', label: 'Values', icon: '⚖️', words: V.values, module: 'advanced' },
+            { id: 'songs', label: 'Songs', icon: '🎵', words: V.songs, module: 'advanced' },
+            { id: 'trade', label: 'Trade', icon: '🤝', words: V.trade, module: 'advanced' },
+            { id: 'mastery', label: 'Mastery', icon: '👑', words: V.mastery, module: 'advanced' }
         ];
         extra.forEach((cat) => {
             if (!V.CATEGORIES.find((c) => c.id === cat.id)) V.CATEGORIES.push(cat);

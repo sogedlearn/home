@@ -417,6 +417,20 @@ html[data-theme="dark"] .culture-library-shelf-label {
     gap: 2px;
     margin: 1.5rem auto;
     width: fit-content;
+    background: rgba(255, 255, 255, 0.72);
+    padding: 0.6rem;
+    border-radius: 1rem;
+    border: 2px solid rgba(227, 160, 8, 0.45);
+}
+
+body.dark-mode .word-search-grid,
+html[data-theme="dark"] .word-search-grid {
+    background: rgba(18, 38, 26, 0.88);
+}
+
+.drag-item.selected {
+    outline: 3px solid #e3a008;
+    outline-offset: 2px;
 }
 
 .word-search-cell {

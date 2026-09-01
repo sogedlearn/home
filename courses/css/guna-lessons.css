@@ -842,8 +842,9 @@
     border: 2px solid var(--guna-primary);
 }
 
-/* Memory match card images */
-.card-image {
+/* Memory match card images (lesson mini-cards only) */
+.memory-card .card-image,
+.memory-card-back .card-image {
     width: 40px;
     height: 40px;
     object-fit: cover;

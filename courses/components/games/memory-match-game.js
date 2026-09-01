@@ -20,22 +20,22 @@ class MemoryMatchGame extends HTMLElement {
 
     getWords() {
         return [
-            { en: 'I', guna: 'Na', image: '../Multimedia/Images/Memory match/Na.png' },
-            { en: 'You', guna: 'Be', image: '../Multimedia/Images/Memory match/Be.jpg' },
-            { en: 'Yes', guna: 'Eye', image: '../Multimedia/Images/Memory match/Eye.jpg' },
-            { en: 'Hello', guna: 'anna', image: '../Multimedia/Images/Memory match/anna.png' },
-            { en: 'Goodbye', guna: 'degi malo', image: '../Multimedia/Images/Memory match/degi malo.jpg' },
-            { en: 'Mother', guna: 'Nana', image: '../Multimedia/Images/Memory match/Nana.jpg' },
-            { en: 'Father', guna: 'Tata', image: '../Multimedia/Images/Memory match/Tata.jpg' },
-            { en: 'Brother', guna: 'Dummad', image: '../Multimedia/Images/Memory match/Dummad.jpg' },
-            { en: 'Sister', guna: 'Nueded', image: '../Multimedia/Images/Memory match/Nueded.jpg' },
-            { en: 'Grandfather', guna: 'Bab', image: '../Multimedia/Images/Memory match/Bab.png' },
-            { en: 'Grandmother', guna: 'Dada', image: '../Multimedia/Images/Memory match/Dada.jpg' },
-            { en: 'House', guna: 'Muu', image: '../Multimedia/Images/Memory match/Muu.jpg' },
-            { en: 'Table', guna: 'Nika', image: '../Multimedia/Images/Memory match/Nika.jpg' },
-            { en: 'Plate', guna: 'Misi', image: '../Multimedia/Images/Memory match/Misi.jpg' },
-            { en: 'Spoon', guna: 'Tapa', image: '../Multimedia/Images/Memory match/Tapa.jpg' },
-            { en: 'Clothes', guna: 'Bii', image: '../Multimedia/Images/Memory match/Bii.jpg' }
+            { en: 'I', guna: 'Na', image: '../Multimedia/Images/Memory match/Na.png', icon: '👤' },
+            { en: 'You', guna: 'Be', image: '../Multimedia/Images/Memory match/Be.jpg', icon: '🫵' },
+            { en: 'Yes', guna: 'Eye', image: '../Multimedia/Images/Memory match/Eye.jpg', icon: '✅' },
+            { en: 'Hello', guna: 'anna', image: '../Multimedia/Images/Memory match/anna.png', icon: '👋' },
+            { en: 'Goodbye', guna: 'degi malo', image: '../Multimedia/Images/Memory match/degi malo.jpg', icon: '🤚' },
+            { en: 'Mother', guna: 'Nana', image: '../Multimedia/Images/Memory match/Nana.jpg', icon: '👩' },
+            { en: 'Father', guna: 'Tata', image: '../Multimedia/Images/Memory match/Tata.jpg', icon: '👨' },
+            { en: 'Brother', guna: 'Dummad', image: '../Multimedia/Images/Memory match/Dummad.jpg', icon: '👦' },
+            { en: 'Sister', guna: 'Nueded', image: '../Multimedia/Images/Memory match/Nueded.jpg', icon: '👧' },
+            { en: 'Grandfather', guna: 'Bab', image: '../Multimedia/Images/Memory match/Bab.png', icon: '👴' },
+            { en: 'Grandmother', guna: 'Dada', image: '../Multimedia/Images/Memory match/Dada.jpg', icon: '👵' },
+            { en: 'House', guna: 'Muu', image: '../Multimedia/Images/Memory match/Muu.jpg', icon: '🏠' },
+            { en: 'Table', guna: 'Nika', image: '../Multimedia/Images/Memory match/Nika.jpg', icon: '🪵' },
+            { en: 'Plate', guna: 'Misi', image: '../Multimedia/Images/Memory match/Misi.jpg', icon: '🍽️' },
+            { en: 'Spoon', guna: 'Tapa', image: '../Multimedia/Images/Memory match/Tapa.jpg', icon: '🥄' },
+            { en: 'Clothes', guna: 'Bii', image: '../Multimedia/Images/Memory match/Bii.jpg', icon: '👕' }
         ];
     }
 
@@ -51,7 +51,7 @@ class MemoryMatchGame extends HTMLElement {
     render() {
         const config = this.getDifficultyConfig();
         this.innerHTML = `
-            <div class="hub-module">
+            <div class="hub-module games-mola-shell">
                 <h2 class="hub-section-title">Memory Match</h2>
                 <p class="hub-section-subtitle">Memorize cards for 5 seconds, then find matching pairs.</p>
                 <div class="hub-tabs" style="margin-bottom:1rem;">
@@ -98,8 +98,8 @@ class MemoryMatchGame extends HTMLElement {
         const cards = [];
         words.forEach((w, i) => {
             const id = `pair-${i}`;
-            cards.push({ pairId: id, type: 'english', label: w.en, image: w.image, language: 'English' });
-            cards.push({ pairId: id, type: 'indigenous', label: w.guna, image: w.image, language: 'Guna' });
+            cards.push({ pairId: id, type: 'english', label: w.en, image: w.image, icon: w.icon, language: 'English' });
+            cards.push({ pairId: id, type: 'indigenous', label: w.guna, image: w.image, icon: w.icon, language: 'Guna' });
         });
 
         const initialLives = typeof GunaLives !== 'undefined' ? GunaLives.getLives() : 5;
@@ -123,10 +123,11 @@ class MemoryMatchGame extends HTMLElement {
                         <div class="card-front guna-card-back" aria-hidden="true">
                             <div class="guna-mola-layer guna-mola-layer--diamonds"></div>
                             <div class="guna-mola-layer guna-mola-layer--circles"></div>
-                            <img src="../Multimedia/Images/Soged/mola-icon.png" alt="" class="card-front-mola-emblem" data-no-mola-attribution="true">
+                            <span class="card-front-mola-mark" aria-hidden="true">◆</span>
                         </div>
                         <div class="card-back ${c.type === 'english' ? 'english-card' : 'indigenous-card'}">
-                            ${c.image ? `<img src="${c.image}" alt="${c.label}" class="card-image">` : ''}
+                            ${c.image ? `<img src="${c.image}" alt="${c.label}" class="card-image" onerror="this.classList.add('is-broken')">` : ''}
+                            <span class="card-fallback">${c.icon || '◆'}</span>
                             <span class="card-language">${c.language}</span>
                             <span class="card-word">${c.label}</span>
                         </div>

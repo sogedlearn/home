@@ -72,14 +72,38 @@ GUNA_VOCABULARY.objects = [...GUNA_VOCABULARY.home, ...GUNA_VOCABULARY.nature];
 GUNA_VOCABULARY.pronouns = GUNA_VOCABULARY.greetings.filter(w => ['Na', 'Be'].includes(w.guna));
 
 GUNA_VOCABULARY.CATEGORIES = [
-    { id: 'greetings', label: 'Greetings', icon: '👋', words: GUNA_VOCABULARY.greetings },
-    { id: 'family', label: 'Family', icon: '👨‍👩‍👧', words: GUNA_VOCABULARY.family },
-    { id: 'home', label: 'Everyday Objects', icon: '🏠', words: GUNA_VOCABULARY.home },
-    { id: 'nature', label: 'Nature', icon: '🌊', words: GUNA_VOCABULARY.nature },
-    { id: 'animals', label: 'Animals', icon: '🐢', words: GUNA_VOCABULARY.animals },
-    { id: 'plants', label: 'Food', icon: '🥥', words: GUNA_VOCABULARY.plants },
-    { id: 'culture', label: 'Guna Culture', icon: '🧵', words: GUNA_VOCABULARY.culture },
-    { id: 'phrases', label: 'Phrases', icon: '💬', words: GUNA_VOCABULARY.phrases }
+    { id: 'greetings', label: 'Greetings', icon: '👋', words: GUNA_VOCABULARY.greetings, module: 'basics' },
+    { id: 'family', label: 'Family', icon: '👨‍👩‍👧', words: GUNA_VOCABULARY.family, module: 'basics' },
+    { id: 'home', label: 'Everyday Objects', icon: '🏠', words: GUNA_VOCABULARY.home, module: 'basics' },
+    { id: 'nature', label: 'Nature', icon: '🌊', words: GUNA_VOCABULARY.nature, module: 'basics' },
+    { id: 'animals', label: 'Animals', icon: '🐢', words: GUNA_VOCABULARY.animals, module: 'basics' },
+    { id: 'plants', label: 'Food', icon: '🥥', words: GUNA_VOCABULARY.plants, module: 'basics' },
+    { id: 'culture', label: 'Guna Culture', icon: '🧵', words: GUNA_VOCABULARY.culture, module: 'basics' },
+    { id: 'phrases', label: 'Phrases', icon: '💬', words: GUNA_VOCABULARY.phrases, module: 'basics' }
+];
+
+GUNA_VOCABULARY.MODULES = [
+    {
+        id: 'basics',
+        label: 'Module 1 — Basics',
+        subtitle: 'Levels 1–7 · greetings, family, home, nature',
+        icon: '🌱',
+        categoryIds: ['greetings', 'family', 'home', 'nature', 'animals', 'plants', 'phrases', 'culture']
+    },
+    {
+        id: 'daily',
+        label: 'Module 2 — Daily Life',
+        subtitle: 'Levels 8–13 · weather, clothing, community',
+        icon: '🏝️',
+        categoryIds: ['weather', 'clothing', 'medicine', 'legends', 'community', 'celebrations']
+    },
+    {
+        id: 'advanced',
+        label: 'Module 3 — Advanced',
+        subtitle: 'Levels 14–20 · idioms, crafts, mastery',
+        icon: '🏆',
+        categoryIds: ['idioms', 'geography', 'crafts', 'values', 'songs', 'trade', 'mastery']
+    }
 ];
 
 window.GUNA_VOCABULARY = GUNA_VOCABULARY;

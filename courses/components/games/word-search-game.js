@@ -19,11 +19,17 @@ class WordSearchGame extends HTMLElement {
         this.attempts = 0;
         this.render();
         this.buildGrid();
+        this._onMouseUp = () => this.endSelection();
+        document.addEventListener('mouseup', this._onMouseUp);
+    }
+
+    disconnectedCallback() {
+        if (this._onMouseUp) document.removeEventListener('mouseup', this._onMouseUp);
     }
 
     render() {
         this.innerHTML = `
-            <div class="hub-module">
+            <div class="hub-module games-mola-shell">
                 <h2 class="hub-section-title">Guna Word Search</h2>
                 <p class="hub-section-subtitle">Find hidden Guna words. Attempts remaining: <strong id="wsAttempts">${this.maxAttempts}</strong></p>
                 <div class="word-list" id="wordList"></div>
@@ -80,7 +86,14 @@ class WordSearchGame extends HTMLElement {
                 cell.addEventListener('mousedown', () => this.startSelection(r, c));
                 cell.addEventListener('mouseenter', () => this.extendSelection(r, c));
                 cell.addEventListener('mouseup', () => this.endSelection());
-                cell.addEventListener('touchstart', e => { e.preventDefault(); this.startSelection(r, c); });
+                cell.addEventListener('touchstart', e => { e.preventDefault(); this.startSelection(r, c); }, { passive: false });
+                cell.addEventListener('touchmove', e => {
+                    const touch = e.touches[0];
+                    if (!touch) return;
+                    const target = document.elementFromPoint(touch.clientX, touch.clientY);
+                    const next = target?.closest?.('.word-search-cell');
+                    if (next) this.extendSelection(parseInt(next.dataset.row, 10), parseInt(next.dataset.col, 10));
+                }, { passive: true });
                 cell.addEventListener('touchend', () => this.endSelection());
                 gridEl.appendChild(cell);
             }

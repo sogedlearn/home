@@ -32,6 +32,30 @@ class GunaVocabularySection extends HTMLElement {
         return window.GUNA_VOCABULARY?.CATEGORIES || [];
     }
 
+    getModules() {
+        const cats = this.getCategories();
+        const modules = window.GUNA_VOCABULARY?.MODULES || [];
+        if (!modules.length) {
+            return [{
+                id: 'all',
+                label: 'All categories',
+                subtitle: 'Full dictionary',
+                icon: '📖',
+                categories: cats
+            }];
+        }
+        return modules.map((mod) => ({
+            ...mod,
+            categories: mod.categoryIds
+                .map((id) => cats.find((c) => c.id === id))
+                .filter(Boolean)
+        })).filter((mod) => mod.categories.length);
+    }
+
+    getActiveCategoryMeta() {
+        return this.getCategories().find((c) => c.id === this.activeCategory) || this.getCategories()[0];
+    }
+
     getFilteredWords() {
         const cats = this.getCategories();
         const cat = cats.find(c => c.id === this.activeCategory) || cats[0];
@@ -179,14 +203,15 @@ class GunaVocabularySection extends HTMLElement {
     }
 
     render() {
-        const cats = this.getCategories();
+        const modules = this.getModules();
         const words = this.getFilteredWords();
+        const active = this.getActiveCategoryMeta();
 
         this.innerHTML = `
             <div class="vocab-section">
                 <header class="vocab-hero" data-aos="fade-up">
                     <h1>📖 ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('vocabHeroTitle') : 'Guna Vocabulary'}</h1>
-                    <p>${typeof GunaI18n !== 'undefined' ? GunaI18n.t('vocabHeroSub') : 'Interactive dictionary — flashcards, pronunciation & practice'}</p>
+                    <p>${typeof GunaI18n !== 'undefined' ? GunaI18n.t('vocabHeroSub') : 'Browse by module and category — flashcards, pronunciation & practice'}</p>
                     <div class="vocab-search-wrap">
                         <i class="fas fa-search"></i>
                         <input type="search" class="vocab-search" placeholder="${typeof GunaI18n !== 'undefined' ? GunaI18n.t('vocabSearch') : 'Search Guna, Spanish or English...'}" id="vocabSearch" value="${this.searchQuery}">
@@ -201,14 +226,29 @@ class GunaVocabularySection extends HTMLElement {
                     <button type="button" class="vocab-mode-btn ${this.mode === 'review' ? 'active' : ''}" data-mode="review">🔄 ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('vocabReview') : 'Review'}</button>
                 </div>
 
-                <div class="vocab-categories" role="tablist">
-                    ${cats.map(c => `
-                        <button type="button" class="vocab-cat-btn ${c.id === this.activeCategory ? 'active' : ''}"
-                                data-cat="${c.id}" role="tab">
-                            <span>${c.icon}</span> ${c.label}
-                            <span class="vocab-cat-count">${c.words.length}</span>
-                        </button>
+                <div class="vocab-modules">
+                    ${modules.map((mod) => `
+                        <section class="vocab-module-card" data-module="${mod.id}">
+                            <div class="vocab-module-head">
+                                <h3>${mod.icon || '📘'} ${mod.label}</h3>
+                                <span>${mod.subtitle || ''}</span>
+                            </div>
+                            <div class="vocab-module-cats" role="tablist">
+                                ${mod.categories.map((c) => `
+                                    <button type="button" class="vocab-cat-btn ${c.id === this.activeCategory ? 'active' : ''}"
+                                            data-cat="${c.id}" role="tab">
+                                        <span>${c.icon}</span> ${c.label}
+                                        <span class="vocab-cat-count">${(c.words || []).length}</span>
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </section>
                     `).join('')}
+                </div>
+
+                <div class="vocab-active-banner">
+                    <span>${active ? `${active.icon} ${active.label}` : 'Category'} · ${words.length} words</span>
+                    <span style="opacity:0.75;font-size:0.85rem;">${this.mode === 'browse' ? 'Dictionary view' : this.mode}</span>
                 </div>
 
                 <div class="vocab-mode-content">

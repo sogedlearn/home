@@ -35,9 +35,21 @@ class GamesHub extends HTMLElement {
 
     render() {
         if (this.activeGame) {
+            if (typeof GameRewards !== 'undefined' && !GameRewards.canPlay()) {
+                this.innerHTML = `<div class="hub-module games-hub-active games-mola-shell"></div>`;
+                GameRewards.showNoLivesMessage(this.querySelector('.games-hub-active'));
+                return;
+            }
+            const game = this.getGames().find(g => g.id === this.activeGame);
+            if (!game) {
+                this.activeGame = null;
+            }
+        }
+
+        if (this.activeGame) {
             const game = this.getGames().find(g => g.id === this.activeGame);
             this.innerHTML = `
-                <div class="hub-module games-hub-active">
+                <div class="hub-module games-hub-active games-mola-shell">
                     <button class="hub-btn hub-btn-secondary" id="backToGamesHub" style="margin-bottom:1.5rem;">
                         <i class="fas fa-arrow-left"></i> ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('backToGames') : 'Back to Games'}
                     </button>
@@ -58,7 +70,7 @@ class GamesHub extends HTMLElement {
         }
 
         this.innerHTML = `
-            <div class="hub-module games-hub">
+            <div class="hub-module games-hub games-mola-shell">
                 <header>
                     <h1 class="hub-section-title">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('gamesHub') : 'Games Hub'}</h1>
                     <p class="hub-section-subtitle">${typeof GunaI18n !== 'undefined' ? GunaI18n.t('gamesHubSub') : 'Play minigames to practice Guna vocabulary and culture. Win Oggob, but lose 1 Burba on failure.'}</p>

@@ -79,10 +79,15 @@ class GunaLessons {
 
     buildQuizQuestion(num, question, options) {
         return `
-            <div class="quiz-question" data-question="${num}">
-                <h4>Question ${num}: ${question}</h4>
-                <div class="quiz-options">
-                    ${options.map(o => `<button class="quiz-option" data-answer="${o.value}">${o.label}</button>`).join('')}
+            <div class="quiz-question duo-exercise" data-question="${num}" data-prompt="Choose the correct answer">
+                <h4 class="duo-sr-only">Question ${num}: ${question}</h4>
+                <div class="duo-mascot-row">
+                    <img class="duo-mascot" src="../Multimedia/Images/Soged/Newturttle.png" alt="Soggy" onerror="this.style.display='none'">
+                    <div class="duo-bubble">${question}</div>
+                </div>
+                <div class="duo-answer-bank" aria-live="polite"></div>
+                <div class="quiz-options duo-chips">
+                    ${options.map(o => `<button type="button" class="quiz-option duo-chip" data-answer="${o.value}">${o.label}</button>`).join('')}
                 </div>
                 <div class="quiz-feedback" style="display: none;"></div>
             </div>
@@ -280,18 +285,18 @@ class GunaLessons {
                     type: 'interactive',
                     title: 'Practice & Quiz',
                     content: `
-                        <div class="interactive-section">
+                        <div class="interactive-section" data-paged="true">
                             <h3>🎯 Let's Practice!</h3>
-                            <p>Complete all exercises to finish this level:</p>
-                            ${config.dragPairs ? this.buildDragDropExercise(dragPairs) : ''}
-                            <div class="quiz-container">
-                                ${this.buildQuizQuestion(1, config.quiz[0].q, config.quiz[0].options)}
-                                ${this.buildQuizQuestion(2, config.quiz[1].q, config.quiz[1].options)}
-                                ${this.buildQuizQuestion(3, config.quiz[2].q, config.quiz[2].options)}
-                                ${this.buildMatchingExercise(matchPairs.map(p => ({
-                                    guna: p.guna,
-                                    options: optionPool
-                                })))}
+                            <p>One activity per screen — complete each to continue.</p>
+                            ${dragPairs.length ? `<div class="lesson-activity-screen" data-kind="drag">${this.buildDragDropExercise(dragPairs)}</div>` : ''}
+                            <div class="lesson-activity-screen" data-kind="quiz">${this.buildQuizQuestion(1, config.quiz[0].q, config.quiz[0].options)}</div>
+                            <div class="lesson-activity-screen" data-kind="quiz">${this.buildQuizQuestion(2, config.quiz[1].q, config.quiz[1].options)}</div>
+                            <div class="lesson-activity-screen" data-kind="quiz">${this.buildQuizQuestion(3, config.quiz[2].q, config.quiz[2].options)}</div>
+                            <div class="lesson-activity-screen" data-kind="match">${this.buildMatchingExercise(matchPairs.map(p => ({
+                                guna: p.guna,
+                                options: optionPool
+                            })))}</div>
+                            <div class="lesson-activity-screen" data-kind="results">
                                 <div class="quiz-results" style="display: none;">
                                     <h4>Quiz Results</h4>
                                     <p>Score: <span class="correct-answers">0</span> / 4</p>
@@ -508,9 +513,10 @@ class GunaLessons {
         const totalQuestions = 4;
         const feedback = {};
 
-        // Check multiple choice questions
+        // Check multiple choice questions (support string or number answer keys)
         for (let i = 1; i <= 3; i++) {
-            if (answers[i] === correctAnswers[i]) {
+            const given = answers[i] ?? answers[String(i)];
+            if (String(given) === String(correctAnswers[i])) {
                 score++;
                 feedback[i] = { correct: true, message: "¡Correcto! Well done!" };
             } else {
@@ -519,10 +525,11 @@ class GunaLessons {
         }
 
         // Check matching exercise
-        const matchingCorrect = answers[4] && 
-            answers[4][1] === correctAnswers[4][1] &&
-            answers[4][2] === correctAnswers[4][2] &&
-            answers[4][3] === correctAnswers[4][3];
+        const matchAns = answers[4] || answers['4'];
+        const matchingCorrect = matchAns &&
+            String(matchAns[1] ?? matchAns['1']) === String(correctAnswers[4][1]) &&
+            String(matchAns[2] ?? matchAns['2']) === String(correctAnswers[4][2]) &&
+            String(matchAns[3] ?? matchAns['3']) === String(correctAnswers[4][3]);
 
         if (matchingCorrect) {
             score++;

@@ -17,6 +17,13 @@ class LearningSection extends HTMLElement {
         this.setupSidebarListener();
         this.updateProgressIndicator();
         this.scrollToCurrentDuoStep();
+        this._onProgressUpdated = () => {
+            this.render();
+            this.initializeEventListeners();
+            this.updateProgressIndicator();
+            setTimeout(() => this.scrollToCurrentDuoStep(), 200);
+        };
+        window.addEventListener('soged:progress-updated', this._onProgressUpdated);
         if (window.learningHub && typeof window.learningHub.scrollToPageTop === 'function') {
             // Keep hub scroll; path will nudge current node into view shortly after
             window.learningHub.scrollToPageTop();
@@ -24,6 +31,12 @@ class LearningSection extends HTMLElement {
             window.scrollTo(0, 0);
         }
         setTimeout(() => this.scrollToCurrentDuoStep(), 350);
+    }
+
+    disconnectedCallback() {
+        if (this._onProgressUpdated) {
+            window.removeEventListener('soged:progress-updated', this._onProgressUpdated);
+        }
     }
 
     scrollToCurrentDuoStep() {
@@ -1364,12 +1377,23 @@ function openGunaLessonViewer(lessonId, review = false) {
     if (viewer) {
         viewer.addEventListener('lessonCompleted', (e) => {
             const completedId = e.detail.lessonId;
-            showNotification(`🎉 Lesson ${completedId} completed! +25 cocos`, 'success');
+            const nextId = e.detail.nextLessonId;
+            showNotification(
+                nextId
+                    ? `🎉 Level ${completedId} complete! Continuing the path…`
+                    : `🎉 Lesson ${completedId} completed! +25 cocos`,
+                'success'
+            );
             setTimeout(() => {
+                if (nextId && typeof window.startLesson === 'function') {
+                    // Keep walking the path: open the next unlocked level
+                    window.startLesson(nextId);
+                    return;
+                }
                 if (window.learningHub) {
                     window.learningHub.loadSection('learn', true);
                 }
-            }, 1500);
+            }, 1200);
         }, { once: true });
     }
 }

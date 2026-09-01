@@ -452,7 +452,7 @@ class SimpleLearningHub {
                     content = `<cultural-readings></cultural-readings>`;
                     break;
                 case 'puzzle':
-                    content = `<games-hub></games-hub>`;
+                    content = `<games-hub game="puzzle"></games-hub>`;
                     break;
                 case 'community':
                     content = `<guna-community-section></guna-community-section>`;
@@ -983,7 +983,7 @@ class SimpleLearningHub {
                         <h1 class="hero-title">${this.t('welcomeBack', { name: username })}</h1>
                         <p class="hero-subtitle">${this.t('heroSubtitle')}</p>
                     </div>
-                    <div class="hero-stats-row">
+                    <div class="hero-stats-row hero-stats-row--compact">
                         <div class="hero-stat-pill level">
                             <i class="fas fa-star"></i>
                             <div>
@@ -996,13 +996,6 @@ class SimpleLearningHub {
                             <div>
                                 <span class="hero-stat-value">${stats.xp.toLocaleString()} XP</span>
                                 <span class="hero-stat-label">${this.t('earned')}</span>
-                            </div>
-                        </div>
-                        <div class="hero-stat-pill streak">
-                            <img src="../Multimedia/Images/Soged/Streak.png" alt="" class="hero-streak-icon" aria-hidden="true">
-                            <div>
-                                <span class="hero-stat-value">${this.t('streakDays', { n: stats.streak })}</span>
-                                <span class="hero-stat-label">${this.t('streak')}</span>
                             </div>
                         </div>
                     </div>
@@ -1029,80 +1022,52 @@ class SimpleLearningHub {
                     </div>
                 </button>
 
-                <section class="mini-stats-grid" data-aos="fade-up" data-aos-delay="100" aria-label="${this.t('progressStats')}">
-                    <div class="mini-stat-card lessons">
-                        ${(window.GunaIcon && window.GunaIcon.html('fas fa-book-open', 'blue')) || '<span class="guna-icon guna-icon--blue" aria-hidden="true"><i class="fas fa-book-open"></i></span>'}
-                        <span class="mini-stat-number">${stats.lessons}</span>
-                        <span class="mini-stat-label">${this.t('lessonsCompleted')}</span>
+                <section class="overview-summary-bar" data-aos="fade-up" data-aos-delay="100" aria-label="${this.t('progressStats')}">
+                    <div class="overview-path-panel">
+                        <div class="overview-path-head">
+                            <div>
+                                <h3>${this.t('gunaLearningPath')}</h3>
+                                <p>${this.t('overallProgress')} · ${stats.pathProgress}%</p>
+                            </div>
+                            <button type="button" class="btn-duo btn-duo-primary overview-path-cta" onclick="window.learningHub.navigateToSection('learn')">
+                                ${this.t('continueLearning')} <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                        <div class="progress-track progress-track-lg">
+                            <div class="progress-fill progress-fill-animated" style="width: ${stats.pathProgress}%"></div>
+                        </div>
+                        <div class="overview-path-meta">
+                            <span><i class="fas fa-book-open"></i> ${stats.lessons} ${this.t('lessonsCompleted')}</span>
+                            <span><i class="fas fa-bolt"></i> ${stats.xp.toLocaleString()} XP · ${xpPercent}% ${this.t('xpToNextLevel')}</span>
+                        </div>
                     </div>
-                    <div class="mini-stat-card xp-total">
-                        ${(window.GunaIcon && window.GunaIcon.html('fas fa-bolt', 'gold')) || '<span class="guna-icon guna-icon--gold" aria-hidden="true"><i class="fas fa-bolt"></i></span>'}
-                        <span class="mini-stat-number">${stats.xp.toLocaleString()}</span>
-                        <span class="mini-stat-label">${this.t('totalXp')}</span>
+                    <div class="overview-quick-stats">
+                        <div class="overview-chip oggob-counter">
+                            <img src="../Multimedia/Images/Soged/oggob.png" alt="" aria-hidden="true">
+                            <div>
+                                <strong data-oggob-balance>${stats.cocos.toLocaleString()}</strong>
+                                <small>${this.t('oggobEarned')}</small>
+                            </div>
+                        </div>
+                        <div class="overview-chip">
+                            <img src="../Multimedia/Images/Soged/Burba.png" alt="" aria-hidden="true">
+                            <div>
+                                <strong data-lives-count>${stats.lives}</strong>
+                                <small>${this.t('burbaRemaining')}</small>
+                            </div>
+                        </div>
+                        <div class="overview-chip">
+                            <img src="../Multimedia/Images/Soged/Streak.png" alt="" aria-hidden="true">
+                            <div>
+                                <strong>${stats.streak}</strong>
+                                <small>${this.t('currentStreak')}</small>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mini-stat-card oggob-earned oggob-counter">
-                        <img src="../Multimedia/Images/Soged/oggob.png" alt="" class="mini-stat-oggob-img" aria-hidden="true">
-                        <span class="mini-stat-number" data-oggob-balance>${stats.cocos.toLocaleString()}</span>
-                        <span class="mini-stat-label">${this.t('oggobEarned')}</span>
-                    </div>
-                    <div class="mini-stat-card burba-current">
-                        <img src="../Multimedia/Images/Soged/Burba.png" alt="" class="mini-stat-burba-img" aria-hidden="true">
-                        <span class="mini-stat-number" data-lives-count>${stats.lives}</span>
-                        <span class="mini-stat-label">${this.t('burbaRemaining')}</span>
-                    </div>
-                    <div class="mini-stat-card streak-current">
-                        <img src="../Multimedia/Images/Soged/Streak.png" alt="" class="mini-stat-streak-img" aria-hidden="true">
-                        <span class="mini-stat-number">${stats.streak}</span>
-                        <span class="mini-stat-label">${this.t('currentStreak')}</span>
+                    <div class="overview-week-wrap" role="group" aria-label="${this.t('weekCalendar')}">
+                        ${this.getWeekCalendar()}
                     </div>
                 </section>
-
-                <div class="dashboard-grid" data-aos="fade-up" data-aos-delay="150">
-                    <div class="dashboard-card progress-card-modern">
-                        <div class="card-header">
-                            <div class="card-icon progress guna-icon guna-icon--gold">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <div>
-                                <h3 class="card-title">${this.t('yourProgress')}</h3>
-                                <p class="card-subtitle">${this.t('gunaLearningPath')}</p>
-                            </div>
-                        </div>
-                        <div class="overall-progress">
-                            <div class="progress-label">
-                                <span>${this.t('overallProgress')}</span>
-                                <span>${stats.pathProgress}%</span>
-                            </div>
-                            <div class="progress-track progress-track-lg">
-                                <div class="progress-fill progress-fill-animated" style="width: ${stats.pathProgress}%"></div>
-                            </div>
-                        </div>
-                        <div class="progress-xp-bar">
-                            <div class="progress-label">
-                                <span>${this.t('xpToNextLevel')}</span>
-                                <span>${xpPercent}%</span>
-                            </div>
-                            <div class="progress-track">
-                                <div class="progress-fill progress-fill-xp" style="width: ${xpPercent}%"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="dashboard-card streak-card-modern">
-                        <div class="card-header">
-                            <div class="card-icon streak">
-                                <img src="../Multimedia/Images/Soged/Streak.png" alt="" class="streak-card-icon" aria-hidden="true">
-                            </div>
-                            <div>
-                                <h3 class="card-title">${this.t('learningStreak')}</h3>
-                                <p class="card-subtitle streak-highlight"><img src="../Multimedia/Images/Soged/Streak.png" alt="" class="inline-streak-icon" aria-hidden="true"> ${this.t('consecutiveDays', { n: stats.streak })}</p>
-                            </div>
-                        </div>
-                        <div class="week-calendar" role="group" aria-label="${this.t('weekCalendar')}">
-                            ${this.getWeekCalendar()}
-                        </div>
-                    </div>
-                </div>
 
                 <div class="store-promo-banner" data-aos="fade-up" data-aos-delay="200">
                     <img src="../Multimedia/Images/Molas - Guna/Mola 2.jpg" alt="" class="store-promo-mola" data-no-mola-attribution="true" aria-hidden="true">

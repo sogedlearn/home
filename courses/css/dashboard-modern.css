@@ -908,8 +908,8 @@
     transform-style: preserve-3d;
 }
 
-.card-front,
-.card-back {
+.memory-card-modern .card-front,
+.memory-card-modern .card-back {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -922,9 +922,10 @@
     gap: 0.5rem;
 }
 
-.card-front {
-    background: url('../Multimedia/Images/Soged/Soggy IA.jpg') center/contain no-repeat;
-    background-color: linear-gradient(135deg, #C41E3A, #FF6B35, #FFD700);
+.memory-card-modern .card-front {
+    background:
+        linear-gradient(145deg, rgba(139, 21, 48, 0.45) 0%, rgba(196, 30, 58, 0.28) 45%, rgba(227, 160, 8, 0.3) 100%),
+        url('../../Multimedia/Images/Molas - Guna/mola-bg-pattern.jpg') center/cover;
     overflow: hidden;
 }
 
@@ -932,11 +933,11 @@
     display: none;
 }
 
-.card-front::after {
+.memory-card-modern .card-front::after {
     display: none;
 }
 
-.card-back {
+.memory-card-modern .card-back {
     background: #FFF8E1;
     transform: rotateY(180deg);
     color: #000;
@@ -944,12 +945,13 @@
     padding: 0.5rem;
 }
 
-.card-back.spanish-card {
+.memory-card-modern .card-back.spanish-card,
+.memory-card-modern .card-back.english-card {
     border-color: #4A90E2;
     background: linear-gradient(135deg, #FFF8E1, #E3F2FD);
 }
 
-.card-back.indigenous-card {
+.memory-card-modern .card-back.indigenous-card {
     border-color: #FFB300;
     background: linear-gradient(135deg, #FFF8E1, #FFF3E0);
 }
@@ -3543,6 +3545,86 @@ input:checked + .toggle-slider:before {
     height: 200px;
     background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
     pointer-events: none;
+}
+
+/* Compact overview summary under hero */
+.overview-summary-bar {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(220px, 0.85fr);
+    gap: 1rem;
+    margin: 0 0 1.5rem;
+    padding: 1rem 1.1rem;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(17, 128, 43, 0.12);
+    box-shadow: 0 10px 28px rgba(17, 128, 43, 0.08);
+}
+
+.overview-path-panel { grid-column: 1 / -1; }
+.overview-path-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+.overview-path-head h3 { margin: 0; font-size: 1.15rem; font-weight: 800; color: #0c5c1f; }
+.overview-path-head p { margin: 0.15rem 0 0; color: #6b7c6e; font-weight: 600; font-size: 0.9rem; }
+.overview-path-cta { white-space: nowrap; }
+.overview-path-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem 1.25rem;
+    margin-top: 0.75rem;
+    font-weight: 700;
+    color: #3d5a45;
+    font-size: 0.9rem;
+}
+.overview-quick-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.65rem;
+}
+.overview-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.7rem 0.8rem;
+    border-radius: 14px;
+    background: #f5faf3;
+    border: 1px solid rgba(17, 128, 43, 0.1);
+}
+.overview-chip img { width: 28px; height: 28px; object-fit: contain; }
+.overview-chip strong { display: block; font-size: 1.05rem; color: #0c5c1f; }
+.overview-chip small { color: #6b7c6e; font-weight: 600; }
+.overview-week-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 14px;
+    background: #f8fbf6;
+    border: 1px solid rgba(17, 128, 43, 0.08);
+}
+body.dark-mode .overview-summary-bar,
+html[data-theme="dark"] .overview-summary-bar {
+    background: rgba(18, 38, 26, 0.94);
+    border-color: #163222;
+}
+body.dark-mode .overview-path-head h3,
+body.dark-mode .overview-chip strong,
+html[data-theme="dark"] .overview-path-head h3,
+html[data-theme="dark"] .overview-chip strong { color: #b7f06a; }
+body.dark-mode .overview-chip,
+body.dark-mode .overview-week-wrap,
+html[data-theme="dark"] .overview-chip,
+html[data-theme="dark"] .overview-week-wrap {
+    background: #1a3324;
+    border-color: #2a4a35;
+}
+@media (max-width: 900px) {
+    .overview-summary-bar { grid-template-columns: 1fr; }
+    .overview-path-head { flex-direction: column; align-items: flex-start; }
 }
 
 /* Mini Stats Grid */

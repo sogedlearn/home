@@ -14,7 +14,11 @@ class GunaLessonViewer extends HTMLElement {
         this.userAnswers = {};
         this.quizCompleted = false;
         this.memoryCompleted = false;
+        this.flashcardsDone = false;
+        this.pronunciationDone = false;
+        this.conversationCompleted = false;
         this.isReviewMode = false;
+        this.currentActivityIndex = 0;
     }
 
     connectedCallback() {
@@ -39,6 +43,11 @@ class GunaLessonViewer extends HTMLElement {
         this.userAnswers = {};
         this.quizCompleted = false;
         this.memoryCompleted = false;
+        this.flashcardsDone = false;
+        this.pronunciationDone = false;
+        this.conversationCompleted = false;
+        this.currentActivityIndex = 0;
+        this.quizActivityIndex = 0;
 
         const session = typeof GunaProgress !== 'undefined' ? GunaProgress.getLessonSession(this.currentLessonId) : null;
         if (session && !this.isReviewMode) {
@@ -47,6 +56,11 @@ class GunaLessonViewer extends HTMLElement {
             this.userAnswers = session.userAnswers || {};
             this.quizCompleted = !!session.quizCompleted;
             this.memoryCompleted = !!session.memoryCompleted;
+            this.flashcardsDone = !!session.flashcardsDone;
+            this.pronunciationDone = !!session.pronunciationDone;
+            this.conversationCompleted = !!session.conversationCompleted;
+            this.currentActivityIndex = session.activityIndex || 0;
+            this.quizActivityIndex = session.activityIndex || 0;
         }
 
         this.loadLesson();
@@ -606,59 +620,147 @@ class GunaLessonViewer extends HTMLElement {
                 }
             </style>
 
-            <div class="lesson-viewer">
+            ${this.buildLessonShellHtml()}
+        `;
+        this.syncDuoProgress();
+    }
+
+    isPracticeSection(type) {
+        return ['interactive', 'conversation', 'flashcards', 'memory', 'pronunciation'].includes(type);
+    }
+
+    getDuoPromptTitle(section) {
+        const map = {
+            interactive: 'Choose the correct answer',
+            conversation: 'Pick the best reply',
+            flashcards: 'Tap the card to flip',
+            memory: 'Find the matching pairs',
+            pronunciation: 'Listen and practice',
+            introduction: 'Welcome',
+            vocabulary: 'Study the words',
+            completion: 'Lesson complete',
+            summary: 'What you learned'
+        };
+        return map[section?.type] || section?.title || 'Continue';
+    }
+
+    getOverallProgressPercent() {
+        const total = this.lessonContent?.sections?.length || 1;
+        const section = this.lessonContent?.sections?.[this.currentSectionIndex];
+        let fraction = this.currentSectionIndex / total;
+        if (section && (section.type === 'interactive' || section.type === 'conversation')) {
+            const screens = this.getActivityScreens?.() || [];
+            const count = Math.max(screens.length, 1);
+            fraction = (this.currentSectionIndex + ((this.currentActivityIndex || 0) + 1) / count) / total;
+        } else {
+            fraction = (this.currentSectionIndex + 1) / total;
+        }
+        return Math.max(4, Math.min(100, Math.round(fraction * 100)));
+    }
+
+    syncDuoProgress() {
+        const fill = this.querySelector('#duoProgressFill');
+        if (fill) fill.style.width = `${this.getOverallProgressPercent()}%`;
+        const hearts = this.querySelector('#duoHeartsCount');
+        if (hearts && typeof GunaLives !== 'undefined') hearts.textContent = String(GunaLives.getLives());
+        const title = this.querySelector('#duoPromptTitle');
+        const section = this.lessonContent?.sections?.[this.currentSectionIndex];
+        if (title && section) {
+            const active = this.querySelector('.lesson-activity-screen.active .duo-exercise, .lesson-activity-screen.active .duo-prompt-title, .quiz-question.duo-exercise');
+            const custom = active?.dataset?.prompt;
+            title.textContent = custom || this.getDuoPromptTitle(section);
+        }
+        this.syncDuoCheckButton();
+    }
+
+    syncDuoCheckButton() {
+        const btn = this.querySelector('#duoCheckBtn');
+        const banner = this.querySelector('#duoFeedbackBanner');
+        if (!btn) return;
+        const section = this.lessonContent?.sections?.[this.currentSectionIndex];
+        const practice = this.isPracticeSection(section?.type);
+
+        if (this._duoAwaitingContinue) {
+            btn.textContent = 'CONTINUE';
+            btn.className = 'duo-check-btn is-continue';
+            btn.disabled = false;
+            return;
+        }
+
+        if (!practice) {
+            const canNext = !this.isNextDisabled();
+            const isEnd = section?.type === 'completion' || section?.type === 'summary'
+                || this.currentSectionIndex >= (this.lessonContent.sections.length - 1);
+            btn.textContent = isEnd ? 'DONE' : 'CONTINUE';
+            btn.className = (canNext || isEnd) ? 'duo-check-btn is-ready' : 'duo-check-btn';
+            btn.disabled = !(canNext || isEnd);
+            if (banner) banner.className = 'duo-feedback-banner';
+            return;
+        }
+
+        const screen = this.querySelector('.lesson-activity-screen.active') || this.querySelector('.section-content');
+        const selected = screen?.querySelector('.quiz-option.selected, .duo-chip.selected, .scenario-option.selected');
+        const matchingReady = screen?.querySelector('.matching-exercise') && [...(screen.querySelectorAll('.matching-select') || [])].every(s => s.value);
+        const dropZones = screen?.querySelectorAll('.drop-zone') || [];
+        const dragReady = dropZones.length > 0 && [...dropZones].every((z) => z.querySelector('.drag-item'));
+        const memoryDone = section?.type === 'memory' && this.memoryCompleted;
+        const flashReady = section?.type === 'flashcards' && this.flashcardsDone;
+        const pronReady = section?.type === 'pronunciation';
+        const onResults = screen?.dataset?.kind === 'results' || (this.quizCompleted && !!screen?.querySelector?.('.quiz-results'));
+        const ready = !!(selected || matchingReady || dragReady || memoryDone || flashReady || pronReady || onResults);
+
+        if (onResults || section?.type === 'flashcards' || section?.type === 'pronunciation') {
+            btn.textContent = 'CONTINUE';
+            const canGo = !!(onResults || flashReady || pronReady);
+            btn.className = canGo ? 'duo-check-btn is-ready' : 'duo-check-btn';
+            btn.disabled = !canGo;
+        } else {
+            btn.textContent = 'CHECK';
+            btn.className = ready ? 'duo-check-btn is-ready' : 'duo-check-btn';
+            btn.disabled = !ready;
+        }
+        if (banner && !this._duoAwaitingContinue) banner.className = 'duo-feedback-banner';
+    }
+
+    buildLessonShellHtml() {
+        const section = this.lessonContent.sections[this.currentSectionIndex];
+        const practice = this.isPracticeSection(section?.type);
+        const lives = typeof GunaLives !== 'undefined' ? GunaLives.getLives() : 5;
+        const progress = this.getOverallProgressPercent();
+        const shellClass = practice ? 'lesson-viewer lesson-viewer--duo' : 'lesson-viewer lesson-viewer--duo-lite';
+
+        return `
+            <div class="${shellClass}">
                 ${typeof GunaLives !== 'undefined' && !GunaLives.canPlay() ? `
                 <div class="lives-warning-banner">
                     <i class="fas fa-heart-broken"></i>
                     <span>${typeof GunaI18n !== 'undefined' ? GunaI18n.t('noLives') : 'No lives left! Visit the store or wait for regeneration.'}</span>
                     <button type="button" class="btn-duo btn-duo-primary" id="goToStoreBtn">Tienda</button>
                 </div>` : ''}
-                <div class="lesson-header">
-                    <button type="button" class="lesson-back-btn" id="backToPathBtn">
-                        <i class="fas fa-arrow-left"></i> Back to Path
-                    </button>
-                    <h1 class="lesson-title">${this.lessonContent.title}</h1>
-                    <p class="lesson-subtitle">${this.lessonContent.subtitle}</p>
-                    
-                    <div class="lesson-stats">
-                        <div class="stat-item">
-                            <span class="stat-value">${this.lessonContent.duration}</span>
-                            <span class="stat-label">minutes</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-value">${this.lessonContent.xp}</span>
-                            <span class="stat-label">XP</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-value">${this.lessonContent.sections.length}</span>
-                            <span class="stat-label">sections</span>
-                        </div>
+                <div class="duo-topbar">
+                    <button type="button" class="duo-close" id="backToPathBtn" aria-label="Close">×</button>
+                    <div class="duo-progress-track" aria-hidden="true">
+                        <div class="duo-progress-fill" id="duoProgressFill" style="width:${progress}%"></div>
+                    </div>
+                    <div class="duo-hearts" title="Burdas">
+                        <span class="duo-heart-icon">💙</span>
+                        <span id="duoHeartsCount">${lives}</span>
                     </div>
                 </div>
 
-                <div class="section-navigation">
-                    ${this.lessonContent.sections.map((section, index) => {
-                        const locked = index > this.maxSectionReached;
-                        return `
-                        <button class="section-tab ${index === this.currentSectionIndex ? 'active' : ''} ${locked ? 'tab-locked' : ''}" 
-                                data-section="${index}" ${locked ? 'disabled' : ''}>
-                            ${this.getSectionIcon(section.type)} ${section.title}
-                        </button>`;
-                    }).join('')}
+                <div class="duo-body">
+                    <p class="lesson-section-label">${this.getSectionIcon(section?.type)} ${section?.title || ''}</p>
+                    <h2 class="duo-prompt-title" id="duoPromptTitle">${this.getDuoPromptTitle(section)}</h2>
+                    <div class="section-content">
+                        ${section?.content || '<p>Loading section…</p>'}
+                    </div>
                 </div>
 
-                <div class="section-content">
-                    ${this.lessonContent.sections[this.currentSectionIndex]?.content || '<p>Loading section…</p>'}
+                <div class="duo-footer">
+                    <div class="duo-feedback-banner" id="duoFeedbackBanner"></div>
+                    <button type="button" class="duo-check-btn" id="duoCheckBtn" disabled>CHECK</button>
                 </div>
 
-                <div class="navigation-buttons">
-                    <button class="nav-btn" id="prevBtn" ${this.currentSectionIndex === 0 ? 'disabled' : ''}>
-                        <i class="fas fa-arrow-left"></i> Previous
-                    </button>
-                    <button class="nav-btn" id="nextBtn" ${this.isNextDisabled() ? 'disabled' : ''}>
-                        Next <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
             </div>
         `;
     }
@@ -688,6 +790,9 @@ class GunaLessonViewer extends HTMLElement {
         if (!section) return true;
         if (section.type === 'interactive') return this.quizCompleted;
         if (section.type === 'memory') return this.memoryCompleted;
+        if (section.type === 'flashcards') return this.flashcardsDone;
+        if (section.type === 'pronunciation') return this.pronunciationDone;
+        if (section.type === 'conversation') return this.conversationCompleted;
         return true;
     }
 
@@ -705,7 +810,11 @@ class GunaLessonViewer extends HTMLElement {
             maxSectionReached: this.maxSectionReached,
             userAnswers: this.userAnswers,
             quizCompleted: this.quizCompleted,
-            memoryCompleted: this.memoryCompleted
+            memoryCompleted: this.memoryCompleted,
+            flashcardsDone: this.flashcardsDone,
+            pronunciationDone: this.pronunciationDone,
+            conversationCompleted: this.conversationCompleted,
+            activityIndex: this.currentActivityIndex
         });
     }
 
@@ -730,16 +839,8 @@ class GunaLessonViewer extends HTMLElement {
             });
         });
 
-        // Navigation buttons
-        this.querySelector('#prevBtn')?.addEventListener('click', () => {
-            this.navigateToSection(this.currentSectionIndex - 1);
-        });
-
-        this.querySelector('#nextBtn')?.addEventListener('click', () => {
-            if (this.isCurrentSectionComplete()) {
-                this.navigateToSection(this.currentSectionIndex + 1);
-            }
-        });
+        this._duoAwaitingContinue = false;
+        this._pendingAnswer = null;
 
         // Quiz interactions
         this.setupQuizInteractions();
@@ -752,9 +853,213 @@ class GunaLessonViewer extends HTMLElement {
         this.setupFlashcards();
         this.setupMemoryGame();
         this.setupDragDrop();
+        this.setupActivityPaging();
+        this.setupConversationPaging();
 
         // Lesson completion
         this.setupCompletionInteractions();
+        this.setupDuoCheckButton();
+        this.syncDuoProgress();
+    }
+
+    setupDuoCheckButton() {
+        this.querySelector('#duoCheckBtn')?.addEventListener('click', () => this.handleDuoCheck());
+        this.querySelectorAll('.matching-select').forEach((sel) => {
+            sel.addEventListener('change', () => this.syncDuoCheckButton());
+        });
+        this.querySelectorAll('.drop-zone, .drag-item').forEach((el) => {
+            el.addEventListener('click', () => setTimeout(() => this.syncDuoCheckButton(), 0));
+            el.addEventListener('drop', () => setTimeout(() => this.syncDuoCheckButton(), 0));
+        });
+    }
+
+    enhanceQuizToDuo() {
+        this.querySelectorAll('.quiz-question').forEach((q) => {
+            q.classList.add('duo-exercise');
+            if (!q.dataset.prompt) q.dataset.prompt = 'Choose the correct answer';
+            const options = q.querySelector('.quiz-options');
+            if (options) options.classList.add('duo-chips');
+            q.querySelectorAll('.quiz-option').forEach((opt) => opt.classList.add('duo-chip'));
+
+            if (!q.querySelector('.duo-mascot-row')) {
+                const h4 = q.querySelector('h4');
+                const text = (h4?.textContent || '').replace(/^Question\s*\d+\s*:\s*/i, '').trim();
+                const row = document.createElement('div');
+                row.className = 'duo-mascot-row';
+                row.innerHTML = `
+                    <img class="duo-mascot" src="../Multimedia/Images/Soged/Newturttle.png" alt="Soggy" onerror="this.style.display='none'">
+                    <div class="duo-bubble">${text || 'Choose the correct answer'}</div>
+                `;
+                const insertBefore = q.querySelector('.matching-exercise') || options;
+                if (insertBefore) q.insertBefore(row, insertBefore);
+                else q.prepend(row);
+                if (h4) h4.classList.add('duo-sr-only');
+            }
+            if (!q.querySelector('.duo-answer-bank') && !q.querySelector('.matching-exercise')) {
+                const bank = document.createElement('div');
+                bank.className = 'duo-answer-bank';
+                const opts = q.querySelector('.quiz-options');
+                if (opts) q.insertBefore(bank, opts);
+            }
+        });
+    }
+
+    handleDuoCheck() {
+        const section = this.lessonContent?.sections?.[this.currentSectionIndex];
+        const practice = this.isPracticeSection(section?.type);
+        const banner = this.querySelector('#duoFeedbackBanner');
+
+        if (this._duoAwaitingContinue) {
+            this._duoAwaitingContinue = false;
+            if (banner) banner.className = 'duo-feedback-banner';
+            this.advanceAfterDuoCheck();
+            return;
+        }
+
+        if (!practice) {
+            if (section?.type === 'completion' || section?.type === 'summary') {
+                this.querySelector('.complete-lesson-btn')?.click();
+                return;
+            }
+            if (!this.isNextDisabled()) {
+                this.navigateToSection(this.currentSectionIndex + 1);
+            }
+            return;
+        }
+
+        const screen = this.querySelector('.lesson-activity-screen.active') || this.querySelector('.section-content');
+        if (screen?.dataset?.kind === 'results' || (this.quizCompleted && screen?.querySelector?.('.quiz-results'))) {
+            if (!this.isNextDisabled()) this.navigateToSection(this.currentSectionIndex + 1);
+            return;
+        }
+
+        if (section?.type === 'flashcards') {
+            this.flashcardsDone = true;
+            this.saveSession();
+            this._duoAwaitingContinue = true;
+            if (banner) {
+                banner.textContent = 'Great review!';
+                banner.className = 'duo-feedback-banner show correct';
+            }
+            this.syncDuoCheckButton();
+            return;
+        }
+
+        if (section?.type === 'pronunciation') {
+            this.pronunciationDone = true;
+            this.saveSession();
+            this._duoAwaitingContinue = true;
+            if (banner) {
+                banner.textContent = 'Nice practice!';
+                banner.className = 'duo-feedback-banner show correct';
+            }
+            this.syncDuoCheckButton();
+            return;
+        }
+
+        if (section?.type === 'memory' && this.memoryCompleted) {
+            this._duoAwaitingContinue = true;
+            if (banner) {
+                banner.textContent = 'All pairs found!';
+                banner.className = 'duo-feedback-banner show correct';
+            }
+            this.syncDuoCheckButton();
+            return;
+        }
+
+        if (screen?.querySelector('.matching-exercise')) {
+            this.checkMatchingAnswers();
+            const ok = this.userAnswers[4] != null || this.userAnswers['4'] != null;
+            if (banner) {
+                banner.textContent = ok ? 'Excellent!' : 'Not quite. Try again!';
+                banner.className = `duo-feedback-banner show ${ok ? 'correct' : 'incorrect'}`;
+            }
+            if (ok) {
+                this._duoAwaitingContinue = true;
+                this.syncDuoCheckButton();
+            }
+            return;
+        }
+
+        if (screen?.querySelector('.drag-drop-exercise')) {
+            const checkBtn = screen.querySelector('.check-drag-btn');
+            checkBtn?.click();
+            const ok = this.userAnswers.drag === 'done';
+            if (banner) {
+                banner.textContent = ok ? 'Perfect!' : 'Keep trying!';
+                banner.className = `duo-feedback-banner show ${ok ? 'correct' : 'incorrect'}`;
+            }
+            if (ok) {
+                this._duoAwaitingContinue = true;
+                this.syncDuoCheckButton();
+            }
+            return;
+        }
+
+        if (screen?.querySelector('.scenario-option.selected') || section?.type === 'conversation') {
+            const scenario = screen.querySelector('.scenario');
+            if (scenario) scenario.dataset.done = 'true';
+            const scenarios = this.querySelectorAll('.conversation-section .scenario');
+            const doneCount = [...scenarios].filter((s) => s.dataset.done === 'true' || s.querySelector('.scenario-option.selected')).length;
+            if (scenarios.length && doneCount >= scenarios.length) {
+                this.conversationCompleted = true;
+                this.saveSession();
+            }
+            if (banner) {
+                banner.textContent = 'Nice choice!';
+                banner.className = 'duo-feedback-banner show correct';
+            }
+            this._duoAwaitingContinue = true;
+            this.syncDuoCheckButton();
+            return;
+        }
+
+        if (this._pendingAnswer) {
+            const { questionId, answer } = this._pendingAnswer;
+            this.userAnswers[questionId] = answer;
+            this.showQuizFeedback(questionId, answer);
+            this.saveSession();
+            const correctAnswers = this.gunaLessons.getQuizAnswers(this.currentLessonId);
+            const isCorrect = String(answer) === String(correctAnswers[questionId]);
+            if (banner) {
+                banner.textContent = isCorrect ? 'Excellent!' : `Correct answer: ${correctAnswers[questionId]}`;
+                banner.className = `duo-feedback-banner show ${isCorrect ? 'correct' : 'incorrect'}`;
+            }
+            this._duoAwaitingContinue = true;
+            this.syncDuoCheckButton();
+            this.checkQuizCompletion();
+        }
+    }
+
+    advanceAfterDuoCheck() {
+        this._pendingAnswer = null;
+        const section = this.lessonContent?.sections?.[this.currentSectionIndex];
+        const screens = this.getActivityScreens();
+        if (screens.length && (section?.type === 'interactive' || section?.type === 'conversation')) {
+            const idx = this.currentActivityIndex || 0;
+            if (idx < screens.length - 1) {
+                this.showActivityScreen(idx + 1);
+                this.syncDuoProgress();
+                return;
+            }
+            if (section?.type === 'conversation') {
+                this.conversationCompleted = true;
+                this.saveSession();
+            }
+        }
+        if (!this.isNextDisabled()) {
+            this.navigateToSection(this.currentSectionIndex + 1);
+        } else if (this.quizCompleted && section?.type === 'interactive') {
+            // Jump to results screen if still inside interactive
+            const resultsIdx = screens.findIndex((s) => s.dataset.kind === 'results');
+            if (resultsIdx >= 0 && (this.currentActivityIndex || 0) !== resultsIdx) {
+                this.showActivityScreen(resultsIdx);
+                return;
+            }
+            this.navigateToSection(this.currentSectionIndex + 1);
+        } else {
+            this.syncDuoCheckButton();
+        }
     }
 
     speakText(text) {
@@ -771,6 +1076,11 @@ class GunaLessonViewer extends HTMLElement {
             el.addEventListener('click', () => {
                 const text = el.dataset.speak || el.textContent.trim();
                 this.speakText(text);
+                if (this.querySelector('.pronunciation-section, .pronunciation-grid')) {
+                    this.pronunciationDone = true;
+                    this.saveSession();
+                    this.syncDuoCheckButton();
+                }
             });
         });
     }
@@ -806,12 +1116,22 @@ class GunaLessonViewer extends HTMLElement {
             if (prev) prev.disabled = index === 0;
             if (next) next.disabled = index === words.length - 1;
             if (speak) speak.dataset.speak = w.guna;
+            if (index >= words.length - 1) {
+                this.flashcardsDone = true;
+                this.saveSession();
+                this.syncDuoCheckButton();
+            }
         };
 
         card?.addEventListener('click', () => {
             flipped = !flipped;
             card.querySelector('.flashcard-front').style.display = flipped ? 'none' : '';
             card.querySelector('.flashcard-back').style.display = flipped ? '' : 'none';
+            if (flipped) {
+                this.flashcardsDone = true;
+                this.saveSession();
+                this.syncDuoCheckButton();
+            }
         });
 
         prev?.addEventListener('click', (e) => {
@@ -885,6 +1205,7 @@ class GunaLessonViewer extends HTMLElement {
                 subsetWords(state.cards).forEach(w => GunaGamification.recordVocabWord(w));
             }
             this.saveSession();
+            this.syncDuoCheckButton();
         };
 
         const subsetWords = (cards) => [...new Set(cards.filter(c => c.speak).map(c => c.speak))];
@@ -954,23 +1275,53 @@ class GunaLessonViewer extends HTMLElement {
         const exercise = this.querySelector('.drag-drop-exercise');
         if (!exercise) return;
 
+        if (!exercise.querySelector('.duo-mascot-row')) {
+            const h4 = exercise.querySelector('h4');
+            const text = (h4?.textContent || 'Match each word to its meaning').trim();
+            const row = document.createElement('div');
+            row.className = 'duo-mascot-row';
+            row.innerHTML = `
+                <img class="duo-mascot" src="../Multimedia/Images/Soged/Newturttle.png" alt="Soggy" onerror="this.style.display='none'">
+                <div class="duo-bubble">${text}</div>
+            `;
+            exercise.insertBefore(row, exercise.firstChild);
+            if (h4) h4.classList.add('duo-sr-only');
+            exercise.dataset.prompt = 'Match the words';
+        }
+
         let dragged = null;
+        const selectItem = (item) => {
+            exercise.querySelectorAll('.drag-item').forEach((el) => el.classList.remove('selected'));
+            dragged = item;
+            if (item) item.classList.add('selected');
+        };
+
         exercise.querySelectorAll('.drag-item').forEach(item => {
-            item.addEventListener('dragstart', () => { dragged = item; });
-            item.addEventListener('dragend', () => { dragged = null; });
+            item.addEventListener('dragstart', () => { dragged = item; item.classList.add('selected'); });
+            item.addEventListener('dragend', () => { item.classList.remove('selected'); });
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+                selectItem(item);
+            });
         });
 
         exercise.querySelectorAll('.drop-zone').forEach(zone => {
             zone.addEventListener('dragover', (e) => e.preventDefault());
-            zone.addEventListener('drop', (e) => {
-                e.preventDefault();
+            const place = () => {
                 if (!dragged) return;
                 const slot = zone.querySelector('.drop-slot');
                 if (slot) {
                     slot.innerHTML = '';
                     slot.appendChild(dragged);
+                    dragged.classList.remove('selected');
+                    dragged = null;
                 }
+            };
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                place();
             });
+            zone.addEventListener('click', place);
         });
 
         const checkBtn = exercise.querySelector('.check-drag-btn');
@@ -992,6 +1343,8 @@ class GunaLessonViewer extends HTMLElement {
                 }
                 if (correct === total) {
                     this.userAnswers.drag = 'done';
+                    this.updateActivityNav();
+                    this.saveSession();
                 } else if (typeof GunaLives !== 'undefined') {
                     GunaLives.loseLife();
                     this.showNotification(typeof GunaI18n !== 'undefined' ? GunaI18n.t('livesLost') : 'You lost a life!', 'error');
@@ -1000,11 +1353,118 @@ class GunaLessonViewer extends HTMLElement {
         }
     }
 
+    wrapAsActivityScreen(el, kind) {
+        if (el.classList.contains('lesson-activity-screen')) return el;
+        if (el.parentElement?.classList.contains('lesson-activity-screen')) return el.parentElement;
+        const screen = document.createElement('div');
+        screen.className = 'lesson-activity-screen';
+        if (kind) screen.dataset.kind = kind;
+        el.parentNode.insertBefore(screen, el);
+        screen.appendChild(el);
+        return screen;
+    }
+
+    getActivityScreens() {
+        return [...this.querySelectorAll('.interactive-section .lesson-activity-screen, .conversation-section .lesson-activity-screen')];
+    }
+
+    isActivityScreenComplete(screen) {
+        if (!screen) return true;
+        if (this.isReviewMode) return true;
+        if (screen.dataset.kind === 'results' || screen.querySelector('.quiz-results')) return true;
+        if (screen.querySelector('.drag-drop-exercise')) return this.userAnswers.drag === 'done';
+        if (screen.querySelector('.matching-exercise')) {
+            return this.userAnswers[4] != null || this.userAnswers['4'] != null;
+        }
+        const question = screen.querySelector('.quiz-question');
+        if (question) {
+            const id = question.dataset.question;
+            return this.userAnswers[id] != null || this.userAnswers[Number(id)] != null;
+        }
+        if (screen.querySelector('.scenario')) {
+            return screen.querySelector('.scenario[data-done="true"], .scenario-option.selected');
+        }
+        return true;
+    }
+
+    updateActivityNav() {
+        const screens = this.getActivityScreens();
+        if (!screens.length) return;
+        const idx = Math.min(this.currentActivityIndex || 0, screens.length - 1);
+        const label = this.querySelector('.activity-step-label');
+        if (label) label.textContent = `Activity ${idx + 1} of ${screens.length}`;
+        const prev = this.querySelector('#activityPrevBtn');
+        const next = this.querySelector('#activityNextBtn');
+        if (prev) prev.disabled = idx <= 0;
+        if (next) {
+            const isLast = idx >= screens.length - 1;
+            next.disabled = isLast || !this.isActivityScreenComplete(screens[idx]);
+            next.textContent = isLast ? 'Done' : 'Next activity →';
+        }
+    }
+
+    showActivityScreen(index) {
+        const screens = this.getActivityScreens();
+        if (!screens.length) return;
+        const idx = Math.max(0, Math.min(index, screens.length - 1));
+        this.currentActivityIndex = idx;
+        const section = this.lessonContent?.sections?.[this.currentSectionIndex];
+        if (section?.type === 'interactive') this.quizActivityIndex = idx;
+        screens.forEach((screen, i) => screen.classList.toggle('active', i === idx));
+        const results = screens[idx]?.querySelector('.quiz-results');
+        if (results && this.quizCompleted) results.style.display = 'block';
+        this._duoAwaitingContinue = false;
+        this._pendingAnswer = null;
+        this.updateActivityNav();
+        this.syncDuoProgress();
+        this.saveSession();
+    }
+
+    bindActivityChrome(root, screens) {
+        if (!root || screens.length < 2) return;
+        root.dataset.paged = 'true';
+        // Only the Duolingo CHECK/CONTINUE footer advances activities — no Next buttons.
+        root.querySelector('.activity-nav')?.remove();
+        this.showActivityScreen(this.currentActivityIndex || 0);
+    }
+
+    setupActivityPaging() {
+        const root = this.querySelector('.interactive-section');
+        if (!root) return;
+        let screens = [...root.querySelectorAll('.lesson-activity-screen')];
+        if (!screens.length) {
+            root.querySelectorAll('.drag-drop-exercise').forEach((el) => this.wrapAsActivityScreen(el, 'drag'));
+            root.querySelectorAll('.quiz-question').forEach((el) => {
+                const kind = el.querySelector('.matching-exercise') ? 'match' : 'quiz';
+                this.wrapAsActivityScreen(el, kind);
+            });
+            const results = root.querySelector('.quiz-results');
+            if (results) this.wrapAsActivityScreen(results, 'results');
+            screens = [...root.querySelectorAll('.lesson-activity-screen')];
+        }
+        this.bindActivityChrome(root, screens);
+    }
+
+    setupConversationPaging() {
+        const root = this.querySelector('.conversation-section');
+        if (!root) return;
+        const scenarios = [...root.querySelectorAll('.scenario')];
+        if (scenarios.length < 2) return;
+        scenarios.forEach((el) => this.wrapAsActivityScreen(el, 'talk'));
+        const screens = [...root.querySelectorAll('.lesson-activity-screen')];
+        this.currentActivityIndex = 0;
+        this.bindActivityChrome(root, screens);
+    }
+
     navigateToSection(sectionIndex) {
         if (!this.lessonContent?.sections) return;
         if (!this.canGoToSection(sectionIndex)) return;
         if (sectionIndex >= 0 && sectionIndex < this.lessonContent.sections.length) {
+            const prevType = this.lessonContent.sections[this.currentSectionIndex]?.type;
+            if (prevType === 'interactive') this.quizActivityIndex = this.currentActivityIndex || 0;
             this.currentSectionIndex = sectionIndex;
+            const nextType = this.lessonContent.sections[sectionIndex]?.type;
+            this.currentActivityIndex = nextType === 'interactive' ? (this.quizActivityIndex || 0) : 0;
             if (sectionIndex > this.maxSectionReached) {
                 this.maxSectionReached = sectionIndex;
             }
@@ -1030,32 +1490,38 @@ class GunaLessonViewer extends HTMLElement {
     }
 
     setupQuizInteractions() {
+        this.enhanceQuizToDuo();
         const canAnswer = typeof GunaLives === 'undefined' || GunaLives.canPlay();
 
-        // Quiz options
+        // Select chip first — CHECK confirms (Duolingo style)
         this.querySelectorAll('.quiz-option').forEach(option => {
             option.addEventListener('click', (e) => {
                 if (!canAnswer && typeof GunaLives !== 'undefined' && !GunaLives.canPlay()) {
                     this.showNotification(typeof GunaI18n !== 'undefined' ? GunaI18n.t('noLives') : 'No lives left!', 'error');
                     return;
                 }
+                if (this._duoAwaitingContinue) return;
                 const optionEl = e.currentTarget;
                 const question = optionEl.closest('.quiz-question');
-                if (!question) return;
-                const questionId = question.dataset.question;
-                
+                if (!question || question.querySelector('.matching-exercise')) return;
+
                 question.querySelectorAll('.quiz-option').forEach(opt => {
-                    opt.classList.remove('selected', 'correct', 'incorrect');
+                    opt.classList.remove('selected', 'correct', 'incorrect', 'used');
                 });
-                
-                optionEl.classList.add('selected');
-                this.userAnswers[questionId] = optionEl.dataset.answer;
-                this.showQuizFeedback(questionId, optionEl.dataset.answer);
-                this.saveSession();
+                optionEl.classList.add('selected', 'used');
+                const bank = question.querySelector('.duo-answer-bank');
+                if (bank) {
+                    bank.innerHTML = `<span class="duo-chip selected">${optionEl.textContent}</span>`;
+                }
+                this._pendingAnswer = {
+                    questionId: question.dataset.question,
+                    answer: optionEl.dataset.answer,
+                    option: optionEl
+                };
+                this.syncDuoCheckButton();
             });
         });
 
-        // Matching exercise
         const checkMatchingBtn = this.querySelector('.check-matching-btn');
         if (checkMatchingBtn) {
             checkMatchingBtn.addEventListener('click', () => {
@@ -1063,7 +1529,6 @@ class GunaLessonViewer extends HTMLElement {
             });
         }
 
-        // Quiz results
         const retryQuizBtn = this.querySelector('.retry-quiz-btn');
         if (retryQuizBtn) {
             retryQuizBtn.addEventListener('click', () => {
@@ -1098,6 +1563,9 @@ class GunaLessonViewer extends HTMLElement {
                 if (response) {
                     response.style.display = 'block';
                 }
+                scenario.dataset.done = 'true';
+                this.updateActivityNav();
+                this.syncDuoCheckButton();
             });
         });
     }
@@ -1133,10 +1601,12 @@ class GunaLessonViewer extends HTMLElement {
 
     showQuizFeedback(questionId, userAnswer) {
         const question = this.querySelector(`[data-question="${questionId}"]`);
+        if (!question) return;
         const feedback = question.querySelector('.quiz-feedback');
+        if (!feedback) return;
         const correctAnswers = this.gunaLessons.getQuizAnswers(this.currentLessonId);
         
-        if (questionId <= 3) {
+        if (Number(questionId) <= 3) {
             // Multiple choice questions
             const isCorrect = userAnswer === correctAnswers[questionId];
             const selectedOption = question.querySelector(`[data-answer="${userAnswer}"]`);
@@ -1152,9 +1622,7 @@ class GunaLessonViewer extends HTMLElement {
                 if (typeof GunaLives !== 'undefined') {
                     GunaLives.loseLife();
                     this.showNotification(typeof GunaI18n !== 'undefined' ? GunaI18n.t('livesLost') : 'You lost a life!', 'error');
-                    if (!GunaLives.canPlay()) {
-                        setTimeout(() => this.render(), 600);
-                    }
+                    this.syncDuoProgress();
                 }
             }
         }
@@ -1189,8 +1657,9 @@ class GunaLessonViewer extends HTMLElement {
             }
         });
         
-        this.userAnswers[4] = userAnswers;
-        
+        this.userAnswers[4] = allCorrect ? userAnswers : undefined;
+        if (!allCorrect) delete this.userAnswers[4];
+
         if (allCorrect) {
             feedback.textContent = "¡Perfecto! All matches are correct!";
             feedback.className = 'matching-feedback correct';
@@ -1204,15 +1673,14 @@ class GunaLessonViewer extends HTMLElement {
         }
         
         feedback.style.display = 'block';
+        this.updateActivityNav();
         this.checkQuizCompletion();
         this.saveSession();
     }
 
     checkQuizCompletion() {
-        const totalQuestions = 4;
-        const answeredQuestions = Object.keys(this.userAnswers).length;
-        
-        if (answeredQuestions === totalQuestions) {
+        const answered = (n) => this.userAnswers[n] != null || this.userAnswers[String(n)] != null;
+        if (answered(1) && answered(2) && answered(3) && answered(4)) {
             this.showQuizResults();
         }
     }
@@ -1270,6 +1738,9 @@ class GunaLessonViewer extends HTMLElement {
         if (matchFeedback) matchFeedback.style.display = 'none';
         const quizResults = this.querySelector('.quiz-results');
         if (quizResults) quizResults.style.display = 'none';
+        this.currentActivityIndex = 0;
+        this.quizActivityIndex = 0;
+        this.showActivityScreen(0);
     }
 
     async completeLesson() {
@@ -1285,11 +1756,23 @@ class GunaLessonViewer extends HTMLElement {
             completedAt: new Date().toISOString()
         });
 
-        this.showNotification('🎉 Lesson completed! Great job!', 'success');
+        const nextId = this.currentLessonId + 1;
+        const hasNext = typeof GunaProgress !== 'undefined' && nextId <= GunaProgress.TOTAL_LESSONS;
+        this.showNotification(
+            hasNext
+                ? `🎉 Level ${this.currentLessonId} done! Next on the path: Level ${nextId}`
+                : '🎉 Lesson completed! Great job!',
+            'success'
+        );
+
+        window.dispatchEvent(new CustomEvent('soged:progress-updated', {
+            detail: { lessonId: this.currentLessonId, nextLessonId: hasNext ? nextId : null }
+        }));
 
         this.dispatchEvent(new CustomEvent('lessonCompleted', {
             detail: {
                 lessonId: this.currentLessonId,
+                nextLessonId: hasNext ? nextId : null,
                 course: 'guna'
             },
             bubbles: true
