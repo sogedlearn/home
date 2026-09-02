@@ -8,7 +8,7 @@ const GunaUserData = {
     AVATARS: [
         '../Multimedia/Images/Soged/Newturttle.png',
         '../Multimedia/Images/Soged/mola-icon.png',
-        '../Multimedia/Images/Soged/LOGO SOGED.png',
+        '../Multimedia/Images/Soged/New%20logo.png',
         '../Multimedia/Images/Molas - Guna/Mola 1.jpg',
         '../Multimedia/Images/Molas - Guna/Mola 3.jpg'
     ],

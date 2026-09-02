@@ -30,7 +30,7 @@ class SogedHeader extends HTMLElement {
         this.shadowRoot.innerHTML = `
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Montserrat:wght@400;500;600;700&display=swap');
-                @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+                @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css');
                 @import url('${basePath}css/header.css');
                 @import url('${basePath}css/variables.css');
 
@@ -126,21 +126,44 @@ class SogedHeader extends HTMLElement {
                 .logo-wordmark {
                     display: block;
                     width: auto;
-                    height: 48px;
-                    max-height: 56px;
-                    max-width: min(280px, 58vw);
+                    height: 52px;
+                    max-height: 60px;
+                    max-width: min(320px, 64vw);
                     object-fit: contain;
                     object-position: left center;
-                    transition: transform 0.3s ease;
+                    mix-blend-mode: normal;
+                    opacity: 1;
+                    visibility: visible;
+                    background: #0a0a0a;
+                    border-radius: 12px;
+                    padding: 0.15rem 0.4rem;
+                    filter: drop-shadow(0 4px 14px rgba(227, 160, 8, 0.28));
+                    transform-origin: center center;
+                    animation: sogedLogoFloat 4.2s ease-in-out infinite;
+                    transition: transform 0.35s ease, filter 0.35s ease;
+                    box-shadow: 0 0 0 1px rgba(255, 210, 80, 0.18);
                 }
 
                 .logo-container:hover .logo-wordmark {
-                    transform: scale(1.02);
+                    transform: scale(1.06) rotate(-1deg);
+                    filter: drop-shadow(0 8px 22px rgba(227, 160, 8, 0.45));
+                    animation-play-state: paused;
                 }
 
                 .logo-container:hover {
                     background: transparent !important;
                     transform: translateY(-2px);
+                }
+
+                @keyframes sogedLogoFloat {
+                    0%, 100% {
+                        transform: translateY(0) scale(1);
+                        filter: drop-shadow(0 4px 14px rgba(227, 160, 8, 0.28));
+                    }
+                    50% {
+                        transform: translateY(-5px) scale(1.03);
+                        filter: drop-shadow(0 10px 24px rgba(255, 179, 0, 0.42));
+                    }
                 }
 
                 .navbar-brand {
@@ -785,7 +808,7 @@ class SogedHeader extends HTMLElement {
                     <div class="header-left">
                         <a href="${basePath}index.html" class="navbar-brand">
                             <div class="logo-container">
-                                <img src="${basePath}Multimedia/Images/Soged/LOGO%20SOGED.png" alt="SOGED" class="logo-wordmark" width="280" height="56" decoding="async">
+                                <img src="${basePath}Multimedia/Images/Soged/New%20logo.png" alt="SOGED" class="logo-wordmark soged-logo" width="320" height="72" decoding="async">
                             </div>
                         </a>
                         <!-- Mobile Menu Toggle -->

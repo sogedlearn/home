@@ -1354,11 +1354,13 @@ body {
 }
 
 .loading-logo {
-    height: 56px;
+    height: 72px;
     width: auto;
-    max-width: 240px;
+    max-width: 280px;
     margin-bottom: 1rem;
     object-fit: contain;
+    mix-blend-mode: normal;
+    opacity: 1;
 }
 
 .loading-content h2 {
@@ -3335,12 +3337,14 @@ input:checked + .toggle-slider:before {
 }
 
 .overview-gamified .hero-section {
-    background: var(--bg-secondary);
-    border-radius: var(--border-radius-xl);
+    background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.92) 0%, rgba(232, 246, 236, 0.9) 100%),
+        repeating-linear-gradient(135deg, rgba(17, 128, 43, 0.05) 0 10px, transparent 10px 22px);
+    border-radius: 2.5rem;
     padding: 2rem 2.5rem;
     margin-bottom: 1.5rem;
     box-shadow: var(--shadow-md);
-    border: 1px solid rgba(40, 167, 69, 0.12);
+    border: 1px solid rgba(40, 167, 69, 0.14);
     position: relative;
     overflow: hidden;
 }
@@ -3409,7 +3413,7 @@ input:checked + .toggle-slider:before {
     align-items: center;
     gap: 0.75rem;
     padding: 0.75rem 1.25rem;
-    border-radius: var(--border-radius-lg);
+    border-radius: 999px;
     background: var(--bg-tertiary);
     transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
@@ -3553,10 +3557,12 @@ input:checked + .toggle-slider:before {
     grid-template-columns: minmax(0, 1.35fr) minmax(220px, 0.85fr);
     gap: 1rem;
     margin: 0 0 1.5rem;
-    padding: 1rem 1.1rem;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.94);
-    border: 1px solid rgba(17, 128, 43, 0.12);
+    padding: 1.15rem 1.25rem;
+    border-radius: 2.25rem;
+    background:
+        linear-gradient(160deg, rgba(255, 255, 255, 0.94) 0%, rgba(236, 248, 240, 0.92) 100%),
+        repeating-linear-gradient(45deg, rgba(9, 115, 161, 0.05) 0 8px, transparent 8px 18px);
+    border: 1px solid rgba(17, 128, 43, 0.14);
     box-shadow: 0 10px 28px rgba(17, 128, 43, 0.08);
 }
 
@@ -3590,7 +3596,7 @@ input:checked + .toggle-slider:before {
     align-items: center;
     gap: 0.55rem;
     padding: 0.7rem 0.8rem;
-    border-radius: 14px;
+    border-radius: 999px;
     background: #f5faf3;
     border: 1px solid rgba(17, 128, 43, 0.1);
 }
@@ -3608,19 +3614,29 @@ input:checked + .toggle-slider:before {
 }
 body.dark-mode .overview-summary-bar,
 html[data-theme="dark"] .overview-summary-bar {
-    background: rgba(18, 38, 26, 0.94);
-    border-color: #163222;
+    background:
+        linear-gradient(160deg, rgba(18, 38, 26, 0.96) 0%, rgba(22, 50, 34, 0.94) 100%),
+        repeating-linear-gradient(45deg, rgba(227, 160, 8, 0.08) 0 8px, transparent 8px 18px);
+    border-color: rgba(227, 160, 8, 0.28);
 }
 body.dark-mode .overview-path-head h3,
+body.dark-mode .overview-path-head p,
+body.dark-mode .overview-path-meta,
 body.dark-mode .overview-chip strong,
+body.dark-mode .overview-chip small,
 html[data-theme="dark"] .overview-path-head h3,
-html[data-theme="dark"] .overview-chip strong { color: #b7f06a; }
+html[data-theme="dark"] .overview-path-head p,
+html[data-theme="dark"] .overview-path-meta,
+html[data-theme="dark"] .overview-chip strong,
+html[data-theme="dark"] .overview-chip small {
+    color: #ffffff;
+}
 body.dark-mode .overview-chip,
 body.dark-mode .overview-week-wrap,
 html[data-theme="dark"] .overview-chip,
 html[data-theme="dark"] .overview-week-wrap {
-    background: #1a3324;
-    border-color: #2a4a35;
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.16);
 }
 @media (max-width: 900px) {
     .overview-summary-bar { grid-template-columns: 1fr; }
@@ -4342,20 +4358,28 @@ html[data-theme="dark"] .overview-week-wrap {
     margin: 0.5rem auto 0;
 }
 
-/* Overview Mola Background */
+/* Overview Mola Background (below hero: green-cream Guna weave) */
 .overview-mola-bg {
     position: relative;
-    border-radius: var(--border-radius-xl);
+    border-radius: 2.75rem;
     overflow: hidden;
+    padding: 0.35rem;
 }
 
 .overview-mola-bg::before {
     content: '';
     position: absolute;
     inset: 0;
-    background:
-        linear-gradient(135deg, rgba(250, 251, 252, 0.92) 0%, rgba(250, 251, 252, 0.88) 100%),
-        url('../../Multimedia/Images/Molas - Guna/Mola 5.jpg') center/cover no-repeat;
+    border-radius: inherit;
+    background-color: #eef6f0;
+    background-image:
+        linear-gradient(160deg, rgba(255, 248, 237, 0.94) 0%, rgba(232, 246, 236, 0.9) 55%, rgba(230, 246, 251, 0.92) 100%),
+        repeating-linear-gradient(45deg, rgba(17, 128, 43, 0.07) 0 10px, transparent 10px 22px),
+        repeating-linear-gradient(-45deg, rgba(9, 115, 161, 0.06) 0 10px, transparent 10px 22px),
+        url('../../Multimedia/Images/Molas%20-%20Guna/mola-bg-pattern.jpg');
+    background-size: auto, auto, auto, 480px auto;
+    background-position: center, 0 0, 0 0, center;
+    background-blend-mode: normal, multiply, multiply, soft-light;
     pointer-events: none;
     z-index: 0;
 }
@@ -4363,6 +4387,50 @@ html[data-theme="dark"] .overview-week-wrap {
 .overview-mola-bg > * {
     position: relative;
     z-index: 1;
+}
+
+body.dark-mode .overview-mola-bg::before,
+html[data-theme="dark"] .overview-mola-bg::before {
+    background-color: #12261a;
+    background-image:
+        linear-gradient(160deg, rgba(14, 28, 20, 0.94) 0%, rgba(18, 38, 26, 0.92) 50%, rgba(15, 36, 48, 0.94) 100%),
+        repeating-linear-gradient(45deg, rgba(227, 160, 8, 0.1) 0 10px, transparent 10px 22px),
+        repeating-linear-gradient(-45deg, rgba(9, 115, 161, 0.1) 0 10px, transparent 10px 22px),
+        url('../../Multimedia/Images/Molas%20-%20Guna/mola-bg-pattern.jpg');
+    background-blend-mode: normal, soft-light, soft-light, luminosity;
+}
+
+body.dark-mode .overview-gamified .hero-section,
+html[data-theme="dark"] .overview-gamified .hero-section {
+    background:
+        linear-gradient(145deg, rgba(22, 50, 34, 0.96) 0%, rgba(18, 38, 26, 0.94) 100%),
+        repeating-linear-gradient(135deg, rgba(227, 160, 8, 0.08) 0 10px, transparent 10px 22px);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+body.dark-mode .overview-gamified .hero-title,
+body.dark-mode .overview-gamified .hero-subtitle,
+body.dark-mode .overview-gamified .hero-stat-value,
+body.dark-mode .overview-gamified .hero-stat-label,
+html[data-theme="dark"] .overview-gamified .hero-title,
+html[data-theme="dark"] .overview-gamified .hero-subtitle,
+html[data-theme="dark"] .overview-gamified .hero-stat-value,
+html[data-theme="dark"] .overview-gamified .hero-stat-label {
+    color: #ffffff;
+}
+
+body.dark-mode .overview-gamified .hero-username,
+html[data-theme="dark"] .overview-gamified .hero-username {
+    background: linear-gradient(135deg, #ffe27a, #7ec8e3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.dark-mode .overview-gamified .hero-stat-pill,
+html[data-theme="dark"] .overview-gamified .hero-stat-pill {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 /* AI Tutor */

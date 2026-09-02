@@ -1,0 +1,158 @@
+/* SOGED wordmark — shared logo look + motion across the site */
+
+.soged-logo,
+.logo-wordmark,
+.logo-img,
+.logo-image,
+.loading-logo,
+.survey-logo,
+.about-hero-logo,
+.footer-brand img,
+.sidebar-logo-wordmark {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+    /* Keep logo fully visible (no mix-blend — it washed out on light UIs) */
+    mix-blend-mode: normal;
+    opacity: 1;
+    visibility: visible;
+    background: #0a0a0a;
+    border-radius: 12px;
+    padding: 0.2rem 0.45rem;
+    filter: drop-shadow(0 4px 14px rgba(227, 160, 8, 0.28));
+    transform-origin: center center;
+    transition: transform 0.35s ease, filter 0.35s ease, box-shadow 0.35s ease;
+    box-shadow: 0 0 0 1px rgba(255, 210, 80, 0.18);
+}
+
+.soged-logo:not(.about-hero-logo),
+.logo-wordmark,
+.logo-img,
+.logo-image,
+.loading-logo,
+.survey-logo,
+.footer-brand img,
+.sidebar-logo-wordmark {
+    animation: sogedLogoFloat 4.2s ease-in-out infinite;
+}
+
+.soged-logo--static {
+    animation: none;
+}
+
+.logo-container:hover .soged-logo,
+.logo-container:hover .logo-wordmark,
+a:hover > .soged-logo,
+.footer-brand:hover img,
+.sidebar-brand:hover .sidebar-logo-wordmark {
+    transform: scale(1.05) rotate(-1deg);
+    filter: drop-shadow(0 8px 22px rgba(227, 160, 8, 0.45));
+    animation-play-state: paused;
+}
+
+@keyframes sogedLogoFloat {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+        filter: drop-shadow(0 4px 14px rgba(227, 160, 8, 0.28));
+    }
+    50% {
+        transform: translateY(-5px) scale(1.03);
+        filter: drop-shadow(0 10px 24px rgba(255, 179, 0, 0.42));
+    }
+}
+
+/* Header / compact sizes */
+.logo-wordmark,
+.auth-header .soged-logo,
+.logo-image {
+    height: 48px;
+    max-height: 56px;
+    max-width: min(300px, 62vw);
+}
+
+.footer-brand img {
+    height: 52px;
+    max-width: 220px;
+}
+
+.loading-logo {
+    height: 72px;
+    max-width: 280px;
+    margin: 0 auto 1rem;
+    animation: sogedLogoFloat 2.4s ease-in-out infinite;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+}
+
+.logo-img,
+.survey-logo {
+    height: 80px;
+    max-width: 300px;
+}
+
+.about-hero-logo {
+    height: clamp(110px, 18vw, 200px);
+    max-width: min(720px, 92vw);
+    background: #0a0a0a;
+    border-radius: 1.25rem;
+    padding: 0.55rem 0.9rem;
+}
+
+/* Badge on SOGED in Action sits on a white chip — keep logo readable */
+.about-soged-badge .soged-logo,
+.about-soged-badge img {
+    height: 44px;
+    max-width: 160px;
+    background: #0a0a0a;
+    border-radius: 0.65rem;
+    padding: 0.2rem 0.4rem;
+    mix-blend-mode: normal;
+    opacity: 1;
+    animation: sogedLogoFloat 5s ease-in-out infinite;
+}
+
+.sidebar-logo-wordmark {
+    height: 42px;
+    max-width: 168px;
+    background: #0a0a0a;
+    border-radius: 10px;
+    padding: 0.15rem 0.35rem;
+}
+
+body.dark-mode .soged-logo,
+body.dark-mode .logo-wordmark,
+body.dark-mode .logo-img,
+body.dark-mode .logo-image,
+body.dark-mode .loading-logo,
+body.dark-mode .survey-logo,
+body.dark-mode .about-hero-logo,
+body.dark-mode .footer-brand img,
+html[data-theme="dark"] .soged-logo,
+html[data-theme="dark"] .logo-wordmark,
+html[data-theme="dark"] .logo-img,
+html[data-theme="dark"] .logo-image,
+html[data-theme="dark"] .loading-logo,
+html[data-theme="dark"] .survey-logo,
+html[data-theme="dark"] .about-hero-logo,
+html[data-theme="dark"] .footer-brand img {
+    mix-blend-mode: normal;
+    opacity: 1;
+    filter: drop-shadow(0 4px 16px rgba(255, 210, 80, 0.35));
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .soged-logo,
+    .logo-wordmark,
+    .logo-img,
+    .logo-image,
+    .loading-logo,
+    .survey-logo,
+    .about-hero-logo,
+    .footer-brand img,
+    .sidebar-logo-wordmark {
+        animation: none !important;
+    }
+}

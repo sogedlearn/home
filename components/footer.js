@@ -508,16 +508,17 @@ class SogedFooter extends HTMLElement {
                         <!-- Logo + Descripción -->
                         <div class="col-lg-3 col-md-6">
                             <div class="footer-brand">
-                                <img src="${basePath}Multimedia/Images/Soged/LOGO%20SOGED.png" alt="SOGED">
+                                <img src="${basePath}Multimedia/Images/Soged/New%20logo.png" alt="SOGED" class="soged-logo">
                             </div>
                             <p class="footer-description">
                                 Preserving and promoting the indigenous languages of Panama.<br>Modern, interactive learning for all.
                             </p>
                             <div class="social-links">
-                                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                                <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                                <a href="https://www.facebook.com/share/1LhWt9UQJz/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://x.com/SOGED2024" target="_blank" rel="noopener noreferrer" class="social-link social-link--x" aria-label="X / Twitter"><svg class="social-x-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                                <a href="https://www.instagram.com/soged.official?igsh=c2tyaHVpYzYzb2Vj" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                <a href="https://www.youtube.com/@SOGED" target="_blank" rel="noopener noreferrer" class="social-link social-link--youtube" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                                <a href="https://tiktok.com/@soged.official" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
                             </div>
                         </div>
                         <!-- Learn -->

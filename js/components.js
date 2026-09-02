@@ -16,6 +16,7 @@ async function loadComponent(elementId, componentPath) {
                 html = html.replace(/href="(?!https?:|#|mailto:|tel:|\.\.\/)([^"]+\.html[^"]*)"/g, 'href="../$1"');
             } else {
                 html = html.replace(/href="\.\.\/css\/footer\.css"/g, 'href="css/footer.css"');
+                html = html.replace(/href="\.\.\/css\/soged-logo\.css"/g, 'href="css/soged-logo.css"');
                 html = html.replace(/src="\.\.\/Multimedia/g, 'src="Multimedia');
             }
         }

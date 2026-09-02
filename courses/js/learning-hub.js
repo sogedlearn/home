@@ -1012,12 +1012,12 @@ class SimpleLearningHub {
                         <span class="main-course-cta guna-button guna-button--dark">${this.t('continueLearning')} <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                     </div>
                     <div class="guna-hero__visual" aria-hidden="true">
-                        <div class="guna-hero__scene">
-                            <div class="guna-hero__sea"></div>
-                            <img class="guna-hero__map" src="../Multimedia/Images/panama-guna-map.svg" alt="">
-                            <div class="guna-hero__island"></div>
-                            <div class="guna-hero__palm"></div>
-                            <img class="guna-hero__mascot" src="../Multimedia/Images/Soged/Newturttle.png" alt="">
+                        <div class="guna-hero__scene guna-hero__scene--beach">
+                            <img
+                                class="guna-hero__beach"
+                                src="../Multimedia/Images/Soged/soged%20en%20playa.png"
+                                alt=""
+                            >
                         </div>
                     </div>
                 </button>
