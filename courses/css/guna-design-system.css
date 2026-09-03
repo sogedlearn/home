@@ -454,10 +454,10 @@ html[data-theme="dark"] .loading-screen {
     flex-shrink: 0;
     mix-blend-mode: normal;
     opacity: 1;
-    background: #0a0a0a;
-    border-radius: 10px;
-    padding: 0.15rem 0.35rem;
-    filter: drop-shadow(0 4px 12px rgba(227, 160, 8, 0.35));
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    filter: none;
     animation: sogedSidebarLogoFloat 3.8s ease-in-out infinite;
 }
 

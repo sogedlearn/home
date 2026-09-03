@@ -131,22 +131,21 @@ class SogedHeader extends HTMLElement {
                     max-width: min(320px, 64vw);
                     object-fit: contain;
                     object-position: left center;
-                    mix-blend-mode: normal;
+                    background: transparent;
+                    border-radius: 0;
+                    padding: 0;
+                    box-shadow: none;
                     opacity: 1;
                     visibility: visible;
-                    background: #0a0a0a;
-                    border-radius: 12px;
-                    padding: 0.15rem 0.4rem;
-                    filter: drop-shadow(0 4px 14px rgba(227, 160, 8, 0.28));
+                    filter: none;
                     transform-origin: center center;
                     animation: sogedLogoFloat 4.2s ease-in-out infinite;
                     transition: transform 0.35s ease, filter 0.35s ease;
-                    box-shadow: 0 0 0 1px rgba(255, 210, 80, 0.18);
                 }
 
                 .logo-container:hover .logo-wordmark {
                     transform: scale(1.06) rotate(-1deg);
-                    filter: drop-shadow(0 8px 22px rgba(227, 160, 8, 0.45));
+                    filter: none;
                     animation-play-state: paused;
                 }
 
@@ -158,11 +157,11 @@ class SogedHeader extends HTMLElement {
                 @keyframes sogedLogoFloat {
                     0%, 100% {
                         transform: translateY(0) scale(1);
-                        filter: drop-shadow(0 4px 14px rgba(227, 160, 8, 0.28));
+                        filter: none;
                     }
                     50% {
                         transform: translateY(-5px) scale(1.03);
-                        filter: drop-shadow(0 10px 24px rgba(255, 179, 0, 0.42));
+                        filter: none;
                     }
                 }
 
