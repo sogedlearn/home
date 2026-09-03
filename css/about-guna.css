@@ -76,10 +76,10 @@
     width: clamp(100px, 18vw, 180px);
     height: clamp(100px, 18vw, 180px);
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 179, 0, 0.35) 0%, rgba(40, 167, 69, 0.15) 45%, transparent 70%);
-    filter: blur(20px);
+    background: transparent;
+    filter: none;
     z-index: 0;
-    animation: logoAuraExpand 2.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: none;
 }
 
 .about-logo-emerge::after {
@@ -88,9 +88,9 @@
     width: clamp(60px, 10vw, 100px);
     height: clamp(60px, 10vw, 100px);
     border-radius: 50%;
-    border: 2px solid rgba(255, 179, 0, 0.25);
+    border: none;
     z-index: 0;
-    animation: logoRingBurst 2.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: none;
 }
 
 .about-hero-logo {
@@ -103,9 +103,9 @@
     transform-origin: center center;
     mix-blend-mode: normal;
     opacity: 1;
-    background: #0a0a0a;
-    border-radius: 1.25rem;
-    padding: 0.55rem 0.9rem;
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
     animation:
         logoEmergeGrow 2.8s cubic-bezier(0.16, 1, 0.3, 1) forwards,
         sogedLogoFloat 4.2s ease-in-out 2.9s infinite;

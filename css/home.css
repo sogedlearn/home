@@ -412,32 +412,11 @@ body.home-page .home-btn--green:hover {
 }
 
 .home-turtle-ring {
-    position: absolute;
-    width: min(420px, 86%);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background:
-        conic-gradient(
-            from 180deg,
-            var(--home-green),
-            var(--home-yellow),
-            var(--home-orange),
-            var(--home-blue),
-            var(--home-green)
-        );
-    opacity: 0.35;
-    filter: blur(18px);
-    animation: home-spin 18s linear infinite;
+    display: none;
 }
 
 .home-turtle-glow {
-    position: absolute;
-    width: min(380px, 80%);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(40, 167, 69, 0.15) 0%, rgba(9, 115, 161, 0.10) 42%, transparent 70%);
-    filter: blur(22px);
-    animation: home-glow 5s ease-in-out infinite alternate;
+    display: none;
 }
 
 @keyframes home-spin {

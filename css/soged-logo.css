@@ -1,4 +1,4 @@
-/* SOGED wordmark — shared logo look + motion across the site */
+/* SOGED wordmark — transparent logo + light motion across the site */
 
 .soged-logo,
 .logo-wordmark,
@@ -14,17 +14,16 @@
     height: auto;
     max-width: 100%;
     object-fit: contain;
-    /* Keep logo fully visible (no mix-blend — it washed out on light UIs) */
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
     mix-blend-mode: normal;
     opacity: 1;
     visibility: visible;
-    background: #0a0a0a;
-    border-radius: 12px;
-    padding: 0.2rem 0.45rem;
-    filter: drop-shadow(0 4px 14px rgba(227, 160, 8, 0.28));
+    filter: none;
     transform-origin: center center;
-    transition: transform 0.35s ease, filter 0.35s ease, box-shadow 0.35s ease;
-    box-shadow: 0 0 0 1px rgba(255, 210, 80, 0.18);
+    transition: transform 0.35s ease, filter 0.35s ease;
 }
 
 .soged-logo:not(.about-hero-logo),
@@ -48,18 +47,18 @@ a:hover > .soged-logo,
 .footer-brand:hover img,
 .sidebar-brand:hover .sidebar-logo-wordmark {
     transform: scale(1.05) rotate(-1deg);
-    filter: drop-shadow(0 8px 22px rgba(227, 160, 8, 0.45));
+    filter: none;
     animation-play-state: paused;
 }
 
 @keyframes sogedLogoFloat {
     0%, 100% {
         transform: translateY(0) scale(1);
-        filter: drop-shadow(0 4px 14px rgba(227, 160, 8, 0.28));
+        filter: none;
     }
     50% {
         transform: translateY(-5px) scale(1.03);
-        filter: drop-shadow(0 10px 24px rgba(255, 179, 0, 0.42));
+        filter: none;
     }
 }
 
@@ -82,9 +81,6 @@ a:hover > .soged-logo,
     max-width: 280px;
     margin: 0 auto 1rem;
     animation: sogedLogoFloat 2.4s ease-in-out infinite;
-    background: transparent;
-    box-shadow: none;
-    padding: 0;
 }
 
 .logo-img,
@@ -96,30 +92,20 @@ a:hover > .soged-logo,
 .about-hero-logo {
     height: clamp(110px, 18vw, 200px);
     max-width: min(720px, 92vw);
-    background: #0a0a0a;
-    border-radius: 1.25rem;
-    padding: 0.55rem 0.9rem;
 }
 
-/* Badge on SOGED in Action sits on a white chip — keep logo readable */
 .about-soged-badge .soged-logo,
 .about-soged-badge img {
     height: 44px;
     max-width: 160px;
-    background: #0a0a0a;
-    border-radius: 0.65rem;
-    padding: 0.2rem 0.4rem;
-    mix-blend-mode: normal;
-    opacity: 1;
+    background: transparent;
     animation: sogedLogoFloat 5s ease-in-out infinite;
 }
 
 .sidebar-logo-wordmark {
     height: 42px;
     max-width: 168px;
-    background: #0a0a0a;
-    border-radius: 10px;
-    padding: 0.15rem 0.35rem;
+    background: transparent;
 }
 
 body.dark-mode .soged-logo,
@@ -138,9 +124,8 @@ html[data-theme="dark"] .loading-logo,
 html[data-theme="dark"] .survey-logo,
 html[data-theme="dark"] .about-hero-logo,
 html[data-theme="dark"] .footer-brand img {
-    mix-blend-mode: normal;
-    opacity: 1;
-    filter: drop-shadow(0 4px 16px rgba(255, 210, 80, 0.35));
+    background: transparent;
+    filter: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
