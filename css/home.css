@@ -48,12 +48,18 @@ body.home-page .testimonials-section,
 body.home-page .pricing-section,
 body.home-page .partners-section {
     border: none !important;
-    margin: 2rem 0 !important;
+    margin: 2.25rem 0 !important;
     border-radius: 0 !important;
     overflow: visible;
     background: transparent;
     min-height: 0;
-    padding: 0;
+    padding: 2.5rem 0;
+}
+
+/* Hero keeps its own taller bottom breathing room */
+body.home-page .hero-section {
+    margin-top: 0 !important;
+    padding: 3.5rem 0 4rem;
 }
 
 body.home-page .hero-section::before,
@@ -114,6 +120,13 @@ body.home-page .hero-section .container::before {
     overflow: visible;
 }
 
+/* Extra space between consecutive home blocks */
+body.home-page .home-section + .home-section,
+body.home-page .home-section + .pricing-section,
+body.home-page .pricing-section + .home-section {
+    margin-top: 2.75rem !important;
+}
+
 .home-section--cream {
     background-color: transparent;
     background-image: none;
@@ -171,7 +184,7 @@ body.home-page .home-subtitle {
 
 .home-header {
     text-align: center;
-    margin: 3.25rem 0;
+    margin: 1.5rem 0 2.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -255,7 +268,7 @@ body.home-page .home-subtitle {
 .home-hero .container {
     position: relative;
     z-index: 2;
-    padding-bottom: 3rem;
+    padding-bottom: 1.5rem;
 }
 
 .home-hero-copy {
@@ -860,7 +873,7 @@ body.home-page .home-step h3 {
    PRICING
    ============================================================ */
 body.home-page .pricing-section {
-    padding: 1rem 0 !important;
+    padding: 2.5rem 0 !important;
     background:
         radial-gradient(ellipse 60% 50% at 80% 10%, rgba(255, 179, 0, 0.12) 0%, transparent 55%),
         var(--home-surface) !important;
@@ -1125,7 +1138,27 @@ body.home-page .pricing-header {
 
 @media (max-width: 991px) {
     .home-section {
-        padding: 4rem 0;
+        padding: 3.5rem 0;
+    }
+
+    body.home-page .features-section,
+    body.home-page .languages-section,
+    body.home-page .how-it-works-section,
+    body.home-page .testimonials-section,
+    body.home-page .pricing-section,
+    body.home-page .partners-section {
+        margin: 1.75rem 0 !important;
+        padding: 2rem 0;
+    }
+
+    body.home-page .hero-section {
+        padding: 2.2rem 0 3rem;
+    }
+
+    body.home-page .home-section + .home-section,
+    body.home-page .home-section + .pricing-section,
+    body.home-page .pricing-section + .home-section {
+        margin-top: 2.25rem !important;
     }
 
     .home-hero {

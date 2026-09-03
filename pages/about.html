@@ -474,6 +474,12 @@
 
     <!-- CTA -->
     <cta-section id="about-cta"></cta-section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var cta = document.getElementById('about-cta');
+            if (cta) cta.setButtonUrls('../courses/learning-hub.html?course=guna');
+        });
+    </script>
 
     <!-- Footer -->
     <div id="footer-component"></div>

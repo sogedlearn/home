@@ -12,10 +12,15 @@ class CtaSection extends HTMLElement {
     }
 
     render() {
+        // Detect base path depending on page location
+        const path = window.location.pathname;
+        const isSubfolder = path.includes('/pages/') || path.includes('/auth/') || path.includes('/courses/') || path.includes('/dashboard/');
+        const base = isSubfolder ? '../' : '';
+
         this.shadowRoot.innerHTML = `
             <style>
-                @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Nunito:wght@400;600;700&display=swap');
-                @import url('../css/variables.css');
+                @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Montserrat:wght@400;500;600;700&display=swap');
+                @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css');
 
                 :host {
                     display: block;
@@ -23,42 +28,32 @@ class CtaSection extends HTMLElement {
                 }
 
                 .cta-section {
-                    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
-                    color: white;
-                    text-align: center;
-                    padding: 100px 0 80px 0;
-                    margin-bottom: 0;
                     position: relative;
+                    padding: 72px 0;
+                    background: #0a0a0a;
+                    text-align: center;
                     overflow: hidden;
                 }
 
-                .cta-section::before {
-                    content: '';
+                .cta-bg {
                     position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background: url('../Multimedia/Images/Languages/Azul.png') center/cover;
-                    opacity: 0.1;
-                    z-index: 1;
+                    inset: 0;
+                    background-color: #0a0a0a;
+                    background-image: url('${base}Multimedia/Images/guna-hero-mola-banner.png');
+                    background-size: cover;
+                    background-position: center center;
+                    background-repeat: no-repeat;
                 }
 
-                .cta-section::after {
-                    content: '';
+                .cta-overlay {
                     position: absolute;
-                    top: -50%;
-                    left: -50%;
-                    width: 200%;
-                    height: 200%;
-                    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-                    animation: cta-glow 8s ease-in-out infinite;
-                    z-index: 1;
-                }
-
-                @keyframes cta-glow {
-                    0%, 100% { transform: rotate(0deg) scale(1); }
-                    50% { transform: rotate(180deg) scale(1.1); }
+                    inset: 0;
+                    background: linear-gradient(
+                        180deg,
+                        rgba(8, 6, 4, 0.88) 0%,
+                        rgba(17, 128, 43, 0.55) 50%,
+                        rgba(8, 6, 4, 0.88) 100%
+                    );
                 }
 
                 .cta-container {
@@ -69,308 +64,75 @@ class CtaSection extends HTMLElement {
                     padding: 0 2rem;
                 }
 
-                .cta-content {
-                    margin-bottom: 3rem;
-                }
-
                 .cta-title {
-                    font-family: 'Fredoka', sans-serif;
-                    font-size: 3.5rem;
+                    font-family: 'Baloo 2', sans-serif;
+                    font-size: clamp(1.7rem, 3.2vw, 2.4rem);
                     font-weight: 700;
-                    margin-bottom: 1.5rem;
-                    color: white;
-                    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    color: #fff;
+                    margin-bottom: 14px;
                     line-height: 1.2;
                 }
 
                 .cta-subtitle {
-                    font-size: 1.3rem;
-                    margin-bottom: 2.5rem;
-                    opacity: 0.95;
-                    line-height: 1.6;
-                    max-width: 800px;
+                    color: rgba(255, 255, 255, 0.9);
+                    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+                    margin-bottom: 32px;
+                    max-width: 560px;
                     margin-left: auto;
                     margin-right: auto;
-                }
-
-                .cta-buttons {
-                    display: flex;
-                    gap: 1.5rem;
-                    justify-content: center;
-                    flex-wrap: wrap;
-                    margin-top: 2rem;
+                    line-height: 1.6;
                 }
 
                 .cta-btn {
-                    padding: 1.3rem 2.8rem;
-                    font-size: 1.1rem;
+                    display: inline-block;
+                    background: linear-gradient(135deg, #e8b923 0%, #d4a017 100%);
+                    color: #3d1f0a;
                     font-weight: 600;
-                    border-radius: 15px;
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 0.8rem;
-                    min-width: 220px;
-                    justify-content: center;
+                    padding: 14px 38px;
+                    border-radius: 8px;
                     text-decoration: none;
-                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                    position: relative;
-                    overflow: hidden;
-                    border: 2px solid transparent;
-                }
-
-                .cta-btn::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: -100%;
-                    width: 100%;
-                    height: 100%;
-                    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-                    transition: left 0.5s;
-                }
-
-                .cta-btn:hover::before {
-                    left: 100%;
-                }
-
-                .cta-btn-primary {
-                    background: white;
-                    color: var(--primary-color);
-                    border-color: white;
-                    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
-                }
-
-                .cta-btn-primary:hover {
-                    background: var(--bg-secondary);
-                    color: var(--primary-color);
-                    transform: translateY(-3px);
-                    box-shadow: 0 12px 35px rgba(255, 255, 255, 0.4);
-                }
-
-                .cta-btn-secondary {
-                    background: transparent;
-                    color: white;
-                    border-color: rgba(255, 255, 255, 0.8);
-                    backdrop-filter: blur(10px);
-                }
-
-                .cta-btn-secondary:hover {
-                    background: rgba(255, 255, 255, 0.1);
-                    border-color: white;
-                    transform: translateY(-3px);
-                    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
-                }
-
-                .cta-btn i {
-                    font-size: 1.2rem;
-                    transition: transform 0.3s ease;
-                }
-
-                .cta-btn:hover i {
-                    transform: translateX(3px);
-                }
-
-                .cta-features {
-                    display: flex;
-                    justify-content: center;
-                    gap: 3rem;
-                    margin-top: 3rem;
-                    flex-wrap: wrap;
-                }
-
-                .cta-feature {
-                    display: flex;
-                    align-items: center;
-                    gap: 0.8rem;
-                    color: rgba(255, 255, 255, 0.9);
                     font-size: 1rem;
-                    font-weight: 500;
+                    letter-spacing: 0.04em;
+                    transition: transform 0.2s ease, box-shadow 0.2s ease;
+                    border: none;
+                    cursor: pointer;
                 }
 
-                .cta-feature i {
-                    font-size: 1.3rem;
-                    color: var(--accent-color);
-                }
-
-                /* Floating decorative elements */
-                .cta-decoration {
-                    position: absolute;
-                    border-radius: 50%;
-                    opacity: 0.1;
-                    animation: float 6s ease-in-out infinite;
-                }
-
-                .cta-decoration:nth-child(1) {
-                    width: 80px;
-                    height: 80px;
-                    background: var(--accent-color);
-                    top: 20%;
-                    left: 10%;
-                    animation-delay: 0s;
-                }
-
-                .cta-decoration:nth-child(2) {
-                    width: 120px;
-                    height: 120px;
-                    background: var(--secondary-color);
-                    top: 60%;
-                    right: 15%;
-                    animation-delay: 2s;
-                }
-
-                .cta-decoration:nth-child(3) {
-                    width: 60px;
-                    height: 60px;
-                    background: var(--success-color);
-                    bottom: 30%;
-                    left: 20%;
-                    animation-delay: 4s;
-                }
-
-                @keyframes float {
-                    0%, 100% { transform: translateY(0px) rotate(0deg); }
-                    50% { transform: translateY(-20px) rotate(180deg); }
-                }
-
-                /* Responsive Design */
-                @media (max-width: 991px) {
-                    .cta-section {
-                        padding: 80px 0 60px 0;
-                    }
-
-                    .cta-title {
-                        font-size: 3rem;
-                    }
-
-                    .cta-subtitle {
-                        font-size: 1.2rem;
-                    }
-
-                    .cta-buttons {
-                        gap: 1rem;
-                    }
-
-                    .cta-btn {
-                        padding: 1.2rem 2.4rem;
-                        font-size: 1rem;
-                        min-width: 200px;
-                    }
-
-                    .cta-features {
-                        gap: 2rem;
-                    }
+                .cta-btn:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 10px 28px rgba(232, 185, 35, 0.45);
+                    color: #3d1f0a;
                 }
 
                 @media (max-width: 768px) {
                     .cta-section {
-                        padding: 60px 0 40px 0;
-                    }
-
-                    .cta-title {
-                        font-size: 2.5rem;
-                    }
-
-                    .cta-subtitle {
-                        font-size: 1.1rem;
-                    }
-
-                    .cta-buttons {
-                        flex-direction: column;
-                        align-items: center;
-                    }
-
-                    .cta-btn {
-                        width: 100%;
-                        max-width: 300px;
-                    }
-
-                    .cta-features {
-                        flex-direction: column;
-                        gap: 1rem;
-                    }
-
-                    .cta-decoration {
-                        display: none;
+                        padding: 56px 0;
                     }
                 }
 
                 @media (max-width: 576px) {
                     .cta-section {
-                        padding: 50px 0 30px 0;
+                        padding: 44px 0;
                     }
-
-                    .cta-title {
-                        font-size: 2rem;
-                    }
-
-                    .cta-subtitle {
-                        font-size: 1rem;
-                    }
-
-                    .cta-btn {
-                        padding: 1rem 2rem;
-                        font-size: 0.95rem;
-                        min-width: 180px;
-                    }
-
                     .cta-container {
-                        padding: 0 1rem;
+                        padding: 0 1.25rem;
                     }
-                }
-
-                /* Dark mode support - using CSS variables that respond to theme changes */
-                :host-context([data-theme="dark"]) .cta-btn-primary:hover {
-                    background: var(--bg-secondary);
-                    color: var(--primary-color);
-                }
-
-                /* Alternative approach for browsers that don't support :host-context */
-                :host([data-theme="dark"]) .cta-btn-primary:hover {
-                    background: var(--bg-secondary);
-                    color: var(--primary-color);
                 }
             </style>
 
             <section class="cta-section">
-                <div class="cta-decoration"></div>
-                <div class="cta-decoration"></div>
-                <div class="cta-decoration"></div>
-                
+                <div class="cta-bg"></div>
+                <div class="cta-overlay"></div>
                 <div class="cta-container">
-                    <div class="cta-content">
-                        <h2 class="cta-title">
-                            <slot name="title">Ready to Start Your Language Journey?</slot>
-                        </h2>
-                        <p class="cta-subtitle">
-                            <slot name="subtitle">Join thousands of learners discovering the rich indigenous languages of Panama. Start your free trial today!</slot>
-                        </p>
-                    </div>
-
-                    <div class="cta-buttons">
-                        <a href="#" class="cta-btn cta-btn-primary">
-                            <i class="fas fa-play"></i>
-                            <slot name="primary-button">Start Free Trial</slot>
-                        </a>
-                        <a href="#" class="cta-btn cta-btn-secondary">
-                            <i class="fas fa-info-circle"></i>
-                            <slot name="secondary-button">Learn More</slot>
-                        </a>
-                    </div>
-
-                    <div class="cta-features text-center">
-                        <div class="cta-feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span class="text-center">Free 7-day trial</span>
-                        </div>
-                        <div class="cta-feature">
-                            <i class="fas fa-users"></i>
-                            <span>Native speakers</span>
-                        </div>
-                        <div class="cta-feature">
-                            <i class="fas fa-mobile-alt"></i>
-                            <span>Mobile friendly</span>
-                        </div>
-                    </div>
+                    <h2 class="cta-title">
+                        <slot name="title">Ready to Learn Dulegaya?</slot>
+                    </h2>
+                    <p class="cta-subtitle">
+                        <slot name="subtitle">Start with your first words in the Guna language. It's free and connects you with one of the most vibrant cultures in the Americas.</slot>
+                    </p>
+                    <a href="#" class="cta-btn">
+                        <slot name="primary-button">Start Lesson →</slot>
+                    </a>
                 </div>
             </section>
         `;
@@ -378,7 +140,6 @@ class CtaSection extends HTMLElement {
 
     setupEventListeners() {
         const buttons = this.shadowRoot.querySelectorAll('.cta-btn');
-        
         buttons.forEach(button => {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -462,15 +223,9 @@ class CtaSection extends HTMLElement {
 
     // Method to set button URLs
     setButtonUrls(primaryUrl, secondaryUrl) {
-        const primaryBtn = this.shadowRoot.querySelector('.cta-btn-primary');
-        const secondaryBtn = this.shadowRoot.querySelector('.cta-btn-secondary');
-        
+        const primaryBtn = this.shadowRoot.querySelector('.cta-btn');
         if (primaryBtn && primaryUrl) {
             primaryBtn.href = primaryUrl;
-        }
-        
-        if (secondaryBtn && secondaryUrl) {
-            secondaryBtn.href = secondaryUrl;
         }
     }
 }
