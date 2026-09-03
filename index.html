@@ -695,16 +695,7 @@
             // Configure CTA component
             const ctaComponent = document.getElementById('main-cta');
             if (ctaComponent) {
-                // Update content
-                ctaComponent.updateContent({
-                    title: 'Ready to Earn Your First Language Badge?',
-                    subtitle: 'Join learners preserving Panama\'s indigenous voices — free to start, rewarding to stick with.',
-                    primaryButton: 'Get Started Free',
-                    secondaryButton: 'Learn More'
-                });
-                
-                // Set button URLs
-                ctaComponent.setButtonUrls('auth/register.html', 'pages/about.html');
+                ctaComponent.setButtonUrls('courses/learning-hub.html?course=guna');
             }
         });
         
