@@ -1,75 +1,134 @@
 /**
  * Guna vocabulary — central data for lessons & dictionary
+ * Words come from native speaker recordings in Multimedia/Audio
+ * (guna word) - (Spanish translation)
  */
+const GUNA_AUDIO = '../Multimedia/Audio/';
+const GUNA_IMG = '../Multimedia/Images/Memory match/';
+
+function vocabWord(guna, es, en, icon, audioFile, extra) {
+    return {
+        guna,
+        es,
+        en,
+        icon,
+        audio: GUNA_AUDIO + audioFile,
+        example: `${guna} — ${en}`,
+        ...(extra || {})
+    };
+}
+
 const GUNA_VOCABULARY = {
     greetings: [
-        { guna: 'Na', es: 'Yo', en: 'I', icon: '👤', image: '../Multimedia/Images/Memory match/Na.png', example: 'Na an mar — I am here' },
-        { guna: 'Be', es: 'Tú', en: 'You', icon: '👋', image: '../Multimedia/Images/Memory match/Be.jpg', example: 'Be an mar? — Are you here?' },
-        { guna: 'Eye', es: 'Sí', en: 'Yes', icon: '✅', image: '../Multimedia/Images/Memory match/Eye.jpg', example: 'Eye, degii — Yes, that is right' },
-        { guna: 'Degii', es: 'Así es', en: "That's right", icon: '👍', image: '../Multimedia/Images/Memory match/Degii.png', example: 'Degii, anna — That is right, hello' },
-        { guna: '¡ anna !', es: 'Hola', en: 'Hello', icon: '🏝️', image: '../Multimedia/Images/Memory match/anna.png', example: '¡ anna ! — Hello!' },
-        { guna: 'degi malo', es: 'Adiós', en: 'Goodbye', icon: '👋', image: '../Multimedia/Images/Memory match/degi malo.jpg', example: 'degi malo — Goodbye' },
-        { guna: 'Banmalo', es: 'Hasta mañana', en: 'See you tomorrow', icon: '🌅', image: '../Multimedia/Images/Memory match/Banmalo.jpg', example: 'Banmalo — See you tomorrow' }
+        vocabWord('Naa', 'Hola', 'Hello', '👋', 'Naa - Hola.mp3', { image: GUNA_IMG + 'anna.png' }),
+        vocabWord('Be', 'Tú', 'You', '👤', 'Be - Tú.mp3', { image: GUNA_IMG + 'Be.jpg' }),
+        vocabWord('Eye', 'Sí', 'Yes', '✅', 'Eye - Si.mp3', { image: GUNA_IMG + 'Eye.jpg' }),
+        vocabWord('Suli', 'No', 'No', '❌', 'Suli - No.mp3'),
+        vocabWord('Deggidde', 'Cómo estás', 'How are you', '🙂', 'Deggidde - Como estas.mp3', { image: GUNA_IMG + 'Degii.png' }),
+        vocabWord('Deggimalo', 'Adiós', 'Goodbye', '👋', 'Deggimalo - Adios.mp3', { image: GUNA_IMG + 'degi malo.jpg' }),
+        vocabWord('Bannemalo', 'Hasta mañana', 'See you tomorrow', '🌅', 'Bannemalo - Hasta Mañana.mp3', { image: GUNA_IMG + 'Banmalo.jpg' }),
+        vocabWord('Nued', 'Gracias', 'Thank you', '🙏', 'Nued - Gracias.mp3')
     ],
     family: [
-        { guna: 'Nana', es: 'Mamá', en: 'Mother', icon: '👩', image: '../Multimedia/Images/Memory match/Nana.jpg', example: 'Nana an mar — Mother is here' },
-        { guna: 'Tata', es: 'Papá', en: 'Father', icon: '👨', image: '../Multimedia/Images/Memory match/Tata.jpg', example: 'Tata — Father' },
-        { guna: 'Dummad', es: 'Hermano', en: 'Brother', icon: '👦', image: '../Multimedia/Images/Memory match/Dummad.jpg', example: 'Dummad — Brother' },
-        { guna: 'Nueded', es: 'Hermana', en: 'Sister', icon: '👧', image: '../Multimedia/Images/Memory match/Nueded.jpg', example: 'Nueded — Sister' },
-        { guna: 'Bab', es: 'Abuelo', en: 'Grandfather', icon: '👴', image: '../Multimedia/Images/Memory match/Bab.png', example: 'Bab — Grandfather' },
-        { guna: 'Dada', es: 'Abuela', en: 'Grandmother', icon: '👵', image: '../Multimedia/Images/Memory match/Dada.jpg', example: 'Dada — Grandmother' }
+        vocabWord('Nana', 'Mamá', 'Mother', '👩', 'Nana - Mamá.mp3', { image: GUNA_IMG + 'Nana.jpg' }),
+        vocabWord('Baba', 'Papá', 'Father', '👨', 'Baba - Papá.mp3', { image: GUNA_IMG + 'Tata.jpg' }),
+        vocabWord('Tata', 'Abuelo', 'Grandfather', '👴', 'Tata - Abuelo.mp3', { image: GUNA_IMG + 'Bab.png' }),
+        vocabWord('Muú', 'Abuela', 'Grandmother', '👵', 'Muú - Abuela.mp3', { image: GUNA_IMG + 'Dada.jpg' }),
+        vocabWord('Gilor', 'Tío', 'Uncle', '👨', 'Gilor - Tio.mp3'),
+        vocabWord('Ammor', 'Tía', 'Aunt', '👩', 'Ammor - Tia.mp3'),
+        vocabWord('Niga', 'Sobrino', 'Nephew', '👦', 'Niga - Sobrino.mp3'),
+        vocabWord('Anai', 'Amigo', 'Friend', '🤝', 'Anai - Amigo.mp3'),
+        vocabWord('Ome', 'Mujer', 'Woman', '👩', 'Ome - Mujer.mp3'),
+        vocabWord('Massered', 'Hombre', 'Man', '👨', 'Massered - Hombre.mp3')
     ],
     home: [
-        { guna: 'Muu', es: 'Casa', en: 'House', icon: '🏠', image: '../Multimedia/Images/Memory match/Muu.jpg', example: 'Muu — House / home' },
-        { guna: 'Nika', es: 'Mesa', en: 'Table', icon: '🪑', image: '../Multimedia/Images/Memory match/Nika.jpg', example: 'Nika — Table' },
-        { guna: 'Misi', es: 'Plato', en: 'Plate', icon: '🍽️', image: '../Multimedia/Images/Memory match/Misi.jpg', example: 'Misi — Plate' },
-        { guna: 'Tapa', es: 'Cuchara', en: 'Spoon', icon: '🥄', image: '../Multimedia/Images/Memory match/Tapa.jpg', example: 'Tapa — Spoon' },
-        { guna: 'Bii', es: 'Ropa', en: 'Clothes', icon: '👕', image: '../Multimedia/Images/Memory match/Bii.jpg', example: 'Bii — Clothes' }
+        vocabWord('Nega', 'Casa', 'House', '🏠', 'Nega - Casa.mp3', { image: GUNA_IMG + 'Muu.jpg' }),
+        vocabWord('Ibya', 'Tienda', 'Store', '🏪', 'Ibya - Tienda.mp3'),
+        vocabWord('Ibdurdaggednega', 'Escuela', 'School', '🏫', 'Ibdurdaggednega - Escuela.mp3'),
+        vocabWord('Mola', 'Blusa de mujer', "Women's blouse", '🧵', 'Mola - Blusa de mujer.mp3'),
+        vocabWord('Moryoed', 'Vestirse', 'To get dressed', '👕', 'Moryoed - Vestirse.mp3')
     ],
     nature: [
-        { guna: 'Sii', es: 'Agua', en: 'Water', icon: '💧', example: 'Sii — Water' },
-        { guna: 'Dii', es: 'Fuego', en: 'Fire', icon: '🔥', example: 'Dii — Fire' },
-        { guna: 'Kalu', es: 'Madera', en: 'Wood', icon: '🪵', example: 'Kalu — Wood' },
-        { guna: 'Tii', es: 'Barro', en: 'Clay', icon: '🏺', example: 'Tii — Clay' }
+        vocabWord('Dii', 'Agua', 'Water', '💧', 'Dii - Agua.mp3'),
+        vocabWord('Urgo', 'Madera', 'Wood', '🪵', 'Urgo - Madera.mp3'),
+        vocabWord('Olli', 'Barro', 'Clay', '🏺', 'Olli - Barro.mp3'),
+        vocabWord('Suwar', 'Palo', 'Stick', '🪵', 'Suwar - Palo.mp3')
     ],
     animals: [
-        { guna: 'Malú', es: 'Pollo', en: 'Chicken', icon: '🐔', example: 'Malú — Chicken' },
-        { guna: 'Suu', es: 'Mono', en: 'Monkey', icon: '🐒', example: 'Suu — Monkey' },
-        { guna: 'Uli', es: 'Cangrejo', en: 'Crab', icon: '🦀', example: 'Uli — Crab' },
-        { guna: 'Ibeler', es: 'Tiburón', en: 'Shark', icon: '🦈', example: 'Ibeler — Shark' },
-        { guna: 'Ardi', es: 'Tortuga', en: 'Turtle', icon: '🐢', example: 'Ardi — Turtle' },
-        { guna: 'Wala', es: 'Mariposa', en: 'Butterfly', icon: '🦋', example: 'Wala — Butterfly' }
+        vocabWord('Nali', 'Tiburón', 'Shark', '🦈', 'Nali - Tiburón.mp3'),
+        vocabWord('Sussua', 'Mariposa', 'Butterfly', '🦋', 'Sussua - Mariposa.mp3'),
+        vocabWord('Misi', 'Gato', 'Cat', '🐱', 'Misi - Gato.mp3'),
+        vocabWord('Gannir', 'Pollo', 'Chicken', '🐔', 'Gannir - Pollo.mp3'),
+        vocabWord('Assu', 'Perro', 'Dog', '🐶', 'Assu - Perro.mp3'),
+        vocabWord('Sulu', 'Mono', 'Monkey', '🐒', 'Sulu - Mono.mp3'),
+        vocabWord('Suga', 'Cangrejo', 'Crab', '🦀', 'Suga - Cangrejo.mp3'),
+        vocabWord('Yaug', 'Tortuga', 'Turtle', '🐢', 'Yaug - Tortuga.mp3')
     ],
     plants: [
-        { guna: 'Ogob', es: 'Maíz', en: 'Corn', icon: '🌽', example: 'Ogob — Corn' },
-        { guna: 'Gwad', es: 'Coco', en: 'Coconut', icon: '🥥', example: 'Gwad — Coconut' },
-        { guna: 'Naggid', es: 'Yuca', en: 'Cassava', icon: '🌿', example: 'Naggid — Cassava' },
-        { guna: 'Suggid', es: 'Ñame', en: 'Yam', icon: '🍠', example: 'Suggid — Yam' },
-        { guna: 'Suwad', es: 'Tomate', en: 'Tomato', icon: '🍅', example: 'Suwad — Tomato' },
-        { guna: 'Bagar', es: 'Cebolla', en: 'Onion', icon: '🧅', example: 'Bagar — Onion' }
+        vocabWord('Oba', 'Maíz', 'Corn', '🌽', 'Oba - Maiz.mp3'),
+        vocabWord('Agu', 'Cebolla', 'Onion', '🧅', 'Agu - Cebolla.mp3'),
+        vocabWord('Ogob', 'Coco', 'Coconut', '🥥', 'Ogob - Coco.mp3'),
+        vocabWord('Sabbidurba', 'Frutas', 'Fruits', '🍇', 'Sabbidurba - Frutas.mp3'),
+        vocabWord('Masi', 'Comida', 'Food', '🍽️', 'Masi_Comida.mp3'),
+        vocabWord('Masdued', 'Cocinar', 'To cook', '👨‍🍳', 'Masdued - Cocinar.mp3')
     ],
     phrases: [
-        { guna: 'Bia?', es: '¿Dónde?', en: 'Where?', icon: '📍', example: 'Bia an mar? — Where are you?' },
-        { guna: 'Doa?', es: '¿Quién?', en: 'Who?', icon: '❓', example: 'Doa? — Who?' },
-        { guna: 'Basuli', es: 'No importa', en: "It doesn't matter", icon: '🤷', example: 'Basuli — It does not matter' },
-        { guna: 'Banmalo', es: 'Hasta mañana', en: 'See you tomorrow', icon: '🌅', example: 'Banmalo — See you tomorrow' },
-        { guna: 'Emi', es: 'Hoy', en: 'Today', icon: '📅', example: 'Emi — Today' }
+        vocabWord('Bia', '¿Dónde?', 'Where?', '📍', 'Bia - Donde.mp3'),
+        vocabWord('Doa', '¿Quién?', 'Who?', '❓', 'Doa - Quien.mp3'),
+        vocabWord('Ingua', '¿Cuándo?', 'When?', '⏰', 'Ingua - Cuando.mp3'),
+        vocabWord('Emi', 'Hoy', 'Today', '📅', 'Emi - Hoy.mp3'),
+        vocabWord('Bassuli', 'No importa', "It doesn't matter", '🤷', 'Bassuli - No importa.mp3'),
+        vocabWord('Baid', 'Otro', 'Other', '🔁', 'Baid - Otro.mp3'),
+        vocabWord('Itosa', '¿Escuchaste?', 'Did you hear?', '👂', 'Itosa - Escuchaste.mp3'),
+        vocabWord('Nueditosa', 'Se entendió', 'It was understood', '💡', 'Nueditosa - Se entendio.mp3')
     ],
     culture: [
-        { guna: 'Mola', es: 'Textil tradicional Guna', en: 'Traditional Guna textile', icon: '🧵', example: 'Mola — Sacred textile art' },
-        { guna: 'Sagla', es: 'Líder tradicional', en: 'Traditional leader', icon: '🏛️', example: 'Sagla — Community leader' },
-        { guna: 'Ibeorgun', es: 'Creador', en: 'Creator', icon: '🌟', example: 'Ibeorgun — Creator deity' },
-        { guna: 'Kantule', es: 'Sabio ancestral', en: 'Ancestral sage', icon: '📜', example: 'Kantule — Ancestral sage' },
-        { guna: 'Dulegaya', es: 'Idioma Guna', en: 'Guna language', icon: '🗣️', example: 'Dulegaya — Guna language' },
-        { guna: 'Guna Yala', es: 'Comarca autónoma', en: 'Autonomous territory', icon: '🏝️', example: 'Guna Yala — Guna territory' }
+        vocabWord('Mola', 'Blusa de mujer', "Women's blouse", '🧵', 'Mola - Blusa de mujer.mp3'),
+        vocabWord('Innasuid', 'Ceremonia', 'Ceremony', '🎉', 'Innasuid - Ceremonia.mp3'),
+        vocabWord('Igarduled', 'Guía', 'Guide', '🧭', 'Igarduled-Guia.mp3')
     ],
-    // Legacy aliases for compatibility
     objects: [],
     pronouns: []
 };
 
 GUNA_VOCABULARY.objects = [...GUNA_VOCABULARY.home, ...GUNA_VOCABULARY.nature];
-GUNA_VOCABULARY.pronouns = GUNA_VOCABULARY.greetings.filter(w => ['Na', 'Be'].includes(w.guna));
+GUNA_VOCABULARY.pronouns = GUNA_VOCABULARY.greetings.filter(w => w.guna === 'Be');
+
+GUNA_VOCABULARY.people = [
+    ...GUNA_VOCABULARY.family.filter(w => ['Ome', 'Massered', 'Anai'].includes(w.guna)),
+    ...GUNA_VOCABULARY.greetings.filter(w => w.guna === 'Be')
+];
+
+GUNA_VOCABULARY.places = GUNA_VOCABULARY.home.filter(w =>
+    ['Nega', 'Ibya', 'Ibdurdaggednega'].includes(w.guna)
+);
+
+GUNA_VOCABULARY.actions = [
+    ...GUNA_VOCABULARY.home.filter(w => w.guna === 'Moryoed'),
+    ...GUNA_VOCABULARY.plants.filter(w => w.guna === 'Masdued'),
+    ...GUNA_VOCABULARY.phrases.filter(w => w.guna === 'Itosa')
+];
+
+GUNA_VOCABULARY.questions = GUNA_VOCABULARY.phrases.filter(w =>
+    ['Bia', 'Doa', 'Ingua'].includes(w.guna)
+);
+
+GUNA_VOCABULARY.expressions = GUNA_VOCABULARY.phrases.filter(w =>
+    ['Bassuli', 'Nueditosa', 'Baid', 'Emi'].includes(w.guna)
+).concat(GUNA_VOCABULARY.greetings.filter(w => w.guna === 'Nued'));
+
+GUNA_VOCABULARY.clothing = [
+    ...GUNA_VOCABULARY.home.filter(w => ['Mola', 'Moryoed'].includes(w.guna)),
+    ...GUNA_VOCABULARY.family.filter(w => w.guna === 'Ome')
+];
+
+GUNA_VOCABULARY.mastery = [
+    ...GUNA_VOCABULARY.greetings.slice(0, 3),
+    ...GUNA_VOCABULARY.family.slice(0, 2),
+    ...GUNA_VOCABULARY.home.slice(0, 1),
+    ...GUNA_VOCABULARY.animals.slice(0, 2),
+    ...GUNA_VOCABULARY.plants.slice(0, 2)
+];
 
 GUNA_VOCABULARY.CATEGORIES = [
     { id: 'greetings', label: 'Greetings', icon: '👋', words: GUNA_VOCABULARY.greetings, module: 'basics' },
@@ -86,24 +145,62 @@ GUNA_VOCABULARY.MODULES = [
     {
         id: 'basics',
         label: 'Module 1 — Basics',
-        subtitle: 'Levels 1–7 · greetings, family, home, nature',
+        subtitle: 'Greetings, family, home, nature, animals, food, phrases and culture',
         icon: '🌱',
         categoryIds: ['greetings', 'family', 'home', 'nature', 'animals', 'plants', 'phrases', 'culture']
-    },
-    {
-        id: 'daily',
-        label: 'Module 2 — Daily Life',
-        subtitle: 'Levels 8–13 · weather, clothing, community',
-        icon: '🏝️',
-        categoryIds: ['weather', 'clothing', 'medicine', 'legends', 'community', 'celebrations']
-    },
-    {
-        id: 'advanced',
-        label: 'Module 3 — Advanced',
-        subtitle: 'Levels 14–20 · idioms, crafts, mastery',
-        icon: '🏆',
-        categoryIds: ['idioms', 'geography', 'crafts', 'values', 'songs', 'trade', 'mastery']
     }
 ];
+
+GUNA_VOCABULARY.getAllWords = function getAllWords() {
+    const seen = new Set();
+    const all = [];
+    (this.CATEGORIES || []).forEach((cat) => {
+        (cat.words || []).forEach((w) => {
+            const key = (w.guna || '').toLowerCase();
+            if (!key || seen.has(key)) return;
+            seen.add(key);
+            all.push(w);
+        });
+    });
+    return all;
+};
+
+GUNA_VOCABULARY.findWord = function findWord(guna) {
+    if (!guna) return null;
+    const needle = String(guna).toLowerCase().replace(/[¡!¿?]/g, '').trim();
+    return this.getAllWords().find((w) => {
+        const name = String(w.guna || '').toLowerCase().replace(/[¡!¿?]/g, '').trim();
+        return name === needle;
+    }) || null;
+};
+
+GUNA_VOCABULARY.speakFallback = function speakFallback(text) {
+    if (!text || !window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'es-ES';
+    u.rate = 0.85;
+    window.speechSynthesis.speak(u);
+};
+
+GUNA_VOCABULARY.play = function play(guna) {
+    const settings = typeof GunaUserData !== 'undefined' ? GunaUserData.getSettings() : {};
+    if (settings.audioPlayback === false) return;
+    const word = this.findWord(guna);
+    if (word?.audio) {
+        try {
+            if (this._player) {
+                this._player.pause();
+                this._player = null;
+            }
+            this._player = new Audio(encodeURI(word.audio));
+            this._player.play().catch(() => this.speakFallback(word.guna || guna));
+            return;
+        } catch {
+            /* fall through */
+        }
+    }
+    this.speakFallback(word?.guna || guna);
+};
 
 window.GUNA_VOCABULARY = GUNA_VOCABULARY;

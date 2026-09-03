@@ -1,6 +1,6 @@
 /**
- * Rich lesson structure (Level 1 style) for Guna levels 1–3
- * Level 1 is preserved exactly. Levels 2 & 3 use the same structure in English.
+ * Rich lesson structure for Guna levels 1–3
+ * Uses the recorded audio vocabulary (Guna — Spanish — English).
  */
 const GunaLevelLessons = {
     buildVocabTableRows(words) {
@@ -218,242 +218,97 @@ const GunaLevelLessons = {
         };
     },
 
-    // LEVEL 1 — preserved exactly (do not modify)
     getGreetingsLesson() {
-        return {
+        return this.buildRichLesson({
             id: 1,
-            title: "Island Greetings",
-            subtitle: "Learn traditional Guna welcome expressions",
+            title: '👋 Island Greetings',
+            subtitle: 'Learn traditional Guna welcome expressions',
             duration: 15,
             xp: 50,
-            sections: [
+            introTitle: 'Welcome to Guna Language!',
+            introHeading: '👋 Island Greetings',
+            introText: 'Discover the language of the Guna people, who live on the islands of Panama\'s Caribbean coast.',
+            culturalText: 'The Guna people are known for their maritime culture, molas (traditional textiles), and strong community values. Greetings open every conversation.',
+            highlights: [
+                { icon: 'fa-water', text: 'Sea-faring people' },
+                { icon: 'fa-palette', text: 'Famous for molas' },
+                { icon: 'fa-users', text: 'Strong community' }
+            ],
+            vocabTitle: 'Essential Greetings',
+            vocabHeading: 'Basic Greetings Vocabulary',
+            vocabIntro: 'Learn the most important greeting words in Guna:',
+            words: [
+                { guna: 'Naa', es: 'Hola', en: 'Hello', pronunciation: 'Nah' },
+                { guna: 'Deggidde', es: 'Cómo estás', en: 'How are you', pronunciation: 'Deh-gee-deh' },
+                { guna: 'Deggimalo', es: 'Adiós', en: 'Goodbye', pronunciation: 'Deg-gee-mah-lo' },
+                { guna: 'Bannemalo', es: 'Hasta mañana', en: 'See you tomorrow', pronunciation: 'Ban-neh-mah-lo' },
+                { guna: 'Eye', es: 'Sí', en: 'Yes', pronunciation: 'Eh-yeh' },
+                { guna: 'Suli', es: 'No', en: 'No', pronunciation: 'Soo-lee' },
+                { guna: 'Nued', es: 'Gracias', en: 'Thank you', pronunciation: 'Nweh-ed' },
+                { guna: 'Be', es: 'Tú', en: 'You', pronunciation: 'Beh' }
+            ],
+            pronunciationTips: [
+                '<strong>Naa</strong> - "nah" with a long a, the everyday hello',
+                '<strong>Deggidde</strong> - "deh-gee-deh", used to ask how someone is',
+                '<strong>Deggimalo</strong> - "deg-gee-mah-lo", goodbye',
+                '<strong>Bannemalo</strong> - "ban-neh-mah-lo", see you tomorrow'
+            ],
+            practiceIntro: 'Test your knowledge of Guna greetings with these interactive exercises:',
+            quizQuestions: [
+                { num: 1, text: 'How do you say "Hello" in Guna?', options: [
+                    { value: 'naa', label: 'Naa' }, { value: 'suli', label: 'Suli' },
+                    { value: 'eye', label: 'Eye' }, { value: 'be', label: 'Be' }
+                ]},
+                { num: 2, text: 'What does "Deggimalo" mean?', options: [
+                    { value: 'hello', label: 'Hello' }, { value: 'goodbye', label: 'Goodbye' },
+                    { value: 'tomorrow', label: 'See you tomorrow' }, { value: 'thanks', label: 'Thank you' }
+                ]},
+                { num: 3, text: 'Which phrase means "See you tomorrow"?', options: [
+                    { value: 'naa', label: 'Naa' }, { value: 'deggimalo', label: 'Deggimalo' },
+                    { value: 'bannemalo', label: 'Bannemalo' }, { value: 'nued', label: 'Nued' }
+                ]},
+                { num: 4, type: 'matching', text: 'Match each Guna word with its meaning:', pairs: [
+                    { guna: 'Naa', options: [
+                        { value: 'hello', label: 'Hello' }, { value: 'goodbye', label: 'Goodbye' }, { value: 'yes', label: 'Yes' }
+                    ]},
+                    { guna: 'Eye', options: [
+                        { value: 'hello', label: 'Hello' }, { value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }
+                    ]},
+                    { guna: 'Deggimalo', options: [
+                        { value: 'goodbye', label: 'Goodbye' }, { value: 'hello', label: 'Hello' }, { value: 'tomorrow', label: 'See you tomorrow' }
+                    ]}
+                ]}
+            ],
+            scenarios: [
                 {
-                    type: 'introduction',
-                    title: "Welcome to Guna Language!",
-                    content: `
-                        <div class="lesson-intro lesson-intro--mola">
-                            <div class="intro-header intro-header--mola">
-                                <h2>Welcome to Guna Language</h2>
-                                <p>Discover the beautiful language of the Guna people, who live on the islands of Panama's Caribbean coast.</p>
-                            </div>
-                            <div class="cultural-context cultural-context--mola">
-                                <h3>Cultural Context</h3>
-                                <p>The Guna people are known for their rich maritime culture, beautiful molas (traditional textiles), and strong community values. Their language reflects their deep connection to the sea and their island home.</p>
-                                <div class="cultural-highlights">
-                                    <div class="highlight-item"><i class="fas fa-water"></i><span>Sea-faring people</span></div>
-                                    <div class="highlight-item"><i class="fas fa-palette"></i><span>Famous for molas</span></div>
-                                    <div class="highlight-item"><i class="fas fa-users"></i><span>Strong community</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    `
+                    title: 'Scenario 1: Meeting a Guna friend',
+                    prompt: 'You want to say hello — which word do you use?',
+                    choices: ['Naa', 'Suli', 'Nued'],
+                    response: '<strong>Correct!</strong> Naa means Hello. You can also ask Deggidde — How are you?'
                 },
                 {
-                    type: 'vocabulary',
-                    title: "Essential Greetings",
-                    content: `
-                        <div class="vocabulary-section">
-                            <h3>Basic Greetings Vocabulary</h3>
-                            <p>Let's learn the most important greeting words and phrases in Guna:</p>
-                            <div class="vocabulary-table">
-                                <table>
-                                    <thead><tr><th>Guna</th><th>Spanish</th><th>English</th><th>Pronunciation</th></tr></thead>
-                                    <tbody>
-                                        <tr><td><strong>¡ anna !</strong></td><td>Hola</td><td>Hello</td><td>¡ anna !</td></tr>
-                                        <tr><td><strong>¡ naa !</strong></td><td>Hola</td><td>Hi</td><td>¡ naa !</td></tr>
-                                        <tr><td><strong>¡ degidde !</strong></td><td>Hola</td><td>Hello</td><td>¡ degite !</td></tr>
-                                        <tr><td><strong>degi malo</strong></td><td>Adios</td><td>Goodbye</td><td>Degi malo</td></tr>
-                                        <tr><td><strong>¡ banmalo !</strong></td><td>Hasta mañana</td><td>See you tomorrow</td><td>Banmelo</td></tr>
-                                        <tr><td><strong>¡ banemalo !</strong></td><td>Hasta mañana</td><td>See you tomorrow</td><td>Banemalo</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="pronunciation-tips">
-                                <h4>Pronunciation Tips</h4>
-                                <ul>
-                                    <li><strong>¡ anna !</strong> - Similar to "ah-nah" with emphasis</li>
-                                    <li><strong>¡ naa !</strong> - Sounds like "nah" with a long 'a'</li>
-                                    <li><strong>degidde</strong> - "deh-gee-deh" with soft 'g'</li>
-                                    <li><strong>malo</strong> - "mah-lo" with clear 'o'</li>
-                                </ul>
-                            </div>
-                        </div>
-                    `
-                },
-                {
-                    type: 'interactive',
-                    title: "Practice Time!",
-                    content: `
-                        <div class="interactive-section">
-                            <h3>Let's Practice!</h3>
-                            <p>Test your knowledge of Guna greetings with these interactive exercises:</p>
-                            <div class="quiz-container">
-                                <div class="quiz-question" data-question="1">
-                                    <h4>Question 1: How do you say "Hello" in Guna?</h4>
-                                    <div class="quiz-options">
-                                        <button class="quiz-option" data-answer="anna">¡ anna !</button>
-                                        <button class="quiz-option" data-answer="malo">degi malo</button>
-                                        <button class="quiz-option" data-answer="banmalo">¡ banmalo !</button>
-                                        <button class="quiz-option" data-answer="naa">¡ naa !</button>
-                                    </div>
-                                    <div class="quiz-feedback" style="display: none;"></div>
-                                </div>
-                                <div class="quiz-question" data-question="2">
-                                    <h4>Question 2: What does "degi malo" mean?</h4>
-                                    <div class="quiz-options">
-                                        <button class="quiz-option" data-answer="hello">Hello</button>
-                                        <button class="quiz-option" data-answer="goodbye">Goodbye</button>
-                                        <button class="quiz-option" data-answer="tomorrow">See you tomorrow</button>
-                                        <button class="quiz-option" data-answer="thanks">Thank you</button>
-                                    </div>
-                                    <div class="quiz-feedback" style="display: none;"></div>
-                                </div>
-                                <div class="quiz-question" data-question="3">
-                                    <h4>Question 3: Which phrase means "See you tomorrow"?</h4>
-                                    <div class="quiz-options">
-                                        <button class="quiz-option" data-answer="anna">¡ anna !</button>
-                                        <button class="quiz-option" data-answer="malo">degi malo</button>
-                                        <button class="quiz-option" data-answer="banmalo">¡ banmalo !</button>
-                                        <button class="quiz-option" data-answer="naa">¡ naa !</button>
-                                    </div>
-                                    <div class="quiz-feedback" style="display: none;"></div>
-                                </div>
-                                <div class="quiz-question" data-question="4">
-                                    <h4>Question 4: Match the Guna greeting with its meaning:</h4>
-                                    <div class="matching-exercise">
-                                        <div class="matching-pairs">
-                                            <div class="matching-item" data-pair="1">
-                                                <span class="guna-text">¡ anna !</span>
-                                                <select class="matching-select">
-                                                    <option value="">Select meaning...</option>
-                                                    <option value="hello">Hello</option>
-                                                    <option value="goodbye">Goodbye</option>
-                                                    <option value="tomorrow">See you tomorrow</option>
-                                                </select>
-                                            </div>
-                                            <div class="matching-item" data-pair="2">
-                                                <span class="guna-text">degi malo</span>
-                                                <select class="matching-select">
-                                                    <option value="">Select meaning...</option>
-                                                    <option value="hello">Hello</option>
-                                                    <option value="goodbye">Goodbye</option>
-                                                    <option value="tomorrow">See you tomorrow</option>
-                                                </select>
-                                            </div>
-                                            <div class="matching-item" data-pair="3">
-                                                <span class="guna-text">¡ banmalo !</span>
-                                                <select class="matching-select">
-                                                    <option value="">Select meaning...</option>
-                                                    <option value="hello">Hello</option>
-                                                    <option value="goodbye">Goodbye</option>
-                                                    <option value="tomorrow">See you tomorrow</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <button class="check-matching-btn">Check Answers</button>
-                                        <div class="matching-feedback" style="display: none;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="quiz-results" style="display: none;">
-                                <h4>Quiz Results</h4>
-                                <div class="results-summary">
-                                    <p>You got <span class="correct-answers">0</span> out of <span class="total-questions">4</span> questions correct!</p>
-                                    <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
-                                </div>
-                                <button class="retry-quiz-btn">Try Again</button>
-                                <button class="continue-lesson-btn">Continue to Next Section</button>
-                            </div>
-                        </div>
-                    `
-                },
-                {
-                    type: 'conversation',
-                    title: "Real Conversation Practice",
-                    content: `
-                        <div class="conversation-section">
-                            <h3>Practice Conversation</h3>
-                            <p>Practice using Guna greetings in realistic scenarios:</p>
-                            <div class="conversation-scenarios">
-                                <div class="scenario" data-scenario="1">
-                                    <h4>Scenario 1: Meeting a Guna friend</h4>
-                                    <div class="scenario-content">
-                                        <p><strong>You:</strong> [Choose the appropriate greeting]</p>
-                                        <div class="scenario-options">
-                                            <button class="scenario-option">¡ anna !</button>
-                                            <button class="scenario-option">¡ naa !</button>
-                                            <button class="scenario-option">¡ degidde !</button>
-                                        </div>
-                                        <div class="scenario-response" style="display: none;">
-                                            <p><strong>Friend:</strong> ¡ anna ! How are you?</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="scenario" data-scenario="2">
-                                    <h4>Scenario 2: Saying goodbye for the day</h4>
-                                    <div class="scenario-content">
-                                        <p><strong>You:</strong> [Choose the appropriate farewell]</p>
-                                        <div class="scenario-options">
-                                            <button class="scenario-option">degi malo</button>
-                                            <button class="scenario-option">¡ banmalo !</button>
-                                            <button class="scenario-option">¡ banemalo !</button>
-                                        </div>
-                                        <div class="scenario-response" style="display: none;">
-                                            <p><strong>Friend:</strong> ¡ banmalo ! Have a good day.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `
-                },
-                {
-                    type: 'summary',
-                    title: "Lesson Summary",
-                    content: `
-                        <div class="lesson-summary">
-                            <h3>What You've Learned</h3>
-                            <div class="summary-content">
-                                <div class="learned-greetings">
-                                    <h4>Greetings You Can Now Use:</h4>
-                                    <ul>
-                                        <li><strong>¡ anna !</strong> - Hello (most common)</li>
-                                        <li><strong>¡ naa !</strong> - Hi (informal)</li>
-                                        <li><strong>¡ degidde !</strong> - Hello (alternative)</li>
-                                        <li><strong>degi malo</strong> - Goodbye</li>
-                                        <li><strong>¡ banmalo !</strong> - See you tomorrow</li>
-                                    </ul>
-                                </div>
-                                <div class="cultural-notes">
-                                    <h4>Cultural Notes:</h4>
-                                    <ul>
-                                        <li>Guna greetings often reflect their maritime culture</li>
-                                        <li>Use "¡ anna !" as your go-to greeting</li>
-                                        <li>Show respect by using the appropriate farewell</li>
-                                    </ul>
-                                </div>
-                                <div class="next-steps">
-                                    <h4>Next Steps:</h4>
-                                    <p>Great job! You're ready to move on to:</p>
-                                    <ul>
-                                        <li>Family vocabulary</li>
-                                        <li>Home objects</li>
-                                        <li>Basic conversation skills</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="lesson-completion">
-                                <button class="complete-lesson-btn">Complete Lesson</button>
-                                <button class="review-lesson-btn">Review Again</button>
-                            </div>
-                        </div>
-                    `
+                    title: 'Scenario 2: Saying goodbye for the day',
+                    prompt: 'You are leaving until tomorrow. Which farewell do you use?',
+                    choices: ['Bannemalo', 'Deggimalo', 'Eye'],
+                    response: '<strong>Correct!</strong> Bannemalo means See you tomorrow. Deggimalo is a general goodbye.'
                 }
-            ]
-        };
+            ],
+            summaryWords: [
+                { guna: 'Naa', en: 'Hello' }, { guna: 'Deggidde', en: 'How are you' },
+                { guna: 'Deggimalo', en: 'Goodbye' }, { guna: 'Bannemalo', en: 'See you tomorrow' },
+                { guna: 'Eye', en: 'Yes' }, { guna: 'Suli', en: 'No' },
+                { guna: 'Nued', en: 'Thank you' }, { guna: 'Be', en: 'You' }
+            ],
+            culturalNotes: [
+                'Guna greetings often reflect island community life',
+                'Use Naa as your everyday hello',
+                'Bannemalo is the farewell when you will meet again tomorrow'
+            ],
+            nextStepsIntro: 'Great job! You are ready to move on to:',
+            nextSteps: ['Family vocabulary', 'Home and places', 'Basic conversation skills']
+        });
     },
 
-    // LEVEL 2 — Family (same structure, all English)
     getFamilyLesson() {
         return this.buildRichLesson({
             id: 2,
@@ -463,8 +318,8 @@ const GunaLevelLessons = {
             xp: 75,
             introTitle: 'Welcome to Family Vocabulary!',
             introHeading: '👨‍👩‍👧 Guna Family',
-            introText: 'Family is the heart of Guna society. Learn how to name parents, siblings, grandparents and talk about your relatives.',
-            culturalText: 'In Guna communities, elders (Dada and Bab) pass wisdom to younger generations. Family bonds are strengthened through daily life, storytelling, and community gatherings.',
+            introText: 'Family is the heart of Guna society. Learn how to name parents, grandparents, relatives and friends.',
+            culturalText: 'In Guna communities, elders (Tata and Muú) pass wisdom to younger generations. Family bonds are strengthened through daily life, storytelling, and community gatherings.',
             highlights: [
                 { icon: 'fa-users', text: 'Strong family bonds' },
                 { icon: 'fa-book-open', text: 'Oral tradition' },
@@ -475,41 +330,45 @@ const GunaLevelLessons = {
             vocabIntro: 'Learn the most important family words in Guna:',
             words: [
                 { guna: 'Nana', es: 'Mamá', en: 'Mother', pronunciation: 'Nah-nah' },
-                { guna: 'Tata', es: 'Papá', en: 'Father', pronunciation: 'Tah-tah' },
-                { guna: 'Dummad', es: 'Hermano', en: 'Brother', pronunciation: 'Doo-mad' },
-                { guna: 'Nueded', es: 'Hermana', en: 'Sister', pronunciation: 'Nweh-ded' },
-                { guna: 'Bab', es: 'Abuelo', en: 'Grandfather', pronunciation: 'Bab' },
-                { guna: 'Dada', es: 'Abuela', en: 'Grandmother', pronunciation: 'Dah-dah' }
+                { guna: 'Baba', es: 'Papá', en: 'Father', pronunciation: 'Bah-bah' },
+                { guna: 'Tata', es: 'Abuelo', en: 'Grandfather', pronunciation: 'Tah-tah' },
+                { guna: 'Muú', es: 'Abuela', en: 'Grandmother', pronunciation: 'Moo' },
+                { guna: 'Gilor', es: 'Tío', en: 'Uncle', pronunciation: 'Gee-lor' },
+                { guna: 'Ammor', es: 'Tía', en: 'Aunt', pronunciation: 'Ah-mor' },
+                { guna: 'Niga', es: 'Sobrino', en: 'Nephew', pronunciation: 'Nee-gah' },
+                { guna: 'Anai', es: 'Amigo', en: 'Friend', pronunciation: 'Ah-nye' },
+                { guna: 'Ome', es: 'Mujer', en: 'Woman', pronunciation: 'Oh-meh' },
+                { guna: 'Massered', es: 'Hombre', en: 'Man', pronunciation: 'Mah-seh-red' }
             ],
             pronunciationTips: [
                 '<strong>Nana</strong> - "nah-nah", stress on first syllable',
-                '<strong>Tata</strong> - "tah-tah", clear short vowels',
-                '<strong>Dummad</strong> - "doo-mad", soft "d" sound',
-                '<strong>Dada</strong> - "dah-dah", used for grandmother'
+                '<strong>Baba</strong> - "bah-bah", father',
+                '<strong>Tata</strong> - "tah-tah", grandfather',
+                '<strong>Muú</strong> - "moo" with a long u, grandmother'
             ],
             practiceIntro: 'Test your knowledge of Guna family words with these interactive exercises:',
             quizQuestions: [
                 { num: 1, text: 'How do you say "Mother" in Guna?', options: [
-                    { value: 'nana', label: 'Nana' }, { value: 'tata', label: 'Tata' },
-                    { value: 'dada', label: 'Dada' }, { value: 'bab', label: 'Bab' }
+                    { value: 'nana', label: 'Nana' }, { value: 'baba', label: 'Baba' },
+                    { value: 'tata', label: 'Tata' }, { value: 'muu', label: 'Muú' }
                 ]},
-                { num: 2, text: 'What does "Tata" mean?', options: [
+                { num: 2, text: 'What does "Baba" mean?', options: [
                     { value: 'father', label: 'Father' }, { value: 'mother', label: 'Mother' },
-                    { value: 'brother', label: 'Brother' }, { value: 'sister', label: 'Sister' }
+                    { value: 'uncle', label: 'Uncle' }, { value: 'friend', label: 'Friend' }
                 ]},
                 { num: 3, text: 'Which word means "Grandmother"?', options: [
-                    { value: 'dada', label: 'Dada' }, { value: 'bab', label: 'Bab' },
-                    { value: 'nueded', label: 'Nueded' }, { value: 'dummad', label: 'Dummad' }
+                    { value: 'muu', label: 'Muú' }, { value: 'tata', label: 'Tata' },
+                    { value: 'ammor', label: 'Ammor' }, { value: 'niga', label: 'Niga' }
                 ]},
                 { num: 4, type: 'matching', text: 'Match each Guna word with its meaning:', pairs: [
                     { guna: 'Nana', options: [
-                        { value: 'mother', label: 'Mother' }, { value: 'father', label: 'Father' }, { value: 'brother', label: 'Brother' }
+                        { value: 'mother', label: 'Mother' }, { value: 'father', label: 'Father' }, { value: 'aunt', label: 'Aunt' }
+                    ]},
+                    { guna: 'Baba', options: [
+                        { value: 'mother', label: 'Mother' }, { value: 'father', label: 'Father' }, { value: 'uncle', label: 'Uncle' }
                     ]},
                     { guna: 'Tata', options: [
-                        { value: 'mother', label: 'Mother' }, { value: 'father', label: 'Father' }, { value: 'sister', label: 'Sister' }
-                    ]},
-                    { guna: 'Dummad', options: [
-                        { value: 'brother', label: 'Brother' }, { value: 'grandmother', label: 'Grandmother' }, { value: 'grandfather', label: 'Grandfather' }
+                        { value: 'grandfather', label: 'Grandfather' }, { value: 'grandmother', label: 'Grandmother' }, { value: 'nephew', label: 'Nephew' }
                     ]}
                 ]}
             ],
@@ -517,87 +376,87 @@ const GunaLevelLessons = {
                 {
                     title: 'Scenario 1: Introducing your mother',
                     prompt: 'You want to say "This is my mother" — which word do you use?',
-                    choices: ['Nana', 'Tata', 'Dada'],
+                    choices: ['Nana', 'Baba', 'Muú'],
                     response: '<strong>Correct!</strong> Nana means Mother. You can say: "An Nana" — My mother.'
                 },
                 {
-                    title: 'Scenario 2: Talking about siblings',
-                    prompt: 'Your friend asks about your brother. Which word means brother?',
-                    choices: ['Dummad', 'Nueded', 'Bab'],
-                    response: '<strong>Correct!</strong> Dummad means Brother. Nueded means Sister.'
+                    title: 'Scenario 2: Talking about elders',
+                    prompt: 'Your friend asks about your grandfather. Which word means grandfather?',
+                    choices: ['Tata', 'Gilor', 'Niga'],
+                    response: '<strong>Correct!</strong> Tata means Grandfather. Muú means Grandmother.'
                 }
             ],
             summaryWords: [
-                { guna: 'Nana', en: 'Mother' }, { guna: 'Tata', en: 'Father' },
-                { guna: 'Dummad', en: 'Brother' }, { guna: 'Nueded', en: 'Sister' },
-                { guna: 'Bab', en: 'Grandfather' }, { guna: 'Dada', en: 'Grandmother' }
+                { guna: 'Nana', en: 'Mother' }, { guna: 'Baba', en: 'Father' },
+                { guna: 'Tata', en: 'Grandfather' }, { guna: 'Muú', en: 'Grandmother' },
+                { guna: 'Gilor', en: 'Uncle' }, { guna: 'Ammor', en: 'Aunt' },
+                { guna: 'Niga', en: 'Nephew' }, { guna: 'Anai', en: 'Friend' }
             ],
             culturalNotes: [
-                'Elders (Dada and Bab) are highly respected in Guna culture',
+                'Elders (Tata and Muú) are highly respected in Guna culture',
                 'Family names and relationships are shared in community gatherings',
                 'Children learn family vocabulary through daily conversation'
             ],
             nextStepsIntro: 'Great job! You are ready to move on to:',
-            nextSteps: ['Home objects vocabulary', 'Nature words', 'Basic conversations']
+            nextSteps: ['Home and places', 'Nature words', 'Basic conversations']
         });
     },
 
-    // LEVEL 3 — Home Objects (same structure, all English)
     getHomeObjectsLesson() {
         return this.buildRichLesson({
             id: 3,
-            title: '🏠 Home Objects - Guna Daily Life',
-            subtitle: 'Learn words for objects in the Guna home',
+            title: '🏠 Home & Places - Guna Daily Life',
+            subtitle: 'Learn words for the house, store, school and clothing',
             duration: 20,
             xp: 75,
             introTitle: 'Welcome to Home Vocabulary!',
-            introHeading: '🏠 Home Objects',
-            introText: 'Learn the words for everyday objects found in a Guna home — from the house itself to the tools used every day.',
-            culturalText: 'The Guna home (Muu) is the center of family life on the islands. Traditional houses are gathering places where food is shared, stories are told, and community bonds grow.',
+            introHeading: '🏠 Home & Places',
+            introText: 'Learn the words for the Guna home and everyday places — house, store, school and the mola blouse.',
+            culturalText: 'The Guna home (Nega) is the center of family life on the islands. Traditional houses are gathering places where food is shared, stories are told, and community bonds grow.',
             highlights: [
                 { icon: 'fa-home', text: 'Center of family life' },
-                { icon: 'fa-utensils', text: 'Shared meals' },
+                { icon: 'fa-store', text: 'Community store' },
                 { icon: 'fa-hands-helping', text: 'Community gathering' }
             ],
             vocabTitle: 'Home Vocabulary',
-            vocabHeading: 'Home Objects Vocabulary',
-            vocabIntro: 'Learn the most important home words in Guna:',
+            vocabHeading: 'Home and Places Vocabulary',
+            vocabIntro: 'Learn the most important home and place words in Guna:',
             words: [
-                { guna: 'Muu', es: 'Casa', en: 'House', pronunciation: 'Moo' },
-                { guna: 'Nika', es: 'Mesa', en: 'Table', pronunciation: 'Nee-kah' },
-                { guna: 'Misi', es: 'Plato', en: 'Plate', pronunciation: 'Mee-see' },
-                { guna: 'Tapa', es: 'Cuchara', en: 'Spoon', pronunciation: 'Tah-pah' },
-                { guna: 'Bii', es: 'Ropa', en: 'Clothes', pronunciation: 'Bee' }
+                { guna: 'Nega', es: 'Casa', en: 'House', pronunciation: 'Neh-gah' },
+                { guna: 'Ibya', es: 'Tienda', en: 'Store', pronunciation: 'Ee-byah' },
+                { guna: 'Ibdurdaggednega', es: 'Escuela', en: 'School', pronunciation: 'Ib-dur-dag-ged-neh-gah' },
+                { guna: 'Mola', es: 'Blusa de mujer', en: "Women's blouse", pronunciation: 'Moh-lah' },
+                { guna: 'Moryoed', es: 'Vestirse', en: 'To get dressed', pronunciation: 'Mor-yo-ed' }
             ],
             pronunciationTips: [
-                '<strong>Muu</strong> - "moo" like the sound a cow makes, means house',
-                '<strong>Nika</strong> - "nee-kah", stress on first syllable',
-                '<strong>Misi</strong> - "mee-see", means plate',
-                '<strong>Tapa</strong> - "tah-pah", means spoon'
+                '<strong>Nega</strong> - "neh-gah", means house / home',
+                '<strong>Ibya</strong> - "ee-byah", means store',
+                '<strong>Mola</strong> - "moh-lah", the traditional women\'s blouse',
+                '<strong>Moryoed</strong> - "mor-yo-ed", to get dressed'
             ],
             practiceIntro: 'Test your knowledge of Guna home words with these interactive exercises:',
             quizQuestions: [
                 { num: 1, text: 'How do you say "House" in Guna?', options: [
-                    { value: 'muu', label: 'Muu' }, { value: 'nika', label: 'Nika' },
-                    { value: 'misi', label: 'Misi' }, { value: 'bii', label: 'Bii' }
+                    { value: 'nega', label: 'Nega' }, { value: 'ibya', label: 'Ibya' },
+                    { value: 'mola', label: 'Mola' }, { value: 'dii', label: 'Dii' }
                 ]},
-                { num: 2, text: 'What does "Misi" mean?', options: [
-                    { value: 'plate', label: 'Plate' }, { value: 'table', label: 'Table' },
-                    { value: 'spoon', label: 'Spoon' }, { value: 'clothes', label: 'Clothes' }
+                { num: 2, text: 'What does "Ibya" mean?', options: [
+                    { value: 'store', label: 'Store' }, { value: 'house', label: 'House' },
+                    { value: 'school', label: 'School' }, { value: 'blouse', label: "Women's blouse" }
                 ]},
-                { num: 3, text: 'Which word means "Spoon"?', options: [
-                    { value: 'tapa', label: 'Tapa' }, { value: 'nika', label: 'Nika' },
-                    { value: 'muu', label: 'Muu' }, { value: 'bii', label: 'Bii' }
+                { num: 3, text: 'Which word means "School"?', options: [
+                    { value: 'ibdurdaggednega', label: 'Ibdurdaggednega' }, { value: 'nega', label: 'Nega' },
+                    { value: 'ibya', label: 'Ibya' }, { value: 'mola', label: 'Mola' }
                 ]},
                 { num: 4, type: 'matching', text: 'Match each Guna word with its meaning:', pairs: [
-                    { guna: 'Muu', options: [
-                        { value: 'house', label: 'House' }, { value: 'table', label: 'Table' }, { value: 'plate', label: 'Plate' }
+                    { guna: 'Nega', options: [
+                        { value: 'house', label: 'House' }, { value: 'store', label: 'Store' }, { value: 'school', label: 'School' }
                     ]},
-                    { guna: 'Nika', options: [
-                        { value: 'house', label: 'House' }, { value: 'table', label: 'Table' }, { value: 'spoon', label: 'Spoon' }
+                    { guna: 'Ibya', options: [
+                        { value: 'house', label: 'House' }, { value: 'store', label: 'Store' }, { value: 'blouse', label: "Women's blouse" }
                     ]},
-                    { guna: 'Tapa', options: [
-                        { value: 'spoon', label: 'Spoon' }, { value: 'clothes', label: 'Clothes' }, { value: 'plate', label: 'Plate' }
+                    { guna: 'Mola', options: [
+                        { value: 'blouse', label: "Women's blouse" }, { value: 'house', label: 'House' }, { value: 'school', label: 'School' }
                     ]}
                 ]}
             ],
@@ -605,25 +464,25 @@ const GunaLevelLessons = {
                 {
                     title: 'Scenario 1: Inviting someone home',
                     prompt: 'You want to say "Come to my house" — which word means house?',
-                    choices: ['Muu', 'Nika', 'Misi'],
-                    response: '<strong>Correct!</strong> Muu means House. The home is the heart of Guna family life.'
+                    choices: ['Nega', 'Ibya', 'Mola'],
+                    response: '<strong>Correct!</strong> Nega means House. The home is the heart of Guna family life.'
                 },
                 {
-                    title: 'Scenario 2: Setting the table',
-                    prompt: 'You need the word for "plate" to describe setting the table:',
-                    choices: ['Misi', 'Tapa', 'Bii'],
-                    response: '<strong>Correct!</strong> Misi means Plate. Tapa is the spoon.'
+                    title: 'Scenario 2: Going to school',
+                    prompt: 'You need the word for school:',
+                    choices: ['Ibdurdaggednega', 'Ibya', 'Moryoed'],
+                    response: '<strong>Correct!</strong> Ibdurdaggednega means School. Ibya is the store.'
                 }
             ],
             summaryWords: [
-                { guna: 'Muu', en: 'House' }, { guna: 'Nika', en: 'Table' },
-                { guna: 'Misi', en: 'Plate' }, { guna: 'Tapa', en: 'Spoon' },
-                { guna: 'Bii', en: 'Clothes' }
+                { guna: 'Nega', en: 'House' }, { guna: 'Ibya', en: 'Store' },
+                { guna: 'Ibdurdaggednega', en: 'School' }, { guna: 'Mola', en: "Women's blouse" },
+                { guna: 'Moryoed', en: 'To get dressed' }
             ],
             culturalNotes: [
-                'The Guna home (Muu) is where families gather and share meals',
-                'Traditional cooking uses simple tools like plates and spoons',
-                'Clothing (Bii) often includes beautiful mola textiles'
+                'The Guna home (Nega) is where families gather and share meals',
+                'The mola blouse is a symbol of Guna identity',
+                'School and store are everyday community places'
             ],
             nextStepsIntro: 'Great job! You are ready to move on to:',
             nextSteps: ['Nature vocabulary', 'Animals of the island', 'Plants and foods']
@@ -632,3 +491,4 @@ const GunaLevelLessons = {
 };
 
 window.GunaLevelLessons = GunaLevelLessons;
+

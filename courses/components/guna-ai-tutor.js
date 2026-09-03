@@ -340,10 +340,10 @@ class GunaAiTutor extends HTMLElement {
             const correct = this.context.quizAnswer;
             if (q.includes(correct) || q === correct) {
                 this.context.quizActive = false;
-                return `Excellent! "${correct}" is correct.\n\nNana means mother in Guna — one of the most important words in Guna family vocabulary. Mothers and grandmothers (Dada) are central figures in community life and mola traditions.\n\nWould you like another quiz, or shall we practice a greeting conversation?`;
+                return `Excellent! "${correct}" is correct.\n\nNana means mother in Guna — one of the most important words in Guna family vocabulary. Mothers and grandmothers (Muú) are central figures in community life and mola traditions.\n\nWould you like another quiz, or shall we practice a greeting conversation?`;
             }
             this.context.quizActive = false;
-            return `Not quite — the answer was "${correct}" (mother). Don't worry, learning takes practice!\n\nRemember: Nana = Mother, Tata = Father, Dada = Grandmother, Bab = Grandfather.\n\nWant to try a conversation practice or explore more family words?`;
+            return `Not quite — the answer was "${correct}" (mother). Don't worry, learning takes practice!\n\nRemember: Nana = Mother, Baba = Father, Muú = Grandmother, Tata = Grandfather.\n\nWant to try a conversation practice or explore more family words?`;
         }
 
         if (/quiz|test me|challenge/.test(q)) {
@@ -355,12 +355,12 @@ class GunaAiTutor extends HTMLElement {
 
         if (/conversation|dialogue|practice talking|roleplay/.test(q)) {
             this.context.lastTopic = 'conversation';
-            return `Let's practice a short greeting conversation!\n\nScene: You arrive at a Guna island community.\n\nPerson A: "¡ anna !" (Hello!)\nYou can reply: "¡ anna !" or "Eye, anna" (Yes, hello)\nPerson A: "Be an mar?" (Are you here?)\nYou: "Eye, na an mar" (Yes, I am here)\nPerson A: "degi malo" (Goodbye)\nYou: "¡ banmalo !" (See you tomorrow)\n\nCultural note: Greetings in Guna Yala often include asking if someone has arrived safely — the sea journey is part of daily life.\n\nWould you like me to quiz you on these phrases, or explain any word in more detail?`;
+            return `Let's practice a short greeting conversation!\n\nScene: You arrive at a Guna island community.\n\nPerson A: "Naa" (Hello!)\nYou can reply: "Naa" or "Eye" (Yes)\nPerson A: "Deggidde?" (How are you?)\nYou: "Nued" (Thank you)\nPerson A: "Deggimalo" (Goodbye)\nYou: "Bannemalo" (See you tomorrow)\n\nCultural note: Greetings in Guna Yala often include asking how someone is after a journey.\n\nWould you like me to quiz you on these phrases, or explain any word in more detail?`;
         }
 
         if (/hello|hi|hola|anna|greeting|saludo/.test(q)) {
             this.context.lastTopic = 'greetings';
-            return `In Guna (Dulegaya), greetings are warm and community-oriented:\n\n• ¡ anna ! — Hello (most common)\n• ¡ naa ! — Hi (informal)\n• ¡ degidde ! — Hello (variant)\n• degi malo — Goodbye\n• ¡ banmalo ! — See you tomorrow\n• Eye — Yes\n• Degii — That's right / Exactly\n\nCultural context: On the islands of Guna Yala, greetings often acknowledge the person's presence after a canoe journey. Elders are greeted with particular respect.\n\nFollow-up: Would you like to practice pronunciation, or learn how to introduce yourself with "Na" (I) and "Be" (You)?`;
+            return `In Guna (Dulegaya), greetings are warm and community-oriented:\n\n• Naa — Hello\n• Deggidde — How are you\n• Deggimalo — Goodbye\n• Bannemalo — See you tomorrow\n• Eye — Yes\n• Suli — No\n• Nued — Thank you\n• Be — You\n\nCultural context: On the islands of Guna Yala, greetings often acknowledge the person's presence after a canoe journey. Elders are greeted with particular respect.\n\nFollow-up: Would you like to practice pronunciation, or learn family words like Nana (Mother) and Baba (Father)?`;
         }
 
         if (/mola|textile|tejido|museum|museo/.test(q)) {
@@ -368,23 +368,23 @@ class GunaAiTutor extends HTMLElement {
             return `Molas are one of the most celebrated art forms of the Guna people — reverse-appliqué textiles created primarily by Guna women.\n\nEach design carries meaning:\n• Animals represent spiritual connections to nature\n• Geometric patterns reflect cosmic order\n• Scenes tell stories of daily life and legends\n\nMolas are not just decoration — they are identity, resistance, and cultural memory. After the 1925 Tule Revolution, traditional dress including molas became a symbol of autonomy.\n\nYou can view beautiful mola images throughout SOGED (with attribution to the Museo de la Mola). Visit https://museodelamola.org/ to learn more.\n\nWould you like vocabulary related to molas, or shall I tell you about the Tule Revolution?`;
         }
 
-        if (/coconut|gwad|coco/.test(q)) {
+        if (/coconut|ogob|coco|comida|food|masi/.test(q)) {
             this.context.lastTopic = 'food';
-            return `Gwad means coconut in Guna! 🥥\n\nCoconut is fundamental to island life:\n• Food: coconut rice, coconut fish dishes\n• Economy: harvesting and trade\n• Daily life: oil, water, and building materials\n\nIn SOGED, you earn virtual cocos (🥥) as rewards while learning — spend them in the Guna Store!\n\nRelated words:\n• Ogob — Corn\n• Naggid — Cassava (yuca)\n• Suggid — Yam\n\nWant a mini quiz on food words, or shall we continue with ${this.context.lastTopic || 'another topic'}?`;
+            return `Ogob means coconut in Guna! 🥥\n\nCoconut is fundamental to island life:\n• Food: coconut rice, coconut fish dishes\n• Economy: harvesting and trade\n• Daily life: oil, water, and building materials\n\nIn SOGED, you earn virtual Oggob as rewards while learning — spend them in the Guna Store!\n\nRelated words:\n• Masi — Food\n• Oba — Corn\n• Agu — Onion\n• Sabbidurba — Fruits\n• Masdued — To cook\n\nWant a mini quiz on food words, or shall we continue with ${this.context.lastTopic || 'another topic'}?`;
         }
 
         if (/family|nana|tata|mother|father|familia/.test(q)) {
             this.context.lastTopic = 'family';
-            return `Family vocabulary is essential in Guna — family and elders anchor community life:\n\n• Nana — Mother\n• Tata — Father\n• Dummad — Brother\n• Nueded — Sister\n• Dada — Grandmother\n• Bab — Grandfather\n\nGrammar tip: Guna often places the subject simply — "Nana an mar" can mean "Mother is here." The word "an mar" relates to being present.\n\nCultural note: Grandmothers (Dada) traditionally pass down mola knowledge and oral histories to younger generations.\n\nFollow-up: Ask me for a family word quiz, or practice saying "My mother is here" in Guna!`;
+            return `Family vocabulary is essential in Guna — family and elders anchor community life:\n\n• Nana — Mother\n• Baba — Father\n• Tata — Grandfather\n• Muú — Grandmother\n• Gilor — Uncle\n• Ammor — Aunt\n• Niga — Nephew\n• Anai — Friend\n• Ome — Woman\n• Massered — Man\n\nCultural note: Grandmothers (Muú) traditionally pass down mola knowledge and oral histories to younger generations.\n\nFollow-up: Ask me for a family word quiz, or practice saying Nana and Baba!`;
         }
 
         if (/grammar|sentence|structure|how to say/.test(q)) {
-            return `Guna grammar basics:\n\n1. Word order is often Subject-Verb-Object, but flexible in conversation.\n2. Pronouns: Na (I), Be (You), Nega (He/She), Anmar (We)\n3. Questions: Bia? (Where?), Doa? (Who?)\n4. Affirmation: Eye (Yes), Degii (That's right)\n\nExample patterns:\n• "Na an mar" — I am here\n• "Be an mar?" — Are you here?\n• "Bia an mar?" — Where are you?\n\nMistake tip: Don't confuse "degi malo" (goodbye) with "Banmalo" (see you tomorrow) — both are farewells but used differently.\n\nWhat sentence would you like help building?`;
+            return `Guna grammar basics:\n\n1. Word order is often Subject-Verb-Object, but flexible in conversation.\n2. Pronoun: Be (You)\n3. Questions: Bia (Where?), Doa (Who?), Ingua (When?)\n4. Affirmation: Eye (Yes), Suli (No)\n\nUseful replies:\n• Nued — Thank you\n• Bassuli — It doesn't matter\n• Nueditosa — It was understood\n\nMistake tip: Don't confuse Deggimalo (goodbye) with Bannemalo (see you tomorrow) — both are farewells but used differently.\n\nWhat sentence would you like help building?`;
         }
 
-        if (/water|sii|fire|dii|house|muu|vocab|word|dictionary|mean/.test(q)) {
+        if (/water|dii|house|nega|vocab|word|dictionary|mean/.test(q)) {
             this.context.lastTopic = 'vocabulary';
-            return `Here's useful Guna vocabulary:\n\nNature & home:\n• Sii — Water\n• Dii — Fire\n• Muu — House / home\n• Kalu — Wood\n\nAnimals:\n• Ardi — Turtle\n• Uli — Crab\n• Ibeler — Shark\n• Wala — Butterfly\n\nDaily life:\n• Gwad — Coconut\n• Onmaked — Canoe\n• Mola — Traditional textile\n\nVisit the Vocabulary section for flashcards, practice modes, and pronunciation!\n\nWhich category interests you — animals, family, food, or nature?`;
+            return `Here's useful Guna vocabulary:\n\nNature & home:\n• Dii — Water\n• Nega — House / home\n• Urgo — Wood\n• Olli — Clay\n\nAnimals:\n• Yaug — Turtle\n• Suga — Crab\n• Nali — Shark\n• Sussua — Butterfly\n\nDaily life:\n• Ogob — Coconut\n• Masi — Food\n• Mola — Women's blouse\n\nVisit the Vocabulary section for flashcards, practice modes, and native audio!\n\nWhich category interests you — animals, family, food, or nature?`;
         }
 
         if (/culture|historia|history|revolution|tule|1925|guna yala|territory/.test(q)) {
@@ -393,7 +393,7 @@ class GunaAiTutor extends HTMLElement {
         }
 
         if (/pronounc|speak|audio|listen|sound/.test(q)) {
-            return `Pronunciation tips for Guna:\n\n• Vowels are generally short and clear\n• Stress is often on the first syllable: NA-na, TA-ta, GWAAD\n• The glottal stop in "¡ anna !" is important — pause slightly before "anna"\n\nUse the 🔊 buttons throughout lessons and vocabulary to hear words. You can also tap the microphone below to speak to me!\n\nTry repeating: "¡ anna !" (hello), "Nana" (mother), "Gwad" (coconut).\n\nWant me to read a word aloud? Type any Guna word!`;
+            return `Pronunciation tips for Guna:\n\n• Vowels are generally short and clear\n• Stress is often on the first syllable: NA-na, BA-ba, O-gob\n• Use the 🔊 buttons to hear native recordings of each word\n\nTry repeating: "Naa" (hello), "Nana" (mother), "Ogob" (coconut).\n\nWant me to read a word aloud? Type any Guna word!`;
         }
 
         if (/correct|mistake|wrong|error/.test(q) && this.context.lastTopic) {
@@ -405,14 +405,14 @@ class GunaAiTutor extends HTMLElement {
         }
 
         if (/thank|gracias|bye|goodbye|malo/.test(q)) {
-            return `You're welcome! Remember:\n• degi malo — Goodbye\n• ¡ banmalo ! — See you tomorrow\n\nEvery word you learn honors Guna heritage. Keep practicing on the Learning Path and visit the Culture Center to deepen your understanding.\n\n¡ anna ! — See you next time! 🏝️`;
+            return `You're welcome! Remember:\n• Deggimalo — Goodbye\n• Bannemalo — See you tomorrow\n• Nued — Thank you\n\nEvery word you learn honors Guna heritage. Keep practicing on the Learning Path and visit the Culture Center to deepen your understanding.\n\nNaa — See you next time! 🏝️`;
         }
 
         const followUp = this.context.lastTopic
             ? `\n\nSince we were discussing ${this.context.lastTopic}, would you like to go deeper into that topic, try a quiz, or explore something new?`
             : '\n\nTry asking about greetings, molas, family words, or say "give me a mini quiz"!';
 
-        return `That's a thoughtful question about ${this.getCourseName()}!${followUp}\n\nFor specific words, ask "What does [word] mean?" For cultural topics, try "Tell me about Guna history" or "Explain molas."\n\nQuick reminder: ¡ anna ! means Hello in Guna — a great word to start any conversation.`;
+        return `That's a thoughtful question about ${this.getCourseName()}!${followUp}\n\nFor specific words, ask "What does [word] mean?" For cultural topics, try "Tell me about Guna history" or "Explain molas."\n\nQuick reminder: Naa means Hello in Guna — a great word to start any conversation.`;
     }
 }
 

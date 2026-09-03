@@ -375,20 +375,20 @@ class GunaLessons {
                     <h3>💬 Practice Dialogues</h3>
                     <div class="scenario" data-scenario="1">
                         <h4>Scenario 1: Meeting on the island</h4>
-                        <p><strong>Person A:</strong> ¡ anna ! — Hello!</p>
-                        <p><strong>Person B:</strong> Eye, degii. Na an mar.</p>
+                        <p><strong>Person A:</strong> Naa — Hello!</p>
+                        <p><strong>Person B:</strong> Eye. Deggidde?</p>
                         <div class="scenario-options">
-                            <button type="button" class="scenario-option">Reply: ¡ anna !</button>
-                            <button type="button" class="scenario-option">Reply: degi malo</button>
+                            <button type="button" class="scenario-option">Reply: Naa</button>
+                            <button type="button" class="scenario-option">Reply: Deggimalo</button>
                         </div>
                         <div class="scenario-response" style="display:none;"><p>Great! You greeted them properly.</p></div>
                     </div>
                     <div class="scenario" data-scenario="2">
                         <h4>Scenario 2: Asking where someone is</h4>
-                        <p><strong>Question:</strong> Bia an mar? — Where are you?</p>
+                        <p><strong>Question:</strong> Bia? — Where?</p>
                         <div class="scenario-options">
-                            <button type="button" class="scenario-option">Muu — At home</button>
-                            <button type="button" class="scenario-option">Sii — At the water</button>
+                            <button type="button" class="scenario-option">Nega — At home</button>
+                            <button type="button" class="scenario-option">Dii — At the water</button>
                         </div>
                         <div class="scenario-response" style="display:none;"><p>Good answer!</p></div>
                     </div>
@@ -408,28 +408,28 @@ class GunaLessons {
             culturalText: 'The 1925 Tule Revolution defended Guna autonomy. Molas express identity. Saglas lead community congresses.',
             vocabTitle: 'Cultural Concepts', vocabIntro: 'Key cultural vocabulary:',
             quiz: [
-                { q: 'What are Guna molas?', options: [
-                    { value: 'textiles', label: 'Traditional textiles' }, { value: 'boats', label: 'Boats' },
-                    { value: 'songs', label: 'Songs only' }, { value: 'houses', label: 'Houses' }
+                { q: 'What is a Guna mola?', options: [
+                    { value: 'blouse', label: "A women's blouse" }, { value: 'boats', label: 'A boat' },
+                    { value: 'songs', label: 'A song only' }, { value: 'houses', label: 'A house' }
                 ]},
-                { q: 'The 1925 revolution defended:', options: [
-                    { value: 'autonomy', label: 'Guna customs and autonomy' }, { value: 'trade', label: 'Trade only' },
-                    { value: 'mining', label: 'Mining' }, { value: 'tourism', label: 'Tourism' }
+                { q: 'Innasuid means:', options: [
+                    { value: 'ceremony', label: 'Ceremony' }, { value: 'guide', label: 'Guide' },
+                    { value: 'house', label: 'House' }, { value: 'friend', label: 'Friend' }
                 ]},
-                { q: 'Who is the creator in Guna tradition?', options: [
-                    { value: 'ibeorgun', label: 'Ibeorgun' }, { value: 'kantule', label: 'Kantule' },
-                    { value: 'sagla', label: 'Sagla' }, { value: 'ardi', label: 'Ardi' }
+                { q: 'Igarduled means:', options: [
+                    { value: 'guide', label: 'Guide' }, { value: 'ceremony', label: 'Ceremony' },
+                    { value: 'coconut', label: 'Coconut' }, { value: 'shark', label: 'Shark' }
                 ]}
             ],
-            matchPairs: [{ guna: 'Mola' }, { guna: 'Sagla' }, { guna: 'Dulegaya' }],
+            matchPairs: [{ guna: 'Mola' }, { guna: 'Innasuid' }, { guna: 'Igarduled' }],
             matchOptionPool: [
-                { value: 'textile', label: 'Traditional textile' }, { value: 'leader', label: 'Community leader' },
-                { value: 'language', label: 'Guna language' }, { value: 'territory', label: 'Territory' }
+                { value: 'blouse', label: "Women's blouse" }, { value: 'ceremony', label: 'Ceremony' },
+                { value: 'guide', label: 'Guide' }, { value: 'house', label: 'House' }
             ],
             dragPairs: [
-                { guna: 'Mola', value: 'textile', label: 'Traditional textile' },
-                { guna: 'Sagla', value: 'leader', label: 'Community leader' },
-                { guna: 'Dulegaya', value: 'language', label: 'Guna language' }
+                { guna: 'Mola', value: 'blouse', label: "Women's blouse" },
+                { guna: 'Innasuid', value: 'ceremony', label: 'Ceremony' },
+                { guna: 'Igarduled', value: 'guide', label: 'Guide' }
             ],
             completionTitle: 'Culture explored!', completionText: 'You understand Guna history, molas and traditions.'
         });
@@ -450,27 +450,27 @@ class GunaLessons {
             vocabTitle: 'Review', vocabIntro: 'Key words from your journey:',
             quiz: [
                 { q: 'Goodbye in Guna:', options: [
-                    { value: 'malo', label: 'degi malo' }, { value: 'anna', label: '¡ anna !' },
-                    { value: 'gwad', label: 'Gwad' }, { value: 'nana', label: 'Nana' }
+                    { value: 'deggimalo', label: 'Deggimalo' }, { value: 'naa', label: 'Naa' },
+                    { value: 'ogob', label: 'Ogob' }, { value: 'nana', label: 'Nana' }
                 ]},
-                { q: 'The 1925 revolution is called:', options: [
-                    { value: 'tule', label: 'Tule Revolution' }, { value: 'coco', label: 'Coconut Revolution' },
-                    { value: 'mola', label: 'Mola Revolution' }, { value: 'sea', label: 'Sea Revolution' }
+                { q: 'Ogob means:', options: [
+                    { value: 'coconut', label: 'Coconut' }, { value: 'corn', label: 'Corn' },
+                    { value: 'water', label: 'Water' }, { value: 'house', label: 'House' }
                 ]},
                 { q: 'Nana means:', options: [
                     { value: 'mother', label: 'Mother' }, { value: 'father', label: 'Father' },
-                    { value: 'water', label: 'Water' }, { value: 'fire', label: 'Fire' }
+                    { value: 'water', label: 'Water' }, { value: 'turtle', label: 'Turtle' }
                 ]}
             ],
-            matchPairs: [{ guna: 'Gwad' }, { guna: 'Sii' }, { guna: 'Ardi' }],
+            matchPairs: [{ guna: 'Ogob' }, { guna: 'Dii' }, { guna: 'Yaug' }],
             matchOptionPool: [
                 { value: 'coconut', label: 'Coconut' }, { value: 'water', label: 'Water' },
                 { value: 'turtle', label: 'Turtle' }, { value: 'mother', label: 'Mother' }
             ],
             dragPairs: [
-                { guna: 'Gwad', value: 'coconut', label: 'Coconut' },
-                { guna: 'Sii', value: 'water', label: 'Water' },
-                { guna: 'Ardi', value: 'turtle', label: 'Turtle' }
+                { guna: 'Ogob', value: 'coconut', label: 'Coconut' },
+                { guna: 'Dii', value: 'water', label: 'Water' },
+                { guna: 'Yaug', value: 'turtle', label: 'Turtle' }
             ],
             completionTitle: 'Grand Master!', completionText: 'You completed all 10 levels of the Guna Learning Path!'
         });
@@ -498,9 +498,9 @@ class GunaLessons {
     // Quiz answers for validation (per lesson)
     getQuizAnswers(lessonId) {
         const richAnswers = {
-            1: { 1: 'anna', 2: 'goodbye', 3: 'banmalo', 4: { 1: 'hello', 2: 'goodbye', 3: 'tomorrow' } },
-            2: { 1: 'nana', 2: 'father', 3: 'dada', 4: { 1: 'mother', 2: 'father', 3: 'brother' } },
-            3: { 1: 'muu', 2: 'plate', 3: 'tapa', 4: { 1: 'house', 2: 'table', 3: 'spoon' } }
+            1: { 1: 'naa', 2: 'goodbye', 3: 'bannemalo', 4: { 1: 'hello', 2: 'yes', 3: 'goodbye' } },
+            2: { 1: 'nana', 2: 'father', 3: 'muu', 4: { 1: 'mother', 2: 'father', 3: 'grandfather' } },
+            3: { 1: 'nega', 2: 'store', 3: 'ibdurdaggednega', 4: { 1: 'house', 2: 'store', 3: 'blouse' } }
         };
         if (richAnswers[lessonId]) return richAnswers[lessonId];
         const answers = window.GUNA_LESSON_CONFIGS?.quizAnswers || {};

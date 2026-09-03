@@ -74,7 +74,12 @@ class GunaVocabularySection extends HTMLElement {
     }
 
     speakWord(text) {
-        if (!text || !window.speechSynthesis) return;
+        if (!text) return;
+        if (window.GUNA_VOCABULARY?.play) {
+            window.GUNA_VOCABULARY.play(text);
+            return;
+        }
+        if (!window.speechSynthesis) return;
         const settings = typeof GunaUserData !== 'undefined' ? GunaUserData.getSettings() : {};
         if (settings.audioPlayback === false) return;
         window.speechSynthesis.cancel();

@@ -1063,7 +1063,12 @@ class GunaLessonViewer extends HTMLElement {
     }
 
     speakText(text) {
-        if (!text || !window.speechSynthesis) return;
+        if (!text) return;
+        if (window.GUNA_VOCABULARY?.play) {
+            window.GUNA_VOCABULARY.play(text);
+            return;
+        }
+        if (!window.speechSynthesis) return;
         window.speechSynthesis.cancel();
         const u = new SpeechSynthesisUtterance(text);
         u.lang = 'es-ES';

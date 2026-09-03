@@ -19,23 +19,25 @@ class MemoryMatchGame extends HTMLElement {
     }
 
     getWords() {
+        const fromVocab = typeof GUNA_VOCABULARY !== 'undefined' && GUNA_VOCABULARY.getAllWords
+            ? GUNA_VOCABULARY.getAllWords().map(w => ({
+                en: w.en,
+                guna: w.guna,
+                image: w.image,
+                icon: w.icon || '📝'
+            }))
+            : [];
+        if (fromVocab.length) return fromVocab;
         return [
-            { en: 'I', guna: 'Na', image: '../Multimedia/Images/Memory match/Na.png', icon: '👤' },
-            { en: 'You', guna: 'Be', image: '../Multimedia/Images/Memory match/Be.jpg', icon: '🫵' },
+            { en: 'Hello', guna: 'Naa', image: '../Multimedia/Images/Memory match/anna.png', icon: '👋' },
+            { en: 'You', guna: 'Be', image: '../Multimedia/Images/Memory match/Be.jpg', icon: '👤' },
             { en: 'Yes', guna: 'Eye', image: '../Multimedia/Images/Memory match/Eye.jpg', icon: '✅' },
-            { en: 'Hello', guna: 'anna', image: '../Multimedia/Images/Memory match/anna.png', icon: '👋' },
-            { en: 'Goodbye', guna: 'degi malo', image: '../Multimedia/Images/Memory match/degi malo.jpg', icon: '🤚' },
+            { en: 'Goodbye', guna: 'Deggimalo', image: '../Multimedia/Images/Memory match/degi malo.jpg', icon: '👋' },
             { en: 'Mother', guna: 'Nana', image: '../Multimedia/Images/Memory match/Nana.jpg', icon: '👩' },
-            { en: 'Father', guna: 'Tata', image: '../Multimedia/Images/Memory match/Tata.jpg', icon: '👨' },
-            { en: 'Brother', guna: 'Dummad', image: '../Multimedia/Images/Memory match/Dummad.jpg', icon: '👦' },
-            { en: 'Sister', guna: 'Nueded', image: '../Multimedia/Images/Memory match/Nueded.jpg', icon: '👧' },
-            { en: 'Grandfather', guna: 'Bab', image: '../Multimedia/Images/Memory match/Bab.png', icon: '👴' },
-            { en: 'Grandmother', guna: 'Dada', image: '../Multimedia/Images/Memory match/Dada.jpg', icon: '👵' },
-            { en: 'House', guna: 'Muu', image: '../Multimedia/Images/Memory match/Muu.jpg', icon: '🏠' },
-            { en: 'Table', guna: 'Nika', image: '../Multimedia/Images/Memory match/Nika.jpg', icon: '🪵' },
-            { en: 'Plate', guna: 'Misi', image: '../Multimedia/Images/Memory match/Misi.jpg', icon: '🍽️' },
-            { en: 'Spoon', guna: 'Tapa', image: '../Multimedia/Images/Memory match/Tapa.jpg', icon: '🥄' },
-            { en: 'Clothes', guna: 'Bii', image: '../Multimedia/Images/Memory match/Bii.jpg', icon: '👕' }
+            { en: 'Father', guna: 'Baba', image: '../Multimedia/Images/Memory match/Tata.jpg', icon: '👨' },
+            { en: 'Grandfather', guna: 'Tata', image: '../Multimedia/Images/Memory match/Bab.png', icon: '👴' },
+            { en: 'Grandmother', guna: 'Muú', image: '../Multimedia/Images/Memory match/Dada.jpg', icon: '👵' },
+            { en: 'House', guna: 'Nega', image: '../Multimedia/Images/Memory match/Muu.jpg', icon: '🏠' }
         ];
     }
 

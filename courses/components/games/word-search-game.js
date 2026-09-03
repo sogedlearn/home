@@ -5,11 +5,13 @@ class WordSearchGame extends HTMLElement {
     connectedCallback() {
         this.words = [
             { word: 'NANA', hint: 'Mother' },
-            { word: 'TATA', hint: 'Father' },
-            { word: 'GWAD', hint: 'Coconut' },
-            { word: 'ANNA', hint: 'Hello' },
-            { word: 'MUU', hint: 'House' },
-            { word: 'SII', hint: 'Water' }
+            { word: 'BABA', hint: 'Father' },
+            { word: 'TATA', hint: 'Grandfather' },
+            { word: 'NAA', hint: 'Hello' },
+            { word: 'NEGA', hint: 'House' },
+            { word: 'DII', hint: 'Water' },
+            { word: 'OGOB', hint: 'Coconut' },
+            { word: 'YAUG', hint: 'Turtle' }
         ];
         this.foundWords = new Set();
         this.selectedCells = [];

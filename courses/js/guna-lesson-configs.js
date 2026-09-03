@@ -1,5 +1,6 @@
 /**
- * Guna Lesson Configs — data for all 10 learning levels
+ * Guna Lesson Configs — data for learning levels 1–7
+ * Vocabulary is limited to recorded audio words.
  */
 const GUNA_LESSON_CONFIGS = {
     1: {
@@ -7,134 +8,134 @@ const GUNA_LESSON_CONFIGS = {
         duration: 15, xp: 50,
         wordsKey: 'greetings',
         introTitle: 'Welcome', introHeading: '👋 Greetings & Introductions',
-        introText: 'Learn basic greetings, pronouns and how to introduce yourself in Guna.',
+        introText: 'Learn basic greetings, yes and no, and how to greet someone in Guna.',
         culturalText: 'Guna people greet each other warmly on the islands. Respectful greetings open every conversation and ceremony.',
         vocabTitle: 'Greetings & Pronouns', vocabIntro: 'Essential words to start speaking Guna:',
         quiz: [
-            { q: 'How do you say "I" in Guna?', options: [
-                { value: 'na', label: 'Na' }, { value: 'be', label: 'Be' },
-                { value: 'eye', label: 'Eye' }, { value: 'degii', label: 'Degii' }
+            { q: 'How do you say "Hello" in Guna?', options: [
+                { value: 'naa', label: 'Naa' }, { value: 'suli', label: 'Suli' },
+                { value: 'eye', label: 'Eye' }, { value: 'be', label: 'Be' }
             ]},
             { q: 'What does "Eye" mean?', options: [
                 { value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' },
                 { value: 'you', label: 'You' }, { value: 'hello', label: 'Hello' }
             ]},
-            { q: 'Which means "That\'s right"?', options: [
-                { value: 'degii', label: 'Degii' }, { value: 'basuli', label: 'Basuli' },
-                { value: 'bia', label: 'Bia?' }, { value: 'emi', label: 'Emi' }
+            { q: 'Which means "Goodbye"?', options: [
+                { value: 'deggimalo', label: 'Deggimalo' }, { value: 'bannemalo', label: 'Bannemalo' },
+                { value: 'bia', label: 'Bia' }, { value: 'nued', label: 'Nued' }
             ]}
         ],
-        matchPairs: [{ guna: 'Na' }, { guna: 'Be' }, { guna: 'Eye' }],
+        matchPairs: [{ guna: 'Naa' }, { guna: 'Eye' }, { guna: 'Deggimalo' }],
         matchOptionPool: [
-            { value: 'i', label: 'I' }, { value: 'you', label: 'You' },
-            { value: 'yes', label: 'Yes' }, { value: 'right', label: "That's right" }
+            { value: 'hello', label: 'Hello' }, { value: 'yes', label: 'Yes' },
+            { value: 'goodbye', label: 'Goodbye' }, { value: 'no', label: 'No' }
         ],
         dragPairs: [
-            { guna: 'Na', value: 'i', label: 'I' },
-            { guna: 'Be', value: 'you', label: 'You' },
-            { guna: 'Eye', value: 'yes', label: 'Yes' }
+            { guna: 'Naa', value: 'hello', label: 'Hello' },
+            { guna: 'Eye', value: 'yes', label: 'Yes' },
+            { guna: 'Deggimalo', value: 'goodbye', label: 'Goodbye' }
         ],
-        completionTitle: 'Greetings mastered!', completionText: 'You can greet people and use basic pronouns in Guna.'
+        completionTitle: 'Greetings mastered!', completionText: 'You can greet people and use yes and no in Guna.'
     },
     2: {
         id: 2, title: '👨‍👩‍👧 Family', subtitle: 'Family members',
         duration: 20, xp: 75,
         wordsKey: 'family',
         introTitle: 'Family', introHeading: '👨‍👩‍👧 Family',
-        introText: 'Learn to name parents, siblings and grandparents in Guna.',
+        introText: 'Learn to name parents, grandparents, relatives and friends in Guna.',
         culturalText: 'Family is the heart of Guna society. Elders pass wisdom through oral tradition.',
         vocabTitle: 'Family Vocabulary', vocabIntro: 'Key family terms:',
         quiz: [
             { q: 'How do you say "Mother"?', options: [
-                { value: 'nana', label: 'Nana' }, { value: 'tata', label: 'Tata' },
-                { value: 'dada', label: 'Dada' }, { value: 'bab', label: 'Bab' }
+                { value: 'nana', label: 'Nana' }, { value: 'baba', label: 'Baba' },
+                { value: 'tata', label: 'Tata' }, { value: 'muu', label: 'Muú' }
             ]},
-            { q: 'What does "Tata" mean?', options: [
+            { q: 'What does "Baba" mean?', options: [
                 { value: 'father', label: 'Father' }, { value: 'mother', label: 'Mother' },
-                { value: 'brother', label: 'Brother' }, { value: 'sister', label: 'Sister' }
+                { value: 'uncle', label: 'Uncle' }, { value: 'friend', label: 'Friend' }
             ]},
             { q: 'Which word means "Grandmother"?', options: [
-                { value: 'dada', label: 'Dada' }, { value: 'bab', label: 'Bab' },
-                { value: 'nueded', label: 'Nueded' }, { value: 'dummad', label: 'Dummad' }
+                { value: 'muu', label: 'Muú' }, { value: 'tata', label: 'Tata' },
+                { value: 'ammor', label: 'Ammor' }, { value: 'niga', label: 'Niga' }
             ]}
         ],
-        matchPairs: [{ guna: 'Nana' }, { guna: 'Tata' }, { guna: 'Dummad' }],
+        matchPairs: [{ guna: 'Nana' }, { guna: 'Baba' }, { guna: 'Tata' }],
         matchOptionPool: [
             { value: 'mother', label: 'Mother' }, { value: 'father', label: 'Father' },
-            { value: 'brother', label: 'Brother' }, { value: 'sister', label: 'Sister' }
+            { value: 'grandfather', label: 'Grandfather' }, { value: 'aunt', label: 'Aunt' }
         ],
         dragPairs: [
             { guna: 'Nana', value: 'mother', label: 'Mother' },
-            { guna: 'Tata', value: 'father', label: 'Father' },
-            { guna: 'Dummad', value: 'brother', label: 'Brother' }
+            { guna: 'Baba', value: 'father', label: 'Father' },
+            { guna: 'Tata', value: 'grandfather', label: 'Grandfather' }
         ],
         completionTitle: 'Family words learned!', completionText: 'You can talk about your family in Guna.'
     },
     3: {
-        id: 3, title: '🏠 Home Objects', subtitle: 'Home objects',
+        id: 3, title: '🏠 Home & Places', subtitle: 'Home and everyday places',
         duration: 20, xp: 75,
         wordsKey: 'home',
-        introTitle: 'Home', introHeading: '🏠 Home Objects',
-        introText: 'Learn words for everyday objects in the Guna home.',
-        culturalText: 'Guna homes (Muu) are gathering places for family and community on the islands.',
-        vocabTitle: 'Home Vocabulary', vocabIntro: 'Objects you find at home:',
+        introTitle: 'Home', introHeading: '🏠 Home & Places',
+        introText: 'Learn words for the house, the store, school and daily clothing.',
+        culturalText: 'Guna homes (Nega) are gathering places for family and community on the islands.',
+        vocabTitle: 'Home Vocabulary', vocabIntro: 'Places and objects from daily life:',
         quiz: [
             { q: 'How do you say "House"?', options: [
-                { value: 'muu', label: 'Muu' }, { value: 'nika', label: 'Nika' },
-                { value: 'misi', label: 'Misi' }, { value: 'bii', label: 'Bii' }
+                { value: 'nega', label: 'Nega' }, { value: 'ibya', label: 'Ibya' },
+                { value: 'mola', label: 'Mola' }, { value: 'dii', label: 'Dii' }
             ]},
-            { q: 'What does "Misi" mean?', options: [
-                { value: 'plate', label: 'Plate' }, { value: 'table', label: 'Table' },
-                { value: 'spoon', label: 'Spoon' }, { value: 'clothes', label: 'Clothes' }
+            { q: 'What does "Ibya" mean?', options: [
+                { value: 'store', label: 'Store' }, { value: 'house', label: 'House' },
+                { value: 'school', label: 'School' }, { value: 'blouse', label: "Women's blouse" }
             ]},
-            { q: 'Which word means "Spoon"?', options: [
-                { value: 'tapa', label: 'Tapa' }, { value: 'nika', label: 'Nika' },
-                { value: 'muu', label: 'Muu' }, { value: 'bii', label: 'Bii' }
+            { q: 'Which word means "School"?', options: [
+                { value: 'ibdurdaggednega', label: 'Ibdurdaggednega' }, { value: 'nega', label: 'Nega' },
+                { value: 'ibya', label: 'Ibya' }, { value: 'mola', label: 'Mola' }
             ]}
         ],
-        matchPairs: [{ guna: 'Muu' }, { guna: 'Nika' }, { guna: 'Tapa' }],
+        matchPairs: [{ guna: 'Nega' }, { guna: 'Ibya' }, { guna: 'Mola' }],
         matchOptionPool: [
-            { value: 'house', label: 'House' }, { value: 'table', label: 'Table' },
-            { value: 'spoon', label: 'Spoon' }, { value: 'plate', label: 'Plate' }
+            { value: 'house', label: 'House' }, { value: 'store', label: 'Store' },
+            { value: 'blouse', label: "Women's blouse" }, { value: 'school', label: 'School' }
         ],
         dragPairs: [
-            { guna: 'Muu', value: 'house', label: 'House' },
-            { guna: 'Nika', value: 'table', label: 'Table' },
-            { guna: 'Tapa', value: 'spoon', label: 'Spoon' }
+            { guna: 'Nega', value: 'house', label: 'House' },
+            { guna: 'Ibya', value: 'store', label: 'Store' },
+            { guna: 'Mola', value: 'blouse', label: "Women's blouse" }
         ],
-        completionTitle: 'Home objects learned!', completionText: 'You can name objects in the Guna home.'
+        completionTitle: 'Home words learned!', completionText: 'You can name places and clothing in Guna.'
     },
     4: {
         id: 4, title: '🌊 Nature', subtitle: 'Nature elements',
         duration: 25, xp: 100,
         wordsKey: 'nature',
         introTitle: 'Nature', introHeading: '🌊 Nature',
-        introText: 'Learn words for water, fire, wood and clay — elements of island life.',
-        culturalText: 'Water (Sii) and fire (Dii) are sacred elements in Guna daily life and ceremonies.',
+        introText: 'Learn words for water, wood, clay and stick — elements of island life.',
+        culturalText: 'Water (Dii), wood and clay are part of Guna daily life, building and ceremony.',
         vocabTitle: 'Nature Vocabulary', vocabIntro: 'Natural elements:',
         quiz: [
             { q: 'How do you say "Water"?', options: [
-                { value: 'sii', label: 'Sii' }, { value: 'dii', label: 'Dii' },
-                { value: 'kalu', label: 'Kalu' }, { value: 'tii', label: 'Tii' }
+                { value: 'dii', label: 'Dii' }, { value: 'urgo', label: 'Urgo' },
+                { value: 'olli', label: 'Olli' }, { value: 'suwar', label: 'Suwar' }
             ]},
-            { q: 'What does "Dii" mean?', options: [
-                { value: 'fire', label: 'Fire' }, { value: 'water', label: 'Water' },
-                { value: 'wood', label: 'Wood' }, { value: 'clay', label: 'Clay' }
+            { q: 'What does "Urgo" mean?', options: [
+                { value: 'wood', label: 'Wood' }, { value: 'water', label: 'Water' },
+                { value: 'clay', label: 'Clay' }, { value: 'stick', label: 'Stick' }
             ]},
-            { q: 'Which word means "Wood"?', options: [
-                { value: 'kalu', label: 'Kalu' }, { value: 'tii', label: 'Tii' },
-                { value: 'sii', label: 'Sii' }, { value: 'dii', label: 'Dii' }
+            { q: 'Which word means "Clay"?', options: [
+                { value: 'olli', label: 'Olli' }, { value: 'suwar', label: 'Suwar' },
+                { value: 'dii', label: 'Dii' }, { value: 'urgo', label: 'Urgo' }
             ]}
         ],
-        matchPairs: [{ guna: 'Sii' }, { guna: 'Dii' }, { guna: 'Kalu' }],
+        matchPairs: [{ guna: 'Dii' }, { guna: 'Urgo' }, { guna: 'Olli' }],
         matchOptionPool: [
-            { value: 'water', label: 'Water' }, { value: 'fire', label: 'Fire' },
-            { value: 'wood', label: 'Wood' }, { value: 'clay', label: 'Clay' }
+            { value: 'water', label: 'Water' }, { value: 'wood', label: 'Wood' },
+            { value: 'clay', label: 'Clay' }, { value: 'stick', label: 'Stick' }
         ],
         dragPairs: [
-            { guna: 'Sii', value: 'water', label: 'Water' },
-            { guna: 'Dii', value: 'fire', label: 'Fire' },
-            { guna: 'Kalu', value: 'wood', label: 'Wood' }
+            { guna: 'Dii', value: 'water', label: 'Water' },
+            { guna: 'Urgo', value: 'wood', label: 'Wood' },
+            { guna: 'Olli', value: 'clay', label: 'Clay' }
         ],
         completionTitle: 'Nature words learned!', completionText: 'You understand Guna words for natural elements.'
     },
@@ -148,27 +149,27 @@ const GUNA_LESSON_CONFIGS = {
         vocabTitle: 'Animal Vocabulary', vocabIntro: 'Animals of Guna territory:',
         quiz: [
             { q: 'How do you say "Turtle"?', options: [
-                { value: 'ardi', label: 'Ardi' }, { value: 'uli', label: 'Uli' },
-                { value: 'ibeler', label: 'Ibeler' }, { value: 'wala', label: 'Wala' }
+                { value: 'yaug', label: 'Yaug' }, { value: 'suga', label: 'Suga' },
+                { value: 'nali', label: 'Nali' }, { value: 'sussua', label: 'Sussua' }
             ]},
-            { q: 'What does "Uli" mean?', options: [
+            { q: 'What does "Suga" mean?', options: [
                 { value: 'crab', label: 'Crab' }, { value: 'shark', label: 'Shark' },
                 { value: 'chicken', label: 'Chicken' }, { value: 'monkey', label: 'Monkey' }
             ]},
             { q: 'Which word means "Butterfly"?', options: [
-                { value: 'wala', label: 'Wala' }, { value: 'malu', label: 'Malú' },
-                { value: 'suu', label: 'Suu' }, { value: 'ardi', label: 'Ardi' }
+                { value: 'sussua', label: 'Sussua' }, { value: 'gannir', label: 'Gannir' },
+                { value: 'sulu', label: 'Sulu' }, { value: 'yaug', label: 'Yaug' }
             ]}
         ],
-        matchPairs: [{ guna: 'Ardi' }, { guna: 'Ibeler' }, { guna: 'Wala' }],
+        matchPairs: [{ guna: 'Yaug' }, { guna: 'Nali' }, { guna: 'Sussua' }],
         matchOptionPool: [
             { value: 'turtle', label: 'Turtle' }, { value: 'shark', label: 'Shark' },
             { value: 'butterfly', label: 'Butterfly' }, { value: 'crab', label: 'Crab' }
         ],
         dragPairs: [
-            { guna: 'Ardi', value: 'turtle', label: 'Turtle' },
-            { guna: 'Ibeler', value: 'shark', label: 'Shark' },
-            { guna: 'Wala', value: 'butterfly', label: 'Butterfly' }
+            { guna: 'Yaug', value: 'turtle', label: 'Turtle' },
+            { guna: 'Nali', value: 'shark', label: 'Shark' },
+            { guna: 'Sussua', value: 'butterfly', label: 'Butterfly' }
         ],
         completionTitle: 'Animals mastered!', completionText: 'You can name animals in Guna.'
     },
@@ -178,31 +179,31 @@ const GUNA_LESSON_CONFIGS = {
         wordsKey: 'plants',
         introTitle: 'Plants & Food', introHeading: '🥥 Plants & Foods',
         introText: 'Learn traditional plants and foods including the sacred coconut.',
-        culturalText: 'Coconut (Gwad) is essential to Guna cuisine, crafts and daily island life.',
+        culturalText: 'Coconut (Ogob) is essential to Guna cuisine, crafts and daily island life.',
         vocabTitle: 'Plants & Foods', vocabIntro: 'Traditional foods and plants:',
         quiz: [
             { q: 'How do you say "Coconut"?', options: [
-                { value: 'gwad', label: 'Gwad' }, { value: 'ogob', label: 'Ogob' },
-                { value: 'naggid', label: 'Naggid' }, { value: 'bagar', label: 'Bagar' }
+                { value: 'ogob', label: 'Ogob' }, { value: 'oba', label: 'Oba' },
+                { value: 'agu', label: 'Agu' }, { value: 'masi', label: 'Masi' }
             ]},
-            { q: 'What does "Ogob" mean?', options: [
+            { q: 'What does "Oba" mean?', options: [
                 { value: 'corn', label: 'Corn' }, { value: 'coconut', label: 'Coconut' },
-                { value: 'yam', label: 'Yam' }, { value: 'tomato', label: 'Tomato' }
+                { value: 'onion', label: 'Onion' }, { value: 'food', label: 'Food' }
             ]},
-            { q: 'Which word means "Cassava"?', options: [
-                { value: 'naggid', label: 'Naggid' }, { value: 'suggid', label: 'Suggid' },
-                { value: 'suwad', label: 'Suwad' }, { value: 'bagar', label: 'Bagar' }
+            { q: 'Which word means "Food"?', options: [
+                { value: 'masi', label: 'Masi' }, { value: 'masdued', label: 'Masdued' },
+                { value: 'sabbidurba', label: 'Sabbidurba' }, { value: 'agu', label: 'Agu' }
             ]}
         ],
-        matchPairs: [{ guna: 'Gwad' }, { guna: 'Ogob' }, { guna: 'Naggid' }],
+        matchPairs: [{ guna: 'Ogob' }, { guna: 'Oba' }, { guna: 'Masi' }],
         matchOptionPool: [
             { value: 'coconut', label: 'Coconut' }, { value: 'corn', label: 'Corn' },
-            { value: 'cassava', label: 'Cassava' }, { value: 'tomato', label: 'Tomato' }
+            { value: 'food', label: 'Food' }, { value: 'onion', label: 'Onion' }
         ],
         dragPairs: [
-            { guna: 'Gwad', value: 'coconut', label: 'Coconut' },
-            { guna: 'Ogob', value: 'corn', label: 'Corn' },
-            { guna: 'Naggid', value: 'cassava', label: 'Cassava' }
+            { guna: 'Ogob', value: 'coconut', label: 'Coconut' },
+            { guna: 'Oba', value: 'corn', label: 'Corn' },
+            { guna: 'Masi', value: 'food', label: 'Food' }
         ],
         completionTitle: 'Plants & foods learned!', completionText: 'You know Guna words for traditional foods.'
     },
@@ -216,43 +217,40 @@ const GUNA_LESSON_CONFIGS = {
         vocabTitle: 'Useful Phrases', vocabIntro: 'Everyday expressions:',
         quiz: [
             { q: 'How do you ask "Where?"', options: [
-                { value: 'bia', label: 'Bia?' }, { value: 'doa', label: 'Doa?' },
-                { value: 'basuli', label: 'Basuli' }, { value: 'emi', label: 'Emi' }
+                { value: 'bia', label: 'Bia' }, { value: 'doa', label: 'Doa' },
+                { value: 'ingua', label: 'Ingua' }, { value: 'emi', label: 'Emi' }
             ]},
-            { q: 'What does "Doa?" mean?', options: [
+            { q: 'What does "Doa" mean?', options: [
                 { value: 'who', label: 'Who?' }, { value: 'where', label: 'Where?' },
-                { value: 'today', label: 'Today' }, { value: 'tomorrow', label: 'Tomorrow' }
+                { value: 'today', label: 'Today' }, { value: 'when', label: 'When?' }
             ]},
-            { q: 'Which means "See you tomorrow"?', options: [
-                { value: 'banmalo', label: 'Banmalo' }, { value: 'basuli', label: 'Basuli' },
-                { value: 'bia', label: 'Bia?' }, { value: 'degii', label: 'Degii' }
+            { q: 'Which means "It doesn\'t matter"?', options: [
+                { value: 'bassuli', label: 'Bassuli' }, { value: 'baid', label: 'Baid' },
+                { value: 'emi', label: 'Emi' }, { value: 'itosa', label: 'Itosa' }
             ]}
         ],
-        matchPairs: [{ guna: 'Bia?' }, { guna: 'Doa?' }, { guna: 'Banmalo' }],
+        matchPairs: [{ guna: 'Bia' }, { guna: 'Doa' }, { guna: 'Bassuli' }],
         matchOptionPool: [
             { value: 'where', label: 'Where?' }, { value: 'who', label: 'Who?' },
-            { value: 'tomorrow', label: 'See you tomorrow' }, { value: 'matter', label: "Doesn't matter" }
+            { value: 'matter', label: "It doesn't matter" }, { value: 'today', label: 'Today' }
         ],
         dragPairs: [
-            { guna: 'Bia?', value: 'where', label: 'Where?' },
-            { guna: 'Doa?', value: 'who', label: 'Who?' },
-            { guna: 'Banmalo', value: 'tomorrow', label: 'See you tomorrow' }
+            { guna: 'Bia', value: 'where', label: 'Where?' },
+            { guna: 'Doa', value: 'who', label: 'Who?' },
+            { guna: 'Bassuli', value: 'matter', label: "It doesn't matter" }
         ],
         completionTitle: 'Basic phrases learned!', completionText: 'You can use everyday Guna expressions.'
     }
 };
 
 GUNA_LESSON_CONFIGS.quizAnswers = {
-    1: { 1: 'na', 2: 'yes', 3: 'degii', 4: { 1: 'i', 2: 'you', 3: 'yes' } },
-    2: { 1: 'nana', 2: 'father', 3: 'dada', 4: { 1: 'mother', 2: 'father', 3: 'brother' } },
-    3: { 1: 'muu', 2: 'plate', 3: 'tapa', 4: { 1: 'house', 2: 'table', 3: 'spoon' } },
-    4: { 1: 'sii', 2: 'fire', 3: 'kalu', 4: { 1: 'water', 2: 'fire', 3: 'wood' } },
-    5: { 1: 'ardi', 2: 'crab', 3: 'wala', 4: { 1: 'turtle', 2: 'shark', 3: 'butterfly' } },
-    6: { 1: 'gwad', 2: 'corn', 3: 'naggid', 4: { 1: 'coconut', 2: 'corn', 3: 'cassava' } },
-    7: { 1: 'bia', 2: 'who', 3: 'banmalo', 4: { 1: 'where', 2: 'who', 3: 'tomorrow' } },
-    8: { 1: 'anna', 2: 'coconut', 3: 'saglas', 4: { 1: 'water', 2: 'mother', 3: 'turtle' } },
-    9: { 1: 'textiles', 2: 'autonomy', 3: 'ibeorgun', 4: { 1: 'textile', 2: 'leader', 3: 'language' } },
-    10: { 1: 'malo', 2: 'tule', 3: 'mother', 4: { 1: 'coconut', 2: 'water', 3: 'turtle' } }
+    1: { 1: 'naa', 2: 'yes', 3: 'deggimalo', 4: { 1: 'hello', 2: 'yes', 3: 'goodbye' } },
+    2: { 1: 'nana', 2: 'father', 3: 'muu', 4: { 1: 'mother', 2: 'father', 3: 'grandfather' } },
+    3: { 1: 'nega', 2: 'store', 3: 'ibdurdaggednega', 4: { 1: 'house', 2: 'store', 3: 'blouse' } },
+    4: { 1: 'dii', 2: 'wood', 3: 'olli', 4: { 1: 'water', 2: 'wood', 3: 'clay' } },
+    5: { 1: 'yaug', 2: 'crab', 3: 'sussua', 4: { 1: 'turtle', 2: 'shark', 3: 'butterfly' } },
+    6: { 1: 'ogob', 2: 'corn', 3: 'masi', 4: { 1: 'coconut', 2: 'corn', 3: 'food' } },
+    7: { 1: 'bia', 2: 'who', 3: 'bassuli', 4: { 1: 'where', 2: 'who', 3: 'matter' } }
 };
 
 window.GUNA_LESSON_CONFIGS = GUNA_LESSON_CONFIGS;

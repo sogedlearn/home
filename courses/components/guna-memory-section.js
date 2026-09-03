@@ -22,34 +22,40 @@ class GunaMemorySection extends HTMLElement {
     }
     getWords() {
         // Direct word pairs with images - English to Guna
-        const educationalPairs = [
-            { en: 'I', guna: 'Na', icon: '👤', image: '../Multimedia/Images/Memory match/Na.png' },
-            { en: 'You', guna: 'Be', icon: '👋', image: '../Multimedia/Images/Memory match/Be.jpg' },
+        const fromVocab = typeof GUNA_VOCABULARY !== 'undefined' && GUNA_VOCABULARY.getAllWords
+            ? GUNA_VOCABULARY.getAllWords().map(w => ({
+                en: w.en,
+                guna: w.guna,
+                icon: w.icon || '📝',
+                image: w.image
+            }))
+            : [];
+        const educationalPairs = fromVocab.length ? fromVocab : [
+            { en: 'Hello', guna: 'Naa', icon: '👋', image: '../Multimedia/Images/Memory match/anna.png' },
+            { en: 'You', guna: 'Be', icon: '👤', image: '../Multimedia/Images/Memory match/Be.jpg' },
             { en: 'Yes', guna: 'Eye', icon: '✅', image: '../Multimedia/Images/Memory match/Eye.jpg' },
-            { en: 'That is right', guna: 'Degii', icon: '👍', image: '../Multimedia/Images/Memory match/Degii.png' },
-            { en: 'Hello', guna: 'anna', icon: '🏝️', image: '../Multimedia/Images/Memory match/anna.png' },
-            { en: 'Goodbye', guna: 'degi malo', icon: '👋', image: '../Multimedia/Images/Memory match/degi malo.jpg' },
-            { en: 'See you tomorrow', guna: 'Banmalo', icon: '🌅', image: '../Multimedia/Images/Memory match/Banmalo.jpg' },
+            { en: 'How are you', guna: 'Deggidde', icon: '🙂', image: '../Multimedia/Images/Memory match/Degii.png' },
+            { en: 'Goodbye', guna: 'Deggimalo', icon: '👋', image: '../Multimedia/Images/Memory match/degi malo.jpg' },
+            { en: 'See you tomorrow', guna: 'Bannemalo', icon: '🌅', image: '../Multimedia/Images/Memory match/Banmalo.jpg' },
             { en: 'Mother', guna: 'Nana', icon: '👩', image: '../Multimedia/Images/Memory match/Nana.jpg' },
-            { en: 'Father', guna: 'Tata', icon: '👨', image: '../Multimedia/Images/Memory match/Tata.jpg' },
-            { en: 'Brother', guna: 'Dummad', icon: '👦', image: '../Multimedia/Images/Memory match/Dummad.jpg' },
-            { en: 'Sister', guna: 'Nueded', icon: '👧', image: '../Multimedia/Images/Memory match/Nueded.jpg' },
-            { en: 'Grandfather', guna: 'Bab', icon: '👴', image: '../Multimedia/Images/Memory match/Bab.png' },
-            { en: 'Grandmother', guna: 'Dada', icon: '👵', image: '../Multimedia/Images/Memory match/Dada.jpg' },
-            { en: 'House', guna: 'Muu', icon: '🏠', image: '../Multimedia/Images/Memory match/Muu.jpg' },
-            { en: 'Table', guna: 'Nika', icon: '🪑', image: '../Multimedia/Images/Memory match/Nika.jpg' },
-            { en: 'Plate', guna: 'Misi', icon: '🍽️', image: '../Multimedia/Images/Memory match/Misi.jpg' },
-            { en: 'Spoon', guna: 'Tapa', icon: '🥄', image: '../Multimedia/Images/Memory match/Tapa.jpg' },
-            { en: 'Clothes', guna: 'Bii', icon: '👕', image: '../Multimedia/Images/Memory match/Bii.jpg' }
+            { en: 'Father', guna: 'Baba', icon: '👨', image: '../Multimedia/Images/Memory match/Tata.jpg' },
+            { en: 'Grandfather', guna: 'Tata', icon: '👴', image: '../Multimedia/Images/Memory match/Bab.png' },
+            { en: 'Grandmother', guna: 'Muú', icon: '👵', image: '../Multimedia/Images/Memory match/Dada.jpg' },
+            { en: 'House', guna: 'Nega', icon: '🏠', image: '../Multimedia/Images/Memory match/Muu.jpg' }
         ];
         return educationalPairs;
     }
 
     speak(text) {
-        if (!text || !window.speechSynthesis) return;
+        if (!text) return;
+        if (window.GUNA_VOCABULARY?.play) {
+            window.GUNA_VOCABULARY.play(text);
+            return;
+        }
+        if (!window.speechSynthesis) return;
         window.speechSynthesis.cancel();
         const u = new SpeechSynthesisUtterance(text);
-        u.lang = 'en-US';
+        u.lang = 'es-ES';
         u.rate = 0.85;
         window.speechSynthesis.speak(u);
     }
