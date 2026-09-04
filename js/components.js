@@ -34,6 +34,10 @@ async function loadComponent(elementId, componentPath) {
             document.body.appendChild(newScript);
             oldScript.remove();
         });
+
+        if (window.SiteI18n && typeof window.SiteI18n.apply === 'function') {
+            window.SiteI18n.apply(container);
+        }
     } catch (error) {
         console.error('Error loading component:', error);
     }
@@ -60,8 +64,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Load auth header for login and register pages
         loadComponent('auth-header-component', basePath + 'auth-header.html');
     } else if (isDashboardPage) {
-        // Load dashboard header for dashboard page
-        loadComponent('header-component', basePath + 'dashboard-header.html');
+        // Dashboard / Learning Hub: optional header + same site footer as home
+        if (document.getElementById('header-component')) {
+            loadComponent('header-component', basePath + 'dashboard-header.html');
+        }
+        if (document.getElementById('footer-component')) {
+            loadComponent('footer-component', basePath + 'footer.html');
+        }
     } else {
         // Load regular header and footer for other pages
         // Use Web Component header.js for non-logged users

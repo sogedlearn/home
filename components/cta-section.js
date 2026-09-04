@@ -9,6 +9,8 @@ class CtaSection extends HTMLElement {
         this.render();
         this.setupEventListeners();
         this.setupThemeListener();
+        this.applyLang();
+        document.addEventListener('guna-language-changed', () => this.applyLang());
     }
 
     render() {
@@ -124,14 +126,14 @@ class CtaSection extends HTMLElement {
                 <div class="cta-bg"></div>
                 <div class="cta-overlay"></div>
                 <div class="cta-container">
-                    <h2 class="cta-title">
-                        <slot name="title">Ready to Learn Dulegaya?</slot>
+                    <h2 class="cta-title" data-cta-title>
+                        Ready to Learn Dulegaya?
                     </h2>
-                    <p class="cta-subtitle">
-                        <slot name="subtitle">Start with your first words in the Guna language. It's free and connects you with one of the most vibrant cultures in the Americas.</slot>
+                    <p class="cta-subtitle" data-cta-subtitle>
+                        Start with your first words in the Guna language. It's free and connects you with one of the most vibrant cultures in the Americas.
                     </p>
                     <a href="#" class="cta-btn">
-                        <slot name="primary-button">Start Lesson →</slot>
+                        <span data-cta-button>Start Lesson →</span>
                     </a>
                 </div>
             </section>
@@ -173,6 +175,17 @@ class CtaSection extends HTMLElement {
 
         // Initial theme check
         this.updateTheme();
+    }
+
+    applyLang() {
+        const i18n = window.SiteI18n;
+        if (!i18n || typeof i18n.t !== 'function') return;
+        const title = this.shadowRoot.querySelector('[data-cta-title]');
+        const subtitle = this.shadowRoot.querySelector('[data-cta-subtitle]');
+        const button = this.shadowRoot.querySelector('[data-cta-button]');
+        if (title && !this.querySelector('[slot="title"]')) title.textContent = i18n.t('cta.title');
+        if (subtitle && !this.querySelector('[slot="subtitle"]')) subtitle.textContent = i18n.t('cta.subtitle');
+        if (button && !this.querySelector('[slot="primary-button"]')) button.textContent = i18n.t('cta.button');
     }
 
     updateTheme() {

@@ -17,11 +17,17 @@ class LearningSection extends HTMLElement {
         this.setupSidebarListener();
         this.updateProgressIndicator();
         this.scrollToCurrentDuoStep();
+        this._onResizeRiver = () => this.drawIslandRiver();
+        window.addEventListener('resize', this._onResizeRiver);
+        requestAnimationFrame(() => this.drawIslandRiver());
         this._onProgressUpdated = () => {
             this.render();
             this.initializeEventListeners();
             this.updateProgressIndicator();
-            setTimeout(() => this.scrollToCurrentDuoStep(), 200);
+            setTimeout(() => {
+                this.scrollToCurrentDuoStep();
+                this.drawIslandRiver();
+            }, 200);
         };
         window.addEventListener('soged:progress-updated', this._onProgressUpdated);
         if (window.learningHub && typeof window.learningHub.scrollToPageTop === 'function') {
@@ -30,12 +36,18 @@ class LearningSection extends HTMLElement {
         } else {
             window.scrollTo(0, 0);
         }
-        setTimeout(() => this.scrollToCurrentDuoStep(), 350);
+        setTimeout(() => {
+            this.scrollToCurrentDuoStep();
+            this.drawIslandRiver();
+        }, 350);
     }
 
     disconnectedCallback() {
         if (this._onProgressUpdated) {
             window.removeEventListener('soged:progress-updated', this._onProgressUpdated);
+        }
+        if (this._onResizeRiver) {
+            window.removeEventListener('resize', this._onResizeRiver);
         }
     }
 
@@ -946,8 +958,8 @@ class LearningSection extends HTMLElement {
     }
 
     getDuoOffsets() {
-        // Snake / Duolingo zigzag pattern
-        return [0, -72, -120, -72, 0, 72, 120, 72];
+        // Guna Yala island hop — cay to cay S-curve
+        return [0, -96, -148, -88, 12, 98, 148, 88];
     }
 
     generateDuoPath() {
@@ -989,19 +1001,20 @@ class LearningSection extends HTMLElement {
             const isRight = x > 0;
             const isCurrent = lesson.status === 'current' || lesson.id === currentLevel;
             const showChest = lesson.type === 'boss' || lesson.id % 5 === 0;
-            const icon = lesson.status === 'completed'
-                ? '<i class="fas fa-check"></i>'
+            const badge = lesson.status === 'completed'
+                ? '<i class="fas fa-check duo-node__badge" aria-hidden="true"></i>'
                 : lesson.status === 'locked'
-                    ? '<i class="fas fa-lock"></i>'
+                    ? '<i class="fas fa-lock duo-node__badge" aria-hidden="true"></i>'
                     : lesson.type === 'boss'
-                        ? '<i class="fas fa-crown"></i>'
-                        : `<span>${lesson.id}</span>`;
+                        ? '<i class="fas fa-crown duo-node__badge duo-node__badge--crown" aria-hidden="true"></i>'
+                        : '';
 
             trackHtml += `
-                <div class="duo-step ${isRight ? 'is-right' : ''} ${isCurrent ? 'is-current' : ''}"
-                     style="--duo-x: ${x}px"
+                <div class="duo-step ${isRight ? 'is-right' : ''} ${isCurrent ? 'is-current' : ''} ${lesson.status === 'locked' ? 'is-locked' : ''}"
+                     style="--duo-x: ${x}px; --i: ${pathIndex}"
                      data-lesson-step="${lesson.id}">
                     <div class="duo-node-wrap">
+                        <span class="duo-island" aria-hidden="true"></span>
                         ${isCurrent ? `
                             <span class="duo-ring" aria-hidden="true"></span>
                             <div class="duo-mascot" aria-hidden="true">
@@ -1014,8 +1027,15 @@ class LearningSection extends HTMLElement {
                             data-lesson="${lesson.id}"
                             data-status="${lesson.status}"
                             aria-label="Level ${lesson.id}: ${lesson.title}">
-                            ${icon}
+                            <span class="duo-node__num">${lesson.id}</span>
+                            ${badge}
+                            <span class="duo-ripple" aria-hidden="true"></span>
                         </button>
+                        <div class="duo-peek" aria-hidden="true">
+                            <strong>${lesson.title}</strong>
+                            <span>+${lesson.xp} XP · ${lesson.duration} min</span>
+                            <em>${lesson.status === 'completed' ? 'Tap to review' : lesson.status === 'locked' ? 'Locked' : 'Tap to start'}</em>
+                        </div>
                         ${showChest ? `
                             <div class="duo-chest ${lesson.status === 'locked' ? 'duo-chest--locked' : ''}" aria-hidden="true">
                                 <i class="fas fa-gift"></i>
@@ -1033,13 +1053,15 @@ class LearningSection extends HTMLElement {
             || lessons[0];
 
         return `
-            <div class="duo-path">
+            <div class="duo-path duo-path--islands">
                 <div class="duo-path__board">
+                    <div class="duo-waves" aria-hidden="true"></div>
                     <div class="duo-progress-pill">
-                        <i class="fas fa-route"></i>
+                        <i class="fas fa-water"></i>
                         <span id="progressText">${progressLabel}</span>
                     </div>
                     <div class="duo-track" id="duoTrack">
+                        <svg class="duo-river" id="duoRiver" aria-hidden="true"></svg>
                         ${trackHtml}
                     </div>
                 </div>
@@ -1239,13 +1261,99 @@ class LearningSection extends HTMLElement {
         }
     }
 
+    enterDuoLesson(lessonId, status, node) {
+        this.selectLesson(lessonId);
+        if (node) {
+            node.classList.remove('is-ripple');
+            void node.offsetWidth;
+            node.classList.add('is-ripple');
+        }
+        if (status === 'locked') {
+            if (node) {
+                node.classList.remove('is-shake');
+                void node.offsetWidth;
+                node.classList.add('is-shake');
+                setTimeout(() => node.classList.remove('is-shake'), 500);
+            }
+            if (typeof window.showNotification === 'function') {
+                window.showNotification('🔒 Este nivel está bloqueado. Completa el anterior para seguir.', 'info');
+            }
+            return;
+        }
+        if (status === 'completed' && typeof window.reviewLesson === 'function') {
+            if (node) node.classList.add('is-hop');
+            window.reviewLesson(lessonId);
+            return;
+        }
+        if (typeof window.startLesson === 'function') {
+            if (node) node.classList.add('is-hop');
+            window.startLesson(lessonId);
+        }
+    }
+
+    drawIslandRiver() {
+        const track = this.querySelector('#duoTrack');
+        const svg = this.querySelector('#duoRiver');
+        if (!track || !svg) return;
+
+        const steps = [...track.querySelectorAll('.duo-step')];
+        const width = Math.max(track.clientWidth, 1);
+        const height = Math.max(track.scrollHeight, 1);
+        svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+        svg.setAttribute('width', String(width));
+        svg.setAttribute('height', String(height));
+
+        if (steps.length < 2) {
+            svg.innerHTML = '';
+            return;
+        }
+
+        const trackRect = track.getBoundingClientRect();
+        const pts = steps.map((step) => {
+            const wrap = step.querySelector('.duo-node-wrap') || step;
+            const r = wrap.getBoundingClientRect();
+            return {
+                x: r.left + r.width / 2 - trackRect.left,
+                y: r.top + r.height / 2 - trackRect.top
+            };
+        });
+
+        let d = `M ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
+        for (let i = 1; i < pts.length; i++) {
+            const prev = pts[i - 1];
+            const cur = pts[i];
+            const midY = (prev.y + cur.y) / 2;
+            d += ` C ${prev.x.toFixed(1)} ${midY.toFixed(1)}, ${cur.x.toFixed(1)} ${midY.toFixed(1)}, ${cur.x.toFixed(1)} ${cur.y.toFixed(1)}`;
+        }
+
+        const currentIdx = steps.findIndex((step) => step.classList.contains('is-current'));
+        const completedCount = steps.filter((step) => step.querySelector('.duo-node--completed')).length;
+        const doneIdx = Math.max(currentIdx, completedCount - 1, 0);
+        let dDone = `M ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
+        for (let i = 1; i <= doneIdx && i < pts.length; i++) {
+            const prev = pts[i - 1];
+            const cur = pts[i];
+            const midY = (prev.y + cur.y) / 2;
+            dDone += ` C ${prev.x.toFixed(1)} ${midY.toFixed(1)}, ${cur.x.toFixed(1)} ${midY.toFixed(1)}, ${cur.x.toFixed(1)} ${cur.y.toFixed(1)}`;
+        }
+
+        svg.innerHTML = `
+            <path class="duo-river__glow" d="${d}"></path>
+            <path class="duo-river__water" d="${d}"></path>
+            <path class="duo-river__progress" d="${dDone}"></path>
+            <path class="duo-river__dash" d="${d}"></path>
+        `;
+    }
+
     initializeEventListeners() {
         this.querySelectorAll('.duo-node').forEach((node) => {
             node.addEventListener('click', () => {
                 const lessonId = node.getAttribute('data-lesson');
-                this.selectLesson(lessonId);
+                const status = node.getAttribute('data-status');
+                this.enterDuoLesson(lessonId, status, node);
             });
         });
+        requestAnimationFrame(() => this.drawIslandRiver());
 
         this.querySelectorAll('.lesson-node').forEach((node) => {
             node.addEventListener('click', () => {
@@ -1363,6 +1471,7 @@ function openGunaLessonViewer(lessonId, review = false) {
     if (!contentContainer) return;
 
     const reviewAttr = review ? ' review="true"' : '';
+    document.body.classList.add('hub-lesson-active');
     contentContainer.innerHTML = `<guna-lesson-viewer lesson-id="${id}"${reviewAttr}></guna-lesson-viewer>`;
     if (window.learningHub && typeof window.learningHub.scrollToPageTop === 'function') {
         window.learningHub.scrollToPageTop();
@@ -1411,6 +1520,10 @@ window.startLesson = function(lessonId) {
             return;
         }
         const completed = GunaProgress.getProgress().completed;
+        if (completed.includes(id)) {
+            window.reviewLesson(id);
+            return;
+        }
         let currentId = 1;
         for (let i = 1; i <= GunaProgress.TOTAL_LESSONS; i++) {
             if (!completed.includes(i)) { currentId = i; break; }

@@ -695,3 +695,64 @@
 .about-guna-page #footer-component .footer::before {
     display: none;
 }
+
+.about-team-fade--left,
+.about-team-fade--right {
+    position: absolute;
+    inset-block: 0;
+    width: 4rem;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.about-team-fade--left {
+    left: 0;
+    background: linear-gradient(to right, #f0faf4, transparent);
+}
+
+.about-team-fade--right {
+    right: 0;
+    background: linear-gradient(to left, #f0faf4, transparent);
+}
+
+@media (min-width: 640px) {
+    .about-team-fade--left,
+    .about-team-fade--right {
+        width: 6rem;
+    }
+}
+
+[data-theme="dark"] .about-guna-page .about-team-fade--left {
+    background: linear-gradient(to right, rgba(13, 26, 18, 0.96), transparent);
+}
+
+[data-theme="dark"] .about-guna-page .about-team-fade--right {
+    background: linear-gradient(to left, rgba(13, 26, 18, 0.96), transparent);
+}
+
+[data-theme="dark"] .about-guna-page .about-gallery-fade--left {
+    background: linear-gradient(to right, rgba(13, 26, 18, 0.95), transparent);
+}
+
+[data-theme="dark"] .about-guna-page .about-gallery-fade--right {
+    background: linear-gradient(to left, rgba(13, 26, 18, 0.95), transparent);
+}
+
+[data-theme="dark"] .about-guna-page .about-gallery-nav {
+    background: rgba(18, 38, 26, 0.94);
+    color: var(--guna-sun, #ffb300);
+}
+
+[data-theme="dark"] .about-guna-page .alliance-modal-panel {
+    background: #12261a;
+}
+
+[data-theme="dark"] .about-guna-page .about-soged-badge {
+    background: rgba(18, 38, 26, 0.9);
+}
+
+[data-theme="dark"] .about-guna-page .about-vision-pill {
+    background: rgba(18, 38, 26, 0.92);
+    color: #F3FBF5;
+    border-color: #163222;
+}

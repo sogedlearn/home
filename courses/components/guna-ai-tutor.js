@@ -43,7 +43,7 @@ class GunaAiTutor extends HTMLElement {
     }
 
     addWelcomeMessage() {
-        this.addMessage('ai', `Welcome! I'm your ${this.getCourseName()} Soggy Tutor — here to help you learn Dulegaya (the Guna language) and explore Guna culture.\n\nI can help you with:\n• Vocabulary and pronunciation\n• Grammar and sentence patterns\n• Cultural context (molas, history, territory)\n• Practice conversations and mini quizzes\n\nTry asking "How do I say hello?" or tap the microphone to speak!\n\nWhat would you like to explore today?`);
+        this.addMessage('ai', `Naa! I'm Soggy, your Guna learning agent.\n\nAsk me a word, try a mini quiz, or practice a greeting. I can also talk about molas and Guna Yala.\n\nYour progress stays with me, so I can coach you on the path.`);
     }
 
     render() {
@@ -59,7 +59,7 @@ class GunaAiTutor extends HTMLElement {
                         <button type="button" id="aiToggleSpeech" class="ai-ctrl-btn" title="Toggle text-to-speech" aria-label="Toggle speech">
                             <i class="fas fa-volume-up"></i>
                         </button>
-                        <div class="ai-tutor-status"><i class="fas fa-circle"></i> ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('online') : 'Online'}</div>
+                        <div class="ai-tutor-status"><i class="fas fa-circle"></i> ${typeof GunaI18n !== 'undefined' ? GunaI18n.t('online') : 'Online'} · Agent</div>
                     </div>
                 </div>
 
@@ -186,6 +186,9 @@ class GunaAiTutor extends HTMLElement {
         const context = typeof HubFlow !== 'undefined'
             ? { ...HubFlow.getUserContext(), currentSection: 'chat' }
             : {};
+        const localReply = typeof SoggyAgent !== 'undefined'
+            ? SoggyAgent.reply(text, { context, course: this.course })
+            : this.generateResponse(text);
 
         try {
             const response = await fetch('/api/chat', {
@@ -197,9 +200,8 @@ class GunaAiTutor extends HTMLElement {
             this.hideThinking();
 
             if (!response.ok) {
-                const fallback = this.generateResponse(text);
-                this.addMessage('ai', fallback);
-                this.speak(fallback);
+                this.addMessage('ai', localReply);
+                this.speak(localReply);
                 return;
             }
 
@@ -208,14 +210,14 @@ class GunaAiTutor extends HTMLElement {
                 await this.handleStreamResponse(response);
             } else {
                 const data = await response.json();
-                this.addMessage('ai', data.response);
-                this.speak(data.response);
+                const reply = data.response || localReply;
+                this.addMessage('ai', reply);
+                this.speak(reply);
             }
         } catch (err) {
             this.hideThinking();
-            const fallback = this.generateResponse(text);
-            this.addMessage('ai', fallback + '\n\n(Note: AI server unavailable — using offline tutor.)');
-            this.speak(fallback);
+            this.addMessage('ai', localReply);
+            this.speak(localReply);
         }
     }
 

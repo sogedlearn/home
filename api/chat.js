@@ -69,6 +69,23 @@ async function saveChatExchange(userId, userMessage, aiResponse) {
     if (error) console.error('Error saving chat history:', error);
 }
 
+async function getGeminiModel() {
+    const names = ['gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-flash-latest'];
+    let lastError = null;
+    for (const modelName of names) {
+        try {
+            return genAI.getGenerativeModel({
+                model: modelName,
+                systemInstruction: SOGGY_SYSTEM_PROMPT
+            });
+        } catch (error) {
+            lastError = error;
+        }
+    }
+    if (lastError) throw lastError;
+    return null;
+}
+
 // POST /api/chat — supports JSON response or SSE streaming
 router.post('/', async (req, res) => {
     try {
@@ -86,11 +103,10 @@ router.post('/', async (req, res) => {
         const messageHistory = toGeminiHistory(historyData);
         const contextBlock = buildContextPrompt(context);
         const enrichedMessage = message + contextBlock;
-
-        const model = genAI.getGenerativeModel({
-            model: 'gemini-1.5-flash',
-            systemInstruction: SOGGY_SYSTEM_PROMPT
-        });
+        const model = await getGeminiModel();
+        if (!model) {
+            return res.status(503).json({ error: 'Gemini model unavailable' });
+        }
 
         const chat = model.startChat({ history: messageHistory });
 

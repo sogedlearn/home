@@ -287,7 +287,16 @@
 
 [data-theme="dark"] body.about-guna-page .about-hero-gradient,
 [data-theme="dark"] body.about-guna-page .about-hero-mola-bg,
-[data-theme="dark"] body.about-guna-page .about-mola-soft-bg {
+[data-theme="dark"] body.about-guna-page .about-mola-soft-bg,
+[data-theme="dark"] body.about-guna-page .about-section-warm,
+[data-theme="dark"] body.about-guna-page .about-section-mission,
+[data-theme="dark"] body.about-guna-page .about-section-vision,
+[data-theme="dark"] body.about-guna-page .about-section-team,
+[data-theme="dark"] body.about-guna-page .mola-pattern-bg,
+[data-theme="dark"] body.about-guna-page .mola-soft-bg,
+[data-theme="dark"] body.about-guna-page .about-gallery-carousel-bleed {
+    background: transparent !important;
+    background-image: none !important;
     background-color: transparent !important;
 }
 
@@ -296,33 +305,84 @@
 [data-theme="dark"] body.about-guna-page h3,
 [data-theme="dark"] body.about-guna-page h4,
 [data-theme="dark"] body.about-guna-page .font-display,
-[data-theme="dark"] body.about-guna-page .text-absolute-black {
+[data-theme="dark"] body.about-guna-page .text-absolute-black,
+[data-theme="dark"] body.about-guna-page [class*="text-absolute-black"] {
     color: #F3FBF5 !important;
 }
 
-[data-theme="dark"] body.about-guna-page .text-absolute-black\/75,
 [data-theme="dark"] body.about-guna-page p,
 [data-theme="dark"] body.about-guna-page .text-guna-earth,
-[data-theme="dark"] body.about-guna-page li {
+[data-theme="dark"] body.about-guna-page li,
+[data-theme="dark"] body.about-guna-page .about-gallery-carousel-label {
     color: #B7D0C0 !important;
 }
 
-[data-theme="dark"] body.about-guna-page .bg-white,
-[data-theme="dark"] body.about-guna-page .bg-guna-cream,
-[data-theme="dark"] body.about-guna-page [class*="bg-white"],
+[data-theme="dark"] body.about-guna-page .about-alliance-card:not(.about-alliance-card--jungle):not(.about-alliance-card--sun),
+[data-theme="dark"] body.about-guna-page .about-team-track article,
 [data-theme="dark"] body.about-guna-page .mission-card,
 [data-theme="dark"] body.about-guna-page .value-card,
-[data-theme="dark"] body.about-guna-page .team-slide,
-[data-theme="dark"] body.about-guna-page .rounded-3xl,
-[data-theme="dark"] body.about-guna-page .rounded-2xl {
-    background-color: rgba(18, 38, 26, 0.9) !important;
+[data-theme="dark"] body.about-guna-page .about-vision-pill,
+[data-theme="dark"] body.about-guna-page .alliance-modal-panel {
+    background-color: rgba(18, 38, 26, 0.92) !important;
     border-color: #163222 !important;
     color: #F3FBF5;
 }
 
+[data-theme="dark"] body.about-guna-page .about-alliance-card--jungle {
+    background-color: var(--guna-jungle, #1a5c2e) !important;
+    color: #fff !important;
+}
+
+[data-theme="dark"] body.about-guna-page .about-alliance-card--sun {
+    background-color: var(--guna-sun, #ffb300) !important;
+}
+
+[data-theme="dark"] body.about-guna-page .about-alliance-card--sun h3,
+[data-theme="dark"] body.about-guna-page .about-alliance-card--sun p {
+    color: #1a1208 !important;
+}
+
+[data-theme="dark"] body.about-guna-page .about-gallery-fade--left,
+[data-theme="dark"] body.about-guna-page .about-team-fade--left {
+    background: linear-gradient(to right, rgba(13, 26, 18, 0.96), transparent) !important;
+}
+
+[data-theme="dark"] body.about-guna-page .about-gallery-fade--right,
+[data-theme="dark"] body.about-guna-page .about-team-fade--right {
+    background: linear-gradient(to left, rgba(13, 26, 18, 0.96), transparent) !important;
+}
+
+[data-theme="dark"] body.about-guna-page .about-gallery-nav,
+[data-theme="dark"] body.about-guna-page .about-soged-badge {
+    background: rgba(18, 38, 26, 0.94) !important;
+    color: var(--guna-sun, #ffb300);
+}
+
 [data-theme="dark"] body.about-guna-page .border,
-[data-theme="dark"] body.about-guna-page [class*="border-"] {
+[data-theme="dark"] body.about-guna-page [class*="border-guna"] {
     border-color: #163222 !important;
+}
+
+[data-theme="dark"] body.resources-boutique-page,
+[data-theme="dark"] body.resources-boutique-page .resources-hero,
+[data-theme="dark"] body.resources-boutique-page .resources-filter-section {
+    background: transparent !important;
+    color: #F3FBF5;
+}
+
+[data-theme="dark"] body.resources-boutique-page h1,
+[data-theme="dark"] body.resources-boutique-page h2,
+[data-theme="dark"] body.resources-boutique-page .text-absolute-black,
+[data-theme="dark"] body.resources-boutique-page [class*="text-absolute-black"] {
+    color: #F3FBF5 !important;
+}
+
+[data-theme="dark"] body.resources-boutique-page .resources-filter-bar select,
+[data-theme="dark"] body.resources-boutique-page .resources-filter-bar input,
+[data-theme="dark"] body.resources-boutique-page .bg-white {
+    background: rgba(18, 38, 26, 0.92) !important;
+    border-color: #163222 !important;
+    color: #F3FBF5 !important;
 }
 
 /* ===== RESOURCES / CONTACT / GENERAL CARDS ===== */

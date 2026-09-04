@@ -7,6 +7,9 @@ const GunaI18n = {
     strings: {
         en: {
             overview: 'Overview', learn: 'Learning Path', vocabulary: 'Vocabulary', store: 'Guna Store',
+            lessonContinue: 'CONTINUE', lessonCheck: 'CHECK', lessonDone: 'DONE',
+            lessonLoading: 'Loading lesson...', lessonGreat: 'Great review!',
+            lessonExcellent: 'Excellent!', lessonTryAgain: 'Not quite. Try again!',
             stories: 'Stories', chat: 'Soggy Tutor', community: 'Culture Center', leaderboard: 'Leaderboard',
             achievements: 'Achievements', streak: 'Streak', lives: 'Burba', cocos: 'Oggob',
             saveChanges: 'Save Changes', saveSettings: 'Save Settings', cancel: 'Cancel',
@@ -118,6 +121,8 @@ const GunaI18n = {
             xpToNextFull: '{xp} / {next} XP to next level',
             dropdownLevel: 'Level {n} • {xp} XP',
             welcomeBack: 'Welcome back, {name}!',
+            welcomeBackLead: 'Welcome back',
+            welcomeKicker: 'Naa · Hello',
             heroSubtitle: 'Keep strengthening your knowledge of Guna culture and language.',
             current: 'Current',
             earned: 'Earned',
@@ -237,6 +242,9 @@ const GunaI18n = {
         },
         es: {
             overview: 'Inicio', learn: 'Ruta de Aprendizaje', vocabulary: 'Vocabulario', store: 'Tienda Guna',
+            lessonContinue: 'CONTINUAR', lessonCheck: 'COMPROBAR', lessonDone: 'LISTO',
+            lessonLoading: 'Cargando lección...', lessonGreat: '¡Buen repaso!',
+            lessonExcellent: '¡Excelente!', lessonTryAgain: 'Casi. ¡Inténtalo de nuevo!',
             stories: 'Historias', chat: 'Tutor Soggy', community: 'Centro Cultural', leaderboard: 'Clasificación',
             achievements: 'Logros', streak: 'Racha', lives: 'Burba', cocos: 'Oggob',
             saveChanges: 'Guardar Cambios', saveSettings: 'Guardar Configuración', cancel: 'Cancelar',
@@ -348,6 +356,8 @@ const GunaI18n = {
             xpToNextFull: '{xp} / {next} XP para el siguiente nivel',
             dropdownLevel: 'Nivel {n} • {xp} XP',
             welcomeBack: '¡Bienvenido de nuevo, {name}!',
+            welcomeBackLead: 'Bienvenido de nuevo',
+            welcomeKicker: 'Naa · Hola',
             heroSubtitle: 'Sigue fortaleciendo tu conocimiento de la cultura y la lengua guna.',
             current: 'Actual',
             earned: 'Ganados',

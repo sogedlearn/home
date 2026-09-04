@@ -7,8 +7,10 @@
     <link rel="icon" type="image/png" href="../Multimedia/Images/Soged/Newturttle.png">
 
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap supports the shared home footer (grid + feedback modal) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="css/dashboard-modern.css">
     <link rel="stylesheet" href="css/guna-lessons.css">
@@ -22,6 +24,35 @@
     <link rel="stylesheet" href="css/lesson-duo.css">
     <link rel="stylesheet" href="../css/mola-site-background.css">
     <link rel="stylesheet" href="../css/soged-logo.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <style>
+        /* Keep hub chrome intact while hosting the same cultural footer as home */
+        #footer-component.learning-hub-site-footer {
+            margin-top: auto;
+            width: 100%;
+            position: relative;
+            z-index: 40;
+        }
+        body.hub-lesson-active #footer-component.learning-hub-site-footer {
+            display: none !important;
+        }
+        body.hub-lesson-active .lesson-section-label {
+            display: none;
+        }
+        #footer-component.learning-hub-site-footer .footer {
+            margin: 0;
+        }
+        #footer-component.learning-hub-site-footer .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        body.dark-mode #footer-component.learning-hub-site-footer .footer.footer--cultural,
+        html[data-theme="dark"] #footer-component.learning-hub-site-footer .footer.footer--cultural {
+            color: #f3f7f4;
+        }
+    </style>
     <script src="components/guna-pattern.js"></script>
     <script>
         (function () {
@@ -398,6 +429,9 @@
                 <!-- Overview content will be loaded by JavaScript -->
             </div>
         </div>
+
+        <!-- Same cultural footer as the home page -->
+        <div id="footer-component" class="learning-hub-site-footer"></div>
     </main>
 
     <!-- Overlay for mobile -->
@@ -435,6 +469,23 @@
                             <h3 class="profile-username">Language Explorer</h3>
                             <div class="profile-level">Level 5 • Cultural Ambassador</div>
                             <div class="profile-xp">1,250 / 2,000 XP to next level</div>
+                            <div class="profile-xp-bar" aria-hidden="true">
+                                <span class="profile-xp-fill" id="profileXpFill"></span>
+                            </div>
+                            <div class="profile-live-stats">
+                                <button type="button" class="profile-stat-card" data-profile-jump="learn">
+                                    <strong id="profileStatLessons">0</strong>
+                                    <small data-i18n="lessonsCompleted">Lessons</small>
+                                </button>
+                                <button type="button" class="profile-stat-card" data-profile-jump="overview">
+                                    <strong id="profileStatStreak">0</strong>
+                                    <small data-i18n="currentStreak">Streak</small>
+                                </button>
+                                <button type="button" class="profile-stat-card" data-profile-jump="store">
+                                    <strong id="profileStatOggob">0</strong>
+                                    <small>Oggob</small>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -832,6 +883,8 @@
     </div>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/components.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -844,6 +897,7 @@
     <script src="js/guna-lives.js"></script>
     <script src="js/guna-user-data.js"></script>
     <script src="js/guna-i18n.js"></script>
+    <script src="../js/site-i18n.js"></script>
     <script src="js/guna-progress.js"></script>
     <script src="js/guna-gamification.js"></script>
     <script src="js/guna-leaderboard.js"></script>
@@ -873,6 +927,7 @@
     <script src="components/mola-puzzle.js"></script>
     
     <!-- Guna Language Lessons -->
+    <script src="js/soggy-agent.js"></script>
     <script src="components/guna-ai-tutor.js"></script>
     <script src="components/guna-lessons.js"></script>
     <script src="components/guna-lesson-viewer.js"></script>

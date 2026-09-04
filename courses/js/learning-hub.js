@@ -486,6 +486,7 @@ class SimpleLearningHub {
             }
 
             contentContainer.innerHTML = content;
+            document.body.classList.remove('hub-lesson-active');
             this.scrollToPageTop();
             } catch (err) {
                 console.error('Failed to render hub section', section, err);
@@ -978,9 +979,14 @@ class SimpleLearningHub {
 
         return `
             <div class="overview-dashboard overview-gamified overview-mola-bg">
-                <section class="hero-section" data-aos="fade-up">
+                <section class="hero-section hero-section--welcome" data-aos="fade-up">
                     <div class="hero-greeting">
-                        <h1 class="hero-title">${this.t('welcomeBack', { name: username })}</h1>
+                        <img class="hero-welcome-mascot" src="../Multimedia/Images/Soged/Newturttle.png" alt="" aria-hidden="true">
+                        <p class="hero-kicker">${this.t('welcomeKicker')}</p>
+                        <h1 class="hero-title">
+                            <span class="hero-title__lead">${this.t('welcomeBackLead')}</span>
+                            <span class="hero-username">${username}</span>
+                        </h1>
                         <p class="hero-subtitle">${this.t('heroSubtitle')}</p>
                     </div>
                     <div class="hero-stats-row hero-stats-row--compact">
@@ -1429,6 +1435,12 @@ class SimpleLearningHub {
                     avatarGrid.querySelectorAll('.avatar-option').forEach(b => b.classList.remove('selected'));
                     btn.classList.add('selected');
                     document.querySelectorAll('.profile-avatar-img').forEach(img => { img.src = selectedAvatar; });
+                    const wrap = document.querySelector('.large-avatar');
+                    if (wrap) {
+                        wrap.classList.remove('is-pop');
+                        void wrap.offsetWidth;
+                        wrap.classList.add('is-pop');
+                    }
                 });
             });
         }
@@ -1436,6 +1448,19 @@ class SimpleLearningHub {
         document.querySelector('.change-avatar-btn')?.addEventListener('click', () => {
             const picker = document.getElementById('avatarPicker');
             if (picker) picker.hidden = !picker.hidden;
+        });
+
+        document.getElementById('username')?.addEventListener('input', (e) => {
+            const name = e.target.value.trim() || 'Explorer';
+            document.querySelectorAll('.profile-username').forEach((el) => { el.textContent = name; });
+        });
+
+        document.querySelectorAll('[data-profile-jump]').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const section = btn.getAttribute('data-profile-jump');
+                this.closeModal('profileModal');
+                if (section) this.navigateToSection(section);
+            });
         });
 
         document.getElementById('saveProfileBtn')?.addEventListener('click', () => {

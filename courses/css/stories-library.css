@@ -393,9 +393,18 @@ html[data-theme="dark"] .story-reader-overlay .story-reader-body {
     background: linear-gradient(180deg, #12261a, #0d1a12);
 }
 
-body.dark-mode .story-reader-article,
-html[data-theme="dark"] .story-reader-article {
-    color: #F3FBF5;
+body.dark-mode .story-reader-article h2,
+body.dark-mode .story-reader-article h3,
+html[data-theme="dark"] .story-reader-article h2,
+html[data-theme="dark"] .story-reader-article h3 {
+    color: #ffffff;
+}
+
+body.dark-mode .stories-library .story-book-btn.secondary,
+html[data-theme="dark"] .stories-library .story-book-btn.secondary {
+    background: #163222;
+    color: #ffffff;
+    border-color: #2a4a34;
 }
 
 @media (max-width: 960px) {

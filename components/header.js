@@ -466,6 +466,11 @@ class SogedHeader extends HTMLElement {
                         display: block;
                     }
 
+                    .header-right {
+                        min-width: 0;
+                        padding-left: 0.5rem;
+                    }
+
                     .navbar-nav.mx-auto {
                         flex-direction: column;
                         width: 100%;
@@ -823,25 +828,25 @@ class SogedHeader extends HTMLElement {
                                 <!-- Home -->
                                 <li class="nav-item">
                                     <a href="${basePath}index.html" class="nav-link">
-                                        <span>Home</span>
+                                        <span data-i18n="nav.home">Home</span>
                                     </a>
                                 </li>
                                 <!-- Learn -->
                                 <li class="nav-item">
                                     <a href="${basePath}pages/resources.html" class="nav-link">
-                                        <span>Learn</span>
+                                        <span data-i18n="nav.learn">Learn</span>
                                     </a>
                                 </li>
                                 <!-- History -->
                                 <li class="nav-item">
                                     <a href="${basePath}languages.html" class="nav-link">
-                                        <span>History</span>
+                                        <span data-i18n="nav.history">History</span>
                                     </a>
                                 </li>
                                 <!-- About Us -->
                                 <li class="nav-item">
                                     <a href="${basePath}pages/about.html" class="nav-link">
-                                        <span>About Us</span>
+                                        <span data-i18n="nav.about">About Us</span>
                                     </a>
                                 </li>
                             </ul>
@@ -857,8 +862,8 @@ class SogedHeader extends HTMLElement {
                             </span>
                         </label>
                         <div class="nav-buttons">
-                            <button class="btn btn-outline-primary nav-login-btn">Login</button>
-                            <button class="btn btn-primary nav-register-btn">Register</button>
+                            <button class="btn btn-outline-primary nav-login-btn" data-i18n="nav.login">Login</button>
+                            <button class="btn btn-primary nav-register-btn" data-i18n="nav.register">Register</button>
                         </div>
                     </div>
                 </div>
@@ -874,21 +879,21 @@ class SogedHeader extends HTMLElement {
                     
                     <ul class="mobile-nav-items">
                         <li class="mobile-nav-item">
-                            <a href="${basePath}index.html" class="mobile-nav-link">Home</a>
+                            <a href="${basePath}index.html" class="mobile-nav-link" data-i18n="nav.home">Home</a>
                         </li>
                         <li class="mobile-nav-item">
-                            <a href="${basePath}pages/resources.html" class="mobile-nav-link">Learn</a>
+                            <a href="${basePath}pages/resources.html" class="mobile-nav-link" data-i18n="nav.learn">Learn</a>
                         </li>
                         <li class="mobile-nav-item">
-                            <a href="${basePath}languages.html" class="mobile-nav-link">History</a>
+                            <a href="${basePath}languages.html" class="mobile-nav-link" data-i18n="nav.history">History</a>
                         </li>
                         <li class="mobile-nav-item">
-                            <a href="${basePath}pages/about.html" class="mobile-nav-link">About Us</a>
+                            <a href="${basePath}pages/about.html" class="mobile-nav-link" data-i18n="nav.about">About Us</a>
                         </li>
                     </ul>
                     <div class="mobile-nav-buttons">
-                        <a href="${basePath}auth/login.html" class="mobile-nav-btn login">Login</a>
-                        <a href="${basePath}auth/register.html" class="mobile-nav-btn register">Register</a>
+                        <a href="${basePath}auth/login.html" class="mobile-nav-btn login" data-i18n="nav.login">Login</a>
+                        <a href="${basePath}auth/register.html" class="mobile-nav-btn register" data-i18n="nav.register">Register</a>
                     </div>
                 </div>
             </div>
@@ -1011,6 +1016,20 @@ class SogedHeader extends HTMLElement {
 
         // Set active nav link based on current page
         this.setActiveNavLink();
+        document.addEventListener('guna-language-changed', () => this.applyLang());
+        this.applyLang();
+    }
+
+    applyLang() {
+        const i18n = window.SiteI18n || window.GunaI18n;
+        if (!i18n || typeof i18n.t !== 'function') return;
+        this.shadowRoot.querySelectorAll('[data-i18n]').forEach((el) => {
+            const text = i18n.t(el.dataset.i18n);
+            if (text) el.textContent = text;
+        });
+        this.shadowRoot.querySelectorAll('[data-i18n-aria]').forEach((el) => {
+            el.setAttribute('aria-label', i18n.t(el.dataset.i18nAria));
+        });
     }
 
     setActiveNavLink() {

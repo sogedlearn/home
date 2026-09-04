@@ -21,7 +21,14 @@ class GunaLessonViewer extends HTMLElement {
         this.currentActivityIndex = 0;
     }
 
+    t(key, fallback) {
+        if (window.SiteI18n && typeof SiteI18n.t === 'function') return SiteI18n.t(key);
+        if (window.GunaI18n && typeof GunaI18n.t === 'function') return GunaI18n.t(key);
+        return fallback || key;
+    }
+
     connectedCallback() {
+        document.body.classList.add('hub-lesson-active');
         this.currentLessonId = parseInt(this.getAttribute('lesson-id'), 10) || 1;
         this.isReviewMode = this.getAttribute('review') === 'true' ||
             (typeof GunaProgress !== 'undefined' && GunaProgress.isCompleted(this.currentLessonId));
@@ -39,6 +46,9 @@ class GunaLessonViewer extends HTMLElement {
 
         this.gunaLessons = new GunaLessons();
         this.currentSectionIndex = 0;
+        document.addEventListener('guna-language-changed', () => {
+            if (typeof this.syncDuoCheckButton === 'function') this.syncDuoCheckButton();
+        });
         this.maxSectionReached = 0;
         this.userAnswers = {};
         this.quizCompleted = false;
@@ -64,6 +74,7 @@ class GunaLessonViewer extends HTMLElement {
         }
 
         this.loadLesson();
+        this.skipInfoSections();
         this.render();
         this.initializeEventListeners();
     }
@@ -75,9 +86,19 @@ class GunaLessonViewer extends HTMLElement {
         }
     }
 
+    skipInfoSections() {
+        const sections = this.lessonContent?.sections || [];
+        const currentType = sections[this.currentSectionIndex]?.type;
+        if (!['introduction', 'vocabulary', 'summary'].includes(currentType)) return;
+        const idx = sections.findIndex((section) => this.isPracticeSection(section.type));
+        if (idx < 0) return;
+        this.currentSectionIndex = idx;
+        this.maxSectionReached = Math.max(this.maxSectionReached, idx);
+    }
+
     render() {
         if (!this.lessonContent) {
-            this.innerHTML = '<p>Loading lesson...</p>';
+            this.innerHTML = '<p>' + this.t('lessonLoading', 'Loading lesson...') + '</p>';
             return;
         }
 
@@ -681,7 +702,7 @@ class GunaLessonViewer extends HTMLElement {
         const practice = this.isPracticeSection(section?.type);
 
         if (this._duoAwaitingContinue) {
-            btn.textContent = 'CONTINUE';
+            btn.textContent = this.t('lessonContinue', 'CONTINUE');
             btn.className = 'duo-check-btn is-continue';
             btn.disabled = false;
             return;
@@ -691,7 +712,7 @@ class GunaLessonViewer extends HTMLElement {
             const canNext = !this.isNextDisabled();
             const isEnd = section?.type === 'completion' || section?.type === 'summary'
                 || this.currentSectionIndex >= (this.lessonContent.sections.length - 1);
-            btn.textContent = isEnd ? 'DONE' : 'CONTINUE';
+            btn.textContent = isEnd ? this.t('lessonDone', 'DONE') : this.t('lessonContinue', 'CONTINUE');
             btn.className = (canNext || isEnd) ? 'duo-check-btn is-ready' : 'duo-check-btn';
             btn.disabled = !(canNext || isEnd);
             if (banner) banner.className = 'duo-feedback-banner';
@@ -710,12 +731,12 @@ class GunaLessonViewer extends HTMLElement {
         const ready = !!(selected || matchingReady || dragReady || memoryDone || flashReady || pronReady || onResults);
 
         if (onResults || section?.type === 'flashcards' || section?.type === 'pronunciation') {
-            btn.textContent = 'CONTINUE';
+            btn.textContent = this.t('lessonContinue', 'CONTINUE');
             const canGo = !!(onResults || flashReady || pronReady);
             btn.className = canGo ? 'duo-check-btn is-ready' : 'duo-check-btn';
             btn.disabled = !canGo;
         } else {
-            btn.textContent = 'CHECK';
+            btn.textContent = this.t('lessonCheck', 'CHECK');
             btn.className = ready ? 'duo-check-btn is-ready' : 'duo-check-btn';
             btn.disabled = !ready;
         }
@@ -758,7 +779,7 @@ class GunaLessonViewer extends HTMLElement {
 
                 <div class="duo-footer">
                     <div class="duo-feedback-banner" id="duoFeedbackBanner"></div>
-                    <button type="button" class="duo-check-btn" id="duoCheckBtn" disabled>CHECK</button>
+                    <button type="button" class="duo-check-btn" id="duoCheckBtn" disabled>${this.t('lessonCheck', 'CHECK')}</button>
                 </div>
 
             </div>
@@ -938,7 +959,7 @@ class GunaLessonViewer extends HTMLElement {
             this.saveSession();
             this._duoAwaitingContinue = true;
             if (banner) {
-                banner.textContent = 'Great review!';
+                banner.textContent = this.t('lessonGreat', 'Great review!');
                 banner.className = 'duo-feedback-banner show correct';
             }
             this.syncDuoCheckButton();
@@ -971,7 +992,7 @@ class GunaLessonViewer extends HTMLElement {
             this.checkMatchingAnswers();
             const ok = this.userAnswers[4] != null || this.userAnswers['4'] != null;
             if (banner) {
-                banner.textContent = ok ? 'Excellent!' : 'Not quite. Try again!';
+                banner.textContent = ok ? this.t('lessonExcellent', 'Excellent!') : this.t('lessonTryAgain', 'Not quite. Try again!');
                 banner.className = `duo-feedback-banner show ${ok ? 'correct' : 'incorrect'}`;
             }
             if (ok) {
@@ -1022,7 +1043,7 @@ class GunaLessonViewer extends HTMLElement {
             const correctAnswers = this.gunaLessons.getQuizAnswers(this.currentLessonId);
             const isCorrect = String(answer) === String(correctAnswers[questionId]);
             if (banner) {
-                banner.textContent = isCorrect ? 'Excellent!' : `Correct answer: ${correctAnswers[questionId]}`;
+                banner.textContent = isCorrect ? this.t('lessonExcellent', 'Excellent!') : `Correct answer: ${correctAnswers[questionId]}`;
                 banner.className = `duo-feedback-banner show ${isCorrect ? 'correct' : 'incorrect'}`;
             }
             this._duoAwaitingContinue = true;
@@ -1488,7 +1509,12 @@ class GunaLessonViewer extends HTMLElement {
         }
     }
 
+    disconnectedCallback() {
+        document.body.classList.remove('hub-lesson-active');
+    }
+
     backToPath() {
+        document.body.classList.remove('hub-lesson-active');
         if (window.learningHub) {
             window.learningHub.loadSection('learn', true);
         }

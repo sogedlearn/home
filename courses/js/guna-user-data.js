@@ -200,6 +200,25 @@ const GunaUserData = {
             if (xpEl) xpEl.textContent = (typeof GunaI18n !== 'undefined'
                 ? GunaI18n.t('xpToNextFull', { xp: state.xp.toLocaleString(), next: xpNext.toLocaleString() })
                 : `${state.xp.toLocaleString()} / ${xpNext.toLocaleString()} XP to next level`);
+            const fill = document.getElementById('profileXpFill');
+            if (fill) {
+                const pct = xpNext ? Math.max(6, Math.min(100, Math.round((state.xp / xpNext) * 100))) : 6;
+                fill.style.width = `${pct}%`;
+            }
+            const lessonsEl = document.getElementById('profileStatLessons');
+            if (lessonsEl) {
+                lessonsEl.textContent = typeof GunaProgress !== 'undefined'
+                    ? String(GunaProgress.getCompletedCount())
+                    : String(state.totalLessons || 0);
+            }
+            const streakEl = document.getElementById('profileStatStreak');
+            if (streakEl) streakEl.textContent = String(state.streak || 0);
+            const oggobEl = document.getElementById('profileStatOggob');
+            if (oggobEl) {
+                oggobEl.textContent = typeof CocosEconomy !== 'undefined'
+                    ? String(CocosEconomy.getBalance())
+                    : '0';
+            }
         }
     },
 

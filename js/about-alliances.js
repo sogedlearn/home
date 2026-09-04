@@ -2,13 +2,24 @@
  * About page — institutional alliance cards & detail modals.
  */
 (function () {
+    function loc(value) {
+        if (!value || typeof value === 'string') return value;
+        var lang = (window.SiteI18n && SiteI18n.getLanguage()) || (window.GunaI18n && GunaI18n.getLanguage && GunaI18n.getLanguage()) || 'en';
+        return value[lang] || value.en || '';
+    }
+
     var ALLIANCES = {
         congreso: {
             id: 'congreso',
-            name: 'Guna General Congress',
-            shortDesc: 'Governance, cultural authority, and community-led language preservation across Guna Yala.',
-            fullDesc:
-                'SOGED collaborates with the Guna General Congress to ensure every lesson, story, and learning resource respects traditional governance and community consent. Together we bridge ancestral knowledge with digital education for new generations.',
+            name: { en: 'Guna General Congress', es: 'Congreso General Guna' },
+            shortDesc: {
+                en: 'Governance, cultural authority, and community-led language preservation across Guna Yala.',
+                es: 'Gobernanza, autoridad cultural y preservación lingüística liderada por la comunidad en Guna Yala.'
+            },
+            fullDesc: {
+                en: 'SOGED collaborates with the Guna General Congress to ensure every lesson, story, and learning resource respects traditional governance and community consent. Together we bridge ancestral knowledge with digital education for new generations.',
+                es: 'SOGED colabora con el Congreso General Guna para que cada lección, historia y recurso respete la gobernanza tradicional y el consentimiento comunitario. Unimos el saber ancestral con la educación digital para las nuevas generaciones.'
+            },
             logo: '../Multimedia/Images/partner/congresogeneral.png',
             accent: 'bg-guna-earth',
             website: 'https://gunayala.org.pa/',
@@ -21,10 +32,15 @@
         },
         udelas: {
             id: 'udelas',
-            name: 'UDELAS — CIEPI',
-            shortDesc: 'Academic research, teacher training, and institutional support for indigenous education.',
-            fullDesc:
-                'Through our partnership with UDELAS and the CIEPI research center, SOGED connects field linguistics, curriculum design, and certified teacher development. This alliance strengthens evidence-based language teaching across Panama.',
+            name: { en: 'UDELAS — CIEPI', es: 'UDELAS — CIEPI' },
+            shortDesc: {
+                en: 'Academic research, teacher training, and institutional support for indigenous education.',
+                es: 'Investigación académica, formación docente y apoyo institucional para la educación indígena.'
+            },
+            fullDesc: {
+                en: 'Through our partnership with UDELAS and the CIEPI research center, SOGED connects field linguistics, curriculum design, and certified teacher development. This alliance strengthens evidence-based language teaching across Panama.',
+                es: 'Con UDELAS y el CIEPI, SOGED conecta lingüística de campo, diseño curricular y formación docente. Esta alianza fortalece la enseñanza de lenguas con evidencia en todo Panamá.'
+            },
             logo: '../Multimedia/Images/partner/CIEPI.png',
             accent: 'bg-guna-jungle',
             website: 'https://www.udelas.ac.pa/servicio/ciepi/',
@@ -38,10 +54,15 @@
         },
         museo: {
             id: 'museo',
-            name: 'Museo de la Mola',
-            shortDesc: 'Safeguarding Guna textile heritage and visual identity woven into our learning experience.',
-            fullDesc:
-                'The Museo de la Mola partners with SOGED to honor mola artistry—the geometric soul of Guna visual culture. Their guidance ensures our platform celebrates authentic patterns, stories, and the women who carry this tradition forward.',
+            name: { en: 'Museo de la Mola', es: 'Museo de la Mola' },
+            shortDesc: {
+                en: 'Safeguarding Guna textile heritage and visual identity woven into our learning experience.',
+                es: 'Protegiendo el patrimonio textil guna y la identidad visual de nuestra experiencia de aprendizaje.'
+            },
+            fullDesc: {
+                en: 'The Museo de la Mola partners with SOGED to honor mola artistry—the geometric soul of Guna visual culture. Their guidance ensures our platform celebrates authentic patterns, stories, and the women who carry this tradition forward.',
+                es: 'El Museo de la Mola se alía con SOGED para honrar el arte de la mola —el alma geométrica de la cultura visual guna. Su guía asegura que la plataforma celebre patrones auténticos, historias y a las mujeres que sostienen esta tradición.'
+            },
             logo: '../Multimedia/Images/partner/Museo de la Mola.png',
             accent: 'bg-guna-sun',
             website: 'https://museodelamola.org/',
@@ -125,17 +146,21 @@
             }
         }
 
+        var currentAllianceId = null;
+
         function openAlliance(id) {
             var data = ALLIANCES[id];
             if (!data) return;
 
+            currentAllianceId = id;
             lastFocus = document.activeElement;
+            var name = loc(data.name);
 
-            if (titleEl) titleEl.textContent = data.name;
-            if (descEl) descEl.textContent = data.fullDesc;
+            if (titleEl) titleEl.textContent = name;
+            if (descEl) descEl.textContent = loc(data.fullDesc);
             if (logoEl) {
                 logoEl.src = data.logo;
-                logoEl.alt = data.name + ' logo';
+                logoEl.alt = name + ' logo';
             }
             if (linkEl) linkEl.href = data.website;
 
@@ -195,6 +220,12 @@
                 restartTimer();
             });
         }
+
+        document.addEventListener('guna-language-changed', function () {
+            if (currentAllianceId && backdrop.classList.contains('is-open')) {
+                openAlliance(currentAllianceId);
+            }
+        });
     }
 
     document.addEventListener('DOMContentLoaded', initAllianceModal);
